@@ -1,6 +1,6 @@
 import { locale as localeDe } from 'src/assets/translations/de';
 import { locale as localeEn } from 'src/assets/translations/en';
-import { localHelpers } from '../helpers/local-helpers';
+import { localHelpers } from 'src/app/helpers/local-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
 
@@ -16,6 +16,10 @@ export class TranslationService {
 
   getLanguageLocale(): string {
     return this._translateService.getDefaultLang();
+  }
+
+  instant(key: string) {
+    return this._translateService.instant(key);  
   }
 
   async setupTranslations() {

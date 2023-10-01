@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { IntroductionPageRoutingModule } from './introduction-routing.module';
+import { ScreenLoaderPageRoutingModule } from './screen-loader-routing.module';
 
-import { IntroductionPage } from './introduction.page';
+import { ScreenLoaderPage } from './screen-loader.page';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -15,8 +15,8 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     TranslateModule,
-    IntroductionPageRoutingModule
+    ScreenLoaderPageRoutingModule
   ],
-  declarations: [IntroductionPage]
+  declarations: [ScreenLoaderPage]
 })
-export class IntroductionPageModule {}
+export class ScreenLoaderPageModule {}
