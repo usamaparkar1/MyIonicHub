@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
+
 export class StorageService {
 
   constructor(private _storage: Storage) {}
@@ -33,8 +34,8 @@ export class StorageService {
   async set(key: string, value: any): Promise<any> {
     return await new Promise(async (resolve, reject) => {
       try {
-        const data = await this._storage.set(key, JSON.stringify(value));
-        resolve(JSON.parse(data));
+        await this._storage.set(key, JSON.stringify(value));
+        resolve(true);
       } catch (error) {
         console.error(error);
         reject(null);
