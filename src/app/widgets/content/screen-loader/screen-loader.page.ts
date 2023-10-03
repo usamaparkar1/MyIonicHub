@@ -27,7 +27,8 @@ export class ScreenLoaderPage implements OnInit {
       return;
     }
 
-    this.downloadFiles();
+    await this.downloadFiles();
+    await this._routingService.goToIntroduction();
   }
 
   async downloadFiles() {

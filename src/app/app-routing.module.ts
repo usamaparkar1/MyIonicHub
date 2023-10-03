@@ -3,10 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./widgets/content/screen-loader/screen-loader.module').then( m => m.ScreenLoaderPageModule)
-  },
-  {
     path: 'screen-loader',
     loadChildren: () => import('./widgets/content/screen-loader/screen-loader.module').then( m => m.ScreenLoaderPageModule)
   },

@@ -17,4 +17,8 @@ export class RoutingService {
   async goToIntroduction(navigationExtras: NavigationExtras = {}) {
     this.goToPage('introduction', navigationExtras);
   }
+
+  async goToScreenLoader(navigationExtras: NavigationExtras = {}) {
+    this.goToPage('screen-loader', navigationExtras);
+  }
 }

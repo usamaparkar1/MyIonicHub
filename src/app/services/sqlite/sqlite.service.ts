@@ -12,30 +12,19 @@ export class SqliteService {
 
   constructor() { }
 
-  getSqliteConnection(): boolean {
-    return !this._sqliteConnection;
-  }
-  
-  async initialiseSqliteApp(isWeb: boolean) {
-    await this.initialisePlugin().then(async (ret) => {
-      try {
-        if(isWeb) {
-          await this.initWebStore();
-        }
-      } catch (error) {
-        console.error(`initializeAppError: ${error}`);
-      }
-    });
+  getSqliteConnection(): any {
+    return this._sqliteConnection;
   }
 
-  async initialisePlugin(): Promise<boolean> {
+  async initialiseSqliteApp(isWeb: boolean): Promise<void> {
     try {
       this._sqlitePlugin = CapacitorSQLite;
       this._sqliteConnection = new SQLiteConnection(this._sqlitePlugin);
-      return true; 
+      if(isWeb) {
+        await this.initWebStore();
+      }
     } catch (error) {
       console.error(error);
-      return false;
     }
   }
 

@@ -2,13 +2,13 @@ import { TranslationService } from './services/translation/translation.service';
 import { AppHelperService } from './services/app-helper/app-helper.service';
 import { StorageService } from './services/storage/storage.service';
 import { SqliteService } from './services/sqlite/sqlite.service';
-import { AlertService } from './services/alert/alert.service';
 import { ToastService } from './services/toast/toast.service';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeEn from '@angular/common/locales/en';
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { RoutingService } from './services/routing/routing.service';
 registerLocaleData(localeDe, 'de');
 registerLocaleData(localeEn, 'en');
 
@@ -23,9 +23,9 @@ export class AppComponent {
   constructor(
     private _platform: Platform,
     private _toastService: ToastService,
-    private _alertService: AlertService,
     private _sqliteService: SqliteService,
     private _storageService: StorageService,
+    private _routingService: RoutingService,
     private _apphelperService: AppHelperService,
     private _translationService: TranslationService
   ) {
@@ -44,6 +44,7 @@ export class AppComponent {
       this.showToastForServiceInitError(this._toastService.storageNotSetup, 'StorageService');
       return;
     }
+    await this.goToScreenLoader();
   }
 
   private async _loadAppTranslations() {
@@ -77,5 +78,9 @@ export class AppComponent {
         serviceName: serviceName
       })
     );
+  }
+
+  async goToScreenLoader() {
+    await this._routingService.goToScreenLoader();
   }
 }
