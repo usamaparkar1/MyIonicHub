@@ -18,8 +18,8 @@ export class TranslationService {
     return this._translateService.getDefaultLang();
   }
 
-  instant(key: string) {
-    return this._translateService.instant(key);  
+  instant(key: string, dynamicTranslation: any = null) {
+    return this._translateService.instant(key, dynamicTranslation);
   }
 
   async setupTranslations() {

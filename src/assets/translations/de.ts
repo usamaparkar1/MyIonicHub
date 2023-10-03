@@ -7,11 +7,12 @@ export const locale = {
         SCREEN_LOADER: {
             PLEASE_WAIT: 'Bitte warten'
         },
+        TOAST: {
+            HEADER: 'Aufmerksamkeit',
+            SERVICE_NOT_SETUP: 'Beim Einrichten des {{serviceName}} ist ein Fehler aufgetreten',
+        },
         ALERT: {
             HEADER: 'Aufmerksamkeit',
-        },
-        STORAGE: {
-            NOT_SETUP: 'Die Speicherung ist nicht eingerichtet. Bitte kontaktieren Sie den Kundensupport',
         },
         INTRODUCTION: {
             HEADER: 'Einführung'

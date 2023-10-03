@@ -9,13 +9,15 @@ export class StorageService {
 
   constructor(private _storage: Storage) {}
 
+  async getCurrentStorageDriver(): Promise<string | null> {
+    return await this._storage.driver;
+  }
+
   async setupStorage() {
     try {
       await this._storage.create();
-      return await this._storage.driver;
     } catch (error) {
       console.error(error);
-      return false;
     }
   }
 
