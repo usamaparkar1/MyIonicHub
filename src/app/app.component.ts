@@ -37,8 +37,8 @@ export class AppComponent {
   private async _init() {
     await this._loadAppTranslations();
     await this._loadAppHelpers();
-    await this._initialiseSqlite();
     await this._setupStorage()
+    await this._initialiseSqlite();
     if(!await this._storageService.getCurrentStorageDriver()) {
       // Storage is not setup. App cant proceed further.
       this.showToastForServiceInitError(this._toastService.storageNotSetup, 'StorageService');

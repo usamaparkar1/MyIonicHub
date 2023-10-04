@@ -21,7 +21,7 @@ export class StorageService {
     }
   }
 
-  async get(key: string): Promise<string> {
+  async get(key: string): Promise<any> {
     return await new Promise(async (resolve, reject) => {
       try {
         const data = await this._storage.get(key);
