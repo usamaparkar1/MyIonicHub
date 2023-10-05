@@ -3,5 +3,7 @@ export const localHelpers = {
     isAppSetup: 'isAppSetup',
     toastTimeoutDuration: 3000,
     accessTokenKey: 'accessTokenKey',
-    refreshTokenKey: 'refreshTokenKey'
+    refreshTokenKey: 'refreshTokenKey',
+    cacheKey: 'cacheKey',
+    apiCacheExpiryTime: 60
 }

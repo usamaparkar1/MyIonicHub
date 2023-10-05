@@ -1,50 +1,55 @@
+import { Network } from '@capacitor/network';
 import { Capacitor } from '@capacitor/core';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
 @Injectable({
-  providedIn: 'root'
+  	providedIn: 'root'
 })
 
 export class AppHelperService {
 
-  private _currentPlatform: string = Capacitor.getPlatform();
+	private _currentPlatform: string = Capacitor.getPlatform();
 
-  constructor(private _platform: Platform) {}
-  
-  get getPlatformName(): string {
-    return this._currentPlatform;
-  }
-  
-  async setupAppHelpers(): Promise<boolean> {
-    await this.setPlatformName();
+	constructor(private _platform: Platform) {}
 
-    return this._currentPlatform !== null;
-  }
+	get getPlatformName(): string {
+		return this._currentPlatform;
+	}
 
-  setPlatformName() {
-    if (!this._currentPlatform) {
-      this._currentPlatform = Capacitor.getPlatform();
+	async setupAppHelpers(): Promise<boolean> {
+		await this.setPlatformName();
+
+		return this._currentPlatform !== null;
+	}
+
+	setPlatformName() {
+		if (!this._currentPlatform) {
+			this._currentPlatform = Capacitor.getPlatform();
+		}
+	}
+
+    async hasInternetAccess() {
+      return (await Network.getStatus()).connected;
     }
-  }
 
-  isWeb(): boolean {
-    return this._platform.is('mobileweb');
-  }
+	isWeb(): boolean {
+		return this._platform.is('mobileweb');
+	}
 
-  isMobile(): boolean {
-    return this._platform.is('mobile');
-  }
+  	isMobile(): boolean {
+    	return this._platform.is('mobile');
+  	}
 
-  isAndroid(): boolean {
-    return this._platform.is('android');
-  }
+  	isAndroid(): boolean {
+    	return this._platform.is('android');
+  	}
 
-  isIos(): boolean {
-    return this._platform.is('ios');
-  }
+  	isIos(): boolean {
+    	return this._platform.is('ios');
+  	}
 
-  isNative(): boolean {
-    return this._platform.is('android') || this._platform.is('ios');
-  }
+  	isNative(): boolean {
+    	return this._platform.is('android') || this._platform.is('ios');
+  	}
 }
