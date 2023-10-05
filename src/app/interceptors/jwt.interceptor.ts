@@ -1,5 +1,5 @@
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { AuthenticationService } from '../services/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { catchError, finalize, switchMap, filter, take } from 'rxjs/operators';
 import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { Injectable } from '@angular/core';

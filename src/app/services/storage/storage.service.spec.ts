@@ -1,4 +1,4 @@
-import { TranslationService } from '../translation/translation.service';
+import { TranslationService } from 'src/app/services/translation/translation.service';
 import { StorageService } from './storage.service';
 import { Storage } from '@ionic/storage-angular';
 import { TestBed } from '@angular/core/testing';

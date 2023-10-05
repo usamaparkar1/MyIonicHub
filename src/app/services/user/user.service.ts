@@ -1,5 +1,5 @@
-import { CachingService } from '../caching/caching.service';
-import { ApiService } from '../api/api.service';
+import { CachingService } from 'src/app/services/caching/caching.service';
+import { ApiService } from 'src/app/services/api/api.service';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
