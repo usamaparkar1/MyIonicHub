@@ -4,6 +4,7 @@ import { RoutingService } from 'src/app/services/routing/routing.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { SqliteService } from 'src/app/services/sqlite/sqlite.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
+import { SplashScreen } from '@capacitor/splash-screen';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeEn from '@angular/common/locales/en';
@@ -35,16 +36,21 @@ export class AppComponent {
     }
 
     private async _init() {
-        await this._loadAppTranslations();
-        await this._loadAppHelpers();
-        await this._setupStorage()
-        await this._initialiseSqlite();
-        if(!await this._storageService.getCurrentStorageDriver()) {
-            // Storage is not setup. App cant proceed further.
-            this.showToastForServiceInitError(this._toastService.storageNotSetup, 'StorageService');
-            return;
+        try {
+            await this._loadAppTranslations();
+            await this._loadAppHelpers();
+            await this._setupStorage()
+            await this._initialiseSqlite();
+            if(!await this._storageService.getCurrentStorageDriver()) {
+                // Storage is not setup. App cant proceed further.
+                this.showToastForServiceInitError(this._toastService.storageNotSetup, 'StorageService');
+                return;
+            }
+            await this.goToScreenLoader();
+            await this.hideSplashScreen()
+        } catch (error) {
+            await SplashScreen.hide();
         }
-        await this.goToScreenLoader();
     }
 
     private async _loadAppTranslations() {
@@ -82,5 +88,9 @@ export class AppComponent {
 
     async goToScreenLoader() {
         await this._routingService.goToScreenLoader();
+    }
+
+    async hideSplashScreen() {
+        await SplashScreen.hide();
     }
 }
