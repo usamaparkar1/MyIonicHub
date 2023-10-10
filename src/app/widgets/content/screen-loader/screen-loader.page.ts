@@ -1,7 +1,7 @@
 import { StorageService } from 'src/app/services//storage/storage.service';
+import { RoutingService } from 'src/app/services/routing/routing.service';
 import { localHelpers } from 'src/app/helpers/local-helpers';
 import { Component, OnInit } from '@angular/core';
-import { RoutingService } from 'src/app/services/routing/routing.service';
 
 @Component({
   selector: 'app-screen-loader',
