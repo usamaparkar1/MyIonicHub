@@ -15,7 +15,15 @@ export const locale = {
             HEADER: 'Attention',
         },
         INTRODUCTION: {
-            HEADER: 'Introduction'
+            SLIDE_1: {
+                HEADER: 'Introduction'
+            },
+            SLIDE_2: {
+                HEADER: 'Want to know more?'
+            },
+            EXPLORE: 'Explore the Hub!',
+            SKIP: 'Skip',
+            START: 'Start',
         },
     },
 };

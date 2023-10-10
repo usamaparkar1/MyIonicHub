@@ -1,5 +1,5 @@
 {
-  "name": "hub",
+  "name": "iohub",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -36,6 +36,7 @@
     "ionicons": "^7.0.0",
     "ng-mocks": "^14.11.0",
     "rxjs": "~7.8.0",
+    "swiper": "^10.3.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

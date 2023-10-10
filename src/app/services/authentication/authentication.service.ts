@@ -1,5 +1,5 @@
 import { StorageService } from 'src/app/services/storage/storage.service';
-import { localHelpers } from 'src/app/helpers/local-helpers';
+import { storageHelpers } from 'src/app/helpers/storageHelpers';
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, of, switchMap } from 'rxjs';
@@ -17,13 +17,13 @@ export class AuthenticationService {
   // Store a new access token
   storeAccessToken(accessToken: any) {
     this.currentAccessToken = accessToken;
-    return from(this._storageService.set(localHelpers.accessTokenKey, accessToken));
+    return from(this._storageService.set(storageHelpers.accessTokenKey, accessToken));
   }
 
   // Load the refresh token from storage
   // then attach it as the header for one specific API call
   getNewAccessToken() {
-    const refreshToken = from(this._storageService.get(localHelpers.refreshTokenKey));
+    const refreshToken = from(this._storageService.get(storageHelpers.refreshTokenKey));
     return refreshToken.pipe(
       switchMap(token => {
         if (token && token.value) {

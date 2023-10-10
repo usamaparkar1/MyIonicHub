@@ -20,7 +20,7 @@ export class ScreenLoaderPage implements OnInit {
   }
 
   private async _init() {
-    const isAppSetupToken = await this._storageService.get(localHelpers.isAppSetup);
+    const isAppSetupToken = await this._storageService.isAppSetup();
 
     if (isAppSetupToken) {
       await this._routingService.goToIntroduction();

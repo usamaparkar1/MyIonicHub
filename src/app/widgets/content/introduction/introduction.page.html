@@ -1,13 +1,16 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>{{ 'INTRODUCTION.HEADER' | translate }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title>{{ 'INTRODUCTION.HEADER' | translate }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <!-- Container for all the Slides in Introduction Page -->
+  <swiper-container #swiper pagination="true" [loop]="true" [zoom]="true" (slidechange)="onSlideChange($event)">
+
+    <swiper-slide *ngFor="let slide of slides; index as index">
+      <div class="swiper-zoom-container">
+        <ion-label *ngIf="slide.title">{{ slide.title | translate }}</ion-label>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="completeIntroduction()">{{ (currentSlideIndex === slides.length - 1 ? 'Start' : 'Skip') | translate }}</ion-fab-button>
+  </ion-fab>
 </ion-content>

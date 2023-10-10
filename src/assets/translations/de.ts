@@ -15,7 +15,15 @@ export const locale = {
             HEADER: 'Aufmerksamkeit',
         },
         INTRODUCTION: {
-            HEADER: 'Einführung'
+            SLIDE_1: {
+                HEADER: 'Einführung'
+            },
+            SLIDE_2: {
+                HEADER: 'Möchten Sie mehr wissen?'
+            },
+            EXPLORE: 'Entdecken Sie den Hub!',
+            SKIP: 'Überspringen',
+            START: 'Start',
         },
     },
 };

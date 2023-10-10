@@ -8,10 +8,12 @@ import { SplashScreen } from '@capacitor/splash-screen';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeEn from '@angular/common/locales/en';
+import { register } from 'swiper/element/bundle';
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 registerLocaleData(localeDe, 'de');
 registerLocaleData(localeEn, 'en');
+register();
 
 @Component({
   selector: 'app-root',
@@ -39,7 +41,7 @@ export class AppComponent {
         try {
             await this._loadAppTranslations();
             await this._loadAppHelpers();
-            await this._setupStorage()
+            await this._setupStorage();
             await this._initialiseSqlite();
             if(!await this._storageService.getCurrentStorageDriver()) {
                 // Storage is not setup. App cant proceed further.
