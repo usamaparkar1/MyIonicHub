@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Hub</string>
-    <string name="title_activity_main">Hub</string>
-    <string name="package_name">com.hub.app</string>
-    <string name="custom_url_scheme">com.hub.app</string>
+    <string name="app_name">IoHub</string>
+    <string name="title_activity_main">IoHub</string>
+    <string name="package_name">com.iohub.app</string>
+    <string name="custom_url_scheme">com.iohub.app</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.hub.app;
+package com.iohub.app;
 
 import com.getcapacitor.BridgeActivity;
 
