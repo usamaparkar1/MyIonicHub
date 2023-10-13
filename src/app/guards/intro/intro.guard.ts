@@ -1,6 +1,6 @@
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
-import { StorageService } from 'src/app/services/storage/storage.service';
 import { Injectable, inject } from '@angular/core';
 
 @Injectable({
@@ -9,15 +9,13 @@ import { Injectable, inject } from '@angular/core';
 
 export class IntroGuard {
 
-    storageService = inject(StorageService);
-    routingService = inject(RoutingService);
+    private _appHelperService = inject(AppHelperService);
+    private _routingService = inject(RoutingService);
 
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
-        const hasSeenIntro = await this.storageService.hasSeenIntro();
-        
-        if (hasSeenIntro) {
-            this.routingService.goToLogin();
+        if (this._appHelperService.hasSeenIntro$.getValue()) {
+            this._routingService.goToLogin();
             return false;
         } else {
             return true;

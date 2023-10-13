@@ -1,3 +1,4 @@
+import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { StorageService } from 'src/app/services//storage/storage.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
 import { localHelpers } from 'src/app/helpers/local-helpers';
@@ -8,31 +9,39 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './screen-loader.page.html',
   styleUrls: ['./screen-loader.page.scss'],
 })
+
 export class ScreenLoaderPage implements OnInit {
 
-  constructor(
-    private _routingService: RoutingService,
-    private _storageService: StorageService
-  ) {}
+    constructor(
+        private _routingService: RoutingService,
+        private _storageService: StorageService,
+        private _apphelperService: AppHelperService,
+    ) {}
 
-  ngOnInit() {
-    this._init();
-  }
-
-  private async _init() {
-    const isAppSetupToken = await this._storageService.isAppSetup();
-
-    if (isAppSetupToken) {
-      await this._routingService.goToIntroduction();
-      return;
+    ngOnInit() {
+        this._init();
     }
 
-    await this.downloadFiles();
-    await this._routingService.goToIntroduction();
-  }
+    private async _init() {
+        await this._setAppHelpers();
+        await this._routingService.goToIntroduction();
+    }
 
-  async downloadFiles() {
-    await this._storageService.set(localHelpers.isAppSetup, true);
-  }
+    private async _setAppHelpers() {
+        await this._checkIfUserHasSeenIntro();
+        await this.completeAppSetup();
+    }
 
+    private async _checkIfUserHasSeenIntro() {
+        if (await this._storageService.hasSeenIntro()) {
+            this._apphelperService.hasSeenIntro$.next(true);
+        }
+    }
+
+    async completeAppSetup() {
+        if (!await this._storageService.isAppSetup()) {
+            await this._storageService.set(localHelpers.isAppSetup, true);
+            this._apphelperService.isAppSetup$.next(true);
+        }
+    }    
 }

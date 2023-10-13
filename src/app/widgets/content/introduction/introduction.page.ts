@@ -1,7 +1,7 @@
 import { SlideService, SlidesModel } from 'src/app/services/slide/slide.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
-import { storageHelpers } from 'src/app/helpers/storageHelpers';
+import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

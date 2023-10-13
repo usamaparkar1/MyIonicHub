@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,20 +7,18 @@ import { AlertController } from '@ionic/angular';
 
 export class AlertService {
 
-  readonly storageNotSetup: string = 'storageNotSetup';
+    constructor(
+        private _alertController: AlertController
+    ) {}
 
-  constructor(
-    private _alertController: AlertController
-  ) {}
+    async showAlert(id: string, header: string, message: string) {
+        const alert = await this._alertController.create({
+            id: id,
+            header: header,
+            message: message,
+            buttons: ['OK'],
+        });
 
-  async showAlert(id: string, header: string, message: string) {
-    const alert = await this._alertController.create({
-      id: id,
-      header: header,
-      message: message,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
-  }
+        await alert.present();
+    }
 }

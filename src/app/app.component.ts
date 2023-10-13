@@ -1,14 +1,12 @@
 import { TranslationService } from 'src/app/services/translation/translation.service';
-import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
-import { StorageService } from 'src/app/services/storage/storage.service';
-import { SqliteService } from 'src/app/services/sqlite/sqlite.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeEn from '@angular/common/locales/en';
 import { register } from 'swiper/element/bundle';
+import { Capacitor } from '@capacitor/core';
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 registerLocaleData(localeDe, 'de');
@@ -23,13 +21,12 @@ register();
 
 export class AppComponent {
 
+    public isWeb: boolean = Capacitor.getPlatform() === 'web';
+
     constructor(
         private _platform: Platform,
         private _toastService: ToastService,
-        private _sqliteService: SqliteService,
-        private _storageService: StorageService,
         private _routingService: RoutingService,
-        private _apphelperService: AppHelperService,
         private _translationService: TranslationService
     ) {
         this._platform.ready().then(() => {
@@ -40,42 +37,16 @@ export class AppComponent {
     private async _init() {
         try {
             await this._loadAppTranslations();
-            await this._loadAppHelpers();
-            await this._setupStorage();
-            await this._initialiseSqlite();
-            if(!await this._storageService.getCurrentStorageDriver()) {
-                // Storage is not setup. App cant proceed further.
-                this.showToastForServiceInitError(this._toastService.storageNotSetup, 'StorageService');
-                return;
-            }
-            await this.goToScreenLoader();
-            await this.hideSplashScreen()
+            await this._goToScreenLoader();
+            await this._hideSplashScreen()
         } catch (error) {
-            await SplashScreen.hide();
+            await this._hideSplashScreen()
         }
     }
 
     private async _loadAppTranslations() {
         // Load locale and setup translations for any error handling or user messages
         await this._translationService.setupTranslations();
-    }
-
-    private async _loadAppHelpers() {
-        await this._apphelperService.setupAppHelpers();
-        if (!this._apphelperService.getPlatformName) {
-            await this.showToastForServiceInitError(this._toastService.appHelperNotSetup, 'AppHelpers');
-        }
-    }
-
-    private async _initialiseSqlite() {
-        await this._sqliteService.initialiseSqliteApp(this._apphelperService.isWeb());
-        if (!this._sqliteService.getSqliteConnection()) {
-            this.showToastForServiceInitError(this._toastService.sqliteNotSetup, 'SqliteService');
-        }
-    }
-
-    private async _setupStorage() {
-        await this._storageService.setupStorage();
     }
 
     async showToastForServiceInitError(id: string, serviceName: string) {
@@ -88,11 +59,11 @@ export class AppComponent {
         );
     }
 
-    async goToScreenLoader() {
+    private async _goToScreenLoader() {
         await this._routingService.goToScreenLoader();
     }
 
-    async hideSplashScreen() {
+    private async _hideSplashScreen() {
         await SplashScreen.hide();
     }
 }

@@ -1,7 +1,5 @@
-import { Network } from '@capacitor/network';
-import { Capacitor } from '@capacitor/core';
 import { Injectable } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   	providedIn: 'root'
@@ -9,47 +7,11 @@ import { Platform } from '@ionic/angular';
 
 export class AppHelperService {
 
-	private _currentPlatform: string = Capacitor.getPlatform();
+	isAppSetup$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+	hasSeenIntro$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-	constructor(private _platform: Platform) {}
 
-	get getPlatformName(): string {
-		return this._currentPlatform;
+	isNotNullAndNotUndefined(valueToTest: any): boolean {
+		return valueToTest !== null && valueToTest !== undefined;
 	}
-
-	async setupAppHelpers(): Promise<boolean> {
-		await this.setPlatformName();
-
-		return this._currentPlatform !== null;
-	}
-
-	setPlatformName() {
-		if (!this._currentPlatform) {
-			this._currentPlatform = Capacitor.getPlatform();
-		}
-	}
-
-    async hasInternetAccess() {
-      return (await Network.getStatus()).connected;
-    }
-
-	isWeb(): boolean {
-		return this._platform.is('mobileweb');
-	}
-
-  	isMobile(): boolean {
-    	return this._platform.is('mobile');
-  	}
-
-  	isAndroid(): boolean {
-    	return this._platform.is('android');
-  	}
-
-  	isIos(): boolean {
-    	return this._platform.is('ios');
-  	}
-
-  	isNative(): boolean {
-    	return this._platform.is('android') || this._platform.is('ios');
-  	}
 }

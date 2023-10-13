@@ -1,6 +1,7 @@
 export const storageHelpers = {
-    accessTokenKey: 'accessTokenKey',
     refreshTokenKey: 'refreshTokenKey',
+    accessTokenKey: 'accessTokenKey',
+    storageTableName: 'storage',
     introSeen: 'introSeen',
     cacheKey: 'cacheKey',
 }
