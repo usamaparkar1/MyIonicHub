@@ -6,21 +6,21 @@ import { NgModule } from '@angular/core';
 const routes: Routes = [
     {
         path: 'screen-loader',
-        loadChildren: () => import('./widgets/content/screen-loader/screen-loader.module').then( m => m.ScreenLoaderPageModule)
+        loadChildren: () => import('./widgets/core/screen-loader/screen-loader.module').then( m => m.ScreenLoaderPageModule)
     },
     {
         path: 'introduction',
-        loadChildren: () => import('./widgets/content/introduction/introduction.module').then( m => m.IntroductionPageModule),
+        loadChildren: () => import('./widgets/core/introduction/introduction.module').then( m => m.IntroductionPageModule),
         canActivate: [IntroGuard]
     },
     {
         path: 'login',
-        loadChildren: () => import('./widgets/content/login/login.module').then( m => m.LoginPageModule),
+        loadChildren: () => import('./widgets/core/login/login.module').then( m => m.LoginPageModule),
         canActivate: [LoginGuard]
     },
     {
         path: 'dashboard',
-        loadChildren: () => import('./widgets/content/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+        loadChildren: () => import('./widgets/core/dashboard/dashboard.module').then( m => m.DashboardPageModule)
     },
 ];
 
