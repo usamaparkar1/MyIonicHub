@@ -1,3 +1,4 @@
+import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { localHelpers } from 'src/app/helpers/local-helpers';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
@@ -6,7 +7,7 @@ import { Storage } from '@ionic/storage';
 // Expire time in seconds
 const TTL = localHelpers.apiCacheExpiryTime * 60;
 // Key to identify only cached API data
-const CACHE_KEY = localHelpers.cacheKey+environment.server;
+const CACHE_KEY = storageHelpers.cacheKey+environment.server;
 
 @Injectable({
     providedIn: 'root'

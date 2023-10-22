@@ -2,7 +2,7 @@ import { SQLiteDBConnection } from '@capacitor-community/sqlite';
 import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { toastHelpers } from 'src/app/helpers/toast-helpers';
 import { localHelpers } from 'src/app/helpers/local-helpers';
-import { storageSchema } from 'src/assets/storage-schema';
+import { storageSchema } from 'src/assets/schemas/storage-schema';
 import { SqliteService } from '../sqlite/sqlite.service';
 import { ToastService } from '../toast/toast.service';
 import { DbService } from '../db/db.service';
@@ -84,11 +84,11 @@ export class StorageService {
                 resolve(response);   
             } catch (error) {
                 console.error(error);
-                this._toastService.showToast(
-                    toastHelpers.storageSetError,
-                    'Storage Service Get Error',
-                    `Error setting data in for key:${key}`,
-                );
+                this._toastService.showToast({
+                    id: toastHelpers.storageSetError,
+                    header: 'Storage Service Get Error',
+                    message: `Error setting data in for key:${key}`,
+                });
                 reject(null);
             }
         });
@@ -111,11 +111,11 @@ export class StorageService {
                 resolve(true);
             } catch (error) {
                 console.error(error);
-                this._toastService.showToast(
-                    toastHelpers.storageSetError,
-                    'Storage Service Set Error',
-                    `Error setting data in for key:${key} and value:${value}`,
-                );
+                this._toastService.showToast({
+                    id: toastHelpers.storageSetError,
+                    header: 'Storage Service Set Error',
+                    message: `Error setting data in for key:${key} and value:${value}`,
+                });
                 reject(null);
             }
         });
@@ -128,11 +128,11 @@ export class StorageService {
                 await this._saveDataToWebStore();
             } catch (error) {
                 console.error(error);
-                this._toastService.showToast(
-                    toastHelpers.clearStorageError,
-                    'Error in Clear in Storage Serivce',
-                    `Error clearing all data in table: ${storageHelpers.storageTableName}`,
-                )                
+                this._toastService.showToast({
+                    id: toastHelpers.clearStorageError,
+                    header: 'Error in Clear in Storage Serivce',
+                    message: `Error clearing all data in table: ${storageHelpers.storageTableName}`,
+                });
             }
         });
     }
@@ -150,6 +150,10 @@ export class StorageService {
 
     async hasSeenIntro(): Promise<boolean> {
         return await this.get(storageHelpers.introSeen);
+    }
+
+    async isUserLoggedIn(): Promise<boolean> {
+        return await this.get(storageHelpers.isUserLoggedIn);
     }
 }
 

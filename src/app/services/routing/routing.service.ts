@@ -17,14 +17,18 @@ export class RoutingService {
     }
 
     async goToScreenLoader(navigationExtras: NavigationExtras = {}) {
-        this.goToPage(routingHelpers.screenLoader, navigationExtras);
+        await this.goToPage(routingHelpers.screenLoader, navigationExtras);
     }
 
     async goToIntroduction(navigationExtras: NavigationExtras = {}) {
-        this.goToPage(routingHelpers.introduction, navigationExtras);
+        await this.goToPage(routingHelpers.introduction, navigationExtras);
     }
 
-    goToLogin(navigationExtras: NavigationExtras = {}) {
-        this.goToPage(routingHelpers.login, navigationExtras);
+    async goToLogin(navigationExtras: NavigationExtras = {}) {
+        await this.goToPage(routingHelpers.login, navigationExtras);
+    }
+
+    async goToDashboard(navigationExtras: NavigationExtras = {}) {
+        await this.goToPage(routingHelpers.dashboard, navigationExtras);
     }
 }

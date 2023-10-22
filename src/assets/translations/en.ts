@@ -9,7 +9,10 @@ export const locale = {
         },
         TOAST: {
             HEADER: 'Warning',
-            SERVICE_NOT_SETUP: 'There was an error while setting up {{serviceName}}'
+            SERVICE_NOT_SETUP: 'There was an error while setting up {{serviceName}}',
+            NETWORK: {
+                USER_IS_OFFLINE: 'You are not connected to the Internet',
+            },
         },
         ALERT: {
             HEADER: 'Attention',
@@ -25,5 +28,12 @@ export const locale = {
             SKIP: 'Skip',
             START: 'Start',
         },
+        LOGIN: {
+            LOGIN: 'Login',
+            USERNAME: 'Username',
+            PASSWORD: 'Password',
+            ENTER_USERNAME: 'Enter Username',
+            ENTER_PASSWORD: 'Enter Password',
+        }
     },
 };

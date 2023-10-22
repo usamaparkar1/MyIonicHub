@@ -24,7 +24,11 @@ export class ScreenLoaderPage implements OnInit {
 
     private async _init() {
         await this._setAppHelpers();
-        await this._routingService.goToIntroduction();
+        if (await await this._storageService.isUserLoggedIn()) {
+            // Navigate to home or something
+        } else {
+            await this._routingService.goToIntroduction();
+        }
     }
 
     private async _setAppHelpers() {
@@ -43,5 +47,5 @@ export class ScreenLoaderPage implements OnInit {
             await this._storageService.set(localHelpers.isAppSetup, true);
             this._apphelperService.isAppSetup$.next(true);
         }
-    }    
+    }
 }

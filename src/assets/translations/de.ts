@@ -10,6 +10,9 @@ export const locale = {
         TOAST: {
             HEADER: 'Aufmerksamkeit',
             SERVICE_NOT_SETUP: 'Beim Einrichten des {{serviceName}} ist ein Fehler aufgetreten',
+            NETWORK: {
+                USER_IS_OFFLINE: 'Sie sind nicht mit dem Internet verbunden',
+            },
         },
         ALERT: {
             HEADER: 'Aufmerksamkeit',
@@ -25,5 +28,12 @@ export const locale = {
             SKIP: 'Überspringen',
             START: 'Start',
         },
+        LOGIN: {
+            LOGIN: 'Anmelden',
+            USERNAME: 'Benutzername',
+            PASSWORD: 'Passwort',
+            ENTER_USERNAME: 'Benutzername Eingeben',
+            ENTER_PASSWORD: 'Passwort Eingeben',
+        }
     },
 };

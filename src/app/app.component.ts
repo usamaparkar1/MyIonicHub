@@ -50,13 +50,13 @@ export class AppComponent {
     }
 
     async showToastForServiceInitError(id: string, serviceName: string) {
-        await this._toastService.showToast(
-            id,
-            this._translationService.instant('TOAST.HEADER'),
-            this._translationService.instant('TOAST.SERVICE_NOT_SETUP', {
+        await this._toastService.showToast({
+            id: id,
+            header: this._translationService.instant('TOAST.HEADER'),
+            message: this._translationService.instant('TOAST.SERVICE_NOT_SETUP', {
                 serviceName: serviceName
             })
-        );
+        });
     }
 
     private async _goToScreenLoader() {

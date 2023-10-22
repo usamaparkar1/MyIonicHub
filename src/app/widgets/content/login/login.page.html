@@ -1,13 +1,51 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>{{ 'LOGIN.LOGIN' | translate }}</ion-title></ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">{{ 'LOGIN.LOGIN' | translate }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <form class="login-form-container" [formGroup]="loginForm" (ngSubmit)="validateLoginForm()">
+        <hub-form-input>
+            <ion-input
+                form-input-field
+                type="text"
+                label="{{ 'LOGIN.USERNAME' | translate }}"
+                labelPlacement="floating"
+                placeholder="{{ 'LOGIN.ENTER_USERNAME' | translate }}"
+                formControlName="username"
+                [maxlength]="loginPageFormValidators.MaxLengthForUserName"
+            ></ion-input>
+        </hub-form-input>
+    
+        <hub-form-input>
+            <ion-input
+                form-input-field
+                type="password"
+                label="{{ 'LOGIN.PASSWORD' | translate }}"
+                labelPlacement="floating"
+                placeholder="{{ 'LOGIN.ENTER_PASSWORD' | translate }}"
+                formControlName="password"
+                [maxlength]="loginPageFormValidators.MaxLengthForPassword"
+            ></ion-input>
+        </hub-form-input>
+    </form>
 </ion-content>
+
+<hub-form-footer>
+    <ion-button
+        class="form-submission-bottom-button"
+        form-submission-bottom-button
+        [disabled]="isLogginIn || loginForm.invalid"
+        (click)="validateLoginForm()"
+        expand="full"
+    >
+        <ion-spinner *ngIf="isLogginIn" name="lines-sharp-small"></ion-spinner>
+        <ion-label *ngIf="!isLogginIn">Login</ion-label>
+    </ion-button>
+</hub-form-footer>

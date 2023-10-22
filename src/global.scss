@@ -29,3 +29,24 @@ ion-grid {
     height: 100%;
     width: 100%;
 }
+
+hub-form-footer {
+    ion-button {
+        margin: 0;        
+    }
+}
+
+hub-form-input {
+    ion-item {
+        > ion-input {
+            margin-bottom: 8px;
+            border-radius: 8px;
+            --padding-start: 8px !important;
+            border: 2px solid var(--ion-color-primary);
+    
+            &.has-value.ion-invalid {
+                border-color: var(--ion-color-danger) !important;
+            }
+        }
+    }
+}
