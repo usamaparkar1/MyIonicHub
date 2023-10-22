@@ -1,5 +1,6 @@
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { IntroGuard } from './guards/intro/intro.guard';
+import { LoginGuard } from './guards/login.guard';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
     },
     {
         path: 'login',
-        loadChildren: () => import('./widgets/content/login/login.module').then( m => m.LoginPageModule)
+        loadChildren: () => import('./widgets/content/login/login.module').then( m => m.LoginPageModule),
+        canActivate: [LoginGuard]
     },
     {
         path: 'dashboard',
@@ -23,9 +25,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
+    imports: [
+        RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    ],
+    exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

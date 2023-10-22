@@ -24,15 +24,12 @@ export class ScreenLoaderPage implements OnInit {
 
     private async _init() {
         await this._setAppHelpers();
-        if (await await this._storageService.isUserLoggedIn()) {
-            // Navigate to home or something
-        } else {
-            await this._routingService.goToIntroduction();
-        }
+        await this._navigateToNextPage();
     }
 
     private async _setAppHelpers() {
         await this._checkIfUserHasSeenIntro();
+        await this._checkIfUserIsLoggedIn();
         await this.completeAppSetup();
     }
 
@@ -42,10 +39,30 @@ export class ScreenLoaderPage implements OnInit {
         }
     }
 
+    private async _checkIfUserIsLoggedIn() {
+        if (await this._storageService.isUserLoggedIn()) {
+            this._apphelperService.isloggedIn$.next(true);
+        }
+    }
+
     async completeAppSetup() {
         if (!await this._storageService.isAppSetup()) {
             await this._storageService.set(localHelpers.isAppSetup, true);
             this._apphelperService.isAppSetup$.next(true);
         }
+    }
+
+    private async _navigateToNextPage() {
+        if (!this._apphelperService.hasSeenIntro$.getValue()) {
+            await this._routingService.goToIntroduction();
+            return;
+        }
+
+        if (!this._apphelperService.isloggedIn$.getValue()) {
+            await this._routingService.goToIntroduction();
+            return;
+        }
+
+        await this._routingService.goToDashboard();
     }
 }

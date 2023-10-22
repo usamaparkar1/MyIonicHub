@@ -1,13 +1,15 @@
-import { AuthenticationService, UserLoginData } from 'src/app/services/authentication/authentication.service';
+import { UserLoginData } from 'src/app/services/authentication/authentication.service';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { RoutingService } from 'src/app/services/routing/routing.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { localHelpers } from 'src/app/helpers/local-helpers';
 import { toastHelpers } from 'src/app/helpers/toast-helpers';
 import { UserHelpers } from 'src/app/helpers/user-helpers';
 import { Component, OnInit } from '@angular/core';
-import { RoutingService } from 'src/app/services/routing/routing.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +29,7 @@ export class LoginPage implements OnInit {
     constructor(
         private _routingService: RoutingService,
         private _networkService: NetworkService,
+        private _storageService: StorageService,
         private _toastService: ToastService,
         private _userService: UserService
     ) {}
@@ -164,10 +167,15 @@ export class LoginPage implements OnInit {
         }
 
         this._showLoginLoader(false);
+        await this._setLoginTokenToStorage();
         await this._routingService.goToDashboard();
     }
 
     private async _loginOffline() {
         await this._toastService.showNoInternetConnectionToast();
+    }
+
+    private async _setLoginTokenToStorage() {
+        await this._storageService.set(storageHelpers.isUserLoggedIn, true);
     }
 }

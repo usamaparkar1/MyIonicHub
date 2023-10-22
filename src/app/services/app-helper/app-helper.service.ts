@@ -9,6 +9,7 @@ export class AppHelperService {
 
 	isAppSetup$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	hasSeenIntro$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+	isloggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 
 	isNotNullAndNotUndefined(valueToTest: any): boolean {

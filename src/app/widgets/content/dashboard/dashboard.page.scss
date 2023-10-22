@@ -1,0 +1,17 @@
+.modern-card {
+    background: linear-gradient(45deg, #3498db, #9b59b6);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    color: var(--ion-color-light);
+} 
+.modern-card ion-card-title {
+    color: var(--ion-color-light);
+    font-weight: bold;
+    font-size: 24px;
+    margin: 10px 0;
+}  
+.modern-card ion-card-content {
+    font-size: 18px;
+    padding: 20px;
+}
