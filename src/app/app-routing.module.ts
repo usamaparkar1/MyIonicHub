@@ -19,8 +19,21 @@ const routes: Routes = [
         canActivate: [LoginGuard]
     },
     {
+        path: 'signup',
+        loadChildren: () => import('./widgets/core/signup/signup.module').then( m => m.SignupPageModule)
+    },    
+    {
         path: 'dashboard',
         loadChildren: () => import('./widgets/core/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+    },
+    {
+        path: 'cb-home',
+        children: [
+            {
+                path: '',
+                loadChildren: () => import('./widgets/projects/contract-booker/cb-home/cb-home.module').then( m => m.CbHomePageModule)
+            }
+        ]
     },
 ];
 

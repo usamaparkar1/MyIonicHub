@@ -1,4 +1,4 @@
-import { routingHelpers } from 'src/app/helpers/routing-helpers';
+import { CbRoutingHelpers, coreRoutingHelpers } from 'src/app/helpers/routing-helpers';
 import { NavigationExtras, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
@@ -17,18 +17,26 @@ export class RoutingService {
     }
 
     async goToScreenLoader(navigationExtras: NavigationExtras = {}) {
-        await this.goToPage(routingHelpers.screenLoader, navigationExtras);
+        await this.goToPage(coreRoutingHelpers.screenLoader, navigationExtras);
     }
 
     async goToIntroduction(navigationExtras: NavigationExtras = {}) {
-        await this.goToPage(routingHelpers.introduction, navigationExtras);
+        await this.goToPage(coreRoutingHelpers.introduction, navigationExtras);
     }
 
     async goToLogin(navigationExtras: NavigationExtras = {}) {
-        await this.goToPage(routingHelpers.login, navigationExtras);
+        await this.goToPage(coreRoutingHelpers.login, navigationExtras);
+    }
+
+    async goToSignup(navigationExtras: NavigationExtras = {}) {
+        await this.goToPage(coreRoutingHelpers.signup, navigationExtras);
     }
 
     async goToDashboard(navigationExtras: NavigationExtras = {}) {
-        await this.goToPage(routingHelpers.dashboard, navigationExtras);
+        await this.goToPage(coreRoutingHelpers.dashboard, navigationExtras);
+    }
+
+    async goToCbHome(navigationExtras: NavigationExtras = {}) {
+        await this.goToPage(CbRoutingHelpers.cbHome, navigationExtras);
     }
 }

@@ -50,16 +50,16 @@ export class AuthenticationService {
 
 
 export class UserLoginData implements IUserLoginData {
-    username?: string | undefined;
-    password?: string | undefined;
+    username: string;
+    password: string;
 
-    constructor(userLoginData?: UserLoginData) {
+    constructor(userLoginData: UserLoginData) {
     	this.username = userLoginData?.username;
         this.password = userLoginData?.password;
   	}
 }
 
 export interface IUserLoginData {
-    username?: string | undefined;
-    password?: string | undefined;
+    username: string;
+    password: string;
 }

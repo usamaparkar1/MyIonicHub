@@ -10,31 +10,39 @@
         </ion-toolbar>
     </ion-header>
 
-    <form class="login-form-container" [formGroup]="loginForm" (ngSubmit)="validateLoginForm()">
-        <hub-form-input>
-            <ion-input
-                form-input-field
-                type="text"
-                label="{{ 'LOGIN.USERNAME' | translate }}"
-                labelPlacement="floating"
-                placeholder="{{ 'LOGIN.ENTER_USERNAME' | translate }}"
-                formControlName="username"
-                [maxlength]="loginPageFormValidators.MaxLengthForUserName"
-            ></ion-input>
-        </hub-form-input>
-    
-        <hub-form-input>
-            <ion-input
-                form-input-field
-                type="password"
-                label="{{ 'LOGIN.PASSWORD' | translate }}"
-                labelPlacement="floating"
-                placeholder="{{ 'LOGIN.ENTER_PASSWORD' | translate }}"
-                formControlName="password"
-                [maxlength]="loginPageFormValidators.MaxLengthForPassword"
-            ></ion-input>
-        </hub-form-input>
-    </form>
+    <ion-grid>
+        <form class="login-form-container" [formGroup]="loginForm" (ngSubmit)="validateLoginForm()">
+            <hub-form-input>
+                <ion-input
+                    form-input-field
+                    type="text"
+                    label="{{ 'LOGIN.USERNAME' | translate }}"
+                    labelPlacement="floating"
+                    placeholder="{{ 'LOGIN.ENTER_USERNAME' | translate }}"
+                    formControlName="username"
+                    [maxlength]="loginPageFormValidators.MaxLengthForUserName"
+                ></ion-input>
+            </hub-form-input>
+        
+            <hub-form-input>
+                <ion-input
+                    form-input-field
+                    type="password"
+                    label="{{ 'LOGIN.PASSWORD' | translate }}"
+                    labelPlacement="floating"
+                    placeholder="{{ 'LOGIN.ENTER_PASSWORD' | translate }}"
+                    formControlName="password"
+                    [maxlength]="loginPageFormValidators.MaxLengthForPassword"
+                ></ion-input>
+            </hub-form-input>
+        </form>
+
+        <ion-row><ion-col class="register-link-container">
+            <ion-label>Don't have an account?</ion-label>
+            <br />
+            <ion-text class="register-link" (click)="goToSignup()">Signup</ion-text>
+        </ion-col></ion-row>
+    </ion-grid>
 </ion-content>
 
 <hub-form-footer>

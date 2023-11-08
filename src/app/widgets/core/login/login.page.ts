@@ -48,6 +48,10 @@ export class LoginPage implements OnInit {
         }
     }
 
+    goToSignup() {
+        this._routingService.goToSignup();
+    }
+
     async validateLoginForm() {
         const isLoginFormValid = await this._isLoginFormValid();
         if (!isLoginFormValid) {
@@ -159,10 +163,7 @@ export class LoginPage implements OnInit {
 
         if (!userExists) {
             this._showLoginLoader(false);
-            this._toastService.showToast({
-                id: toastHelpers.userDoesNotExist,
-                message: `You do not have an account with us for the User: ${userLoginData.username}`
-            });
+            await this._showUserDoesNotExistToast(userLoginData.username);
             return;
         }
 
@@ -177,5 +178,12 @@ export class LoginPage implements OnInit {
 
     private async _setLoginTokenToStorage() {
         await this._storageService.set(storageHelpers.isUserLoggedIn, true);
+    }
+
+    private async _showUserDoesNotExistToast(username: string) {
+        this._toastService.showToast({
+            id: toastHelpers.userDoesNotExist,
+            message: `You do not have an account with us for the User: ${username}`
+        });
     }
 }

@@ -1,3 +1,4 @@
+import { RoutingService } from 'src/app/services/routing/routing.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +6,17 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
+
 export class DashboardPage implements OnInit {
 
-  constructor() { }
+    
+    constructor(
+        private _routingService: RoutingService
+    ) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {}
 
+    goToContractBooker() {
+        this._routingService.goToCbHome();
+    }
 }
