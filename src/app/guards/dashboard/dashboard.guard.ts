@@ -14,10 +14,10 @@ export class DashboardGuard {
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
         if (this._appHelperService.isUserLoggedIn) {
+            return true;
+        } else {
             this._routingService.goToLogin();
             return false;
-        } else {
-            return true;
         }
     }
 }

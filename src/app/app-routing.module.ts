@@ -2,6 +2,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { IntroGuard } from './guards/intro/intro.guard';
 import { LoginGuard } from './guards/login/login.guard';
 import { NgModule } from '@angular/core';
+import { DashboardGuard } from './guards/dashboard/dashboard.guard';
 
 const routes: Routes = [
     {
@@ -24,7 +25,8 @@ const routes: Routes = [
     },    
     {
         path: 'dashboard',
-        loadChildren: () => import('./widgets/core/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+        loadChildren: () => import('./widgets/core/dashboard/dashboard.module').then( m => m.DashboardPageModule),
+        canActivate: [DashboardGuard]
     },
     {
         path: 'cb-home',
