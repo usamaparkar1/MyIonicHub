@@ -34,6 +34,18 @@ export const locale = {
             PASSWORD: 'Password',
             ENTER_USERNAME: 'Enter Username',
             ENTER_PASSWORD: 'Enter Password',
+        },
+        SIGNUP: {
+            SIGNUP: 'Signup',
+            USERNAME: 'Username',
+            PASSWORD: 'Password',
+            ENTER_USERNAME: 'Enter Username',
+            ENTER_PASSWORD: 'Enter Password',
+            CONFIRM_PASSWORD: 'Confirm Password',
+            ENTER_PASSWORD_AGAIN: 'Enter Password Again',
+        },
+        DASHBOARD: {
+            DASHBOARD: 'Dashboard'
         }
     },
 };

@@ -54,6 +54,6 @@
         expand="full"
     >
         <ion-spinner *ngIf="isLogginIn" name="lines-sharp-small"></ion-spinner>
-        <ion-label *ngIf="!isLogginIn">Login</ion-label>
+        <ion-label *ngIf="!isLogginIn">{{ 'LOGIN.LOGIN' | translate }}</ion-label>
     </ion-button>
 </hub-form-footer>

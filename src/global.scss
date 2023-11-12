@@ -47,6 +47,10 @@ hub-form-input {
             &.has-value.ion-invalid {
                 border-color: var(--ion-color-danger) !important;
             }
+
+            &.ion-invalid {
+                border-color: var(--ion-color-danger) !important;
+            }
         }
     }
 }

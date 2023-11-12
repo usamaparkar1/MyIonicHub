@@ -56,7 +56,7 @@ export class JwtInterceptor implements HttpInterceptor {
     // Potentially check the exact error reason for the 400
     // then log out the user automatically
     console.error(error);
-    this._authenticationService.logout();
+    this._authenticationService.logoutUser();
     return of(null);
   }
 

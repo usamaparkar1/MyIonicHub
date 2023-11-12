@@ -1,13 +1,13 @@
+import { AppHelperService } from '../app-helper/app-helper.service';
+import { storageSchema } from 'src/assets/schemas/storage-schema';
 import { SQLiteDBConnection } from '@capacitor-community/sqlite';
 import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { toastHelpers } from 'src/app/helpers/toast-helpers';
 import { localHelpers } from 'src/app/helpers/local-helpers';
-import { storageSchema } from 'src/assets/schemas/storage-schema';
 import { SqliteService } from '../sqlite/sqlite.service';
 import { ToastService } from '../toast/toast.service';
 import { DbService } from '../db/db.service';
 import { Injectable } from '@angular/core';
-import { AppHelperService } from '../app-helper/app-helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +18,10 @@ export class StorageService {
     private _storageDbConnection!: SQLiteDBConnection;
 
     constructor(
-        private _appHelperService: AppHelperService,
-        private _sqliteService: SqliteService,
-        private _toastService: ToastService,
         private _dbService: DbService,
+        private _toastService: ToastService,
+        private _sqliteService: SqliteService,
+        private _appHelperService: AppHelperService
     ) {}
 
     async initializeDatabase() {
@@ -117,6 +117,28 @@ export class StorageService {
                     message: `Error setting data in for key:${key} and value:${value}`,
                 });
                 reject(null);
+            }
+        });
+    }
+
+    async remove(key: string): Promise<boolean> {
+        return await new Promise(async (resolve, reject) => {
+            try {
+                const valueExists: boolean = await this.get(key);
+                if (valueExists) {
+                    await this._storageDbConnection.query(`DELETE FROM ${storageHelpers.storageTableName} WHERE key="${key}"`);
+                    await this._saveDataToWebStore();
+                }
+
+                resolve(true);
+            } catch (error) {
+                console.error(error);
+                this._toastService.showToast({
+                    id: toastHelpers.storageSetError,
+                    header: 'Storage Service Remove Error',
+                    message: `Error removing data in for key:${key}`,
+                });
+                reject(false);
             }
         });
     }

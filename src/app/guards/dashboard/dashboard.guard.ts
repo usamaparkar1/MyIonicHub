@@ -1,20 +1,20 @@
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { AppHelperService } from '../services/app-helper/app-helper.service';
-import { RoutingService } from '../services/routing/routing.service';
+import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
+import { RoutingService } from 'src/app/services/routing/routing.service';
 import { Injectable, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class LoginGuard {
+export class DashboardGuard {
 
-  private _appHelperService = inject(AppHelperService);
+    private _appHelperService = inject(AppHelperService);
     private _routingService = inject(RoutingService);
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
-        if (this._appHelperService.isloggedIn$.getValue()) {
-            this._routingService.goToDashboard();
+        if (this._appHelperService.isUserLoggedIn) {
+            this._routingService.goToLogin();
             return false;
         } else {
             return true;

@@ -1,3 +1,4 @@
+import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { HttpHeaders } from '@angular/common/http';
@@ -12,7 +13,10 @@ export class AuthenticationService {
   
     currentAccessToken = null;
 
-    constructor(private _storageService: StorageService) { }
+    constructor(
+        private _storageService: StorageService,
+        private _appHelperService: AppHelperService
+    ) { }
 
     // Store a new access token
     storeAccessToken(accessToken: any) {
@@ -43,9 +47,23 @@ export class AuthenticationService {
         );
     }
 
-    login() {}
+    async loginUser() {
+        await this.setLoginTokenToStorage();
+    }
 
-    logout() {}
+    async logoutUser() {
+        await this.removeLoginTokenFromStorage();
+    }
+
+    async setLoginTokenToStorage() {
+        await this._storageService.set(storageHelpers.isUserLoggedIn, true);
+        await this._appHelperService.setUserIsLoggedInToken();
+    }
+
+    async removeLoginTokenFromStorage() {
+        await this._storageService.remove(storageHelpers.isUserLoggedIn);
+        await this._appHelperService.removeUserIsLoggedInToken();
+    }
 }
 
 
@@ -54,12 +72,30 @@ export class UserLoginData implements IUserLoginData {
     password: string;
 
     constructor(userLoginData: UserLoginData) {
-    	this.username = userLoginData?.username;
-        this.password = userLoginData?.password;
+    	this.username = userLoginData.username;
+        this.password = userLoginData.password;
   	}
 }
 
 export interface IUserLoginData {
     username: string;
     password: string;
+}
+
+export class UserSignupData implements IUserSignupData {
+    username: string;
+    password: string;
+    confirmPassword: string;
+
+    constructor(userSignupData: UserSignupData) {
+    	this.username = userSignupData.username;
+        this.password = userSignupData.password;
+        this.confirmPassword = userSignupData?.confirmPassword;
+  	}
+}
+
+export interface IUserSignupData {
+    username: string;
+    password: string;
+    confirmPassword: string;
 }

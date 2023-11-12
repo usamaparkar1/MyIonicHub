@@ -1,11 +1,12 @@
 import { StorageService } from './storage/storage.service';
 import { SqliteService } from './sqlite/sqlite.service';
 import { alertHelpers } from '../helpers/alert-helpers';
+import { SignupService } from './signup/signup.service';
 import { AlertService } from './alert/alert.service';
+import { NetworkService } from './network.service';
 import { UserService } from './user/user.service';
 import { Capacitor } from '@capacitor/core';
 import { Injectable } from '@angular/core';
-import { NetworkService } from './network.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class AppService {
     constructor(
         private _userService: UserService,
         private _alertService: AlertService,
+        private _signupService: SignupService,
         private _sqliteService: SqliteService,
         private _storageService: StorageService,
         private _networkService: NetworkService,
@@ -73,6 +75,7 @@ export class AppService {
     private async _createUserSchema() {
         try {
             await this._userService.initializeUserDatabase();
+            await this._signupService.setUserDbConnection(this._userService.getUserDbConnection);
         } catch (error) {
             console.error(error);
             await this._alertService.showAlert(

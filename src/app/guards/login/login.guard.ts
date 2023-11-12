@@ -7,15 +7,14 @@ import { Injectable, inject } from '@angular/core';
   providedIn: 'root'
 })
 
-export class IntroGuard {
+export class LoginGuard {
 
     private _appHelperService = inject(AppHelperService);
     private _routingService = inject(RoutingService);
 
-
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
-        if (this._appHelperService.userHasSeenIntro) {
-            this._routingService.goToLogin();
+        if (this._appHelperService.isUserLoggedIn) {
+            this._routingService.goToDashboard();
             return false;
         } else {
             return true;

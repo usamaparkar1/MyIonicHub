@@ -15,7 +15,7 @@ export class ScreenLoaderPage implements OnInit {
     constructor(
         private _routingService: RoutingService,
         private _storageService: StorageService,
-        private _apphelperService: AppHelperService,
+        private _appHelperService: AppHelperService,
     ) {}
 
     ngOnInit() {
@@ -35,30 +35,30 @@ export class ScreenLoaderPage implements OnInit {
 
     private async _checkIfUserHasSeenIntro() {
         if (await this._storageService.hasSeenIntro()) {
-            this._apphelperService.hasSeenIntro$.next(true);
+            this._appHelperService.setUserHasSeenIntroToken();
         }
     }
 
     private async _checkIfUserIsLoggedIn() {
         if (await this._storageService.isUserLoggedIn()) {
-            this._apphelperService.isloggedIn$.next(true);
+            this._appHelperService.setUserIsLoggedInToken();
         }
     }
 
     async completeAppSetup() {
         if (!await this._storageService.isAppSetup()) {
             await this._storageService.set(localHelpers.isAppSetup, true);
-            this._apphelperService.isAppSetup$.next(true);
+            this._appHelperService.setIsAppSetupToken();
         }
     }
 
     private async _navigateToNextPage() {
-        if (!this._apphelperService.hasSeenIntro$.getValue()) {
+        if (!this._appHelperService.userHasSeenIntro) {
             await this._routingService.goToIntroduction();
             return;
         }
 
-        if (!this._apphelperService.isloggedIn$.getValue()) {
+        if (!this._appHelperService.isUserLoggedIn) {
             await this._routingService.goToIntroduction();
             return;
         }

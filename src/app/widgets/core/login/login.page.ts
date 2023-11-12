@@ -1,11 +1,9 @@
-import { UserLoginData } from 'src/app/services/authentication/authentication.service';
+import { AuthenticationService, UserLoginData } from 'src/app/services/authentication/authentication.service';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { StorageService } from 'src/app/services/storage/storage.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { UserService } from 'src/app/services/user/user.service';
-import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { localHelpers } from 'src/app/helpers/local-helpers';
 import { toastHelpers } from 'src/app/helpers/toast-helpers';
 import { UserHelpers } from 'src/app/helpers/user-helpers';
@@ -21,17 +19,17 @@ export class LoginPage implements OnInit {
   
     loginPageFormValidators = UserHelpers;
     loginForm = new UntypedFormGroup({
-        username: new UntypedFormControl('UsamaParkar', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(UserHelpers.MaxLengthForUserName)])),
-        password: new UntypedFormControl('UsamaParkar', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(UserHelpers.MaxLengthForPassword)])),
+        username: new UntypedFormControl('UsamaParkar', Validators.compose([Validators.required, Validators.minLength(UserHelpers.MinLengthForUserName), Validators.maxLength(UserHelpers.MaxLengthForUserName)])),
+        password: new UntypedFormControl('UsamaParkar', Validators.compose([Validators.required, Validators.minLength(UserHelpers.MinLengthForPassword), Validators.maxLength(UserHelpers.MaxLengthForPassword)])),
     });
     isLogginIn: boolean = false;
 
     constructor(
+        private _userService: UserService,
+        private _toastService: ToastService,
         private _routingService: RoutingService,
         private _networkService: NetworkService,
-        private _storageService: StorageService,
-        private _toastService: ToastService,
-        private _userService: UserService
+        private _authenticationService: AuthenticationService,
     ) {}
 
     ngOnInit() {
@@ -39,13 +37,17 @@ export class LoginPage implements OnInit {
     }
 
     private async _setupLoginPage() {
-        this._setVariables()
+        this._setVariables();
     }
 
     private async _setVariables() {
         if (this.isLogginIn) {
             this._showLoginLoader(false);
         }
+    }
+
+    private _showLoginLoader(value: boolean) {
+        this.isLogginIn = value;
     }
 
     goToSignup() {
@@ -58,8 +60,7 @@ export class LoginPage implements OnInit {
             return;
         }
         
-
-        this.onLogin();
+        await this._onLogin();
     }
 
     private _isLoginFormValid(): boolean {
@@ -80,8 +81,8 @@ export class LoginPage implements OnInit {
 
     private _isUserNameValid(): boolean {
         const userNameErrors = this.loginForm.controls['username']?.errors;
-        const showMessageForInvalidUserName = (message: string) => {
-            this._toastService.showToast({
+        const showMessageForInvalidUserName = async (message: string) => {
+            await this._toastService.showToast({
                 id: toastHelpers.invalidForm + 'username',
                 message: message
             });
@@ -103,8 +104,8 @@ export class LoginPage implements OnInit {
 
     private _isPasswordValid() {
         const passwordErrors = this.loginForm.controls['password']?.errors;
-        const showMessageForInvalidPassword = (message: string) => {
-            this._toastService.showToast({
+        const showMessageForInvalidPassword = async (message: string) => {
+            await this._toastService.showToast({
                 id: toastHelpers.invalidForm + 'password',
                 message: message
             });
@@ -119,7 +120,7 @@ export class LoginPage implements OnInit {
     }
 
     /** @description Login is called only after the form is validated */
-    async onLogin(): Promise<void> {
+    private async _onLogin(): Promise<void> {
         return await new Promise(async (resolve) => {
             try {
                 this._showLoginLoader(true);
@@ -149,41 +150,47 @@ export class LoginPage implements OnInit {
         }
     }
 
-    private _showLoginLoader(value: boolean) {
-        this.isLogginIn = value;
+    /** @description Online Login is unavailable currently. Redirecting to offline login */
+    private async _loginOnline() {
+        this._loginOffline();
     }
 
-    private async _loginOnline() {
+    private async _loginOffline() {
+        await this._toastService.showNoInternetConnectionToast();
         const userLoginData= new UserLoginData({
             username: this.loginForm.get('username')?.value?.trim(),
             password: this.loginForm.get('password')?.value?.trim(),
         });
 
         const userExists: boolean = await this._userService.doesUserExists(userLoginData);
-
         if (!userExists) {
-            this._showLoginLoader(false);
             await this._showUserDoesNotExistToast(userLoginData.username);
+            await this._showLoginLoader(false);
             return;
         }
-
-        this._showLoginLoader(false);
-        await this._setLoginTokenToStorage();
-        await this._routingService.goToDashboard();
-    }
-
-    private async _loginOffline() {
-        await this._toastService.showNoInternetConnectionToast();
-    }
-
-    private async _setLoginTokenToStorage() {
-        await this._storageService.set(storageHelpers.isUserLoggedIn, true);
+        
+        const userDataOfflineLogin = await this._userService.getUserDataOffline(userLoginData.username);
+        const isUserAuthenticated = await this._userService.authenticateUser(userDataOfflineLogin, userLoginData.password);
+        await this._showLoginLoader(false);
+        if (isUserAuthenticated) {
+            await this._authenticationService.loginUser();
+            await this._routingService.goToDashboard();
+        } else {
+            await this._showToastForIncorrectPasswordEntered();
+        }
     }
 
     private async _showUserDoesNotExistToast(username: string) {
-        this._toastService.showToast({
+        await this._toastService.showToast({
             id: toastHelpers.userDoesNotExist,
             message: `You do not have an account with us for the User: ${username}`
+        });
+    }
+
+    private async _showToastForIncorrectPasswordEntered() {
+        await this._toastService.showToast({
+            id: toastHelpers.incorrectPasswordOnLogin,
+            message: `You have entered an incorrect password. Please check your password again.`
         });
     }
 }

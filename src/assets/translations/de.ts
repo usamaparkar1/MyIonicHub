@@ -34,6 +34,17 @@ export const locale = {
             PASSWORD: 'Passwort',
             ENTER_USERNAME: 'Benutzername Eingeben',
             ENTER_PASSWORD: 'Passwort Eingeben',
+        },
+        SIGNUP: {
+            SIGNUP: 'Melden Sie sich an',
+            USERNAME: 'Benutzername',
+            PASSWORD: 'Passwort',
+            ENTER_USERNAME: 'Benutzername Eingeben',
+            CONFIRM_PASSWORD: 'Bestätige das Passwort',
+            ENTER_PASSWORD_AGAIN: 'Passwort erneut eingeben',
+        },
+        DASHBOARD: {
+            DASHBOARD: 'Armaturenbrett'
         }
     },
 };

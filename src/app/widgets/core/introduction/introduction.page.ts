@@ -17,9 +17,9 @@ export class IntroductionPage implements OnInit {
     currentSlideIndex: number = 0;
 
     constructor(
+        private _slideService: SlideService,
         private _routingService: RoutingService,
         private _storageService: StorageService,
-        private _slideService: SlideService,
     ) {}
 
     ngOnInit() {

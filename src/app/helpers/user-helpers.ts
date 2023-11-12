@@ -1,18 +1,23 @@
 export const UserHelpers = {
     userDataKey: "userDataKey",
+    MinLengthForUserName: 6,
     MaxLengthForUserName: 20,
+    MinLengthForPassword: 6,
     MaxLengthForPassword: 20,
 	usersApiRoute: 'users',
     UserTable: 'Users',
     Columns: {
         AccountId: {
-            Name: 'AccountId',
+            Name: 'accountId',
         },
         Username: {
-            Name: 'Username',
+            Name: 'username',
         },
         Password: {
-            Name: 'Password',
+            Name: 'password',
+        },
+        Salt: {
+            Name: 'salt',
         }
     }
 }

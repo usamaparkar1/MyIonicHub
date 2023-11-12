@@ -1,5 +1,6 @@
+import { UserLoginData, UserSignupData } from '../authentication/authentication.service';
+import { PasswordHelperService } from '../password-helper/password-helper.service';
 import { CachingService } from 'src/app/services/caching/caching.service';
-import { UserLoginData } from '../authentication/authentication.service';
 import { SQLiteDBConnection } from '@capacitor-community/sqlite';
 import { ApiService } from 'src/app/services/api/api.service';
 import { userSchema } from 'src/assets/schemas/user-schema';
@@ -8,8 +9,6 @@ import { SqliteService } from '../sqlite/sqlite.service';
 import { DbService } from '../db/db.service';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs'
-import { v4 as uuidv4 } from 'uuid';
-import CryptoES from 'crypto-es';
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +18,24 @@ export class UserService {
 
 	private _userDbConnection!: SQLiteDBConnection;
 
+    get getUserDbConnection(): SQLiteDBConnection {
+        return this._userDbConnection;
+    }
+    
 	constructor(
 		private _dbService: DbService,
 		private _apiService: ApiService,
 		private _sqliteService: SqliteService,
-		private _cachingService: CachingService
+		private _cachingService: CachingService,
+        private _passwordHelperService: PasswordHelperService
 	) {}
 
-  	async getUserData(hasInternetAccess: boolean): Promise<UserModel> {
+    /** @deprecated This is just a test api function for caching api responses. This will be removed/changed. */
+  	async getUserData(hasInternetAccess: boolean): Promise<any> {
     	return await new Promise(async (resolve) => {
-			let user: UserModel = new UserModel();
+			let user = {
+                accountId: null
+            };
 
 			if (hasInternetAccess) {
 				const response = await firstValueFrom(await this._apiService.get(UserHelpers.usersApiRoute));
@@ -82,7 +89,7 @@ export class UserService {
         });
     }
 
-	async doesUserExists(userLoginData: UserLoginData): Promise<boolean> {
+	async doesUserExists(userLoginData: UserLoginData | UserSignupData): Promise<boolean> {
         return await new Promise(async (resolve) => {
 			const query: string = `SELECT ${UserHelpers.Columns.Username.Name} from ${UserHelpers.UserTable} WHERE ${UserHelpers.Columns.Username.Name}="${userLoginData.username}"`;
             let queryValues = (await this._userDbConnection.query(query))?.values;
@@ -95,88 +102,52 @@ export class UserService {
         });
     }
 
-	async isPasswordValid(password: string): Promise<boolean> {
+    async authenticateUser(userModel: UserModel, password: string): Promise<boolean> {
         return await new Promise(async (resolve) => {
-			const hashedPassword: string = this._createHashPassword(password);
-			const query: string = `SELECT ${UserHelpers.Columns.Password.Name} from ${UserHelpers.UserTable} WHERE ${UserHelpers.Columns.Password.Name}="${hashedPassword}"`;
-            let queryValues = (await this._userDbConnection.query(query))?.values;
-
-			if (queryValues!.length === 0) {
-				resolve(false);
+			const hashResponse = this._passwordHelperService.createHashPassword(password, userModel.salt);
+			if (hashResponse.passwordHashString === userModel.password) {
+                resolve(true);
 			}
 
-			resolve(true);
+            resolve(false);
         });
     }
 
-	/** @deprecated To be shifted to new SignupService later */
-	async createUserAccount(userLoginData: UserLoginData): Promise<boolean> {
-		return await new Promise(async (resolve) => {
-			const newUserAccountId = uuidv4();
-			const query: string = `SELECT ${UserHelpers.Columns.AccountId.Name} FROM ${UserHelpers.UserTable} WHERE ${UserHelpers.Columns.AccountId.Name}="${newUserAccountId}"`;
-            let queryValues = (await this._userDbConnection.query(query)).values;
-
-			if (queryValues!.length === 0) {
-				const newPassword: string = this._createHashPassword(userLoginData.password as string);
-
-				const success = await this.insertNewUserInDb(newUserAccountId, userLoginData, newPassword);
-				
-				resolve(success);
-			}
-
-			resolve(false);
-        });
-	}
-
-	/** @deprecated To be shifted to new SignupService later */
-	private _createHashPassword(password: string): string {
-		const salt = CryptoES.lib.WordArray.random(128/8);
-		const passwordHash = CryptoES.PBKDF2(password, salt.toString(), { keySize: 128/32, iterations: 10000 });
-
-		return passwordHash?.toString();
-	}
-
-	/** @deprecated To be shifted to new SignupService later */
-	async insertNewUserInDb(newUserAccountId: string, userLoginData: UserLoginData, password: string) {
-		try {
-			const insertQuery: string = `INSERT INTO ${UserHelpers.UserTable} VALUES (
-				"${newUserAccountId}",
-				"${userLoginData.username}",
-				"${password}"
-			)`;
-
-			let queryValues = (await this._userDbConnection.query(insertQuery)).values;
-	
-			if (this._sqliteService.isWeb) {
-				await this._sqliteService.sqliteConnection.saveToStore(userSchema.databaseName);
-			}
-			return queryValues?.length === 0;	
-		} catch (error) {
-			return false;
-		}
-	}
-
-	/** @deprecated To be shifted to new SignupService later */
 	async getAllUsers() {
 		const getQuery: string = `SELECT * FROM ${UserHelpers.UserTable};`;
-        let getQueryValues = (await this._userDbConnection.query(getQuery))?.values;
+        return (await this._userDbConnection.query(getQuery))?.values;
 	}
+
+    async getUserDataOffline(username: string): Promise<UserModel> {
+        return await new Promise(async (resolve, reject) => {
+            const query: string = `SELECT * from ${UserHelpers.UserTable} WHERE ${UserHelpers.Columns.Username.Name}="${username}";`;
+            let queryValues = (await this._userDbConnection.query(query))?.values;
+            if (queryValues!.length === 0) {
+                reject();
+            }
+
+            resolve(queryValues![0]);
+        });
+    }
 }
 
 export class UserModel implements IUserModel {
-  	accountId: string | undefined;
-	username: string | undefined;
-	password: string | undefined;
+  	accountId: string;
+	username: string;
+	password: string;
+    salt: string;
 
-  	constructor(userModel?: UserModel) {
-    	this.accountId = userModel?.accountId;
-		this.username = userModel?.username;
-		this.password = userModel?.password;
+  	constructor(userModel: UserModel) {
+    	this.accountId = userModel.accountId;
+		this.username = userModel.username;
+		this.password = userModel.password;
+        this.salt = userModel.salt;
   	}
 }
 
 export interface IUserModel {
-	accountId: string | undefined;
-	username: string | undefined;
-	password: string | undefined;
+	accountId: string;
+	username: string;
+	password: string;
+    salt: string;
 }

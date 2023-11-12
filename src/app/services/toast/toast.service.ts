@@ -1,8 +1,8 @@
-import { localHelpers } from 'src/app/helpers/local-helpers';
-import { ToastButton, ToastController, ToastOptions } from '@ionic/angular';
-import { Injectable } from '@angular/core';
-import { toastHelpers } from 'src/app/helpers/toast-helpers';
 import { TranslationService } from '../translation/translation.service';
+import { ToastController, ToastOptions } from '@ionic/angular';
+import { localHelpers } from 'src/app/helpers/local-helpers';
+import { toastHelpers } from 'src/app/helpers/toast-helpers';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,8 @@ import { TranslationService } from '../translation/translation.service';
 export class ToastService {
 
     constructor(
+        private _toastController: ToastController,
         private _translationService: TranslationService,
-        private _toastController: ToastController
     ) {}
 
     async showToast(toastOptions: ToastOptions, notificationType: NotificationType = NotificationType.Default) {
@@ -29,7 +29,7 @@ export class ToastService {
     }
 
     async showNoInternetConnectionToast() {
-        this.showToast({
+        await this.showToast({
             id: toastHelpers.userIsOffline,
             message: this._translationService.instant('TOAST.NETWORK.USER_IS_OFFLINE')
         });

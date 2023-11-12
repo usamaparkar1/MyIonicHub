@@ -1,4 +1,6 @@
 export const toastHelpers = {
+    incorrectPasswordOnLogin: 'incorrectPasswordOnLogin',
+    cannotSignUpOffline: 'cannotSignUpOffline',
     clearStorageError: 'clearStorageError',
     appHelperNotSetup: 'appHelperNotSetup',
     userDoesNotExist: 'userDoesNotExist',
