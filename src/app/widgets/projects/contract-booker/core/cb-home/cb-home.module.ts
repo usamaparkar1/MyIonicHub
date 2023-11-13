@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { CbHomePageRoutingModule } from './cb-home-routing.module';
 
 import { CbHomePage } from './cb-home.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     CbHomePageRoutingModule
   ],
   declarations: [CbHomePage]

@@ -33,8 +33,12 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                loadChildren: () => import('./widgets/projects/contract-booker/cb-home/cb-home.module').then( m => m.CbHomePageModule)
-            }
+                loadChildren: () => import('./widgets/projects/contract-booker/core/cb-home/cb-home.module').then( m => m.CbHomePageModule)
+            },
+            {
+                path: 'cb-customer-address',
+                loadChildren: () => import('./widgets/projects/contract-booker/core/cb-customer-address/cb-customer-address.module').then( m => m.CbCustomerAddressPageModule)
+            },
         ]
     },
 ];

@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>{{ 'CB.HOME.HOME' | translate }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">{{ 'CB.HOME.HOME' | translate }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-grid>
+        <ion-row><ion-col class="cb-home-module-container" (click)="startConsultation()">
+            <ion-img class="home-module-images" [src]="contractBookerData.consultationStartImage"></ion-img>
+            <ion-label class="ion-text-center ion-padding">{{ 'CB.HOME.START_CONSULTATION' | translate }}</ion-label>
+        </ion-col></ion-row>
+    </ion-grid>
+</ion-content>

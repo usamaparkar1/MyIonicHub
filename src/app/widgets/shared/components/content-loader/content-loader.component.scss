@@ -1,0 +1,21 @@
+ion-skeleton-text {
+    --border-radius: 8px;
+    --background-rgb: 188, 0, 255;
+    --background: rgba(188, 0, 255, 0.065);
+}
+
+ion-card {
+    box-shadow: none;
+
+    ion-card-header {
+        ion-skeleton-text {
+            height: 80px;
+        }
+    }
+
+    ion-card-title {
+        ion-skeleton-text {
+            height: 16px;
+        }
+    }
+}

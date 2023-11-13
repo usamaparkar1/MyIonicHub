@@ -12,23 +12,29 @@
         </ion-toolbar>
     </ion-header>
 
-    <ion-grid>
+    <ion-grid *ngIf="isLoadingContent">
+        <hub-content-loader></hub-content-loader>
+        <hub-content-loader></hub-content-loader>
+        <hub-content-loader></hub-content-loader>
+    </ion-grid>
+
+    <ion-grid *ngIf="!isLoadingContent">
         <ion-row><ion-col>
             <ion-card class="modern-card" (click)="goToContractBooker()">
                 <!-- Images -->
                 <ion-row><ion-col>
-                    <img alt="gas" src="assets/icon/contract-booker/gas.svg" />
+                    <img [alt]="contractBookerData.gasAltText" [src]="contractBookerData.gasSvgUrl" />
                 </ion-col>
                 <ion-col>
-                    <img alt="electricity" src="assets/icon/contract-booker/electricity.svg" />
+                    <img [alt]="contractBookerData.electricityAltText" [src]="contractBookerData.electricitySvgUrl" />
                 </ion-col></ion-row>
                 <!-- App Title -->
                 <ion-card-header>
-                    <ion-card-title>Contract Booker</ion-card-title>
+                    <ion-card-title>{{ contractBookerData.appName }}</ion-card-title>
                 </ion-card-header>
                 <!-- App Description -->
                 <ion-card-content>
-                    This application lets you book electricity and gas contracts.
+                    {{ contractBookerData.appDescription }}
                 </ion-card-content>
             </ion-card>
         </ion-col></ion-row>

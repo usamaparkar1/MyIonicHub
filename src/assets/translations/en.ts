@@ -46,6 +46,17 @@ export const locale = {
         },
         DASHBOARD: {
             DASHBOARD: 'Dashboard'
+        },
+        CB: {
+            HOME: {
+                HOME: 'HOME',
+                START_CONSULTATION: 'Start a consultation',
+            },
+            CUSTOMER_ADDRESS: {
+                CUSTOMER_ADDRESS: 'Customer Address',
+                STATE: 'State',
+                SELECT_STATE: 'Select a state'
+            }
         }
     },
 };

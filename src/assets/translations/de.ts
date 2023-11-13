@@ -45,6 +45,17 @@ export const locale = {
         },
         DASHBOARD: {
             DASHBOARD: 'Armaturenbrett'
+        },
+        CB: {
+            HOME: {
+                HOME: 'HOME',
+                START_CONSULTATION: 'Beratung Starten',
+            },
+            CUSTOMER_ADDRESS: {
+                CUSTOMER_ADDRESS: 'Kundenadresse',
+                STATE: 'Staat',
+                SELECT_STATE: 'Wähle einen Staat'
+            }
         }
     },
 };

@@ -8,15 +8,17 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../../shared/shared-module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TranslateModule,
-    DashboardPageRoutingModule
-  ],
-  declarations: [DashboardPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        SharedModule,
+        TranslateModule,
+        DashboardPageRoutingModule
+    ],
+    declarations: [DashboardPage]
 })
 export class DashboardPageModule {}

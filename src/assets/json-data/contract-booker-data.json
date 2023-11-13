@@ -1,0 +1,9 @@
+{
+    "appName": "Contract Booker",
+    "appDescription": "This application lets you book electricity and gas contracts",
+    "gasAltText": "gas",
+    "gasSvgUrl": "assets/icon/contract-booker/gas.svg",
+    "electricityAltText": "electricity",
+    "electricitySvgUrl": "assets/icon/contract-booker/electricity.svg",
+    "consultationStartImage": "assets/img/contract-booker/consultation-start.svg"
+}
