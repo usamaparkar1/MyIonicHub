@@ -170,27 +170,44 @@ export class StorageService {
         return await this.get(localHelpers.isAppSetup);
     }
 
+    async setIsAppSetupInStorage() {
+        await this.set(localHelpers.isAppSetup, true);
+    }
+
     async hasSeenIntro(): Promise<boolean> {
         return await this.get(storageHelpers.introSeen);
+    }
+
+    async setUserHasSeenIntroInStorage() {
+        await this.set(storageHelpers.introSeen, true);
     }
 
     async isUserLoggedIn(): Promise<boolean> {
         return await this.get(storageHelpers.isUserLoggedIn);
     }
+
+    /** @description Path will be the home route of the application that is selected. */
+    async setCurrentAppInUse(path: string) {
+        await this.set(storageHelpers.currentAppInUse, path);
+    }
+
+    async isCurrentAppInUse(): Promise<string> {
+        return await this.get(storageHelpers.currentAppInUse);
+    }
 }
 
 export class StorageModel implements IStorageModel {
-    key?: string;
-    value?: string | undefined
+    key: string;
+    value?: string | undefined;
   
-    constructor(storageModel?: StorageModel) {
-        this.key = storageModel?.key;
+    constructor(storageModel: StorageModel) {
+        this.key = storageModel.key;
         this.value = storageModel?.value;
     }
 }
   
 export interface IStorageModel {
-    key?: string;
-    value?: string | undefined
+    key: string;
+    value?: string | undefined;
 }
   

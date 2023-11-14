@@ -10,10 +10,20 @@ export class AppHelperService {
 	hasSeenIntro$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	isAppSetup$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	isloggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    isCurrentAppInUse$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
 	isNotNullAndNotUndefined(valueToTest: any): boolean {
 		return valueToTest !== null && valueToTest !== undefined;
 	}
+
+    isStringNotEmpty(stringToTest: string): boolean {
+        return (!stringToTest || stringToTest.length === 0);
+    }
+
+    /** @description Returns a string if its not empty or returns null */
+    getStringOrNull(stringToTest: string): string | null {
+        return (!stringToTest || stringToTest.length === 0) ? null : stringToTest;
+    }
 
     setUserHasSeenIntroToken() {
         this.hasSeenIntro$.next(true);
@@ -49,5 +59,17 @@ export class AppHelperService {
 
     get isUserLoggedIn() {
         return this.isloggedIn$.getValue();
+    }
+
+    setCurrentAppInUseToken(currentAppHomeRoute: string) {
+        this.isCurrentAppInUse$.next(currentAppHomeRoute);
+    }
+
+    removeCurrentAppInUseToken() {
+        this.isCurrentAppInUse$.next('');
+    }
+
+    get getCurrentAppInUseToken() {
+        return this.getStringOrNull(this.isCurrentAppInUse$.getValue());
     }
 }

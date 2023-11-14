@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-title slot="start" color="primary">{{ 'DASHBOARD.DASHBOARD' | translate }}</ion-title>
-        <ion-icon slot="end" size="large" name="log-out-outline" color="primary" (click)="logoutUser()" class="logout-icon"></ion-icon>
+        <ion-icon slot="end" size="large" [src]="coreData.logoutIconUrl" class="toolbar-slot-end-icon" (click)="logoutUser()"></ion-icon>
     </ion-toolbar>
 </ion-header>
 
@@ -20,7 +20,7 @@
 
     <ion-grid *ngIf="!isLoadingContent">
         <ion-row><ion-col>
-            <ion-card class="modern-card" (click)="goToContractBooker()">
+            <ion-card class="modern-card" (click)="selectContractBookerApp()">
                 <!-- Images -->
                 <ion-row><ion-col>
                     <img [alt]="contractBookerData.gasAltText" [src]="contractBookerData.gasSvgUrl" />

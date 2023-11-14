@@ -64,6 +64,11 @@ export class AuthenticationService {
         await this._storageService.remove(storageHelpers.isUserLoggedIn);
         await this._appHelperService.removeUserIsLoggedInToken();
     }
+
+    async removeCurrentAppInUseFromStorage() {
+        await this._storageService.remove(storageHelpers.currentAppInUse);
+        await this._appHelperService.removeCurrentAppInUseToken();
+    }
 }
 
 

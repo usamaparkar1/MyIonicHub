@@ -1,0 +1,5 @@
+{
+    "logoutIconUrl": "assets/icon/core/logout.svg",
+    "profileIconUrl": "assets/icon/core/profile.svg",
+    "appLogoutIconUrl": "assets/icon/core/app-logout.svg"
+}

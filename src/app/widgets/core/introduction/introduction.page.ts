@@ -1,7 +1,6 @@
 import { SlideService, SlidesModel } from 'src/app/services/slide/slide.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
-import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -36,7 +35,7 @@ export class IntroductionPage implements OnInit {
 
     async completeIntroduction() {
         // Skip can be clicked from the end of the slides or from the floating skip button
-        await this._storageService.set(storageHelpers.introSeen, true);
+        await this._storageService.setUserHasSeenIntroInStorage();
         await this._routingService.goToLogin();
     }
 }

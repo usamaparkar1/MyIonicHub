@@ -1,7 +1,6 @@
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { StorageService } from 'src/app/services//storage/storage.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
-import { localHelpers } from 'src/app/helpers/local-helpers';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -30,6 +29,7 @@ export class ScreenLoaderPage implements OnInit {
     private async _setAppHelpers() {
         await this._checkIfUserHasSeenIntro();
         await this._checkIfUserIsLoggedIn();
+        await this._checkIfCurrentAppIsSelected();
         await this.completeAppSetup();
     }
 
@@ -45,9 +45,16 @@ export class ScreenLoaderPage implements OnInit {
         }
     }
 
+    private async _checkIfCurrentAppIsSelected() {
+        const currentAppHomeRoute = this._appHelperService.getStringOrNull(await this._storageService.isCurrentAppInUse());
+        if (currentAppHomeRoute) {
+            this._appHelperService.setCurrentAppInUseToken(currentAppHomeRoute);
+        }
+    }
+
     async completeAppSetup() {
         if (!await this._storageService.isAppSetup()) {
-            await this._storageService.set(localHelpers.isAppSetup, true);
+            await this._storageService.setIsAppSetupInStorage();
             this._appHelperService.setIsAppSetupToken();
         }
     }
@@ -60,6 +67,11 @@ export class ScreenLoaderPage implements OnInit {
 
         if (!this._appHelperService.isUserLoggedIn) {
             await this._routingService.goToIntroduction();
+            return;
+        }
+
+        if (this._appHelperService.getCurrentAppInUseToken) {
+            await this._routingService.goToCbHome();
             return;
         }
 

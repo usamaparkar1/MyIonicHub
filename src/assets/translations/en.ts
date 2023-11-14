@@ -17,6 +17,12 @@ export const locale = {
         ALERT: {
             HEADER: 'Attention',
         },
+        ACTION_SHEET: {
+            PROFILE: {
+                APP_LOGOUT: 'App Logout',
+                ACCOUNT_LOGOUT: 'Account Logout'
+            }
+        },
         INTRODUCTION: {
             SLIDE_1: {
                 HEADER: 'Introduction'

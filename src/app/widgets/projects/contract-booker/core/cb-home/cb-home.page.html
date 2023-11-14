@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-title>{{ 'CB.HOME.HOME' | translate }}</ion-title>
+        <ion-icon [src]="coreData.profileIconUrl" slot="end" size="large" class="toolbar-slot-end-icon" (click)="openProfileActionSheet()"></ion-icon>
     </ion-toolbar>
 </ion-header>
 

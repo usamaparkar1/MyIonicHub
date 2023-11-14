@@ -1,4 +1,5 @@
 export const storageHelpers = {
+    currentAppInUse: 'currentAppInUse',
     refreshTokenKey: 'refreshTokenKey',
     accessTokenKey: 'accessTokenKey',
     isUserLoggedIn: 'isUserLoggedIn',

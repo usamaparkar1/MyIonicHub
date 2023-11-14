@@ -1,5 +1,7 @@
 import { CbRoutingService } from 'src/app/widgets/projects/contract-booker/services/routing/cb-routing.service';
+import { ActionSheetService } from 'src/app/services/action-sheet/action-sheet.service';
 import contractBookerJson from 'src/assets/json-data/contract-booker-data.json';
+import coreDataJson from 'src/assets/json-data/core-data.json';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,11 +13,19 @@ import { Component, OnInit } from '@angular/core';
 export class CbHomePage implements OnInit {
 
     contractBookerData = contractBookerJson;
+    coreData = coreDataJson;
+
     constructor(
-        private _cbRoutingService: CbRoutingService
+        private _cbRoutingService: CbRoutingService,
+        private _actionSheetService: ActionSheetService,
     ) {}
 
     ngOnInit() {}
+
+    async openProfileActionSheet() {
+        const profileActionSheet = await this._actionSheetService.createProfileActionSheet();
+        await profileActionSheet.present();
+    }
 
     async startConsultation() {
         await this._cbRoutingService.goToCbCustomerAddress();

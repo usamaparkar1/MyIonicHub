@@ -1,6 +1,9 @@
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import contractBookerJson from 'src/assets/json-data/contract-booker-data.json';
 import { RoutingService } from 'src/app/services/routing/routing.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { CbRoutingHelpers } from 'src/app/helpers/routing-helpers';
+import coreDataJson from 'src/assets/json-data/core-data.json';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,9 +16,11 @@ export class DashboardPage implements OnInit {
 
     isLoadingContent: boolean = true;
     contractBookerData = contractBookerJson;
+    coreData = coreDataJson;
 
     constructor(
         private _routingService: RoutingService,
+        private _storageService: StorageService,
         private _authenticationService: AuthenticationService
     ) {}
 
@@ -24,11 +29,16 @@ export class DashboardPage implements OnInit {
     }
 
     private _dashboardInit() {
-        this.showLoadingContent(false);
+        this._showLoadingContent(false);
     }
 
-    showLoadingContent(value: boolean) {
+    private _showLoadingContent(value: boolean) {
         this.isLoadingContent = value;
+    }
+
+    async selectContractBookerApp() {
+        await this._storageService.setCurrentAppInUse(CbRoutingHelpers.cbHome);
+        await this.goToContractBooker();
     }
 
     async goToContractBooker() {
