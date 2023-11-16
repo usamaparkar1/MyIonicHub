@@ -597,19 +597,19 @@ export class SqliteService {
     }
 
     async isInConfigEncryption(): Promise<capSQLiteResult> {
-        return await this.sqliteConnection.isInConfigEncryption();
+        return await this._sqliteConnection.isInConfigEncryption();
     }
 
     async isDatabaseEncrypted(database: string): Promise<capSQLiteResult> {
         let result: capSQLiteResult = { result: false };
 
-        const isDB = (await this.sqliteConnection.isDatabase(database)).result;
+        const isDB = (await this._sqliteConnection.isDatabase(database)).result;
         
         if (!isDB) {
             return result;
         }
         
-        return await this.sqliteConnection.isDatabaseEncrypted(database);
+        return await this._sqliteConnection.isDatabaseEncrypted(database);
     }
      
     async save(mDb: SQLiteDBConnection, table: string, mObj: any, where?: any): Promise<void> {

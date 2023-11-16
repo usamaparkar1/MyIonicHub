@@ -3,8 +3,8 @@ export const storageSchema = {
     toVersion: 1,
     statements: [
         `CREATE TABLE IF NOT EXISTS storage (
-            key varchar(20) PRIMARY KEY NOT NULL,
-            value varchar(10)
+            keyName varchar(20) NOT NULL PRIMARY KEY,
+            value varchar(255)
         );`,
     ]
 };
