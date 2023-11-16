@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { ConnectionStatus, Network } from '@capacitor/network';
+import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,7 +10,6 @@ import { BehaviorSubject } from 'rxjs';
 export class NetworkService {
 
     private _isOnline$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    private _networkListenerSubscription: any;
 
     get isOnline() {
         return this._isOnline$.getValue();

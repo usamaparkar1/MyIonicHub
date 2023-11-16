@@ -1,4 +1,5 @@
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
+import { NavigationOptions } from '@ionic/angular/providers/nav-controller';
 import { StorageService } from 'src/app/services//storage/storage.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
 import { Component, OnInit } from '@angular/core';
@@ -60,21 +61,22 @@ export class ScreenLoaderPage implements OnInit {
     }
 
     private async _navigateToNextPage() {
+        const navigationOptions: NavigationOptions = { skipLocationChange: true, replaceUrl: true };
         if (!this._appHelperService.userHasSeenIntro) {
-            await this._routingService.goToIntroduction();
+            await this._routingService.goToIntroduction(navigationOptions);
             return;
         }
 
         if (!this._appHelperService.isUserLoggedIn) {
-            await this._routingService.goToIntroduction();
+            await this._routingService.goToLogin(navigationOptions);
             return;
         }
 
         if (this._appHelperService.getCurrentAppInUseToken) {
-            await this._routingService.goToCbHome();
+            await this._routingService.goToCbHome(navigationOptions);
             return;
         }
 
-        await this._routingService.goToDashboard();
+        await this._routingService.goToDashboard(navigationOptions);
     }
 }

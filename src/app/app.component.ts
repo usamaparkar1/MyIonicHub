@@ -60,7 +60,7 @@ export class AppComponent {
     }
 
     private async _goToScreenLoader() {
-        await this._routingService.goToScreenLoader();
+        await this._routingService.goToScreenLoader({skipLocationChange: true, replaceUrl: true});
     }
 
     private async _hideSplashScreen() {
