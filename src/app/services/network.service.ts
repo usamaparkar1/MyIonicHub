@@ -35,7 +35,7 @@ export class NetworkService {
     }
 
     private _startNetworkListener() {
-        this._networkListenerSubscription = Network.addListener("networkStatusChange", (status) => {
+        Network.addListener("networkStatusChange", (status) => {
             if (this.isOnline !== status?.connected) {
                 if (this.isNetworkConnected(status)) {
                     this._setIsOnline(true);
@@ -65,7 +65,6 @@ export class NetworkService {
     }
 
     private _removeNetworkListener() {
-        this._networkListenerSubscription?.unsubscribe();
         Network.removeAllListeners();
     }
 }
