@@ -57,15 +57,15 @@ export class StorageService {
         });
     }
 
-    async get(key: string): Promise<any> {
+    async get(keyName: string): Promise<any> {
         return await new Promise(async (resolve, reject) => {
             try {
                 let response = undefined;
 
-                const data = await this._storageDbConnection.query(`SELECT * FROM ${storageHelpers.storageTableName} WHERE key="${key}"`);
+                const data = await this._storageDbConnection.query(`SELECT * FROM ${storageHelpers.storageTableName} WHERE keyName="${keyName}"`);
     
                 if (data.values!.length > 0) {
-                    const keyValuePair = data.values!.find((x) => x?.key === key);
+                    const keyValuePair = data.values!.find((x) => x?.keyName === keyName);
     
                     if (Object.keys(keyValuePair)?.length > 0) {
     
@@ -87,22 +87,22 @@ export class StorageService {
                 this._toastService.showToast({
                     id: toastHelpers.storageSetError,
                     header: 'Storage Service Get Error',
-                    message: `Error setting data in for key:${key}`,
+                    message: `Error setting data in for key:${keyName}`,
                 });
                 reject(null);
             }
         });
     }
 
-    async set(key: string, value: any): Promise<any> {
+    async set(keyName: string, value: any): Promise<any> {
         return await new Promise(async (resolve, reject) => {
-            const valueExists: boolean = await this.get(key);
+            const valueExists: boolean = await this.get(keyName);
 
             try {
-                const storageData = new StorageModel({ key: key, value: JSON.stringify(value) });
+                const storageData = new StorageModel({ keyName: keyName, value: JSON.stringify(value) });
 
                 if (this._appHelperService.isNotNullAndNotUndefined(valueExists)) {
-                    await this._sqliteService.save(this._storageDbConnection, storageHelpers.storageTableName, storageData, { key: key });
+                    await this._sqliteService.save(this._storageDbConnection, storageHelpers.storageTableName, storageData, { keyName: keyName });
                 } else {
                     await this._sqliteService.save(this._storageDbConnection, storageHelpers.storageTableName, storageData);
                 }
@@ -114,19 +114,19 @@ export class StorageService {
                 this._toastService.showToast({
                     id: toastHelpers.storageSetError,
                     header: 'Storage Service Set Error',
-                    message: `Error setting data in for key:${key} and value:${value}`,
+                    message: `Error setting data in for key:${keyName} and value:${value}`,
                 });
                 reject(null);
             }
         });
     }
 
-    async remove(key: string): Promise<boolean> {
+    async remove(keyName: string): Promise<boolean> {
         return await new Promise(async (resolve, reject) => {
             try {
-                const valueExists: boolean = await this.get(key);
+                const valueExists: boolean = await this.get(keyName);
                 if (valueExists) {
-                    await this._storageDbConnection.query(`DELETE FROM ${storageHelpers.storageTableName} WHERE key="${key}"`);
+                    await this._storageDbConnection.query(`DELETE FROM ${storageHelpers.storageTableName} WHERE keyName="${keyName}"`);
                     await this._saveDataToWebStore();
                 }
 
@@ -136,7 +136,7 @@ export class StorageService {
                 this._toastService.showToast({
                     id: toastHelpers.storageSetError,
                     header: 'Storage Service Remove Error',
-                    message: `Error removing data in for key:${key}`,
+                    message: `Error removing data in for key:${keyName}`,
                 });
                 reject(false);
             }
@@ -197,17 +197,17 @@ export class StorageService {
 }
 
 export class StorageModel implements IStorageModel {
-    key: string;
+    keyName: string;
     value?: string | undefined;
   
     constructor(storageModel: StorageModel) {
-        this.key = storageModel.key;
+        this.keyName = storageModel.keyName;
         this.value = storageModel?.value;
     }
 }
   
 export interface IStorageModel {
-    key: string;
+    keyName: string;
     value?: string | undefined;
 }
   
