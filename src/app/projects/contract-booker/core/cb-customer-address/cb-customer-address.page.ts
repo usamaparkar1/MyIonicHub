@@ -1,7 +1,7 @@
+import { CbContractService } from 'src/app/projects/contract-booker/services/contract/cb-contract.service';
+import { CbModalService } from 'src/app/projects/contract-booker/services/modal/cb-modal.service';
 import { customerAddressHelpers } from 'src/app/helpers/contract-booker/customer-address-helpers';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { CbContractService } from '../../services/contract/cb-contract.service';
-import { CbModalService } from '../../services/modal/cb-modal.service';
 import citiesListJson from 'src/assets/json-data/cities.json';
 import stateListJson from 'src/assets/json-data/states.json';
 import { Component, OnInit } from '@angular/core';

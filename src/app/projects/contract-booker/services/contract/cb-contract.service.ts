@@ -1,4 +1,4 @@
-import { CustomerAddressData } from 'src/app/widgets/projects/contract-booker/core/cb-customer-address/cb-customer-address.page';
+import { CustomerAddressData } from 'src/app/projects/contract-booker/core/cb-customer-address/cb-customer-address.page';
 import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 

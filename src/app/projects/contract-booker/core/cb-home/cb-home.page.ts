@@ -1,4 +1,4 @@
-import { CbRoutingService } from 'src/app/widgets/projects/contract-booker/services/routing/cb-routing.service';
+import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
 import { ActionSheetService } from 'src/app/services/action-sheet/action-sheet.service';
 import contractBookerJson from 'src/assets/json-data/contract-booker-data.json';
 import coreDataJson from 'src/assets/json-data/core-data.json';

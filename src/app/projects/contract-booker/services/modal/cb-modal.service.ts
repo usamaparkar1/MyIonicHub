@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { modalHelpers } from 'src/app/helpers/modal-helpers';
 import { SearchbarComponent } from 'src/app/widgets/shared/components/searchbar/searchbar.component';
+import { modalHelpers } from 'src/app/helpers/modal-helpers';
+import { ModalController } from '@ionic/angular';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
