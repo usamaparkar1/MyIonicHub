@@ -7,25 +7,25 @@ import { NgModule } from '@angular/core';
 const routes: Routes = [
     {
         path: 'screen-loader',
-        loadChildren: () => import('./widgets/core/screen-loader/screen-loader.module').then( m => m.ScreenLoaderPageModule)
+        loadChildren: () => import('./core/screen-loader/screen-loader.module').then( m => m.ScreenLoaderPageModule)
     },
     {
         path: 'introduction',
-        loadChildren: () => import('./widgets/core/introduction/introduction.module').then( m => m.IntroductionPageModule),
+        loadChildren: () => import('./core/introduction/introduction.module').then( m => m.IntroductionPageModule),
         canActivate: [IntroGuard]
     },
     {
         path: 'login',
-        loadChildren: () => import('./widgets/core/login/login.module').then( m => m.LoginPageModule),
+        loadChildren: () => import('./core/login/login.module').then( m => m.LoginPageModule),
         canActivate: [LoginGuard]
     },
     {
         path: 'signup',
-        loadChildren: () => import('./widgets/core/signup/signup.module').then( m => m.SignupPageModule)
+        loadChildren: () => import('./core/signup/signup.module').then( m => m.SignupPageModule)
     },    
     {
         path: 'dashboard',
-        loadChildren: () => import('./widgets/core/dashboard/dashboard.module').then( m => m.DashboardPageModule),
+        loadChildren: () => import('./core/dashboard/dashboard.module').then( m => m.DashboardPageModule),
         canActivate: [DashboardGuard]
     },
     {

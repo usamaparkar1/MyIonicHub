@@ -8,7 +8,7 @@ import { CbCustomerAddressPageRoutingModule } from './cb-customer-address-routin
 
 import { CbCustomerAddressPage } from './cb-customer-address.page';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from 'src/app/widgets/shared/shared-module';
+import { SharedModule } from 'src/app/shared/shared-module';
 
 @NgModule({
   imports: [

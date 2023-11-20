@@ -1,4 +1,4 @@
-import { SearchbarComponent } from 'src/app/widgets/shared/components/searchbar/searchbar.component';
+import { SearchbarComponent } from 'src/app/shared/components/searchbar/searchbar.component';
 import { modalHelpers } from 'src/app/helpers/modal-helpers';
 import { ModalController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
