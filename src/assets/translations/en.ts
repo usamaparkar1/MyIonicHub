@@ -61,7 +61,11 @@ export const locale = {
             CUSTOMER_ADDRESS: {
                 CUSTOMER_ADDRESS: 'Customer Address',
                 STATE: 'State',
-                SELECT_STATE: 'Select a state'
+                SELECT_STATE: 'Select a state',
+                CITY: 'City',
+                POSTCODE: 'Post Code',
+                ENTER_POSTCODE: 'Enter Post Code',
+                SELECT_ADDRESS: 'Select Address',
             }
         }
     },

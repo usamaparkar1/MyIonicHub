@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class CbHomePage implements OnInit {
 
+    // JSON data
     contractBookerData = contractBookerJson;
     coreData = coreDataJson;
 

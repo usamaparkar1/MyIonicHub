@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { customerAddressHelpers } from 'src/app/helpers/contract-booker/customer-address-helpers';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { CbContractService } from '../../services/contract/cb-contract.service';
+import { CbModalService } from '../../services/modal/cb-modal.service';
+import citiesListJson from 'src/assets/json-data/cities.json';
+import stateListJson from 'src/assets/json-data/states.json';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-cb-customer-address',
@@ -9,55 +14,93 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 
 export class CbCustomerAddressPage implements OnInit {
 
-    customerAddressFormGroup: UntypedFormGroup = new UntypedFormBuilder().group({
-        state: [null, Validators.compose([Validators.required])]
-    })
+    isValidatingCustomerAddressForm: boolean = false;
+    customerAddressFormHelpers = customerAddressHelpers;
+    customerAddressForm: UntypedFormGroup = new UntypedFormBuilder().group({
+        state: ['Maharashtra', Validators.compose([Validators.required])],
+        city: ['Mumbai', Validators.compose([Validators.required])],
+        postCode: ['400009', Validators.compose([
+            Validators.required,
+            Validators.minLength(customerAddressHelpers.postCodeMinLength),
+            Validators.maxLength(customerAddressHelpers.postCodeMaxLength)]
+        )],
+    });
 
-    constructor() { }
+    constructor(
+        private _cbContractService: CbContractService,
+        private _cbModalService: CbModalService
+    ) {}
 
     ngOnInit() {
     }
 
-    validateCustomerAddress(){
+    async openStateSearchBar() {
+        const searchBarModal = await this._cbModalService.openStateSearchBarModal(stateListJson);
 
+        await searchBarModal.present();
+
+        const { data, role } = await searchBarModal.onWillDismiss();
+        if (role === 'confirm') {
+            this.customerAddressForm.get('state')?.setValue(data);
+            this.customerAddressForm.get('city')?.setValue(null);
+        }
+    }
+
+    async openCitiesSearchBar() {
+        if (this.customerAddressForm.get('state')!.invalid) {
+            return;
+        }
+
+        const cityList = this._getCitiesFilteredByState();
+        const searchBarModal = await this._cbModalService.openCitySearchBarModal(cityList);
+
+        await searchBarModal.present();
+
+        const { data, role } = await searchBarModal.onWillDismiss();
+        if (role === 'confirm') {
+            this.customerAddressForm.get('city')?.setValue(data);
+        }
+    }
+
+    private _getCitiesFilteredByState() {
+        const selectedState = this.customerAddressForm.get('state')?.value;
+        return (citiesListJson as any)[selectedState];
+    }
+
+    async validateCustomerAddress() {
+        try {
+            this.showValidatingFormLoader(true);
+            const newCustomerAddressData = new CustomerAddressData({
+                state: this.customerAddressForm.get('state')?.value,
+                city: this.customerAddressForm.get('city')?.value,
+                postCode: this.customerAddressForm.get('postCode')?.value
+            });
+
+            await this._cbContractService.createNewContract(newCustomerAddressData)
+            this.showValidatingFormLoader(false);
+        } catch (error) {
+            this.showValidatingFormLoader(false);
+        }
+    }
+
+    showValidatingFormLoader(value: boolean) {
+        this.isValidatingCustomerAddressForm = value;
+    }
+}
+export class CustomerAddressData implements ICustomerAddressData {
+    state: string;
+    city: string;
+    postCode: string
+
+    constructor(customerAddressData: CustomerAddressData) {
+        this.state = customerAddressData.state;
+        this.city = customerAddressData.city;
+        this.postCode = customerAddressData.postCode;
     }
 }
 
-const StatesList = [ 
-    "Andhra Pradesh",
-    "Arunachal Pradesh",
-    "Assam",
-    "Bihar",
-    "Chhattisgarh",
-    "Goa",
-    "Gujarat",
-    "Haryana",
-    "Himachal Pradesh",
-    "Jammu and Kashmir",
-    "Jharkhand",
-    "Karnataka",
-    "Kerala",
-    "Madhya Pradesh",
-    "Maharashtra",
-    "Manipur",
-    "Meghalaya",
-    "Mizoram",
-    "Nagaland",
-    "Odisha",
-    "Punjab",
-    "Rajasthan",
-    "Sikkim",
-    "Tamil Nadu",
-    "Telangana",
-    "Tripura",
-    "Uttarakhand",
-    "Uttar Pradesh",
-    "West Bengal",
-    "Andaman and Nicobar Islands",
-    "Chandigarh",
-    "Dadra and Nagar Haveli",
-    "Daman and Diu",
-    "Delhi",
-    "Lakshadweep",
-    "Puducherry"
-];
+export interface ICustomerAddressData {
+    state: string;
+    city: string;
+    postCode: string
+}
