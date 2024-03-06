@@ -55,7 +55,7 @@ export const locale = {
         },
         CB: {
             HOME: {
-                HOME: 'HOME',
+                HOME: 'Home',
                 START_CONSULTATION: 'Start a consultation',
             },
             CUSTOMER_ADDRESS: {
@@ -66,6 +66,9 @@ export const locale = {
                 POSTCODE: 'Post Code',
                 ENTER_POSTCODE: 'Enter Post Code',
                 SELECT_ADDRESS: 'Select Address',
+            },
+            PRODUCT_SELECTION: {
+                PRODUCT_SELECTION: 'Product Selection'
             }
         }
     },

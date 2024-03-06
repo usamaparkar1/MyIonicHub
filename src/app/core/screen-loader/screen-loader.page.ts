@@ -1,3 +1,4 @@
+import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { StorageService } from 'src/app/services//storage/storage.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
@@ -13,8 +14,9 @@ import { Component, OnInit } from '@angular/core';
 export class ScreenLoaderPage implements OnInit {
 
     constructor(
-        private _routingService: RoutingService,
         private _storageService: StorageService,
+        private _routingService: RoutingService,
+        private _cbRoutingService: CbRoutingService,
         private _appHelperService: AppHelperService,
     ) {}
 
@@ -73,7 +75,7 @@ export class ScreenLoaderPage implements OnInit {
         }
 
         if (this._appHelperService.getCurrentAppInUseToken) {
-            await this._routingService.goToCbHome(navigationBehaviorOptions);
+            await this._cbRoutingService.goToCbHome();
             return;
         }
 

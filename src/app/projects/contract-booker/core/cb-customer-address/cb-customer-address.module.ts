@@ -9,6 +9,7 @@ import { CbCustomerAddressPageRoutingModule } from './cb-customer-address-routin
 import { CbCustomerAddressPage } from './cb-customer-address.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared-module';
+import { CbSharedModule } from '../../shared/cb-shared-module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { SharedModule } from 'src/app/shared/shared-module';
     FormsModule,
     IonicModule,
     SharedModule,
+    CbSharedModule,
     TranslateModule,
     ReactiveFormsModule,
     CbCustomerAddressPageRoutingModule

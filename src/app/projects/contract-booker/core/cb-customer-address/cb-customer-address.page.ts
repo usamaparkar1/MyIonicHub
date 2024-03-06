@@ -5,6 +5,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import citiesListJson from 'src/assets/json-data/cities.json';
 import stateListJson from 'src/assets/json-data/states.json';
 import { Component, OnInit } from '@angular/core';
+import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
 
 @Component({
   selector: 'app-cb-customer-address',
@@ -28,6 +29,7 @@ export class CbCustomerAddressPage implements OnInit {
 
     constructor(
         private _cbContractService: CbContractService,
+        private _cbRoutingService: CbRoutingService,
         private _cbModalService: CbModalService
     ) {}
 
@@ -69,7 +71,7 @@ export class CbCustomerAddressPage implements OnInit {
 
     async validateCustomerAddress() {
         try {
-            this.showValidatingFormLoader(true);
+            this._showValidatingFormLoader(true);
             const newCustomerAddressData = new CustomerAddressData({
                 state: this.customerAddressForm.get('state')?.value,
                 city: this.customerAddressForm.get('city')?.value,
@@ -77,14 +79,19 @@ export class CbCustomerAddressPage implements OnInit {
             });
 
             await this._cbContractService.createNewContract(newCustomerAddressData)
-            this.showValidatingFormLoader(false);
+            this._showValidatingFormLoader(false);
+            this._goToProductSelection();
         } catch (error) {
-            this.showValidatingFormLoader(false);
+            this._showValidatingFormLoader(false);
         }
     }
 
-    showValidatingFormLoader(value: boolean) {
+    private _showValidatingFormLoader(value: boolean) {
         this.isValidatingCustomerAddressForm = value;
+    }
+
+    private _goToProductSelection() {
+        this._cbRoutingService.goToCbProductSelection();
     }
 }
 export class CustomerAddressData implements ICustomerAddressData {

@@ -1,3 +1,4 @@
+import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import contractBookerJson from 'src/assets/json-data/contract-booker-data.json';
 import { RoutingService } from 'src/app/services/routing/routing.service';
@@ -19,8 +20,9 @@ export class DashboardPage implements OnInit {
     coreData = coreDataJson;
 
     constructor(
-        private _routingService: RoutingService,
         private _storageService: StorageService,
+        private _routingService: RoutingService,
+        private _cbRoutingService: CbRoutingService,
         private _authenticationService: AuthenticationService
     ) {}
 
@@ -42,7 +44,7 @@ export class DashboardPage implements OnInit {
     }
 
     async goToContractBooker() {
-        await this._routingService.goToCbHome();
+        await this._cbRoutingService.goToCbHome();
     }
 
     async logoutUser() {

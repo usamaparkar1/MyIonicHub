@@ -1,8 +1,26 @@
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, Route, RouterModule, Routes } from '@angular/router';
 import { DashboardGuard } from 'src/app/guards/dashboard/dashboard.guard';
 import { IntroGuard } from 'src/app/guards/intro/intro.guard';
 import { LoginGuard } from 'src/app/guards/login/login.guard';
 import { NgModule } from '@angular/core';
+
+const contractBookerRoutes: Route = {
+    path: 'cb',
+    children: [
+        {
+            path: 'cb-home',
+            loadChildren: () => import('src/app/projects/contract-booker/core/cb-home/cb-home.module').then( m => m.CbHomePageModule)
+        },
+        {
+            path: 'cb-customer-address',
+            loadChildren: () => import('src/app/projects/contract-booker/core/cb-customer-address/cb-customer-address.module').then( m => m.CbCustomerAddressPageModule)
+        },
+        {
+            path: 'cb-product-selection',
+            loadChildren: () => import('src/app/projects/contract-booker/core/cb-product-selection/cb-product-selection.module').then( m => m.CbProductSelectionPageModule)
+        },            
+    ]
+}
 
 const routes: Routes = [
     {
@@ -28,20 +46,8 @@ const routes: Routes = [
         loadChildren: () => import('./core/dashboard/dashboard.module').then( m => m.DashboardPageModule),
         canActivate: [DashboardGuard]
     },
-    {
-        path: 'cb-home',
-        children: [
-            {
-                path: '',
-                loadChildren: () => import('./projects/contract-booker/core/cb-home/cb-home.module').then( m => m.CbHomePageModule)
-            },
-            {
-                path: 'cb-customer-address',
-                loadChildren: () => import('./projects/contract-booker/core/cb-customer-address/cb-customer-address.module').then( m => m.CbCustomerAddressPageModule)
-            },
-        ]
-    },
-];
+    contractBookerRoutes
+]
 
 @NgModule({
     imports: [

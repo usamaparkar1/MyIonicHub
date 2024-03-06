@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CbHomePageRoutingModule } from './cb-home-routing.module';
+import { CbProductSelectionPageRoutingModule } from './cb-product-selection-routing.module';
 
-import { CbHomePage } from './cb-home.page';
-import { TranslateModule } from '@ngx-translate/core';
+import { CbProductSelectionPage } from './cb-product-selection.page';
 import { CbSharedModule } from '../../shared/cb-shared-module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -17,8 +17,8 @@ import { CbSharedModule } from '../../shared/cb-shared-module';
     IonicModule,
     CbSharedModule,
     TranslateModule,
-    CbHomePageRoutingModule
+    CbProductSelectionPageRoutingModule
   ],
-  declarations: [CbHomePage]
+  declarations: [CbProductSelectionPage]
 })
-export class CbHomePageModule {}
+export class CbProductSelectionPageModule {}

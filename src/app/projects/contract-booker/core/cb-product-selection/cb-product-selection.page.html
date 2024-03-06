@@ -1,0 +1,32 @@
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{ 'CB.PRODUCT_SELECTION.PRODUCT_SELECTION' | translate }}</ion-title>
+</cb-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ 'CB.PRODUCT_SELECTION.PRODUCT_SELECTION' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+    <ion-grid>
+        <!-- View for Sectors -->
+        <ion-row *ngIf="sectors.length > 0">
+            <ion-col *ngFor="let sector of sectors" class="sector-container">
+                <ion-thumbnail (click)="sectorClicked(sector)">
+                    <img [alt]="sector.sectorImageAlt" [src]="sector.sectorImage" />
+                </ion-thumbnail>
+                <ion-label color="warning" [autocapitalize]="true">{{ sector.sectorName }}</ion-label>
+            </ion-col>
+        </ion-row>
+
+        <!-- List of available Products for each Sector -->
+        <ion-row *ngIf="selectedSector">
+            <ion-col *ngFor="let item of products" class="product-container" size="4">
+                <ion-thumbnail>
+                    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+                </ion-thumbnail>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

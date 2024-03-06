@@ -1,9 +1,14 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>{{ 'CB.HOME.HOME' | translate }}</ion-title>
-        <ion-icon [src]="coreData.profileIconUrl" slot="end" size="large" class="toolbar-slot-end-icon" (click)="openProfileActionSheet()"></ion-icon>
-    </ion-toolbar>
-</ion-header>
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{ 'CB.HOME.HOME' | translate }}</ion-title>
+    <ion-icon
+        cb-header-4
+        slot="end"
+        size="large"
+        class="toolbar-slot-end-icon"
+        [src]="coreData.profileIconUrl"
+        (click)="openProfileActionSheet()"
+    ></ion-icon>
+</cb-header>
 
 <ion-content [fullscreen]="true">
     <ion-header collapse="condense">

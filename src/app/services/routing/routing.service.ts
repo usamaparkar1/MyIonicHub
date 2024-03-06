@@ -1,4 +1,4 @@
-import { CbRoutingHelpers, coreRoutingHelpers } from 'src/app/helpers/routing-helpers';
+import { coreRoutingHelpers } from 'src/app/helpers/routing-helpers';
 import { NavigationExtras, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
@@ -34,9 +34,5 @@ export class RoutingService {
 
     async goToDashboard(navigationExtras: NavigationExtras = {}) {
         await this.goToPage(coreRoutingHelpers.dashboard, navigationExtras);
-    }
-
-    async goToCbHome(navigationExtras: NavigationExtras = {}) {
-        await this.goToPage(CbRoutingHelpers.cbHome, navigationExtras);
     }
 }

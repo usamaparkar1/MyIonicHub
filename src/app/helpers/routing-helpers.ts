@@ -7,6 +7,8 @@ export const coreRoutingHelpers = {
 };
 
 export const CbRoutingHelpers = {
+    cb: 'cb',
     cbHome: 'cb-home',
-    cbCustomerAddress: 'cb-customer-address'
+    cbCustomerAddress: 'cb-customer-address',
+    cbProductSelection: 'cb-product-selection'
 }
