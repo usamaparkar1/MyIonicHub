@@ -1,4 +1,5 @@
-import { ContractResolverService } from './projects/contract-booker/services/resolvers/contract-resolver/contract-resolver.service';
+import { ContractResolverService } from './projects/contract-booker/resolvers/contract-resolver/contract-resolver.service';
+import { CbHomeResolverService } from './projects/contract-booker/resolvers/cb-home-resolver/cb-home-resolver.service';
 import { PreloadAllModules, Route, RouterModule, Routes } from '@angular/router';
 import { DashboardGuard } from 'src/app/guards/dashboard/dashboard.guard';
 import { IntroGuard } from 'src/app/guards/intro/intro.guard';
@@ -10,7 +11,10 @@ const contractBookerRoutes: Route = {
     children: [
         {
             path: 'cb-home',
-            loadChildren: () => import('src/app/projects/contract-booker/pages/cb-home/cb-home.module').then( m => m.CbHomePageModule)
+            loadChildren: () => import('src/app/projects/contract-booker/pages/cb-home/cb-home.module').then( m => m.CbHomePageModule),
+            resolve: {
+                contracts: CbHomeResolverService
+            }
         },
         {
             path: 'cb-customer-address',

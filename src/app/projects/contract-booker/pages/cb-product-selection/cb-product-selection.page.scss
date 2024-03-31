@@ -1,0 +1,14 @@
+ion-grid {
+    display: grid;
+}
+
+.consultation-type-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.consultation-type-container ion-label {
+    text-align: center;
+}

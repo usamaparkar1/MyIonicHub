@@ -12,7 +12,7 @@
     <ion-grid>
         <form class="login-form-container" [formGroup]="customerAddressForm" (ngSubmit)="validateCustomerAddress()">
             <!-- State Form Field -->
-            <hub-form-input>
+            <cb-form-input>
                 <ion-input
                     form-input-field
                     type="text"
@@ -22,10 +22,10 @@
                     (click)="openStateSearchBar()"
                     label="{{ 'CB.CUSTOMER_ADDRESS.STATE' | translate }}"
                 ></ion-input>
-            </hub-form-input>
+            </cb-form-input>
 
             <!-- City Form Field -->
-            <hub-form-input>
+            <cb-form-input>
                 <ion-input
                     form-input-field
                     type="text"
@@ -35,10 +35,10 @@
                     (click)="openCitiesSearchBar()"
                     label="{{ 'CB.CUSTOMER_ADDRESS.CITY' | translate }}"
                 ></ion-input>
-            </hub-form-input>
+            </cb-form-input>
 
             <!-- Postcode Form Field -->
-            <hub-form-input>
+            <cb-form-input>
                 <ion-input
                     form-input-field
                     type="tel"
@@ -48,12 +48,12 @@
                     label="{{ 'CB.CUSTOMER_ADDRESS.POSTCODE' | translate }}"
                     placeholder="{{ 'CB.CUSTOMER_ADDRESS.ENTER_POSTCODE' | translate }}"
                 ></ion-input>
-            </hub-form-input>
+            </cb-form-input>
         </form>
     </ion-grid>
 </ion-content>
 
-<hub-form-footer>
+<cb-form-footer>
     <ion-button
         class="form-submission-bottom-button"
         form-submission-bottom-button
@@ -64,4 +64,4 @@
         <ion-spinner *ngIf="isValidatingCustomerAddressForm" name="lines-sharp-small"></ion-spinner>
         <ion-label *ngIf="!isValidatingCustomerAddressForm">{{ 'CB.CUSTOMER_ADDRESS.SELECT_ADDRESS' | translate }}</ion-label>
     </ion-button>
-</hub-form-footer>
+</cb-form-footer>

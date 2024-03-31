@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CbModalService {
 
     constructor(
@@ -31,8 +32,8 @@ export class CbModalService {
         return await new Promise(async (resolve) => {
             const stateSearchModal = await this._modalController.create({
                 component: SearchbarComponent,
-                id: modalHelpers.citySearchBar.id,
-                cssClass: modalHelpers.citySearchBar.class,
+                id: modalHelpers.citySearchBarModal.id,
+                cssClass: modalHelpers.citySearchBarModal.class,
                 componentProps: {
                     searchList: searchList
                 }

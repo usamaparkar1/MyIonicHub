@@ -7,3 +7,7 @@ export const storageHelpers = {
     introSeen: 'introSeen',
     cacheKey: 'cacheKey',
 }
+
+export const cbStorageHelpers = {
+    allContracts: 'allContracts'
+}

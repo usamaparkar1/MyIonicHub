@@ -1,12 +1,11 @@
 import { CbContractService, Contract } from 'src/app/projects/contract-booker/services/contract/cb-contract.service';
+import { cbCustomerAddressHelpers } from 'src/app/projects/contract-booker/helpers/cb-customer-address-helpers';
 import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
 import { CbModalService } from 'src/app/projects/contract-booker/services/modal/cb-modal.service';
-import { customerAddressHelpers } from 'src/app/helpers/contract-booker/customer-address-helpers';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import citiesListJson from 'src/assets/json-data/cities.json';
 import stateListJson from 'src/assets/json-data/states.json';
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-cb-customer-address',
@@ -17,14 +16,14 @@ import { NavigationExtras } from '@angular/router';
 export class CbCustomerAddressPage implements OnInit {
 
     isValidatingCustomerAddressForm: boolean = false;
-    customerAddressFormHelpers = customerAddressHelpers;
+    customerAddressFormHelpers = cbCustomerAddressHelpers;
     customerAddressForm: UntypedFormGroup = new UntypedFormBuilder().group({
         state: ['Maharashtra', Validators.compose([Validators.required])],
         city: ['Mumbai', Validators.compose([Validators.required])],
         postCode: ['400009', Validators.compose([
             Validators.required,
-            Validators.minLength(customerAddressHelpers.postCodeMinLength),
-            Validators.maxLength(customerAddressHelpers.postCodeMaxLength)]
+            Validators.minLength(cbCustomerAddressHelpers.postCodeMinLength),
+            Validators.maxLength(cbCustomerAddressHelpers.postCodeMaxLength)]
         )],
     });
 

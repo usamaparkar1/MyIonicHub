@@ -7,8 +7,11 @@
     "priceComparisonImgAlt": "price-comparison",
     "gasAltText": "gas",
     "gasSvgUrl": "assets/icon/contract-booker/gas.svg",
+    "gasIconUrl": "assets/icon/contract-booker/gas-icon.svg",
     "electricityAltText": "electricity",
     "electricitySvgUrl": "assets/icon/contract-booker/electricity.svg",
+    "electricityIconUrl": "assets/icon/contract-booker/electricity-icon.svg",
     "shoppingCartSvgUrl": "assets/icon/contract-booker/shopping-cart.svg",
-    "consultationStartImage": "assets/img/contract-booker/consultation-start.svg"
+    "consultationStartImage": "assets/img/contract-booker/consultation-start.svg",
+    "defaultProductImg": "assets/img/contract-booker/cb-default-product-image.png"
 }

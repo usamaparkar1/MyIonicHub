@@ -1,0 +1,29 @@
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{ 'CB.PRODUCT_SELECTION.PRODUCT_SELECTION' | translate }}</ion-title>
+</cb-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">{{ 'CB.PRODUCT_SELECTION.PRODUCT_SELECTION' | translate }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+  
+    <ion-grid>
+        <ion-row>
+            <ion-col class="consultation-type-container">
+                <ion-thumbnail (click)="consultationMethodClicked(this.standardConsultation)">
+                    <img [alt]="contractBookerData.standardConsultationImgAlt" [src]="contractBookerData.standardConsultationSvgUrl" />
+                </ion-thumbnail>
+                <ion-label color="warning" [autocapitalize]="true">{{ 'CB.PRODUCT_SELECTION.STANDARD_CONSULTATION' | translate }}</ion-label>
+            </ion-col>
+
+            <ion-col class="consultation-type-container">
+                <ion-thumbnail (click)="consultationMethodClicked(this.priceComparison)">
+                    <img [alt]="contractBookerData.priceComparisonImgAlt" [src]="contractBookerData.priceComparisonSvgUrl" />
+                </ion-thumbnail>
+                <ion-label color="warning" [autocapitalize]="true">{{ 'CB.PRODUCT_SELECTION.PRICE_COMPARISON' | translate }}</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

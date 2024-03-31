@@ -31,8 +31,12 @@ ion-grid {
 }
 
 hub-form-footer {
+    ion-toolbar {
+        --min-height: 0;
+    }
     ion-button {
-        margin: 0;        
+        --background: var(--ion-color-primary);
+        margin: 0;     
     }
 }
 
@@ -43,6 +47,35 @@ hub-form-input {
             border-radius: 8px;
             --padding-start: 8px !important;
             border: 2px solid var(--ion-color-primary);
+    
+            &.has-value.ion-invalid {
+                border-color: var(--ion-color-danger) !important;
+            }
+
+            &.ion-invalid {
+                border-color: var(--ion-color-danger) !important;
+            }
+        }
+    }
+}
+
+cb-form-footer {
+    ion-toolbar {
+        --min-height: 0;
+    }
+    ion-button {
+        --background: var(--ion-color-warning);
+        margin: 0;        
+    }
+}
+
+cb-form-input {
+    ion-item {
+        > ion-input {
+            margin-bottom: 8px;
+            border-radius: 8px;
+            --padding-start: 8px !important;
+            border: 2px solid var(--ion-color-warning);
     
             &.has-value.ion-invalid {
                 border-color: var(--ion-color-danger) !important;

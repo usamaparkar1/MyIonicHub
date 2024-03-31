@@ -1,5 +1,7 @@
+import { CbContractService } from 'src/app/projects/contract-booker/services/contract/cb-contract.service';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { CbRoutingHelpers } from 'src/app/helpers/routing-helpers';
 import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,7 +17,8 @@ export class AuthenticationService {
 
     constructor(
         private _storageService: StorageService,
-        private _appHelperService: AppHelperService
+        private _appHelperService: AppHelperService,
+        private _cbContractService: CbContractService,
     ) { }
 
     // Store a new access token
@@ -66,8 +69,15 @@ export class AuthenticationService {
     }
 
     async removeCurrentAppInUseFromStorage() {
+        await this._clearAppRelatedData();
         await this._storageService.remove(storageHelpers.currentAppInUse);
         await this._appHelperService.removeCurrentAppInUseToken();
+    }
+
+    private async _clearAppRelatedData() {
+        if (this._appHelperService.getCurrentAppInUseToken === CbRoutingHelpers.cbHome) {
+            await this._cbContractService.clearAllContractStorageKeys();
+        }
     }
 }
 

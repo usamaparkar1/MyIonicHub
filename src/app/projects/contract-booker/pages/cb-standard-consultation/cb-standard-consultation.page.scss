@@ -1,0 +1,14 @@
+ion-content {
+    --offset-bottom: 0px !important;
+}
+
+.sector-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    ion-label {
+        text-align: center;
+    } 
+}

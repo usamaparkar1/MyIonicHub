@@ -1,4 +1,7 @@
-import { CustomerAddressData } from 'src/app/projects/contract-booker/core/cb-customer-address/cb-customer-address.page';
+import { CustomerAddressData } from 'src/app/projects/contract-booker/pages/cb-customer-address/cb-customer-address.page';
+import { Product, Sector } from '../../pages/cb-product-selection/cb-product-selection.page';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { cbStorageHelpers } from 'src/app/helpers/storage-helpers';
 import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -8,11 +11,35 @@ import { v4 as uuidv4 } from 'uuid';
 
 export class CbContractService {
 
-    contracts: Contract[] = [];
+    contracts: Contract[] = []; // Check For optmization
 
-    constructor() {}
+    constructor(
+        private _storageService: StorageService
+    ) {}
 
-    createNewContract(newCustomerAddressData: CustomerAddressData) {
+    async clearAllContractStorageKeys() {
+        this.clearAllContracts();
+    }
+
+    async clearAllContracts() {
+        this.contracts = [];
+        await this.storeContractsInStorage([]);
+    }
+
+    async getAllContractsFromStorage() {
+        return await this._storageService.get(cbStorageHelpers.allContracts);
+    }
+
+    async loadAllContractsFromStorage(): Promise<Contract[]> {
+        const data = await this.getAllContractsFromStorage();
+        if (data?.length > 0) {
+            this.contracts = data;
+        }
+
+        return this.contracts;
+    }
+
+    async createNewContract(newCustomerAddressData: CustomerAddressData) {
         const newContractId: string = this._getNewContractId();
 
         const newContract = new Contract({
@@ -20,25 +47,80 @@ export class CbContractService {
             state: newCustomerAddressData.state,
             city: newCustomerAddressData.city,
             postCode: newCustomerAddressData.postCode,
+            currentRoute: ConsultationSteps.productSelection
         });
 
         this.contracts.push(newContract);
+        await this.storeContractsInStorage(this.contracts);
+
+        return newContract;
     }
 
     private _getNewContractId(): string {
-        let newContractId = uuidv4();
-
+        let newContractId: string;
+    
         if (this.contracts?.length > 0) {
-            let contractIdExists: boolean = false;
+            let contractIdExists: boolean;
             do {
-                contractIdExists = this.contracts.findIndex((x) => x.id === newContractId) >= 0;
-                if (contractIdExists) {
-                    newContractId = uuidv4();
-                }
-            } while (contractIdExists);
+                newContractId = uuidv4(); // Generate a new UUID
+                // Check if any contract already has this ID
+                contractIdExists = this.contracts.some(contract => contract.id === newContractId);
+            } while (contractIdExists); // Continue generating until unique ID found
+        } else {
+            // If contracts array is empty, generate a new UUID directly
+            newContractId = uuidv4();
+        }
+        
+        return newContractId;
+    }
+
+    async storeContractsInStorage(contracts: Contract[]) {
+        await this._storageService.set(cbStorageHelpers.allContracts, contracts);
+    }
+
+    getContractById(contractId: string): Contract | undefined {
+        const contract = this.contracts.find((x) => x.id === contractId);
+        return contract !== undefined ? contract : undefined;
+    }
+
+    getLastUsedContract(): Contract {
+        return this.contracts?.slice(-1)[0];
+    }
+
+    storeContractSector(sector: Sector) {
+        const contract = this.getLastUsedContract();
+
+        if (contract?.id) {
+            contract.selectedSectorId = sector.sectorId;
         }
 
-        return newContractId
+        this.contracts = this.updateContractsWithContract(contract);
+        this.storeContractsInStorage(this.contracts);
+    }
+
+    storeContractProduct(product: Product) {
+        const contract = this.getLastUsedContract();
+
+        if (contract?.id) {
+            contract.selectedProductId = product.productId;
+        }
+
+        contract.currentRoute = ConsultationSteps.productDetails;
+        this.contracts = this.updateContractsWithContract(contract);
+        this.storeContractsInStorage(this.contracts);
+    }
+
+    updateContractsWithContract(newContract: Contract): Contract[] {
+        const indexToUpdate = this.contracts.findIndex(contract => contract.id === newContract.id);
+
+        const updatedContracts = this.contracts.map((contract, index) => {
+            if (index === indexToUpdate) {
+                return newContract;
+            }
+            return contract;
+        });
+
+        return updatedContracts;
     }
 }
 
@@ -47,17 +129,31 @@ export class Contract implements IContract {
     state: string;
     city: string;
     postCode: string
+    currentRoute: ConsultationSteps;
+    selectedSectorId?: string;
+    selectedProductId?: string;
 
     constructor(contract: Contract) {
         this.id = contract.id;
         this.state = contract.state;
         this.city = contract.city;
         this.postCode = contract.postCode;
+        this.currentRoute = contract.currentRoute;
     }
 }
 
 export interface IContract {
+    id: string;
     state: string;
     city: string;
-    postCode: string
+    postCode: string;
+    currentRoute: ConsultationSteps;
+    selectedSectorId?: string;
+    selectedProductId?: string;
+}
+
+export enum ConsultationSteps {
+    customerAddress = 'cb-customer-address',
+    productSelection =  'cb-product-selection',
+    productDetails = 'cb-product-details',
 }
