@@ -3,7 +3,7 @@ export const modalHelpers = {
         id: 'stateSearchBar',
         class: 'state-searchbar-modal'
     },
-    citySearchBar: {
+    citySearchBarModal: {
         id: 'citySearchBar',
         class: 'city-searchbar-modal'
     }

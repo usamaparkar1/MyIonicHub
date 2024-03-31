@@ -4,6 +4,7 @@ import { FormInputComponent } from './components/form/form-input/form-input.comp
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ProfileHeaderComponent } from './components/profile-header/profile-header.component';
 
 @NgModule({
     declarations: [],
@@ -13,6 +14,7 @@ import { NgModule } from '@angular/core';
         FormInputComponent,
         FormFooterComponent,
         ContentLoaderComponent,
+        ProfileHeaderComponent,
     ],
     exports: [
         CommonModule,
@@ -20,6 +22,7 @@ import { NgModule } from '@angular/core';
         FormInputComponent,
         FormFooterComponent,
         ContentLoaderComponent,
+        ProfileHeaderComponent,
     ]
 })
 

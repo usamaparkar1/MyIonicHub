@@ -1,9 +1,12 @@
 import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
+import { McRoutingService } from 'src/app/projects/miscellaneous/services/router/mc-routing.service';
+import { CbRoutingHelpers, McRoutingHelpers } from 'src/app/helpers/routing-helpers';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { StorageService } from 'src/app/services//storage/storage.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
 import { NavigationBehaviorOptions } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-screen-loader',
@@ -17,6 +20,7 @@ export class ScreenLoaderPage implements OnInit {
         private _storageService: StorageService,
         private _routingService: RoutingService,
         private _cbRoutingService: CbRoutingService,
+        private _mcRoutingService: McRoutingService,
         private _appHelperService: AppHelperService,
     ) {}
 
@@ -75,7 +79,18 @@ export class ScreenLoaderPage implements OnInit {
         }
 
         if (this._appHelperService.getCurrentAppInUseToken) {
-            await this._cbRoutingService.goToCbHome();
+            switch (this._appHelperService.getCurrentAppInUseToken) {
+                case CbRoutingHelpers.cbHome:
+                    await this._cbRoutingService.goToCbHome();
+                    break;
+                case McRoutingHelpers.mcHome:
+                    await this._mcRoutingService.goToMcHome();
+                    break;
+
+                default:
+                    await this._routingService.goToDashboard(navigationBehaviorOptions);
+                    break;
+            }
             return;
         }
 

@@ -1,0 +1,20 @@
+.rnf-img-col-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rnf-title {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.rnf-route {
+    cursor: pointer;
+    color: var(--ion-color-primary);
+}
+
+.cards {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}

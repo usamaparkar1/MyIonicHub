@@ -128,7 +128,7 @@ export class LoginPage implements OnInit {
                 if (this._networkService.isOnline) {
                     this._loginOnline();
                 } else {
-                    this._loginOffline();
+                    this._handleOfflineLogin();
                 }
                 this._showLoginLoader(true);
             } catch (error) {
@@ -150,13 +150,17 @@ export class LoginPage implements OnInit {
         }
     }
 
+    private _handleOfflineLogin() {
+        this._loginOffline();
+    }
+
     /** @description Online Login is unavailable currently. Redirecting to offline login */
     private async _loginOnline() {
+        // The below line is temporary. Remove after creating backend
         this._loginOffline();
     }
 
     private async _loginOffline() {
-        await this._toastService.showNoInternetConnectionToast();
         const userLoginData= new UserLoginData({
             username: this.loginForm.get('username')?.value?.trim(),
             password: this.loginForm.get('password')?.value?.trim(),

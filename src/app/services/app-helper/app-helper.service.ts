@@ -16,8 +16,8 @@ export class AppHelperService {
 		return valueToTest !== null && valueToTest !== undefined;
 	}
 
-    isStringNotEmpty(stringToTest: string): boolean {
-        return (!stringToTest || stringToTest.length === 0);
+    isStringNotEmpty(stringToTest: string | undefined): boolean {
+        return typeof stringToTest === 'string' && stringToTest.trim().length > 0;
     }
 
     /** @description Returns a string if its not empty or returns null */

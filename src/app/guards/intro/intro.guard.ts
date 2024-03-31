@@ -12,7 +12,6 @@ export class IntroGuard {
     private _appHelperService = inject(AppHelperService);
     private _routingService = inject(RoutingService);
 
-
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
         if (this._appHelperService.userHasSeenIntro) {
             this._routingService.goToLogin();

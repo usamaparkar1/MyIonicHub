@@ -7,6 +7,13 @@ export const locale = {
         SCREEN_LOADER: {
             PLEASE_WAIT: 'Bitte warten'
         },
+        ROUTE_NOT_FOUND: {
+            PAGE_NOT_FOUND: 'Seite nicht gefunden',
+            TITLE: 'Die angeforderte Seite konnte nicht gefunden werden',
+            DASHBOARD_DESCRIPTION: 'Sie können zum Anwendungs-Dashboard gehen',
+            LOGIN_DESCRIPTION: 'Sie können sich abmelden und zum Anmeldebildschirm wechseln',
+            EXIT_DESCRIPTION: 'Sie können die Anwendung beenden und erneut starten',
+        },
         TOAST: {
             HEADER: 'Aufmerksamkeit',
             SERVICE_NOT_SETUP: 'Beim Einrichten des {{serviceName}} ist ein Fehler aufgetreten',
@@ -67,7 +74,9 @@ export const locale = {
                 SELECT_ADDRESS: 'Wählen Sie Adresse aus',
             },
             PRODUCT_SELECTION: {
-                PRODUCT_SELECTION: 'Produktauswahl'
+                PRODUCT_SELECTION: 'Produktauswahl',
+                STANDARD_CONSULTATION: 'Standardberatung',
+                PRICE_COMPARISON: 'Preisvergleich',
             }
         }
     },

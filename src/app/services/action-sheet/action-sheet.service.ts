@@ -18,14 +18,14 @@ export class ActionSheetService {
             icon: this.coreData.appLogoutIconUrl,
             text: this._translationService.instant('ACTION_SHEET.PROFILE.APP_LOGOUT'),
             handler: async () => {
-                await this._onAppLogoutFromProfileSheet()
+                await this.onAppLogoutFromProfileSheet()
             }
         },
         {
             icon: this.coreData.logoutIconUrl,
             text: this._translationService.instant('ACTION_SHEET.PROFILE.ACCOUNT_LOGOUT'),
             handler: async () => {
-                await this._onAccountLogoutFromProfileSheet();
+                await this.onAccountLogoutFromProfileSheet();
             }
         },
     ];
@@ -37,12 +37,12 @@ export class ActionSheetService {
         private _authenticationService: AuthenticationService,
     ) {}
 
-    private async _onAppLogoutFromProfileSheet() {
+    async onAppLogoutFromProfileSheet() {
         await this._authenticationService.removeCurrentAppInUseFromStorage();
         this._routingService.goToDashboard();
     }
 
-    private async _onAccountLogoutFromProfileSheet() {
+    async onAccountLogoutFromProfileSheet() {
         await this._authenticationService.removeCurrentAppInUseFromStorage();
         await this._authenticationService.removeLoginTokenFromStorage();
         this._routingService.goToLogin();

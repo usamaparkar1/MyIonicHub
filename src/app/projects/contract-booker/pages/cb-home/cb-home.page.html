@@ -1,0 +1,27 @@
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{ 'CB.HOME.HOME' | translate }}</ion-title>
+    <ion-icon
+        cb-header-3
+        slot="end"
+        size="large"
+        [class.disabled]="!isCartCountGreaterThanZero()"
+        [src]="contractBookerData.shoppingCartSvgUrl"
+        (click)="openShoppingCart()"
+    ></ion-icon>
+    <app-profile-header cb-header-4 slot="end"></app-profile-header>
+</cb-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">{{ 'CB.HOME.HOME' | translate }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-grid>
+        <ion-row class="cb-home-module-row-container"><ion-col class="cb-home-module-col-container" (click)="startConsultation()">
+            <ion-img class="home-module-images" [src]="contractBookerData.consultationStartImage"></ion-img>
+            <ion-label class="ion-text-center ion-padding">{{ 'CB.HOME.START_CONSULTATION' | translate }}</ion-label>
+        </ion-col></ion-row>
+    </ion-grid>
+</ion-content>

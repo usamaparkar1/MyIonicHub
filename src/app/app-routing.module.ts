@@ -1,3 +1,4 @@
+import { ContractResolverService } from './projects/contract-booker/services/resolvers/contract-resolver/contract-resolver.service';
 import { PreloadAllModules, Route, RouterModule, Routes } from '@angular/router';
 import { DashboardGuard } from 'src/app/guards/dashboard/dashboard.guard';
 import { IntroGuard } from 'src/app/guards/intro/intro.guard';
@@ -9,16 +10,41 @@ const contractBookerRoutes: Route = {
     children: [
         {
             path: 'cb-home',
-            loadChildren: () => import('src/app/projects/contract-booker/core/cb-home/cb-home.module').then( m => m.CbHomePageModule)
+            loadChildren: () => import('src/app/projects/contract-booker/pages/cb-home/cb-home.module').then( m => m.CbHomePageModule)
         },
         {
             path: 'cb-customer-address',
-            loadChildren: () => import('src/app/projects/contract-booker/core/cb-customer-address/cb-customer-address.module').then( m => m.CbCustomerAddressPageModule)
+            loadChildren: () => import('src/app/projects/contract-booker/pages/cb-customer-address/cb-customer-address.module').then( m => m.CbCustomerAddressPageModule),
         },
         {
             path: 'cb-product-selection',
-            loadChildren: () => import('src/app/projects/contract-booker/core/cb-product-selection/cb-product-selection.module').then( m => m.CbProductSelectionPageModule)
-        },            
+            loadChildren: () => import('src/app/projects/contract-booker/pages/cb-product-selection/cb-product-selection.module').then( m => m.CbProductSelectionPageModule),
+            resolve: {
+                contract: ContractResolverService
+            }
+        },
+        {
+            path: 'cb-standard-consultation',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-standard-consultation/cb-standard-consultation.module').then( m => m.CbStandardConsultationPageModule)
+        },
+        {
+            path: 'cb-price-comparison',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-price-comparison/cb-price-comparison.module').then( m => m.CbPriceComparisonPageModule)
+        }
+    ]
+}
+
+const miscellaneousRoutes: Route = {
+    path: 'mc',
+    children: [
+        {
+            path: 'mc-home',
+            loadChildren: () => import('./projects/miscellaneous/pages/mc-home/mc-home.module').then( m => m.McHomePageModule)
+        },
+        {
+            path: 'mc-reminder',
+            loadChildren: () => import('./projects/miscellaneous/pages/mc-reminder/mc-reminder.module').then( m => m.McReminderPageModule)
+        },
     ]
 }
 
@@ -46,7 +72,16 @@ const routes: Routes = [
         loadChildren: () => import('./core/dashboard/dashboard.module').then( m => m.DashboardPageModule),
         canActivate: [DashboardGuard]
     },
-    contractBookerRoutes
+    contractBookerRoutes,
+    miscellaneousRoutes,
+    {
+        path: 'route-not-found',
+        loadChildren: () => import('./core/route-not-found/route-not-found.module').then( m => m.RouteNotFoundPageModule)
+    },
+    {
+        path: '**',
+        redirectTo: '/route-not-found'
+    }
 ]
 
 @NgModule({

@@ -19,23 +19,20 @@
     </ion-grid>
 
     <ion-grid *ngIf="!isLoadingContent">
-        <ion-row><ion-col>
-            <ion-card class="modern-card" (click)="selectContractBookerApp()">
+        <ion-row *ngFor="let project of projects"><ion-col>
+            <ion-card class="modern-card" (click)="selectApplication(project.appName)">
                 <!-- Images -->
-                <ion-row><ion-col>
-                    <img [alt]="contractBookerData.gasAltText" [src]="contractBookerData.gasSvgUrl" />
-                </ion-col>
-                <ion-col>
-                    <img [alt]="contractBookerData.electricityAltText" [src]="contractBookerData.electricitySvgUrl" />
-                </ion-col></ion-row>
+                <ion-row>
+                    <ion-col *ngFor="let appicon of project.projectIcon">
+                        <img [alt]="appicon.altText" [src]="appicon.svgSrc" />
+                    </ion-col>
+                </ion-row>
                 <!-- App Title -->
                 <ion-card-header>
-                    <ion-card-title>{{ contractBookerData.appName }}</ion-card-title>
+                    <ion-card-title>{{ project.appName }}</ion-card-title>
                 </ion-card-header>
                 <!-- App Description -->
-                <ion-card-content>
-                    {{ contractBookerData.appDescription }}
-                </ion-card-content>
+                <ion-card-content>{{ project.appDescription }}</ion-card-content>
             </ion-card>
         </ion-col></ion-row>
     </ion-grid>

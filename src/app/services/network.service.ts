@@ -46,7 +46,7 @@ export class NetworkService {
     }
 
     private isNetworkConnected(status: ConnectionStatus): boolean {
-        return status?.connected && (status?.connectionType === 'wifi' || status?.connectionType === 'cellular');
+        return status?.connected && (status?.connectionType !== 'none');
     }
 
     private _setIsOnline(value: boolean) {
