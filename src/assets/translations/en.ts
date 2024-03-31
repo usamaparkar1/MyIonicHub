@@ -79,6 +79,14 @@ export const locale = {
                 STANDARD_CONSULTATION: 'Standard Consultation',
                 PRICE_COMPARISON: 'Price Comparison',
             }
+        },
+        MC: {
+            HOME: {
+                HOME: 'Miscellaneous'
+            },
+            REMINDER: {
+                REMINDER: 'Reminder'
+            }
         }
     },
 };

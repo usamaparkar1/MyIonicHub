@@ -78,6 +78,14 @@ export const locale = {
                 STANDARD_CONSULTATION: 'Standardberatung',
                 PRICE_COMPARISON: 'Preisvergleich',
             }
+        },
+        MC: {
+            HOME: {
+                HOME: 'Verschiedenes'
+            },
+            REMINDER: {
+                REMINDER: 'Erinnerung'
+            }
         }
     },
 };
