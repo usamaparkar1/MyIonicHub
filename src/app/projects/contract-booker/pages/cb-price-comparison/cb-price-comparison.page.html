@@ -1,0 +1,69 @@
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{ 'CB.PRODUCT_SELECTION.PRICE_COMPARISON' | translate }}</ion-title>
+</cb-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title>{{ 'CB.PRODUCT_SELECTION.PRICE_COMPARISON' | translate }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-grid *ngIf="sectorsCheckboxes.length > 0">
+        <!-- Checkboxes for Sectors -->
+        <ng-container *ngFor="let sectorCheckbox of sectorsCheckboxes">
+            <ion-row>
+                <ion-col class="ion-no-padding">
+                    <ion-item>
+                        <ion-checkbox labelPlacement="end" alignment="center" justify="start" color="warning" mode="ios" [value]="sectorCheckbox.sectorId" [(ngModel)]="sectorCheckbox.checked" (click)="sectorClicked(sectorCheckbox)">
+                            {{ sectorCheckbox.sectorName | titlecase }}
+                        </ion-checkbox>
+                    </ion-item>
+
+                    <div *ngIf="sectorCheckbox.checked" class="sector-checked-dropdown-container">
+                        <!-- Single Tariff Consumption -->
+                        <cb-consumption-input 
+                            (consumptionChangedEvent)="handleConsumptionChangeEventEtHt($event, sectorCheckbox)"
+                            [consumptionPerYearLabel]="'Consumption Per Year EtHt'"
+                            [consumptionPerYear]="sectorCheckbox.consumptionPerYearEtHt"
+                            [sector]="sectorCheckbox"
+                        ></cb-consumption-input>
+                        <!-- Night Consumption Tariff Consumption -->
+                        <cb-consumption-input *ngIf="sectorCheckbox.isDoubleTariffEnabled"
+                            (consumptionChangedEvent)="handleConsumptionChangeEventNt($event, sectorCheckbox)"
+                            [consumptionPerYearLabel]="'Consumption Per Year Nt'"
+                            [consumptionPerYear]="sectorCheckbox.consumptionPerYearNt"
+                            [sector]="sectorCheckbox"
+                        ></cb-consumption-input>
+
+                        <!-- Products for each Sector (Indented) -->
+                        <ion-list>
+                            <ion-radio-group [(ngModel)]="selectedProductId">
+                                <ng-container *ngFor="let product of sectorCheckbox.productCheckboxes">
+                                    <ion-item>
+                                        <ion-radio slot="start" labelPlacement="end" [value]="product.productId">{{product.name}}</ion-radio>
+                                        <ion-label slot="end">{{product.pricePerConsumption}}</ion-label>
+                                    </ion-item>
+                                </ng-container>
+                            </ion-radio-group>
+                        </ion-list>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ng-container> 
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <cb-form-footer>
+        <ion-button
+            expand="full"
+            [disabled]="isConsumptionInValid(selectedProductId)"
+            form-submission-bottom-button
+            class="form-submission-bottom-button"
+            (click)="validateProductPriceComparison()"
+        >
+            <ion-label color="light">{{'CB.PRODUCT_SELECTION.SELECT_PRODUCT' | translate}}</ion-label>
+        </ion-button>
+    </cb-form-footer>
+</ion-footer>

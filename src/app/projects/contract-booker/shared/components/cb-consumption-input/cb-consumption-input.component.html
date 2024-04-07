@@ -1,0 +1,29 @@
+<!-- Input Field for Consumption -->
+<ion-row><ion-col>
+    <ion-item>
+        <ion-input
+            type="number"
+            labelPlacement="floating"
+            [label]="consumptionPerYearLabel"
+            [max]="sector.maxConsumption"
+            #ionConsumptionInputEl
+            [value]="consumptionPerYear"
+            (ionInput)="onConsumptionInput($event)"
+        ></ion-input>
+    </ion-item>
+</ion-col></ion-row>
+
+<!-- Slider for Consumption -->
+<ion-row><ion-col>
+    <ion-range
+        [pin]="true"
+        type="number"
+        [min]="sector.minConsumption"
+        [max]="sector.maxConsumption"
+        [(ngModel)]="consumptionPerYear"
+        (ionChange)="consumptionChanged()"
+    >
+        <ion-icon color="warning" slot="start" name="flash-outline"></ion-icon>
+        <ion-icon color="warning" slot="end" name="flash-sharp"></ion-icon>
+    </ion-range>
+</ion-col></ion-row>

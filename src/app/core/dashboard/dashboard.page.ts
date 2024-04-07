@@ -27,12 +27,12 @@ export class DashboardPage implements OnInit {
             appDescription: this.contractBookerData.appDescription,
             projectIcon: [
                 {
-                    altText: this.contractBookerData.gasAltText,
-                    svgSrc: this.contractBookerData.gasSvgUrl
+                    altText: this.contractBookerData.sectors[0].sectorImageAlt,
+                    svgSrc: this.contractBookerData.sectors[0].sectorImage
                 },
                 {
-                    altText: this.contractBookerData.electricityAltText,
-                    svgSrc: this.contractBookerData.electricitySvgUrl
+                    altText: this.contractBookerData.sectors[1].sectorImageAlt,
+                    svgSrc: this.contractBookerData.sectors[1].sectorImage
                 }
             ]
         },

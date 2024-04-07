@@ -1,3 +1,4 @@
+import { CbConsumptionInputComponent } from './components/cb-consumption-input/cb-consumption-input.component';
 import { CbProductCardComponent } from './components/cb-product-card/cb-product-card.component';
 import { CbFormFooterComponent } from './components/cb-form-footer/cb-form-footer.component';
 import { CbFormInputComponent } from './components/cb-form-input/cb-form-input.component';
@@ -13,6 +14,7 @@ import { NgModule } from '@angular/core';
         CbFormInputComponent,
         CbFormFooterComponent,
         CbProductCardComponent,
+        CbConsumptionInputComponent,
     ],
     exports: [
         CommonModule,
@@ -20,6 +22,7 @@ import { NgModule } from '@angular/core';
         CbFormInputComponent,
         CbFormFooterComponent,
         CbProductCardComponent,
+        CbConsumptionInputComponent,
     ]
 })
 

@@ -76,8 +76,12 @@ export class Sector implements ISector {
     sectorIcon: string;
     sectorImage: string;
     sectorImageAlt: string;
+    minConsumption: number;
+    maxConsumption: number;
+    defaultConsumptionValue: number;
     consumptionPerYearEtHt: number;
     consumptionPerYearNt: number;
+    isDoubleTariffEnabled: boolean;
 
     constructor (sector: Sector) {
         this.sectorId = sector.sectorId;
@@ -85,8 +89,12 @@ export class Sector implements ISector {
         this.sectorIcon = sector.sectorIcon;
         this.sectorImage = sector.sectorImage;
         this.sectorImageAlt = sector.sectorImageAlt;
+        this.minConsumption = sector.minConsumption;
+        this.maxConsumption = sector.maxConsumption;
+        this.defaultConsumptionValue = sector.defaultConsumptionValue;
         this.consumptionPerYearEtHt = sector.consumptionPerYearEtHt;
         this.consumptionPerYearNt = sector.consumptionPerYearNt;
+        this.isDoubleTariffEnabled = sector.isDoubleTariffEnabled;
     }
 }
 
@@ -96,24 +104,34 @@ export interface ISector {
     sectorIcon: string;
     sectorImage: string;
     sectorImageAlt: string;
+    minConsumption: number;
+    maxConsumption: number;
+    defaultConsumptionValue: number;
     consumptionPerYearEtHt: number;
     consumptionPerYearNt: number;
+    isDoubleTariffEnabled: boolean;
 }
 
 export class Product implements IProduct {
-    productId: string
     name: string;
+    productId: string
+    productGroupId: string;
     productImage: string;
+    productPrice: number;
 
     constructor(product: Product) {
-        this.productId = product.productId;
         this.name = product.name;
+        this.productId = product.productId;
+        this.productGroupId = product.productGroupId;
         this.productImage = product.productImage;
+        this.productPrice = product.productPrice;
     }
 }
 
 export interface IProduct {
-    productId: string;
     name: string;
+    productId: string;
+    productGroupId: string;
     productImage: string;
+    productPrice: number;
 }

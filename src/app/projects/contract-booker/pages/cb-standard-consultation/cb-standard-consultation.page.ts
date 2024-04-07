@@ -43,11 +43,11 @@ export class CbStandardConsultationPage implements OnInit {
     sectorClicked(sector: Sector) {
         this.selectedSector = sector;
         this._cbContractService.storeContractSector(sector);
-        this._getProductsForSector();
+        this._getProductsForSector(sector.sectorId);
     }
 
-    private async _getProductsForSector() {
-        this.products = await this._cbCustomerAddressService.getAvailableProductsForSector();
+    private async _getProductsForSector(sectorId: string) {
+        this.products = await this._cbCustomerAddressService.getAvailableProductsForSector(sectorId);
     }
 
     async productClicked(product: Product) {

@@ -16,62 +16,28 @@ export class CbCustomerAddressService {
 
     /** @description This will load and store the sectors to be used in Standard and Price Comparison Consultation */
     loadSectorsForZipCity(contractId: string) {
-        const sectors = [
-            new Sector({
-                sectorId: '1',
-                sectorName: 'electricity',
-                sectorIcon: this.contractBookerData.electricityIconUrl,
-                sectorImage: this.contractBookerData.electricitySvgUrl,
-                sectorImageAlt: this.contractBookerData.electricityAltText,
-                consumptionPerYearEtHt: 0,
-                consumptionPerYearNt: 0
-            }),
-            new Sector({
-                sectorId: '2',
-                sectorName: 'gas',
-                sectorIcon: this.contractBookerData.gasIconUrl,
-                sectorImage: this.contractBookerData.gasSvgUrl,
-                sectorImageAlt: this.contractBookerData.gasAltText,
-                consumptionPerYearEtHt: 0,
-                consumptionPerYearNt: 0
-            }),
-        ];
+        const sectors = this.contractBookerData.sectors.map((sector) => new Sector({
+            sectorId: sector.sectorId,
+            sectorName: sector.sectorName,
+            sectorIcon: sector.sectorIcon,
+            sectorImage: sector.sectorImage,
+            sectorImageAlt: sector.sectorImageAlt,
+            minConsumption: sector.minConsumption,
+            maxConsumption: sector.maxConsumption,
+            defaultConsumptionValue: sector.defaultConsumptionValue,
+            consumptionPerYearEtHt: sector.consumptionPerYearEtHt,
+            consumptionPerYearNt: sector.consumptionPerYearNt,
+            isDoubleTariffEnabled: sector.isDoubleTariffEnabled,
+        }));
 
         this.sectorsSubject.next(sectors);
     }
 
-    getAvailableProductsForSector(): Product[] {
-        return [
-            {
-                productId: '0',
-                name: 'Product A',
-                productImage: '',
-            },
-            {
-                productId: '1',
-                name: 'Product B',
-                productImage: '',
-            },
-            {
-                productId: '2',
-                name: 'Product C',
-                productImage: '',
-            },
-            {
-                productId: '3',
-                name: 'Product D',
-                productImage: '',
-            },
-            {
-                productId: '4',
-                name: 'Product E',
-                productImage: '',
-            },
-            {
-                productId: '5',
-                name: 'Product F',
-                productImage: '',
-            },
-        ];
+    getAvailableProductsForSector(sectorId: string): Product[] {
+        return this.contractBookerData.products.filter((product) => product.productGroupId === sectorId);
+    }
+
+    getProductByProductId(selectedProductId: string): Product | undefined {
+        return this.contractBookerData.products.find((product) => product.productId === selectedProductId);
     }
 }

@@ -77,6 +77,7 @@ export const locale = {
                 PRODUCT_SELECTION: 'Produktauswahl',
                 STANDARD_CONSULTATION: 'Standardberatung',
                 PRICE_COMPARISON: 'Preisvergleich',
+                SELECT_PRODUCT: 'Ausgewähltes Produkt',
             }
         },
         MC: {
