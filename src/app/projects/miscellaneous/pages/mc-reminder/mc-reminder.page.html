@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>{{'MC.REMINDER.REMINDER' | translate}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<!-- This page needs to be redone. Shifting focus towards contract booker for now. -->
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title>{{'MC.REMINDER.REMINDER' | translate}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-grid>
+        <form [formGroup]="newReminderForm" (ngSubmit)="validateReminderForm()">
+            <ion-row><ion-col>
+                <ion-item lines="none">
+                    <ion-input
+                        type="text"
+                        counter="true"
+                        label="{{ 'MC.REMINDER.TITLE' | translate }}"
+                        labelPlacement="floating"
+                        placeholder="{{ 'MC.REMINDER.ENTER_REMINDER_TITLE' | translate }}"
+                        formControlName="title"
+                        [min]="reminderFormValidators.MinLengthForTitle"
+                        [maxlength]="reminderFormValidators.MaxLengthForTitle"
+                    ></ion-input>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-input
+                        type="number"
+                        label="{{ 'MC.REMINDER.INTERVAL_HOURS' | translate }}"
+                        labelPlacement="floating"
+                        placeholder="3"
+                        formControlName="interval"
+                        [min]="reminderFormValidators.MinTimeForInterval"
+                        [max]="reminderFormValidators.MaxTimeForInterval"
+                    ></ion-input>
+                </ion-item>
+
+                <ion-item lines="none">
+                    <ion-textarea
+                        type="text"
+                        counter="true"
+                        label="{{ 'MC.REMINDER.DESCRIPTION' | translate }}"
+                        labelPlacement="floating"
+                        placeholder="{{ 'MC.REMINDER.ENTER_REMINDER_INFO' | translate }}"
+                        formControlName="description"
+                        [maxlength]="reminderFormValidators.MaxLengthForDescription"
+                    ></ion-textarea>
+                </ion-item>
+                
+                <ion-button expand="block" (click)="validateReminderForm()">{{'MC.REMINDER.ADD_REMINDER'}}</ion-button>
+            </ion-col></ion-row>
+
+            <!-- All Reminders -->
+            <ion-list>
+                <ion-item *ngFor="let reminder of reminders;let i = index">
+                    <ion-label>
+                        <h2>{{reminder.title}}</h2>
+                        <p>Repeats every {{reminder.interval}} hours</p>
+                        <p>Scheduled Time:{{reminder.schedule?.at | date: 'medium'}}</p>
+                        <p *ngIf="reminder?.description">Description:<br/>{{reminder.description}}</p>
+                    </ion-label>
+                    <ion-icon name="trash-outline" (click)="deleteReminder(reminder.id, i)"></ion-icon>
+                </ion-item>
+            </ion-list>
+        </form>
+    </ion-grid>
+</ion-content>

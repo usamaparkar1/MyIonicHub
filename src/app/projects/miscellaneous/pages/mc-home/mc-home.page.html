@@ -8,12 +8,13 @@
 <ion-content [fullscreen]="true">
     <ion-header collapse="condense">
         <ion-toolbar>
-            <ion-title size="large">{{ 'MC.HOME.HOME' | translate }}</ion-title>
+            <ion-title>{{ 'MC.HOME.HOME' | translate }}</ion-title>
         </ion-toolbar>
     </ion-header>
 
     <ion-grid>
-        <ion-row>
+        <!-- Reminders App. Native only -->
+        <ion-row *ngIf="isNativePlatform">
             <ion-col size="6">
                 <ion-card (click)="reminderAppClicked()">
                     <ion-card-header class="ion-align-items-center">

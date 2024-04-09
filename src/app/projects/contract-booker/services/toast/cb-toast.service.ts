@@ -1,4 +1,4 @@
-import { cbLocalHelpers } from '../../helpers/cb-local-helpers';
+import { cbToastHelpers } from '../../helpers/cb-toast-helpers';
 import { ToastController, ToastOptions } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 
@@ -18,7 +18,7 @@ export class CbToastService {
             toastOptions.position = 'top';
         }
         if (!toastOptions?.buttons || toastOptions?.buttons?.length === 0) {
-            toastOptions.duration = cbLocalHelpers.toastTimeoutDuration;
+            toastOptions.duration = cbToastHelpers.toastTimeoutDuration;
         }
         const toast = await this._toastController.create(toastOptions);
 

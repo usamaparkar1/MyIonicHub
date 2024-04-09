@@ -1,4 +1,5 @@
 import { ActionSheetService } from 'src/app/services/action-sheet/action-sheet.service';
+import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { McRoutingService } from '../../services/router/mc-routing.service';
 import coreDataJson from 'src/assets/json-data/core-data.json';
 import { Component, OnInit } from '@angular/core';
@@ -12,13 +13,20 @@ import { Component, OnInit } from '@angular/core';
 export class McHomePage implements OnInit {
 
     coreData = coreDataJson;
+    isNativePlatform: boolean = false;
 
     constructor(
+        private _appHelperService: AppHelperService,
         private _mcRoutingService: McRoutingService,
-        private _actionSheetService: ActionSheetService
+        private _actionSheetService: ActionSheetService,
     ) { }
 
     ngOnInit() {
+        this._setupMcHome();
+    }
+
+    private _setupMcHome() {
+        this.isNativePlatform = this._appHelperService.isNative();
     }
 
     async openProfileActionSheet() {

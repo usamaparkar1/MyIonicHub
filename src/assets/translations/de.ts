@@ -85,7 +85,17 @@ export const locale = {
                 HOME: 'Verschiedenes'
             },
             REMINDER: {
-                REMINDER: 'Erinnerung'
+                REMINDER: 'Erinnerung',
+                NOTIFICATION_PERMISSION_DENIED: 'Erlaubnis nicht erteilt',
+                GRANT_NOTIFICATION_PERMISSION: 'Sie müssen die vollständige Benachrichtigungsberechtigung erteilen, um die Erinnerungs-App verwenden zu können',
+                SCHEDULE_REMINDER_FAILURE: 'Terminerinnerungsfehler',
+                INVALID_NOTIFICATION_ID: 'Ungültige Benachrichtigungs-ID',
+                TITLE: 'Titel',
+                ENTER_REMINDER_TITLE: 'Geben Sie den Titel der Erinnerung ein',
+                INTERVAL_HOURS: 'Intervalle (Stunden)',
+                DESCRIPTION: 'Beschreibung',
+                ENTER_REMINDER_INFO: 'Geben Sie die Erinnerungsinformationen ein',
+                ADD_REMINDER: 'Erinnerung hinzufügen',
             }
         }
     },

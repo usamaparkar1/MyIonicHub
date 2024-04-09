@@ -86,7 +86,17 @@ export const locale = {
                 HOME: 'Miscellaneous'
             },
             REMINDER: {
-                REMINDER: 'Reminder'
+                REMINDER: 'Reminder',
+                NOTIFICATION_PERMISSION_DENIED: 'Permission Not Granted',
+                GRANT_NOTIFICATION_PERMISSION: 'You need to grant full notification permission to use Reminders app',
+                SCHEDULE_REMINDER_FAILURE: 'Schedule Reminder Failure',
+                INVALID_NOTIFICATION_ID: 'Invalid notification ID',
+                TITLE: 'Title',
+                ENTER_REMINDER_TITLE: 'Enter Reminder Title',
+                INTERVAL_HOURS: 'Intervals (Hours)',
+                DESCRIPTION: 'Description',
+                ENTER_REMINDER_INFO: 'Enter Reminder Info',
+                ADD_REMINDER: 'Add Reminder',
             }
         }
     },

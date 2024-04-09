@@ -9,5 +9,7 @@ export const McReminderHelpers = {
 export const PushNotificationHelpers = {
     actionTypeId: 'reminder',
     snoozeActionId: 'snooze',
+    snoozeActionTitle: 'Snooze',
     completedActionId: 'completed',
+    completedActionTitle: 'Task Completed'
 }

@@ -1,3 +1,4 @@
+import { Capacitor } from '@capacitor/core';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -11,6 +12,10 @@ export class AppHelperService {
 	isAppSetup$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	isloggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     isCurrentAppInUse$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+    isNative(): boolean {
+        return Capacitor.isNativePlatform();
+    }
 
 	isNotNullAndNotUndefined(valueToTest: any): boolean {
 		return valueToTest !== null && valueToTest !== undefined;
