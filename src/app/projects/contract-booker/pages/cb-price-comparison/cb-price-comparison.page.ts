@@ -16,6 +16,7 @@ export class CbPriceComparisonPage implements OnInit {
     sectorsCheckboxes: SectorCheckboxes[] = [];
     products: ProductCheckboxes[] = [];
     selectedProductId!: string;
+    selectedSectorId!: string;
 
     constructor(
         private _cbToastService: CbToastService,
@@ -60,6 +61,7 @@ export class CbPriceComparisonPage implements OnInit {
     }
 
     sectorClicked(sector: SectorCheckboxes) {
+        this.selectedSectorId = sector.sectorId;
         this._getProductsForSector(sector);
         this.updateProductPricePerConsumption(sector);
     }
@@ -75,12 +77,6 @@ export class CbPriceComparisonPage implements OnInit {
             productPrice: prod.productPrice,
             pricePerConsumption: prod.productPrice * (sector?.isDoubleTariffEnabled ? sector.consumptionPerYearEtHt + sector.consumptionPerYearNt : sector.consumptionPerYearEtHt),
         }));
-    }
-
-    async productClicked(sector: SectorCheckboxes, product: Product) {
-        this._cbContractService.storeContractSector(sector);
-        this._cbContractService.storeContractProduct(product);
-        this._cbRoutingService.goToProductDetails();
     }
 
     handleConsumptionChangeEventEtHt(data: number, sector: SectorCheckboxes) {
@@ -122,16 +118,7 @@ export class CbPriceComparisonPage implements OnInit {
     }
 
     private _confirmProductSelection() {
-        const selectedProduct = this._cbCustomerAddressService.getProductByProductId(this.selectedProductId);
-        if (!selectedProduct) {
-            this._cbToastService.showToast({
-                header: 'Product could not be found',
-                message: 'Please go back and try again. Close the app and try again. Or start a new contract'
-            });
-            return;
-        }
-
-        this._cbContractService.storeContractProduct(selectedProduct);
+        this._cbContractService.storeContractProduct(this.selectedProductId, this.selectedSectorId);
         this._cbRoutingService.goToProductDetails();
     }
 }

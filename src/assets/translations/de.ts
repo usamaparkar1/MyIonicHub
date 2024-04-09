@@ -78,6 +78,8 @@ export const locale = {
                 STANDARD_CONSULTATION: 'Standardberatung',
                 PRICE_COMPARISON: 'Preisvergleich',
                 SELECT_PRODUCT: 'Ausgewähltes Produkt',
+                SECTORS_NOT_FOUND: 'Sektoren nicht gefunden',
+                NO_SECTORS_FOR_ZIP_CITY: 'Wir konnten keine Sektoren für Ihre Postleitzahl und Stadt finden',
             }
         },
         MC: {

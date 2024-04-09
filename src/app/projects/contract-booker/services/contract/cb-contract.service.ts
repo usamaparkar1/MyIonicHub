@@ -1,5 +1,4 @@
 import { CustomerAddressData } from 'src/app/projects/contract-booker/pages/cb-customer-address/cb-customer-address.page';
-import { Product, Sector } from '../../pages/cb-product-selection/cb-product-selection.page';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { cbStorageHelpers } from 'src/app/helpers/storage-helpers';
 import { Injectable } from '@angular/core';
@@ -18,12 +17,12 @@ export class CbContractService {
     ) {}
 
     async clearAllContractStorageKeys() {
-        this.clearAllContracts();
+        this._clearAllContracts();
     }
 
-    async clearAllContracts() {
+    private async _clearAllContracts() {
         this.contracts = [];
-        await this.storeContractsInStorage([]);
+        this._storageService.remove(cbStorageHelpers.allContracts);
     }
 
     async getAllContractsFromStorage() {
@@ -87,22 +86,12 @@ export class CbContractService {
         return this.contracts?.slice(-1)[0];
     }
 
-    storeContractSector(sector: Sector) {
+    storeContractProduct(productId: string, sectorId: string) {
         const contract = this.getLastUsedContract();
 
         if (contract?.id) {
-            contract.selectedSectorId = sector.sectorId;
-        }
-
-        this.contracts = this.updateContractsWithContract(contract);
-        this.storeContractsInStorage(this.contracts);
-    }
-
-    storeContractProduct(product: Product) {
-        const contract = this.getLastUsedContract();
-
-        if (contract?.id) {
-            contract.selectedProductId = product.productId;
+            contract.selectedSectorId = sectorId;
+            contract.selectedProductId = productId;
         }
 
         contract.currentRoute = ConsultationSteps.productDetails;

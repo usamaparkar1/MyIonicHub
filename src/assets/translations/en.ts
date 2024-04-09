@@ -79,6 +79,8 @@ export const locale = {
                 STANDARD_CONSULTATION: 'Standard Consultation',
                 PRICE_COMPARISON: 'Price Comparison',
                 SELECT_PRODUCT: 'Select Product',
+                SECTORS_NOT_FOUND: 'Sectors not found',
+                NO_SECTORS_FOR_ZIP_CITY: 'We were unable to find any sectors for you zip and city',
             }
         },
         MC: {
