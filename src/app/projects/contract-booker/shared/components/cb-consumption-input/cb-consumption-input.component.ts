@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { Sector } from '../../../pages/cb-product-selection/cb-product-selection.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonInput, IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { Sector } from '../../../models/cb-sector';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,6 +12,7 @@ import { CommonModule } from '@angular/common';
         CommonModule,
         IonicModule,
         FormsModule,
+        TranslateModule,
         ReactiveFormsModule,
     ],
     templateUrl: './cb-consumption-input.component.html',
@@ -32,21 +34,23 @@ export class CbConsumptionInputComponent  implements OnInit {
     }
 
     onConsumptionInput(ev: any) {
-        const value = ev.target.value;
-        const filteredValue: string = value.replace(/[^0-9]+/g, ''); // Only allow numbers
-        const newConsumption = parseInt(filteredValue);
-        
-        if (isNaN(newConsumption)) {
-            this.ionConsumptionInputEl.value = this.consumptionPerYear = undefined;
-            this.consumptionChangedEvent.emit(undefined);
-        } else {
-            if (newConsumption > this.sector.maxConsumption) {
-                this.ionConsumptionInputEl.value = this.consumptionPerYear;
-            } else {
-                this.ionConsumptionInputEl.value = this.consumptionPerYear = newConsumption;
-                this.consumptionChangedEvent.emit(this.consumptionPerYear);
-            }
+        const value = ev.detail.value;
+        if (ev.detail?.event?.data && this.containsNonNumericOrSpecial(ev.detail?.event?.data)) {
+            this.ionConsumptionInputEl.value = this.consumptionPerYear;
+            return;
         }
+        
+        const newConsumption: number = parseInt(value.replace(/[^0-9]+/g, ''));
+        if (newConsumption > this.sector.maxConsumption) {
+            this.ionConsumptionInputEl.value = this.consumptionPerYear;
+        } else {
+            this.ionConsumptionInputEl.value = this.consumptionPerYear = newConsumption;
+            this.consumptionChangedEvent.emit(this.consumptionPerYear);
+        }
+    }
+
+    containsNonNumericOrSpecial(str: string): boolean {
+        return /\D/.test(str);
     }
 
     consumptionChanged() {

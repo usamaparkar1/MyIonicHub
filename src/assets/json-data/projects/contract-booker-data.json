@@ -8,6 +8,7 @@
     "shoppingCartSvgUrl": "assets/icon/contract-booker/shopping-cart.svg",
     "consultationStartImage": "assets/img/contract-booker/consultation-start.svg",
     "defaultProductImg": "assets/img/contract-booker/cb-default-product-image.png",
+    "defaultProductBannerImg": "assets/img/contract-booker/cb-default-product-banner.jpg",
     "sectors": [
         {
             "sectorId": "1",
@@ -40,44 +41,86 @@
         {
             "productId": "0",
             "name": "Product A",
-            "productImage": "",
+            "productImage": null,
+            "productBannerImage": null,
             "productPrice": 10,
-            "productGroupId": "1"
+            "productPricePerConsumption": 0,
+            "productGroupId": "1",
+            "keySellingPoints": [
+                "Key Selling Point 1",
+                "Key Selling Point 2",
+                "Key Selling Point 3"
+            ]
         },
         {
             "productId": "1",
             "name": "Product B",
-            "productImage": "",
+            "productImage": null,
+            "productBannerImage": null,
             "productPrice": 20,
-            "productGroupId": "1"
+            "productPricePerConsumption": 0,
+            "productGroupId": "1",
+            "keySellingPoints": [
+                "Key Selling Point 1",
+                "Key Selling Point 2",
+                "Key Selling Point 3"
+            ]
         },
         {
             "productId": "2",
             "name": "Product C",
-            "productImage": "",
+            "productImage": null,
+            "productBannerImage": null,
             "productPrice": 30,
-            "productGroupId": "1"
+            "productPricePerConsumption": 0,
+            "productGroupId": "1",
+            "keySellingPoints": [
+                "Key Selling Point 1",
+                "Key Selling Point 2",
+                "Key Selling Point 3"
+            ]
         },
         {
             "productId": "3",
             "name": "Product D",
-            "productImage": "",
+            "productImage": null,
+            "productBannerImage": null,
             "productPrice": 10,
-            "productGroupId": "2"
+            "productPricePerConsumption": 0,
+            "productGroupId": "2",
+            "keySellingPoints": [
+                "Key Selling Point 1",
+                "Key Selling Point 2",
+                "Key Selling Point 3"
+            ]
         },
         {
             "productId": "4",
             "name": "Product E",
-            "productImage": "",
+            "productImage": null,
+            "productBannerImage": null,
             "productPrice": 20,
-            "productGroupId": "2"
+            "productPricePerConsumption": 0,
+            "productGroupId": "2",
+            "keySellingPoints": [
+                "Key Selling Point 1",
+                "Key Selling Point 2",
+                "Key Selling Point 3"
+            ]
         },
         {
             "productId": "5",
             "name": "Product F",
-            "productImage": "",
+            "productImage": null,
+            "productBannerImage": null,
             "productPrice": 30,
-            "productGroupId": "2"
+            "productPricePerConsumption": 0,
+            "productGroupId": "2",
+            "keySellingPoints": [
+                "Key Selling Point 1",
+                "Key Selling Point 2",
+                "Key Selling Point 3"
+            ]
         }
     ]
 }

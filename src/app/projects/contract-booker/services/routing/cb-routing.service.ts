@@ -1,6 +1,6 @@
-import { Contract } from 'src/app/projects/contract-booker/services/contract/cb-contract.service';
 import { CbRoutingHelpers } from 'src/app/helpers/routing-helpers';
 import { NavigationExtras, Router } from '@angular/router';
+import { Contract } from '../../models/cb-contract';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -57,6 +57,11 @@ export class CbRoutingService {
 
     async goToProductDetails(navigationExtras: NavigationExtras = {}) {
         await this.goToCbPage(CbRoutingHelpers.cbProductDetails, navigationExtras);
+    }
+
+    
+    async goToCustomerDetails(navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.cbCustomerAddress, navigationExtras);
     }
 
     async handleRouteNotFound() { 

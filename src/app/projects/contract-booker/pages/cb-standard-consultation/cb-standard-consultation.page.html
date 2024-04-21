@@ -11,9 +11,9 @@
 
     <ion-grid>
         <!-- List of available Products for each Sector -->
-        <ion-row *ngIf="selectedSector">
+        <ion-row *ngIf="selectedSectorId">
             <ion-col size="12" class="product-container">
-                <cb-product-card *ngFor="let product of products" (click)="productClicked(product)" [product]="product"></cb-product-card>
+                <cb-product-card *ngFor="let product of products" (click)="productClicked(product.productId)" [product]="product"></cb-product-card>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -21,8 +21,8 @@
 
 <ion-footer>
     <ion-toolbar>
-        <ion-segment color="warning" [value]="selectedSector">
-            <ion-segment-button *ngFor="let sector of sectors" [value]="sector.sectorId" (click)="sectorClicked(sector)">
+        <ion-segment color="warning" [value]="selectedSectorId">
+            <ion-segment-button *ngFor="let sector of sectors" [value]="sector.sectorId" (click)="sectorClicked(sector.sectorId)">
                 <ion-label>{{sector.sectorName}}</ion-label>
                 <ion-icon [src]="sector.sectorIcon"></ion-icon>
             </ion-segment-button>

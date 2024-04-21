@@ -79,7 +79,21 @@ export const locale = {
                 STANDARD_CONSULTATION: 'Standard Consultation',
                 PRICE_COMPARISON: 'Price Comparison',
                 SELECT_PRODUCT: 'Select Product',
-            }
+                SECTORS_NOT_FOUND: 'Sectors not found',
+                NO_SECTORS_FOR_ZIP_CITY: 'We were unable to find any sectors for you zip and city',
+            },
+            PRODUCT_DETAILS: {
+                PRODUCT_DETAILS: 'Product Details',
+                ROUTE_DATA_MISSING_TITLE: 'Contract not found',
+                ROUTE_DATA_MISSING_DESCRIPTIO: 'We were not able to find the {{missingData}} data for your contract. Please go back and try again. Or create a new contract',
+                CONFIRM_PRODUCT: 'Confirm Product',
+                CONSUMPTION_PER_YEAR_ETHT: 'Consumption Per Year EtHt',
+                CONSUMPTION_PER_YEAR_NT: 'Consumption Per Year Nt',
+            },
+            CONSUMPTION: {
+                INVALID_CONSUMPTION: 'Invalid Consumption',
+                SELECT_VALID_CONSUMPTION: 'Please select a valid {{consumptionType}} Consumption',
+            },
         },
         MC: {
             HOME: {
