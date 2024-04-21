@@ -2,11 +2,13 @@ name: Merge to Master
 
 on:
   pull_request:
+    branches: 
+        - develop
     types: [closed]
 
 jobs:
   merge_to_master:
-    if: github.event.pull_request.merged && github.event.pull_request.base.ref == 'develop' && github.event.pull_request.head.ref != 'develop'
+    if: github.event.pull_request.merged
     runs-on: macos-latest
 
     steps:
