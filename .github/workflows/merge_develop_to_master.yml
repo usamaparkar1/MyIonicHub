@@ -1,23 +1,23 @@
 name: Merge to Master
 
 on:
-  push:
-    branches:
-      - develop
+    push:
+      branches:
+        - develop
 
 permissions:
-  actions: write
-  checks: write
-  pull-requests: write
-
+    actions: write # Necessary to cancel workflow executions
+    checks: write #  Necessary to write reports
+    pull-requests: write # Necessary to create PRs
+  
 jobs:
-  pull-request:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Create pull request
-        run: |
-          gh_pr_up() { gh pr create $* || gh pr edit $*; }
-          gh_pr_up --title "My pull request" --body "Description" --base master --head develop
-        env:
-          GITHUB_TOKEN: ${{ secrets.MERGE_WORKFLOW_ACCESS_TOKEN }}
+    pull-request:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: pull-request
+          run: |
+            gh_pr_up() { gh pr create $* || gh pr edit $* }
+            gh_pr_up --title "My pull request" --body "Description"
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
