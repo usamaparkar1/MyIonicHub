@@ -1,21 +1,19 @@
 name: Merge to Master
 
 on:
-  pull_request:
+  push:
     branches: 
         - develop
-    types: [closed]
 
 jobs:
   merge_to_master:
-    if: github.event.pull_request.merged
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Create pull request to master
+    - name: Create pull request from develop to master
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
