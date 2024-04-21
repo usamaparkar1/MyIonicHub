@@ -1,3 +1,4 @@
+import { cartReducer } from './projects/contract-booker/store/reducers/cart.reducer';
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -10,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouteReuseStrategy } from '@angular/router';
 import { AppService } from './services/app.service';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
 
 export function initializeFactory(init: AppService) {
     return () => init.initializeApp();
@@ -23,6 +25,7 @@ export function initializeFactory(init: AppService) {
         AppRoutingModule,
         IonicModule.forRoot(),
         IonicStorageModule.forRoot(),
+        StoreModule.forRoot({ cartCount: cartReducer }),
         TranslateModule.forRoot({ defaultLanguage: localHelpers.defaultLanguage })
     ],
     providers: [
