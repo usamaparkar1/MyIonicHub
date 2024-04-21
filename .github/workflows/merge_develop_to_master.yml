@@ -8,7 +8,7 @@ on:
 permissions:
     actions: write # Necessary to cancel workflow executions
     checks: write #  Necessary to write reports
-    pull-requests: write # Necessary to comment on PRs
+    pull-requests: write # Necessary to create PRs
   
 jobs:
     pull-request:
@@ -19,3 +19,5 @@ jobs:
           run: |
             gh_pr_up() { gh pr create $* || gh pr edit $* }
             gh_pr_up --title "My pull request" --body "Description"
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
