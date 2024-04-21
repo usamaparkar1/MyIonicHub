@@ -17,12 +17,16 @@ export class AppHelperService {
         return Capacitor.isNativePlatform();
     }
 
-	isNotNullAndNotUndefined(valueToTest: any): boolean {
+    isNotNullAndNotUndefined(valueToTest: any): boolean {
 		return valueToTest !== null && valueToTest !== undefined;
 	}
 
     isStringNotEmpty(stringToTest: string | undefined): boolean {
         return typeof stringToTest === 'string' && stringToTest.trim().length > 0;
+    }
+
+    isNumberInValid(numberToTest: any): boolean {
+        return (isNaN(numberToTest) || !numberToTest);
     }
 
     /** @description Returns a string if its not empty or returns null */

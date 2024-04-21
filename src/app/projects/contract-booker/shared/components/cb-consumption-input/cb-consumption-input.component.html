@@ -4,7 +4,7 @@
         <ion-input
             type="number"
             labelPlacement="floating"
-            [label]="consumptionPerYearLabel"
+            [label]="consumptionPerYearLabel | translate"
             [max]="sector.maxConsumption"
             #ionConsumptionInputEl
             [value]="consumptionPerYear"
@@ -16,6 +16,7 @@
 <!-- Slider for Consumption -->
 <ion-row><ion-col>
     <ion-range
+        class="consumption-slider"
         [pin]="true"
         type="number"
         [min]="sector.minConsumption"

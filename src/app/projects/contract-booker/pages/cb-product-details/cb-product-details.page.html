@@ -1,0 +1,59 @@
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{ 'CB.PRODUCT_DETAILS.PRODUCT_DETAILS' | translate }}</ion-title>
+</cb-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title>{{'CB.PRODUCT_DETAILS.PRODUCT_DETAILS' | translate}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-img *ngIf="productBgImage" [src]="productBgImage" class="product-image"></ion-img>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngIf="product" size="6">
+                <ion-list>
+                    <ion-list-header *ngIf="product.name">{{product.name}}</ion-list-header>
+                    <ul>
+                        <li *ngFor="let ksp of product.keySellingPoints" class="key-selling-point-text">{{ksp}}</li>
+                    </ul>
+                </ion-list>
+            </ion-col>
+
+            <!-- Right Column: Consumption Input -->
+            <ion-col size="6">
+                <cb-consumption-input 
+                    (consumptionChangedEvent)="handleConsumptionChangeEventEtHt($event, sector)"
+                    [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_ETHT'"
+                    [consumptionPerYear]="contract.consumptionPerYearEtHt"
+                    [sector]="sector"
+                ></cb-consumption-input>
+                <!-- Night Consumption Tariff Consumption -->
+                <cb-consumption-input *ngIf="sector.isDoubleTariffEnabled"
+                    (consumptionChangedEvent)="handleConsumptionChangeEventNt($event, sector)"
+                    [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_NT'"
+                    [consumptionPerYear]="contract.consumptionPerYearNt"
+                    [sector]="sector"
+                ></cb-consumption-input>
+
+                <ion-label>{{contract.pricePerConsumption || ''}}</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <cb-form-footer>
+        <ion-button
+            expand="full"
+            [disabled]="isConsumptionInvalid()"
+            form-submission-bottom-button
+            class="form-submission-bottom-button"
+            (click)="confirmConsumption()"
+        >
+            <ion-label color="light">{{'CB.PRODUCT_DETAILS.CONFIRM_PRODUCT' | translate}}</ion-label>
+        </ion-button>
+    </cb-form-footer>
+</ion-footer>

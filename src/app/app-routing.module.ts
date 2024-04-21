@@ -30,11 +30,24 @@ const contractBookerRoutes: Route = {
         },
         {
             path: 'cb-standard-consultation',
-            loadChildren: () => import('./projects/contract-booker/pages/cb-standard-consultation/cb-standard-consultation.module').then( m => m.CbStandardConsultationPageModule)
+            loadChildren: () => import('./projects/contract-booker/pages/cb-standard-consultation/cb-standard-consultation.module').then( m => m.CbStandardConsultationPageModule),
+            resolve: {
+                contract: ContractResolverService
+            }
         },
         {
             path: 'cb-price-comparison',
-            loadChildren: () => import('./projects/contract-booker/pages/cb-price-comparison/cb-price-comparison.module').then( m => m.CbPriceComparisonPageModule)
+            loadChildren: () => import('./projects/contract-booker/pages/cb-price-comparison/cb-price-comparison.module').then( m => m.CbPriceComparisonPageModule),
+            resolve: {
+                contract: ContractResolverService
+            }
+        },
+        {
+            path: 'cb-product-details',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-product-details/cb-product-details.module').then( m => m.CbProductDetailsPageModule),
+            resolve: {
+                contract: ContractResolverService
+            }
         }
     ]
 }

@@ -1,6 +1,6 @@
 import contractBookerJson from 'src/assets/json-data/projects/contract-booker-data.json';
-import { Product } from '../../../pages/cb-product-selection/cb-product-selection.page';
 import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '../../../models/cb-product';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 

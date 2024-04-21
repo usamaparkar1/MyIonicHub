@@ -87,3 +87,11 @@ cb-form-input {
         }
     }
 }
+
+ion-list {
+    background: transparent !important;
+}
+
+ion-item {
+    --background: transparent;
+}

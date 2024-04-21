@@ -1,6 +1,8 @@
 import { CustomerAddressData } from 'src/app/projects/contract-booker/pages/cb-customer-address/cb-customer-address.page';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { ConsultationSteps } from '../../models/cb-consultation-steps';
 import { cbStorageHelpers } from 'src/app/helpers/storage-helpers';
+import { Contract } from '../../models/cb-contract';
 import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -38,6 +40,12 @@ export class CbContractService {
         return this.contracts;
     }
 
+    storeCurrentRoute(contract: Contract, route: ConsultationSteps) {
+        contract.currentRoute = route;
+        this.contracts = this.updateContractsWithContract(contract);
+        this.storeContractsInStorage(this.contracts);
+    }
+
     async createNewContract(newCustomerAddressData: CustomerAddressData) {
         const newContractId: string = this._getNewContractId();
 
@@ -46,7 +54,10 @@ export class CbContractService {
             state: newCustomerAddressData.state,
             city: newCustomerAddressData.city,
             postCode: newCustomerAddressData.postCode,
-            currentRoute: ConsultationSteps.productSelection
+            currentRoute: ConsultationSteps.productSelection,
+            consumptionPerYearEtHt: 0,
+            consumptionPerYearNt: 0,
+            pricePerConsumption: 0
         });
 
         this.contracts.push(newContract);
@@ -86,15 +97,34 @@ export class CbContractService {
         return this.contracts?.slice(-1)[0];
     }
 
-    storeContractProduct(productId: string, sectorId: string) {
+    storeStandardProductConsumption(productId: string, sectorId: string, consumptionPerYearEtHt: number, consumptionPerYearNt: number) {
         const contract = this.getLastUsedContract();
 
         if (contract?.id) {
             contract.selectedSectorId = sectorId;
             contract.selectedProductId = productId;
+            contract.consumptionPerYearEtHt = consumptionPerYearEtHt;
+            contract.consumptionPerYearNt = consumptionPerYearNt;
         }
 
-        contract.currentRoute = ConsultationSteps.productDetails;
+        this.contracts = this.updateContractsWithContract(contract);
+        this.storeContractsInStorage(this.contracts);
+    }
+
+
+    storeComparisonProductConsumption(contract: Contract, productId: string, sectorId: string, consumptionPerYearEtHt: number, consumptionPerYearNt: number) {
+        if (contract?.id) {
+            contract.selectedSectorId = sectorId;
+            contract.selectedProductId = productId;
+            contract.consumptionPerYearEtHt = consumptionPerYearEtHt;
+            contract.consumptionPerYearNt = consumptionPerYearNt;
+        }
+
+        this.contracts = this.updateContractsWithContract(contract);
+        this.storeContractsInStorage(this.contracts);
+    }
+
+    storeProductDetailsConsumption(contract: Contract) {
         this.contracts = this.updateContractsWithContract(contract);
         this.storeContractsInStorage(this.contracts);
     }
@@ -111,38 +141,4 @@ export class CbContractService {
 
         return updatedContracts;
     }
-}
-
-export class Contract implements IContract {
-    id: string;
-    state: string;
-    city: string;
-    postCode: string
-    currentRoute: ConsultationSteps;
-    selectedSectorId?: string;
-    selectedProductId?: string;
-
-    constructor(contract: Contract) {
-        this.id = contract.id;
-        this.state = contract.state;
-        this.city = contract.city;
-        this.postCode = contract.postCode;
-        this.currentRoute = contract.currentRoute;
-    }
-}
-
-export interface IContract {
-    id: string;
-    state: string;
-    city: string;
-    postCode: string;
-    currentRoute: ConsultationSteps;
-    selectedSectorId?: string;
-    selectedProductId?: string;
-}
-
-export enum ConsultationSteps {
-    customerAddress = 'cb-customer-address',
-    productSelection =  'cb-product-selection',
-    productDetails = 'cb-product-details',
 }

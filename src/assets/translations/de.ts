@@ -80,7 +80,19 @@ export const locale = {
                 SELECT_PRODUCT: 'Ausgewähltes Produkt',
                 SECTORS_NOT_FOUND: 'Sektoren nicht gefunden',
                 NO_SECTORS_FOR_ZIP_CITY: 'Wir konnten keine Sektoren für Ihre Postleitzahl und Stadt finden',
-            }
+            },
+            PRODUCT_DETAILS: {
+                PRODUCT_DETAILS: 'Produktdetails',
+                ROUTE_DATA_MISSING_TITLE: 'Vertrag nicht gefunden',
+                ROUTE_DATA_MISSING_DESCRIPTIO: 'Wir konnten die {{missingData}}daten für Ihren Vertrag nicht finden. Bitte gehen Sie zurück und versuchen Sie es erneut. Oder erstellen Sie einen neuen Vertrag',
+                CONFIRM_PRODUCT: 'Ausgewähltes Produkt',
+                CONSUMPTION_PER_YEAR_ETHT: 'Verbrauch pro Jahr EtHt',
+                CONSUMPTION_PER_YEAR_NT: 'Verbrauch pro Jahr Nt',
+            },
+            CONSUMPTION: {
+                INVALID_CONSUMPTION: 'Ungültiger Verbrauch',
+                SELECT_VALID_CONSUMPTION: 'Bitte wählen Sie einen gültigen {{consumptionType}}-Verbrauch aus',
+            },
         },
         MC: {
             HOME: {

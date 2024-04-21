@@ -1,9 +1,16 @@
 import { CbCustomerAddressService } from '../../services/customer-address/cb-customer-address.service';
-import { IProduct, ISector, Product, Sector } from '../cb-product-selection/cb-product-selection.page';
+import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { CbContractService } from '../../services/contract/cb-contract.service';
 import { CbRoutingService } from '../../services/routing/cb-routing.service';
-import { CbToastService } from '../../services/toast/cb-toast.service';
+import { CbAlertService } from '../../services/alert/cb-alert.service';
+import { ProductCheckboxes } from '../../models/cb-product-checkboxes';
+import { SectorCheckboxes } from '../../models/cb-sector-checkboxes';
+import { CbAlertHelpers } from '../../helpers/cb-alert-helpers';
+import { TranslateService } from '@ngx-translate/core';
+import { Contract } from '../../models/cb-contract';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Sector } from '../../models/cb-sector';
 
 @Component({
   selector: 'app-cb-price-comparison',
@@ -13,14 +20,16 @@ import { Component, OnInit } from '@angular/core';
 
 export class CbPriceComparisonPage implements OnInit {
 
-    sectorsCheckboxes: SectorCheckboxes[] = [];
+    contract!: Contract;
     products: ProductCheckboxes[] = [];
-    selectedProductId!: string;
-    selectedSectorId!: string;
+    sectorsCheckboxes: SectorCheckboxes[] = [];
 
     constructor(
-        private _cbToastService: CbToastService,
+        private _route: ActivatedRoute,
+        private _cbAlertService: CbAlertService,
         private _cbRoutingService: CbRoutingService,
+        private _appHelperService: AppHelperService,
+        private _translateService: TranslateService,
         private _cbContractService: CbContractService,
         private _cbCustomerAddressService: CbCustomerAddressService
     ) { }
@@ -30,6 +39,8 @@ export class CbPriceComparisonPage implements OnInit {
     }
 
     private async _setupProductSelectionPage() {
+        this.contract = this._route.snapshot.data['contract'];
+
         await this._getAvailableSectors();
     }
 
@@ -52,8 +63,8 @@ export class CbPriceComparisonPage implements OnInit {
                 minConsumption: sector.minConsumption,
                 maxConsumption: sector.maxConsumption,
                 defaultConsumptionValue: sector.defaultConsumptionValue,
-                consumptionPerYearEtHt: sector.consumptionPerYearEtHt,
-                consumptionPerYearNt: sector.consumptionPerYearNt,
+                priceComparisonConsumptionPerYearEtHt: sector.defaultConsumptionValue,
+                priceComparisonConsumptionPerYearNt: sector.defaultConsumptionValue,
                 isDoubleTariffEnabled: sector.isDoubleTariffEnabled,
                 productCheckboxes: this._getProductsForSector(sector)
             }));
@@ -61,9 +72,10 @@ export class CbPriceComparisonPage implements OnInit {
     }
 
     sectorClicked(sector: SectorCheckboxes) {
-        this.selectedSectorId = sector.sectorId;
-        this._getProductsForSector(sector);
-        this.updateProductPricePerConsumption(sector);
+        if (sector.checked) {
+            this._getProductsForSector(sector);
+            this.updateProductPricePerConsumption(sector);
+        }
     }
 
     private _getProductsForSector(sector: Sector): ProductCheckboxes[] {
@@ -73,84 +85,74 @@ export class CbPriceComparisonPage implements OnInit {
             productId: prod.productId,
             productGroupId: prod.productGroupId,
             productImage: prod.productImage,
+            productBannerImage: prod.productBannerImage,
             checked: false,
             productPrice: prod.productPrice,
-            pricePerConsumption: prod.productPrice * (sector?.isDoubleTariffEnabled ? sector.consumptionPerYearEtHt + sector.consumptionPerYearNt : sector.consumptionPerYearEtHt),
+            productPricePerConsumption: prod.productPrice * (sector?.isDoubleTariffEnabled ? sector.defaultConsumptionValue + sector.defaultConsumptionValue : sector.defaultConsumptionValue),
         }));
     }
 
     handleConsumptionChangeEventEtHt(data: number, sector: SectorCheckboxes) {
-        sector.consumptionPerYearEtHt = data ?? 0;
+        sector.priceComparisonConsumptionPerYearEtHt = data ?? 0;
         this.updateProductPricePerConsumption(sector);
-
     }
 
     handleConsumptionChangeEventNt(data: number, sector: SectorCheckboxes){
-        sector.consumptionPerYearNt = data ?? 0;    
+        sector.priceComparisonConsumptionPerYearNt = data ?? 0;    
         this.updateProductPricePerConsumption(sector);
     }
 
     updateProductPricePerConsumption(sector: SectorCheckboxes) {
-        let updatedConsumption = sector.consumptionPerYearEtHt;
-        if (sector.isDoubleTariffEnabled) {
-            updatedConsumption = sector.consumptionPerYearEtHt + sector.consumptionPerYearNt;
+        let updatedConsumption = sector.priceComparisonConsumptionPerYearEtHt ?? 0;
+        if (sector.isDoubleTariffEnabled && sector.priceComparisonConsumptionPerYearNt) {
+            updatedConsumption += sector.priceComparisonConsumptionPerYearNt ?? 0;
         }
 
         sector.productCheckboxes.map((product) => {
-            product.pricePerConsumption = updatedConsumption * product.productPrice;
+            product.productPricePerConsumption = updatedConsumption * product.productPrice;
         });
     }
 
-    isConsumptionInValid(selectedProductId: string): boolean {
-        const selectedSector = this.sectorsCheckboxes.find(sector => {
-            return sector.productCheckboxes.some(product => product.productId === selectedProductId && (product.productGroupId === sector.sectorId));
-        });
-
-        if (!selectedSector) {
-            return true;
-        } else {
-            return (selectedSector.consumptionPerYearEtHt === 0 || (selectedSector.isDoubleTariffEnabled ? selectedSector.consumptionPerYearNt === 0 : false));
+    isConsumptionInvalid(
+        selectedProductId: string,
+        selectedSectorId: string,
+        priceComparisonConsumptionPerYearEtHt:number,
+        priceComparisonConsumptionPerYearNt: number,
+        isDoubleTariffEnabled: boolean
+    ) {
+        if (this._appHelperService.isNumberInValid(priceComparisonConsumptionPerYearEtHt) || priceComparisonConsumptionPerYearEtHt === 0) {
+            this._cbAlertService.showAlert(
+                CbAlertHelpers.InvalidEtHtConsumption,
+                this._translateService.instant('CB.CONSUMPTION.INVALID_CONSUMPTION'),
+                this._translateService.instant('CB.CONSUMPTION.SELECT_VALID_CONSUMPTION', {
+                    consumptionType: 'ET HT'
+                })
+            );
+            return;
         }
+
+        if (isDoubleTariffEnabled && (this._appHelperService.isNumberInValid(priceComparisonConsumptionPerYearNt) || priceComparisonConsumptionPerYearNt === 0)) {
+            this._cbAlertService.showAlert(
+                CbAlertHelpers.InvalidNtConsumption,
+                this._translateService.instant('CB.CONSUMPTION.INVALID_CONSUMPTION'),
+                this._translateService.instant('CB.CONSUMPTION.SELECT_VALID_CONSUMPTION', {
+                    consumptionType: 'NT'
+                })
+            );
+            return;
+        }
+
+        this.confirmProductSelection(selectedProductId, selectedSectorId, priceComparisonConsumptionPerYearEtHt, priceComparisonConsumptionPerYearNt);
     }
 
-    validateProductPriceComparison() {
-        this._confirmProductSelection();
-    }
-
-    private _confirmProductSelection() {
-        this._cbContractService.storeContractProduct(this.selectedProductId, this.selectedSectorId);
+    confirmProductSelection(selectedProductId: string, selectedSectorId: string, priceComparisonConsumptionPerYearEtHt: number, priceComparisonConsumptionPerYearNt: number) {
+        this._cbContractService.storeComparisonProductConsumption(
+            this.contract,
+            selectedProductId,
+            selectedSectorId,
+            priceComparisonConsumptionPerYearEtHt,
+            priceComparisonConsumptionPerYearNt
+        );
         this._cbRoutingService.goToProductDetails();
     }
-}
-
-export class SectorCheckboxes extends Sector implements ISectorCheckboxes {
-    checked: boolean;
-    productCheckboxes: ProductCheckboxes[];
-
-    constructor(sectorCheckboxes: ISectorCheckboxes) {
-        super(sectorCheckboxes);
-        this.checked = sectorCheckboxes.checked;
-        this.productCheckboxes = sectorCheckboxes.productCheckboxes;
-    }
-}
-
-export interface ISectorCheckboxes extends ISector {
-    checked: boolean;
-    productCheckboxes: ProductCheckboxes[];
-}
-
-export class ProductCheckboxes extends Product implements IProductCheckboxes {
-    checked: boolean;
-    pricePerConsumption: number;
-
-    constructor(productCheckboxes: IProductCheckboxes) {
-        super(productCheckboxes);
-        this.checked = productCheckboxes.checked;
-        this.pricePerConsumption = productCheckboxes.pricePerConsumption;
-    }
-}
-
-export interface IProductCheckboxes extends IProduct {
-    checked: boolean;
-    pricePerConsumption: number;
 }

@@ -1,11 +1,14 @@
 import { CbCustomerAddressService } from '../../services/customer-address/cb-customer-address.service';
-import { Product, Sector } from '../cb-product-selection/cb-product-selection.page';
 import { CbContractService } from '../../services/contract/cb-contract.service';
 import { CbRoutingService } from '../../services/routing/cb-routing.service';
 import { CbAlertService } from '../../services/alert/cb-alert.service';
 import { CbAlertHelpers } from '../../helpers/cb-alert-helpers';
 import { TranslateService } from '@ngx-translate/core';
+import { Contract } from '../../models/cb-contract';
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../../models/cb-product';
+import { ActivatedRoute } from '@angular/router';
+import { Sector } from '../../models/cb-sector';
 
 @Component({
   selector: 'app-cb-standard-consultation',
@@ -15,11 +18,13 @@ import { Component, OnInit } from '@angular/core';
 
 export class CbStandardConsultationPage implements OnInit {
 
+    contract!: Contract;
     sectors: Sector[] = [];
     products: Product[] = [];
     selectedSectorId!: string;
 
     constructor(
+        private _route: ActivatedRoute,
         private _cbAlertService: CbAlertService,
         private _translateService: TranslateService,
         private _cbRoutingService: CbRoutingService,
@@ -32,6 +37,7 @@ export class CbStandardConsultationPage implements OnInit {
     }
 
     private async _setupProductSelectionPage() {
+        this.contract = this._route.snapshot.data['contract'];
         await this._getAvailableSectors();
     }
 
@@ -63,7 +69,27 @@ export class CbStandardConsultationPage implements OnInit {
     }
 
     async productClicked(productId: string) {
-        this._cbContractService.storeContractProduct(productId, this.selectedSectorId);
+        this._setConsumptionValues();
+        this._cbContractService.storeStandardProductConsumption(
+            productId, this.selectedSectorId, this.contract.consumptionPerYearEtHt, this.contract.consumptionPerYearNt);
         this._cbRoutingService.goToProductDetails();
+    }
+
+    private _setConsumptionValues() {
+        if (this.contract.consumptionPerYearEtHt === 0 || this.contract.consumptionPerYearNt === 0) {
+            const sectorDefaultConsumptionValue = this.sectors.find((x) => x.sectorId === this.selectedSectorId)?.defaultConsumptionValue;
+
+            if (sectorDefaultConsumptionValue) {
+                if (!this.contract.consumptionPerYearEtHt) {
+                    this.contract.consumptionPerYearEtHt = sectorDefaultConsumptionValue;
+                }
+            }
+
+            if (sectorDefaultConsumptionValue) {
+                if (!this.contract.consumptionPerYearNt) {
+                    this.contract.consumptionPerYearNt = sectorDefaultConsumptionValue;
+                }
+            }
+        }
     }
 }

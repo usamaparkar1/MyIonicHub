@@ -1,6 +1,7 @@
-import { Product, Sector } from '../../pages/cb-product-selection/cb-product-selection.page';
 import contractBookerJson from 'src/assets/json-data/projects/contract-booker-data.json';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Product } from '../../models/cb-product';
+import { Sector } from '../../models/cb-sector';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -25,8 +26,6 @@ export class CbCustomerAddressService {
             minConsumption: sector.minConsumption,
             maxConsumption: sector.maxConsumption,
             defaultConsumptionValue: sector.defaultConsumptionValue,
-            consumptionPerYearEtHt: sector.consumptionPerYearEtHt,
-            consumptionPerYearNt: sector.consumptionPerYearNt,
             isDoubleTariffEnabled: sector.isDoubleTariffEnabled,
         }));
 
@@ -35,6 +34,10 @@ export class CbCustomerAddressService {
 
     getAvailableProductsForSector(sectorId: string): Product[] {
         return this.contractBookerData.products.filter((product) => product.productGroupId === sectorId);
+    }
+
+    getSectorBySectorId(sectorId: string): Sector | undefined {
+        return this.contractBookerData.sectors.find((sector) => sector.sectorId === sectorId);
     }
 
     getProductByProductId(selectedProductId: string): Product | undefined {
