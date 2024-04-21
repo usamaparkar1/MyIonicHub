@@ -9,5 +9,5 @@ export const toastHelpers = {
     storageNotSetup: 'storageNotSetup',
     sqliteNotSetup: 'sqliteNotSetup',
     userIsOffline: 'userIsOffline',
-    invalidForm: 'invalidForm',
+    invalidForm: 'invalidForm'
 }
