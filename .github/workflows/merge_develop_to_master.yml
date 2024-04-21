@@ -6,7 +6,9 @@ on:
         - develop
 
 permissions:
-    pull-requests: write
+    actions: write # Necessary to cancel workflow executions
+    checks: write #  Necessary to write reports
+    pull-requests: write # Necessary to comment on PRs
   
 jobs:
     pull-request:
