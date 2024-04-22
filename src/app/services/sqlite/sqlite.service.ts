@@ -646,7 +646,7 @@ export class SqliteService {
         }
 
         const ret = await mDb.run(stmt,values);
-        
+
         if (ret.changes!.changes != 1) {
             return Promise.reject(`save: insert changes != 1`);
         }

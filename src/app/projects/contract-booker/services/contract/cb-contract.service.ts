@@ -105,6 +105,7 @@ export class CbContractService {
             contract.selectedProductId = productId;
             contract.consumptionPerYearEtHt = consumptionPerYearEtHt;
             contract.consumptionPerYearNt = consumptionPerYearNt;
+            contract.currentRoute = ConsultationSteps.productDetails;
         }
 
         this.contracts = this.updateContractsWithContract(contract);
@@ -118,6 +119,7 @@ export class CbContractService {
             contract.selectedProductId = productId;
             contract.consumptionPerYearEtHt = consumptionPerYearEtHt;
             contract.consumptionPerYearNt = consumptionPerYearNt;
+            contract.currentRoute = ConsultationSteps.productDetails;
         }
 
         this.contracts = this.updateContractsWithContract(contract);

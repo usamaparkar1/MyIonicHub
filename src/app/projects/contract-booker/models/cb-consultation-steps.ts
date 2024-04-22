@@ -2,5 +2,5 @@ export enum ConsultationSteps {
     customerAddress = 'cb-customer-address',
     productSelection = 'cb-product-selection',
     productDetails = 'cb-product-details',
-    customerDetails = 'customerDetails',
+    customerDetails = 'cb-customer-details',
 }

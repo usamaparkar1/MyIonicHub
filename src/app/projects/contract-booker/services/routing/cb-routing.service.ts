@@ -61,7 +61,7 @@ export class CbRoutingService {
 
     
     async goToCustomerDetails(navigationExtras: NavigationExtras = {}) {
-        await this.goToCbPage(CbRoutingHelpers.cbCustomerAddress, navigationExtras);
+        await this.goToCbPage(CbRoutingHelpers.cbCustomerDetails, navigationExtras);
     }
 
     async handleRouteNotFound() { 

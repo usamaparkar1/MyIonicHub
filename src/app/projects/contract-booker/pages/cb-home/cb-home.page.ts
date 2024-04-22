@@ -51,6 +51,5 @@ export class CbHomePage implements OnInit {
     }
 
     openShoppingCart() {
-        alert('Count is greater than 0. Opening Shopping Cart');
     }
 }

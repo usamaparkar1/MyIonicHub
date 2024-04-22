@@ -56,7 +56,6 @@ export class CbProductDetailsPage implements OnInit {
             return;
         }
 
-        this._cbContractService.storeCurrentRoute(this.contract, ConsultationSteps.productDetails);
         this._loadProductDataForPage(this.contract.selectedSectorId, this.contract.selectedProductId);
     }
 
