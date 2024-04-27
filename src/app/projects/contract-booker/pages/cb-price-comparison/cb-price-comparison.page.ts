@@ -122,7 +122,7 @@ export class CbPriceComparisonPage implements OnInit {
     ) {
         if (this._appHelperService.isNumberInValid(priceComparisonConsumptionPerYearEtHt) || priceComparisonConsumptionPerYearEtHt === 0) {
             this._cbAlertService.showAlert(
-                CbAlertHelpers.InvalidEtHtConsumption,
+                CbAlertHelpers.invalidEtHtConsumption,
                 this._translateService.instant('CB.CONSUMPTION.INVALID_CONSUMPTION'),
                 this._translateService.instant('CB.CONSUMPTION.SELECT_VALID_CONSUMPTION', {
                     consumptionType: 'ET HT'
@@ -133,7 +133,7 @@ export class CbPriceComparisonPage implements OnInit {
 
         if (isDoubleTariffEnabled && (this._appHelperService.isNumberInValid(priceComparisonConsumptionPerYearNt) || priceComparisonConsumptionPerYearNt === 0)) {
             this._cbAlertService.showAlert(
-                CbAlertHelpers.InvalidNtConsumption,
+                CbAlertHelpers.invalidNtConsumption,
                 this._translateService.instant('CB.CONSUMPTION.INVALID_CONSUMPTION'),
                 this._translateService.instant('CB.CONSUMPTION.SELECT_VALID_CONSUMPTION', {
                     consumptionType: 'NT'
@@ -153,6 +153,6 @@ export class CbPriceComparisonPage implements OnInit {
             priceComparisonConsumptionPerYearEtHt,
             priceComparisonConsumptionPerYearNt
         );
-        this._cbRoutingService.goToProductDetails();
+        this._cbRoutingService.goToCbProductDetails(this.contract.id);
     }
 }

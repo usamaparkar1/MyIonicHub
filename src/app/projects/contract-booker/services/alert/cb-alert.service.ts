@@ -25,13 +25,21 @@ export class CbAlertService {
         await alert.present();
     }
 
-    async showAlertForContractDataNotFound(missingData: string) {
+    showAlertForContractDataNotFound(missingData: string) {
         this.showAlert(
             CbAlertHelpers.productDetailsRouteDataNotFound,
             this._translateService.instant('CB.PRODUCT_DETAILS.ROUTE_DATA_MISSING_TITLE'),
             this._translateService.instant('CB.PRODUCT_DETAILS.ROUTE_DATA_MISSING_DESCRIPTION', {
                 missingData: missingData
             })
+        );
+    }
+
+    showAlertForContractNotRemoved(errorMessage: string) {
+        this.showAlert(
+            CbAlertHelpers.couldNotRemoveContract,
+            this._translateService.instant('CORE.ERROR'),
+            errorMessage
         );
     }
 }

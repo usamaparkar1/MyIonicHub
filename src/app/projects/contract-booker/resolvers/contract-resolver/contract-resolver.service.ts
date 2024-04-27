@@ -16,6 +16,7 @@ export class ContractResolverService {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable <Contract | undefined> => {
-        return of(this._cbContractService.getLastUsedContract());
+        const contractId = route.params['id'];
+        return of(this._cbContractService.getContractById(contractId));
     }
 }

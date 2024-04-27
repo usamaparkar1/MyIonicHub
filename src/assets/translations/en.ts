@@ -3,6 +3,7 @@ export const locale = {
     data: {
         CORE: {
             HELLO: 'Hello',
+            ERROR: 'Error',
         },
         SCREEN_LOADER: {
             PLEASE_WAIT: 'Please wait'
@@ -93,6 +94,30 @@ export const locale = {
             CONSUMPTION: {
                 INVALID_CONSUMPTION: 'Invalid Consumption',
                 SELECT_VALID_CONSUMPTION: 'Please select a valid {{consumptionType}} Consumption',
+            },
+            SHOPPING_CART: {
+                SHOPPING_CART: 'Shopping Cart',
+                SIGN_CONTRACT: 'Sign Contract',
+                ADD_CONTRACT: 'Add Contract',
+                CART_IS_EMPTY: 'Your cart is empty',
+            },
+            ADD_CONTRACT: {
+                ADD_CONTRACT: 'Add Contract',
+                TITLE: 'Select an option to create another contract',
+                CREATE_FROM_CONTRACT: 'Create from existing contract',
+                CREATE_NEW_CONTRACT: 'Create a new contract',
+                CONTRACT_ID_NOT_FOUND: 'Could not find the Contract Id from the existing contract',
+                INVALID_SELECTION_FOR_ADD_CONTRACT: 'You have not selected a valid option for a new contract',
+            },
+            CART_ITEM: {
+                CONSUMPTION_PER_YEAR_ETHT: 'Consumption Per Year ET HT',
+                CONSUMPTION_PER_YEAR_NT: 'Consumption Per Year NT'
+            },
+            CONTRACT: {
+                CANT_REMOVE_CONTRACT: 'Could not remove Contract',
+                CONTRACT_REMOVED: 'Contract has been removed from Cart',
+                CONTRACT_NOT_FOUND: 'Could not find the Contract to be removed',
+                ERROR_MESSAGE: 'Could not find index for Contract Id: {{contractId}} and Data {{error}}',
             },
         },
         MC: {

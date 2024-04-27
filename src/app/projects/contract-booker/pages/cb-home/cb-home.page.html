@@ -1,14 +1,5 @@
 <cb-header [isTranslucent]="true">
     <ion-title cb-header-1>{{ 'CB.HOME.HOME' | translate }}</ion-title>
-    <ion-icon
-        cb-header-3
-        slot="end"
-        size="large"
-        [class.disabled]="!isCartCountGreaterThanZero()"
-        [src]="contractBookerData.shoppingCartSvgUrl"
-        (click)="openShoppingCart()"
-    ></ion-icon>
-    <app-profile-header cb-header-4 slot="end"></app-profile-header>
 </cb-header>
 
 <ion-content [fullscreen]="true">

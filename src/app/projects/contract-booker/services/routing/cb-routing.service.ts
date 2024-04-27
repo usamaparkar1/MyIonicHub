@@ -13,8 +13,12 @@ export class CbRoutingService {
         private _router: Router,
     ) {}
 
-    async goToCbPage(url: string, navigationExtras: NavigationExtras) {
-        await this._router.navigate([CbRoutingHelpers.cb, url], navigationExtras)
+    async goToCbPage(url: string, paramId: string | null = null, navigationExtras: NavigationExtras) {
+        if (paramId) {
+            await this._router.navigate([CbRoutingHelpers.cb, url, paramId], navigationExtras)
+        } else {
+            await this._router.navigate([CbRoutingHelpers.cb, url], navigationExtras)
+        }
     }
 
     async findLastUsedRoute(contract: Contract) {
@@ -23,10 +27,16 @@ export class CbRoutingService {
                 this.goToCbCustomerAddress();
                 break;
             case CbRoutingHelpers.cbProductSelection:
-                this.goToCbProductSelection();
+                this.goToCbProductSelection(contract.id);
                 break;
             case CbRoutingHelpers.cbProductDetails:
-                this.goToProductDetails();
+                this.goToCbProductDetails(contract.id);
+                break;
+            case CbRoutingHelpers.cbShoppingCart:
+                this.goToCbShoppingCart();
+                break;
+            case CbRoutingHelpers.cbAddContract:
+                this.goToCbAddContract();
                 break;
 
             default:
@@ -36,32 +46,35 @@ export class CbRoutingService {
     }
 
     async goToCbHome(navigationExtras: NavigationExtras = {}) {
-        await this.goToCbPage(CbRoutingHelpers.cbHome, navigationExtras);
+        await this.goToCbPage(CbRoutingHelpers.cbHome, null, navigationExtras);
     }
 
     async goToCbCustomerAddress(navigationExtras: NavigationExtras = {}) {
-        await this.goToCbPage(CbRoutingHelpers.cbCustomerAddress, navigationExtras);
+        await this.goToCbPage(CbRoutingHelpers.cbCustomerAddress, null, navigationExtras);
     }
 
-    async goToCbProductSelection(navigationExtras: NavigationExtras = {}) {
-        await this.goToCbPage(CbRoutingHelpers.cbProductSelection, navigationExtras);
+    async goToCbProductSelection(contractId: string, navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.cbProductSelection, contractId, navigationExtras);
     }
 
-    async goToCbStandardConsultation(navigationExtras: NavigationExtras = {}) {
-        await this.goToCbPage(CbRoutingHelpers.cbStandardConsultation, navigationExtras);
+    async goToCbStandardConsultation(contractId: string, navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.cbStandardConsultation, contractId, navigationExtras);
     }
 
-    async goToCbPriceComparison(navigationExtras: NavigationExtras = {}) {
-        await this.goToCbPage(CbRoutingHelpers.cbPriceComparison, navigationExtras);
+    async goToCbPriceComparison(contractId: string, navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.cbPriceComparison, contractId, navigationExtras);
     }
 
-    async goToProductDetails(navigationExtras: NavigationExtras = {}) {
-        await this.goToCbPage(CbRoutingHelpers.cbProductDetails, navigationExtras);
+    async goToCbProductDetails(contractId: string, navigationExtras: NavigationExtras = {}) {;
+        await this.goToCbPage(CbRoutingHelpers.cbProductDetails, contractId, navigationExtras);
     }
 
-    
-    async goToCustomerDetails(navigationExtras: NavigationExtras = {}) {
-        await this.goToCbPage(CbRoutingHelpers.cbCustomerAddress, navigationExtras);
+    async goToCbShoppingCart(navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.cbShoppingCart, null, navigationExtras);
+    }
+
+    async goToCbAddContract(navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.cbAddContract, null, navigationExtras);
     }
 
     async handleRouteNotFound() { 
