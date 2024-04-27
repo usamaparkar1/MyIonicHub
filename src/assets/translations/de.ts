@@ -3,6 +3,7 @@ export const locale = {
     data: {
         CORE: {
             HELLO: 'Hallo',
+            ERROR: 'Fehler',
         },
         SCREEN_LOADER: {
             PLEASE_WAIT: 'Bitte warten'
@@ -92,6 +93,30 @@ export const locale = {
             CONSUMPTION: {
                 INVALID_CONSUMPTION: 'Ungültiger Verbrauch',
                 SELECT_VALID_CONSUMPTION: 'Bitte wählen Sie einen gültigen {{consumptionType}}-Verbrauch aus',
+            },
+            SHOPPING_CART: {
+                SHOPPING_CART: 'Einkaufswagen',
+                SIGN_CONTRACT: 'Unterschreibe den Vertrag',
+                ADD_CONTRACT: 'Vertrag hinzufügen',
+                CART_IS_EMPTY: 'Ihr Warenkorb ist leer',
+            },
+            ADD_CONTRACT: {
+                ADD_CONTRACT: 'Vertrag hinzufügen',
+                TITLE: 'Wählen Sie eine Option zum Erstellen eines weiteren Vertrags',
+                CREATE_FROM_CONTRACT: 'Aus bestehendem Vertrag erstellen',
+                CREATE_NEW_CONTRACT: 'Erstellen Sie einen neuen Vertrag',
+                CONTRACT_ID_NOT_FOUND: 'Die Vertrags-ID des bestehenden Vertrags konnte nicht gefunden werden',
+                INVALID_SELECTION_FOR_ADD_CONTRACT: 'Sie haben keine gültige Option für einen neuen Vertrag ausgewählt',
+            },
+            CART_ITEM: {
+                CONSUMPTION_PER_YEAR_ETHT: 'Verbrauch pro Jahr ET HT',
+                CONSUMPTION_PER_YEAR_NT: 'Verbrauch pro Jahr NT'
+            },
+            CONTRACT: {
+                CANT_REMOVE_CONTRACT: 'Der Vertrag konnte nicht entfernt werden',
+                CONTRACT_REMOVED: 'Der Vertrag wurde aus dem Warenkorb entfernt',
+                CONTRACT_NOT_FOUND: 'Der zu entfernende Vertrag konnte nicht gefunden werden',
+                ERROR_MESSAGE: 'Index für Vertrags-ID: {{contractId}} und Daten {{error}} konnte nicht gefunden werden',
             },
         },
         MC: {

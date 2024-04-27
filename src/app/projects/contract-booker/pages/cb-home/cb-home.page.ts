@@ -3,7 +3,9 @@ import contractBookerJson from 'src/assets/json-data/projects/contract-booker-da
 import { ActionSheetService } from 'src/app/services/action-sheet/action-sheet.service';
 import { CbContractService } from '../../services/contract/cb-contract.service';
 import coreDataJson from 'src/assets/json-data/core-data.json';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Contract } from '../../models/cb-contract';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cb-home',
@@ -11,10 +13,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cb-home.page.scss'],
 })
 
-export class CbHomePage implements OnInit {
+export class CbHomePage implements OnInit, OnDestroy {
 
     contractBookerData = contractBookerJson;
     coreData = coreDataJson;
+    contracts: Contract[] = [];
+    contractsSubscription!: Subscription;
 
     constructor(
         private _cbRoutingService: CbRoutingService,
@@ -26,10 +30,18 @@ export class CbHomePage implements OnInit {
         this._initCbHomePage();
     }
 
-    private async _initCbHomePage() {}
+    private async _initCbHomePage() {
+        this.contractsSubscription = this._cbContractService.contracts.subscribe((contracts) => {
+            this.contracts = contracts;
+        });
+    }
+
+    ngOnDestroy() {
+        this.contractsSubscription.unsubscribe();
+    }
 
     isCartCountGreaterThanZero() {
-        return this._cbContractService.contracts?.length > 0;
+        return this.contracts?.length > 0;
     }
 
     async openProfileActionSheet() {
@@ -51,5 +63,6 @@ export class CbHomePage implements OnInit {
     }
 
     openShoppingCart() {
+        this._cbRoutingService.goToCbShoppingCart();
     }
 }

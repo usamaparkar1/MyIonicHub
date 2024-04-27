@@ -1,5 +1,5 @@
+import { CbContractService } from 'src/app/projects/contract-booker/services/contract/cb-contract.service';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, ResolveFn } from '@angular/router';
-import { CbContractService } from '../../services/contract/cb-contract.service';
 import { Contract } from '../../models/cb-contract';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -7,16 +7,14 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-
-export class ContractResolverService {
+export class CbCartResolverService {
 
     constructor(private _cbContractService: CbContractService) {}
 
-    resolve: ResolveFn<Observable<Contract | undefined>> = (
+    resolve: ResolveFn<Observable<Contract[] | undefined>> = (
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
-    ): Observable <Contract | undefined> => {
-        const contractId = route.params['id'];
-        return of(this._cbContractService.getContractById(contractId));
+    ): Observable<Contract[] | undefined> => {
+        return of(this._cbContractService.allContracts);
     }
 }

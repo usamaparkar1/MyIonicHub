@@ -1,0 +1,54 @@
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{ 'CB.ADD_CONTRACT.ADD_CONTRACT' | translate }}</ion-title>
+</cb-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title>{{'CB.ADD_CONTRACT.ADD_CONTRACT' | translate}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-grid>
+        <ion-row><ion-col>
+            <ion-title class="add-contract-title">{{'CB.ADD_CONTRACT.TITLE'}}</ion-title>
+        </ion-col></ion-row>
+        <ion-row><ion-col class="radios-container">
+            <ion-radio-group [(ngModel)]="addContractType">
+                <!-- Radio 2: Create contract from existing ones -->
+                <ion-radio [value]="addContractTypeEnum.createFromExisting" labelPlacement="end">
+                    <ion-label>{{'CB.ADD_CONTRACT.CREATE_FROM_CONTRACT'}}</ion-label>
+                </ion-radio><br />
+
+                <!-- List of existing contracts -->
+                <ion-list [hidden]="!canSeeContractList()">
+                    <ion-item>
+                        <ion-select interface="action-sheet" placeholder="Select Contract" [(ngModel)]="selectedContractId">
+                            <ion-select-option *ngFor="let contract of contracts" [value]="contract.id">
+                                {{contract.state}} - {{contract.city}} - {{contract.postCode}}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                  </ion-list>
+
+                <!-- Radio 2: Create fresh contract -->
+                <ion-radio [value]="addContractTypeEnum.createNewContract" labelPlacement="end">
+                    <ion-label>{{'CB.ADD_CONTRACT.CREATE_NEW_CONTRACT'}}</ion-label>
+                </ion-radio>
+            </ion-radio-group>
+        </ion-col></ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <cb-form-footer>
+        <ion-button
+            form-submission-bottom-button
+            expand="full"
+            (click)="addAnotherContract()"
+            [disabled]="!canAddAnotherContract()"
+        >
+            <ion-label color="light">{{'CB.ADD_CONTRACT.ADD_CONTRACT' | translate}}</ion-label>
+        </ion-button>
+    </cb-form-footer>
+</ion-footer>

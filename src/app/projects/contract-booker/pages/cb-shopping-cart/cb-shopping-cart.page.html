@@ -1,0 +1,51 @@
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{ 'CB.SHOPPING_CART.SHOPPING_CART' | translate }}</ion-title>
+</cb-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title>{{'CB.SHOPPING_CART.SHOPPING_CART' | translate}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-list *ngIf="contracts && contracts.length > 0; else cartIsEmpty" lines="none">
+        <ng-container *ngFor="let contract of contracts; let cIndex = index">
+            <cb-cart-item
+                [cIndex]="cIndex"
+                [contract]="contract"
+            ></cb-cart-item>
+        </ng-container>
+    </ion-list>
+
+    <ng-template #cartIsEmpty>
+        <ion-grid style="display: flex;" class="ion-justify-content-center ion-align-items-center">
+            <ion-row><ion-col>
+                <ion-title>{{'CB.SHOPPING_CART.CART_IS_EMPTY' | translate}}</ion-title>
+            </ion-col></ion-row>
+        </ion-grid>
+    </ng-template>
+</ion-content>
+
+<ion-footer>
+    <cb-cart-footer>
+        <!-- Add Contracts -->
+        <ion-button
+            cart-bottom-button-1
+            color="secondary"
+            (click)="addContract()"
+            [hidden]="!canAddMoreContracts()"
+        >
+            <ion-label color="light">{{'CB.SHOPPING_CART.ADD_CONTRACT' | translate}}</ion-label>
+        </ion-button>
+        <!-- Sign Contracts -->
+        <ion-button
+            cart-bottom-button-2
+            color="warning"
+            (click)="signContract()"
+            [hidden]="isSignatureButtonHidden()"
+        >
+            <ion-label color="light">{{'CB.SHOPPING_CART.SIGN_CONTRACT' | translate}}</ion-label>
+        </ion-button>
+    </cb-cart-footer>
+</ion-footer>

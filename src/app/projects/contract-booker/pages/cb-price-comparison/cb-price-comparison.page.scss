@@ -15,23 +15,3 @@ ion-checkbox::part(container) {
 .sector-checked-dropdown-container > *:not(ion-list) ion-col {
     padding: 0 !important;
 }
-
-ion-radio {
-    margin-right: 16px;
-    --border-radius: 4px;
-    --inner-border-radius: 4px;
-    --color: #ddd;
-    --color-checked: var(--ion-color-warning);
-}
-  
-ion-radio.ios::part(container) {
-    width: 20px;
-    height: 20px;
-  
-    border: 2px solid #ddd;
-    border-radius: 4px;
-}
-  
-.radio-checked.ios::part(container) {
-    border-color: var(--ion-color-warning);
-}

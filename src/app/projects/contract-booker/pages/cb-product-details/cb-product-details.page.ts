@@ -118,6 +118,7 @@ export class CbProductDetailsPage implements OnInit {
     }
 
     confirmConsumption() {
-        this._cbRoutingService.goToCustomerDetails();
+        this._cbContractService.storeCurrentRoute(this.contract, ConsultationSteps.shoppingCart);
+        this._cbRoutingService.goToCbShoppingCart();
     }
 }

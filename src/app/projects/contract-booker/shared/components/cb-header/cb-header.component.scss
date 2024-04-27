@@ -1,3 +1,17 @@
 ion-toolbar {
     color: var(--ion-color-light);
 }
+ion-toolbar [isTranslucent="true"] > div {
+    position: relative;
+}
+
+.cart-item-count {
+    top: 20%;
+    z-index: 999;
+    right: 3.9rem;
+    font-size: 8px;
+    position: absolute;
+    border-radius: 8px;
+    --padding-end: 5px;
+    --padding-start: 5px;
+}
