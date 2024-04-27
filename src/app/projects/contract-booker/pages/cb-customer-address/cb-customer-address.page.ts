@@ -3,18 +3,25 @@ import { CbContractService } from 'src/app/projects/contract-booker/services/con
 import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
 import { CbModalService } from 'src/app/projects/contract-booker/services/modal/cb-modal.service';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { CbAlertService } from '../../services/alert/cb-alert.service';
 import citiesListJson from 'src/assets/json-data/cities.json';
 import stateListJson from 'src/assets/json-data/states.json';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Contract } from '../../models/cb-contract';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-cb-customer-address',
-  templateUrl: './cb-customer-address.page.html',
-  styleUrls: ['./cb-customer-address.page.scss'],
+    selector: 'app-cb-customer-address',
+    templateUrl: './cb-customer-address.page.html',
+    styleUrls: ['./cb-customer-address.page.scss'],
 })
 
-export class CbCustomerAddressPage implements OnInit {
+export class CbCustomerAddressPage implements OnInit, OnDestroy {
 
+    private routeSubscription!: Subscription;
+
+    contract!: Contract;
     isValidatingCustomerAddressForm: boolean = false;
     customerAddressFormHelpers = cbCustomerAddressHelpers;
     customerAddressForm: UntypedFormGroup = new UntypedFormBuilder().group({
@@ -28,12 +35,54 @@ export class CbCustomerAddressPage implements OnInit {
     });
 
     constructor(
-        private _cbContractService: CbContractService,
+        private _route: ActivatedRoute,
+        private _cbAlertService: CbAlertService,
+        private _cbModalService: CbModalService,
         private _cbRoutingService: CbRoutingService,
-        private _cbModalService: CbModalService
+        private _cbContractService: CbContractService,
     ) {}
 
     ngOnInit() {
+        this.routeSubscription = this._route.queryParams.subscribe((params) => {
+            const existingContractId: string = params['contractId'];
+            if (existingContractId?.length > 0) {
+                this._setExistingContractAddress(existingContractId);
+            }
+        });
+    }
+
+    ngOnDestroy() {
+        if (this.routeSubscription) {
+            this.routeSubscription.unsubscribe();
+        }
+    }
+
+    private _setExistingContractAddress(existingContractId: string) {
+        const contract = this._cbContractService.getContractById(existingContractId);
+        if (contract) {
+            this._setCustomerAddressFromExistingContract(contract);
+        } else {
+            this._handleExistingContractDataNotFound(contract);
+        }
+    }
+
+    private _setCustomerAddressFromExistingContract(existingContract: Contract) {
+        this.customerAddressForm.get('state')?.setValue(existingContract.state);
+        this.customerAddressForm.get('city')?.setValue(existingContract.city);
+        this.customerAddressForm.get('postCode')?.setValue(existingContract.postCode);
+    }
+
+    private _handleExistingContractDataNotFound(contract: Contract | undefined) {
+        if (!contract) {
+            this._cbAlertService.showAlertForContractDataNotFound('Contract');
+            return;
+        }
+
+        const missingProperty = !contract.state ? 'State' : !contract.city ? 'City' : !contract.postCode ? 'PostCode' : null;        
+        if (missingProperty) {
+            this._cbAlertService.showAlertForContractDataNotFound(missingProperty);
+            return;
+        }
     }
 
     async openStateSearchBar() {
@@ -72,26 +121,33 @@ export class CbCustomerAddressPage implements OnInit {
     async validateCustomerAddress() {
         try {
             this._showValidatingFormLoader(true);
-            const newCustomerAddressData = new CustomerAddressData({
-                state: this.customerAddressForm.get('state')?.value,
-                city: this.customerAddressForm.get('city')?.value,
-                postCode: this.customerAddressForm.get('postCode')?.value
-            });
+            const newCustomerAddressData = this._getNewCustomerAddressData(
+                this.customerAddressForm.get('state')?.value,
+                this.customerAddressForm.get('city')?.value,
+                this.customerAddressForm.get('postCode')?.value
+            );
 
-            const newContract = await this._cbContractService.createNewContract(newCustomerAddressData);
+            const isNewContract = !this.contract;
+            const newContract = isNewContract 
+                ? await this._cbContractService.createNewContract(newCustomerAddressData)
+                : await this._cbContractService.createContractFromExistingContract(this.contract, newCustomerAddressData);
             this._showValidatingFormLoader(false);
-            this._goToProductSelection();
+            this._goToProductSelection(newContract);
         } catch (error) {
             this._showValidatingFormLoader(false);
         }
+    }
+
+    private _getNewCustomerAddressData(state: string, city: string, postCode: string) {
+        return new CustomerAddressData({ state, city, postCode });
     }
 
     private _showValidatingFormLoader(value: boolean) {
         this.isValidatingCustomerAddressForm = value;
     }
 
-    private _goToProductSelection() {
-        this._cbRoutingService.goToCbProductSelection({});
+    private _goToProductSelection(newContract: Contract) {
+        this._cbRoutingService.goToCbProductSelection(newContract.id, {});
     }
 }
 

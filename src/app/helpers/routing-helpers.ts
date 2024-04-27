@@ -14,6 +14,8 @@ export const CbRoutingHelpers = {
     cbStandardConsultation: 'cb-standard-consultation',
     cbPriceComparison: 'cb-price-comparison',
     cbProductDetails: 'cb-product-details',
+    cbShoppingCart: 'cb-shopping-cart',
+    cbAddContract: 'cb-add-contract',
 }
 
 export const McRoutingHelpers = {

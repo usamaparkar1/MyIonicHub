@@ -50,14 +50,13 @@
 
 <hub-form-footer>
     <ion-button
-        class="form-submission-bottom-button"
         form-submission-bottom-button
         [disabled]="isSigningUp || signupForm.invalid"
         (click)="validateSignupForm()"
         expand="full"
     >
-        <ion-spinner *ngIf="isSigningUp" name="lines-sharp-small"></ion-spinner>
-        <ion-label *ngIf="!isSigningUp">{{ 'SIGNUP.SIGNUP' | translate }}</ion-label>
+        <ion-spinner [hidden]="!isSigningUp" name="lines-sharp-small"></ion-spinner>
+        <ion-label [hidden]="isSigningUp">{{ 'SIGNUP.SIGNUP' | translate }}</ion-label>
     </ion-button>
 </hub-form-footer>
 

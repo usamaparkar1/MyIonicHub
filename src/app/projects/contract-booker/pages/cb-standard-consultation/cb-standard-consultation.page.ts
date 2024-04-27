@@ -70,9 +70,8 @@ export class CbStandardConsultationPage implements OnInit {
 
     async productClicked(productId: string) {
         this._setConsumptionValues();
-        this._cbContractService.storeStandardProductConsumption(
-            productId, this.selectedSectorId, this.contract.consumptionPerYearEtHt, this.contract.consumptionPerYearNt);
-        this._cbRoutingService.goToProductDetails();
+        this._cbContractService.storeStandardProductConsumption(this.contract, productId, this.selectedSectorId, this.contract.consumptionPerYearEtHt, this.contract.consumptionPerYearNt);
+        this._cbRoutingService.goToCbProductDetails(this.contract.id);
     }
 
     private _setConsumptionValues() {

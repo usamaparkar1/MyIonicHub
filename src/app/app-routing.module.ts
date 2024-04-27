@@ -1,5 +1,6 @@
 import { McRemindersResolverService } from './projects/miscellaneous/services/resolvers/mc-reminders-resolver/mc-reminders-resolver.service';
 import { ContractResolverService } from './projects/contract-booker/resolvers/contract-resolver/contract-resolver.service';
+import { CbCartResolverService } from './projects/contract-booker/resolvers/cb-cart-resolver/cb-cart-resolver.service';
 import { CbHomeResolverService } from './projects/contract-booker/resolvers/cb-home-resolver/cb-home-resolver.service';
 import { PreloadAllModules, Route, RouterModule, Routes } from '@angular/router';
 import { DashboardGuard } from 'src/app/guards/dashboard/dashboard.guard';
@@ -22,31 +23,45 @@ const contractBookerRoutes: Route = {
             loadChildren: () => import('src/app/projects/contract-booker/pages/cb-customer-address/cb-customer-address.module').then( m => m.CbCustomerAddressPageModule),
         },
         {
-            path: 'cb-product-selection',
+            path: 'cb-product-selection/:id',
             loadChildren: () => import('src/app/projects/contract-booker/pages/cb-product-selection/cb-product-selection.module').then( m => m.CbProductSelectionPageModule),
             resolve: {
                 contract: ContractResolverService
             }
         },
         {
-            path: 'cb-standard-consultation',
+            path: 'cb-standard-consultation/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-standard-consultation/cb-standard-consultation.module').then( m => m.CbStandardConsultationPageModule),
             resolve: {
                 contract: ContractResolverService
             }
         },
         {
-            path: 'cb-price-comparison',
+            path: 'cb-price-comparison/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-price-comparison/cb-price-comparison.module').then( m => m.CbPriceComparisonPageModule),
             resolve: {
                 contract: ContractResolverService
             }
         },
         {
-            path: 'cb-product-details',
+            path: 'cb-product-details/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-product-details/cb-product-details.module').then( m => m.CbProductDetailsPageModule),
             resolve: {
                 contract: ContractResolverService
+            }
+        },
+        {
+            path: 'cb-shopping-cart',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-shopping-cart/cb-shopping-cart.module').then( m => m.CbShoppingCartPageModule),
+            resolve: {
+                contracts: CbCartResolverService
+            }
+        },
+        {
+            path: 'cb-add-contract',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-add-contract/cb-add-contract.module').then( m => m.CbAddContractPageModule),
+            resolve: {
+                contracts: CbCartResolverService
             }
         }
     ]

@@ -4,6 +4,7 @@ import { AppHelperService } from 'src/app/services/app-helper/app-helper.service
 import { CbRoutingService } from '../../services/routing/cb-routing.service';
 import { CbToastService } from '../../services/toast/cb-toast.service';
 import { cbToastHelpers } from '../../helpers/cb-toast-helpers';
+import { Contract } from '../../models/cb-contract';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -15,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 
 export class CbProductSelectionPage implements OnInit {
 
+    contract!: Contract;
     standardConsultation: string = "standardConsultation";
     priceComparison: string = "priceComparison";
     contractBookerData = contractBookerJson;
@@ -33,16 +35,16 @@ export class CbProductSelectionPage implements OnInit {
     }
 
     private async _setupProductSelectionPage() {
-        const contract = this._route.snapshot.data['contract'];
+        this.contract = this._route.snapshot.data['contract'];
 
         if (
-            this._appHelperService.isStringNotEmpty(contract?.state)
+            this._appHelperService.isStringNotEmpty(this.contract?.state)
             &&
-            this._appHelperService.isStringNotEmpty(contract?.city)
+            this._appHelperService.isStringNotEmpty(this.contract?.city)
             &&
-            this._appHelperService.isStringNotEmpty(contract?.postCode)
+            this._appHelperService.isStringNotEmpty(this.contract?.postCode)
         ) {
-            this._cbCustomerAddressService.loadSectorsForZipCity(contract);
+            this._cbCustomerAddressService.loadSectorsForZipCity(this.contract.id);
         } else {
             this._handleContractDataNotAvailable();
         }
@@ -62,10 +64,10 @@ export class CbProductSelectionPage implements OnInit {
 
         if (this.consultationType === this.standardConsultation) {
             // Standard Consultation
-            this._cbRoutingService.goToCbStandardConsultation();
+            this._cbRoutingService.goToCbStandardConsultation(this.contract.id);
         } else {
             // Price Comparison
-            this._cbRoutingService.goToCbPriceComparison();
+            this._cbRoutingService.goToCbPriceComparison(this.contract.id);
         }
     }
 }

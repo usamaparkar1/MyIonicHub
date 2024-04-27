@@ -47,13 +47,12 @@
 
 <hub-form-footer>
     <ion-button
-        class="form-submission-bottom-button"
         form-submission-bottom-button
         [disabled]="isLogginIn || loginForm.invalid"
         (click)="validateLoginForm()"
         expand="full"
     >
-        <ion-spinner *ngIf="isLogginIn" name="lines-sharp-small"></ion-spinner>
-        <ion-label *ngIf="!isLogginIn">{{ 'LOGIN.LOGIN' | translate }}</ion-label>
+        <ion-spinner [hidden]="!isLogginIn" name="lines-sharp-small"></ion-spinner>
+        <ion-label [hidden]="isLogginIn">{{ 'LOGIN.LOGIN' | translate }}</ion-label>
     </ion-button>
 </hub-form-footer>
