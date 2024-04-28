@@ -1,23 +1,21 @@
-name: Merge to Master
+name: Push to main
 
 on:
-    push:
-      branches:
-        - develop
+  push:
+    branches:
+      - develop
 
-permissions:
-    actions: write # Necessary to cancel workflow executions
-    checks: write #  Necessary to write reports
-    pull-requests: write # Necessary to create PRs
-  
 jobs:
-    pull-request:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - name: pull-request
-          run: |
-            gh_pr_up() { gh pr create $* || gh pr edit $* }
-            gh_pr_up --title "My pull request" --body "Description"
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  push_to_main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2   # Checkout develop branch again (avoid credential issues)
+        with:
+          ref: ${{ github.sha }}  # Use the pushed commit SHA
+      - run: |
+          git config --global user.email "your_github_email@example.com"
+          git config --global user.name "GitHub Actions"
+          git push origin ${{ github.sha }} main  # Push to main with PAT
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Personal Access Token with push access
