@@ -6,9 +6,10 @@
     "priceComparisonSvgUrl": "assets/icon/contract-booker/price-comparison.svg",
     "priceComparisonImgAlt": "price-comparison",
     "shoppingCartSvgUrl": "assets/icon/contract-booker/shopping-cart.svg",
-    "consultationStartImage": "assets/img/contract-booker/consultation-start.svg",
+    "consultationStartSvg": "assets/icon/contract-booker/consultation-start.svg",
     "defaultProductImg": "assets/img/contract-booker/cb-default-product-image.png",
     "defaultProductBannerImg": "assets/img/contract-booker/cb-default-product-banner.jpg",
+    "myContractsSvg": "assets/icon/contract-booker/my-contracts.svg",
     "sectors": [
         {
             "sectorId": "1",

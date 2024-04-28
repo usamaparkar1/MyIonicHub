@@ -25,12 +25,12 @@ export class CbHomePage implements OnInit, OnDestroy {
         {
             id: 1,
             name: this._translateService.instant('CB.HOME.START_CONSULTATION'),
-            image: this.contractBookerData.consultationStartImage
+            image: this.contractBookerData.consultationStartSvg
         },
         {
             id: 2,
             name: this._translateService.instant('CB.HOME.MY_CONTRACTS'),
-            image: this.contractBookerData.consultationStartImage
+            image: this.contractBookerData.myContractsSvg
         }
     ];
 
