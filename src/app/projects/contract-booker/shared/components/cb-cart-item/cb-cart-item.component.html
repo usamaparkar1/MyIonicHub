@@ -12,12 +12,16 @@
             <ion-card-header>
                 <ion-card-title>{{contract.selectedSectorId}} - {{contract.selectedProductId}}</ion-card-title>
                 <ion-card-subtitle>
-                    <p> {{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_ETHT' | translate}}: {{contract.consumptionPerYearEtHt}}</p>
-                    <p> {{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_NT' | translate}}: {{contract.consumptionPerYearNt}}</p>
+                    <p>{{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_ETHT' | translate}}: {{contract.consumptionPerYearEtHt}}</p>
+                    <p>{{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_NT' | translate}}: {{contract.consumptionPerYearNt}}</p>
                 </ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
                 <p>{{contract.state}} - {{contract.city}} - {{contract.postCode}}</p>
+                <div class="cart-item-signature-container">
+                    <ion-label>{{'CB.CART_ITEM.CONTRACT_SIGNATURE' | translate}}: </ion-label>
+                    <img *ngIf="contract.isSigned && contract?.contractSignature" src="{{contract.contractSignature}}" />
+                </div>
             </ion-card-content>
         </ion-col>
     </ion-row></ion-grid>

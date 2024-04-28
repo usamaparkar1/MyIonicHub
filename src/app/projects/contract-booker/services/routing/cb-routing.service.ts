@@ -38,6 +38,9 @@ export class CbRoutingService {
             case CbRoutingHelpers.cbAddContract:
                 this.goToCbAddContract();
                 break;
+            case CbRoutingHelpers.CbSignContract:
+                this.goToCbSignContract(contract.id);
+                break;
 
             default:
                 this.handleRouteNotFound();
@@ -75,6 +78,10 @@ export class CbRoutingService {
 
     async goToCbAddContract(navigationExtras: NavigationExtras = {}) {
         await this.goToCbPage(CbRoutingHelpers.cbAddContract, null, navigationExtras);
+    }
+
+    async goToCbSignContract(contractId: string, navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.CbSignContract, contractId, navigationExtras);
     }
 
     async handleRouteNotFound() { 

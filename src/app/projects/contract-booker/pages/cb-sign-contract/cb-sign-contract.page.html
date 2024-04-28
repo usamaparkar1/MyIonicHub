@@ -1,0 +1,38 @@
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{'CB.SIGN_CONTRACT.SIGN_CONTRACT' | translate}}</ion-title>
+</cb-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title>{{'CB.SIGN_CONTRACT.SIGN_CONTRACT' | translate}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <div class="signature-block-container">
+        <div id="signature-pad">
+            <canvas #signaturePadCanvas class="signature-canvas"></canvas>
+        </div>
+        <p class="ion-text-center" color="warning">{{'CB.SIGN_CONTRACT.SIGN_IN_THE_BOX' | translate}}</p>
+    </div>
+
+</ion-content>
+
+<ion-footer>
+    <cb-form-footer-2>
+        <ion-button
+            cb-bottom-button-1
+            color="danger"
+            (click)="clearSignature()"
+        >
+            <ion-label color="light">{{'CB.SIGN_CONTRACT.CLEAR_SIGNATURE' | translate}}</ion-label>
+        </ion-button>
+        <ion-button
+            cb-bottom-button-2
+            color="warning"
+            (click)="saveSignature()"
+        >
+            <ion-label color="light">{{'CB.SIGN_CONTRACT.SIGN_CONTRACT' | translate}}</ion-label>
+        </ion-button>
+    </cb-form-footer-2>
+</ion-footer>

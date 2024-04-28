@@ -28,11 +28,24 @@
 </ion-content>
 
 <ion-footer>
-    <cb-cart-footer>
+    <!-- Look into imroving this code. -->
+    <cb-form-footer [hidden]="!allContractsAreSigned()">
+        <!-- Submit Contracts -->
+        <ion-button
+            cb-bottom-button
+            expand="full"
+            color="warning"
+            (click)="submitContracts()"
+        >
+            <ion-label color="light">{{'CB.SHOPPING_CART.SUBMIT_CONTRACT' | translate}}</ion-label>
+        </ion-button>
+    </cb-form-footer>
+    <cb-form-footer-2 [hidden]="allContractsAreSigned()">
         <!-- Add Contracts -->
         <ion-button
-            cart-bottom-button-1
+            cb-bottom-button-1
             color="secondary"
+            [style]="isSignatureButtonHidden() ? 'width: 100%;' : 'width: 50%'"
             (click)="addContract()"
             [hidden]="!canAddMoreContracts()"
         >
@@ -40,12 +53,13 @@
         </ion-button>
         <!-- Sign Contracts -->
         <ion-button
-            cart-bottom-button-2
+            cb-bottom-button-2
             color="warning"
+            [style]="canAddMoreContracts() ? 'width: 50%;' : 'width: 100%'"
             (click)="signContract()"
             [hidden]="isSignatureButtonHidden()"
         >
             <ion-label color="light">{{'CB.SHOPPING_CART.SIGN_CONTRACT' | translate}}</ion-label>
         </ion-button>
-    </cb-cart-footer>
+    </cb-form-footer-2>
 </ion-footer>

@@ -13,3 +13,17 @@
     justify-content: center;
     align-items: center;
 }
+
+.cart-item-signature-container {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+
+    > img {
+        margin-left: 1rem;
+        max-height: 10%;
+        max-width: 10%;
+        height: 10%;
+        width: 10%;
+    }
+}

@@ -85,7 +85,7 @@ export const locale = {
             PRODUCT_DETAILS: {
                 PRODUCT_DETAILS: 'Produktdetails',
                 ROUTE_DATA_MISSING_TITLE: 'Vertrag nicht gefunden',
-                ROUTE_DATA_MISSING_DESCRIPTIO: 'Wir konnten die {{missingData}}daten für Ihren Vertrag nicht finden. Bitte gehen Sie zurück und versuchen Sie es erneut. Oder erstellen Sie einen neuen Vertrag',
+                ROUTE_DATA_MISSING_DESCRIPTION: 'Wir konnten die {{missingData}}daten für Ihren Vertrag nicht finden. Bitte gehen Sie zurück und versuchen Sie es erneut. Oder erstellen Sie einen neuen Vertrag',
                 CONFIRM_PRODUCT: 'Ausgewähltes Produkt',
                 CONSUMPTION_PER_YEAR_ETHT: 'Verbrauch pro Jahr EtHt',
                 CONSUMPTION_PER_YEAR_NT: 'Verbrauch pro Jahr Nt',
@@ -99,6 +99,7 @@ export const locale = {
                 SIGN_CONTRACT: 'Unterschreibe den Vertrag',
                 ADD_CONTRACT: 'Vertrag hinzufügen',
                 CART_IS_EMPTY: 'Ihr Warenkorb ist leer',
+                SUBMIT_CONTRACT: 'Vertrag einreichen',
             },
             ADD_CONTRACT: {
                 ADD_CONTRACT: 'Vertrag hinzufügen',
@@ -110,13 +111,24 @@ export const locale = {
             },
             CART_ITEM: {
                 CONSUMPTION_PER_YEAR_ETHT: 'Verbrauch pro Jahr ET HT',
-                CONSUMPTION_PER_YEAR_NT: 'Verbrauch pro Jahr NT'
+                CONSUMPTION_PER_YEAR_NT: 'Verbrauch pro Jahr NT',
+                CONTRACT_SIGNATURE: 'Vertragsunterzeichnung',
             },
             CONTRACT: {
                 CANT_REMOVE_CONTRACT: 'Der Vertrag konnte nicht entfernt werden',
                 CONTRACT_REMOVED: 'Der Vertrag wurde aus dem Warenkorb entfernt',
                 CONTRACT_NOT_FOUND: 'Der zu entfernende Vertrag konnte nicht gefunden werden',
                 ERROR_MESSAGE: 'Index für Vertrags-ID: {{contractId}} und Daten {{error}} konnte nicht gefunden werden',
+            },
+            SIGN_CONTRACT: {
+                SIGN_CONTRACT: 'Unterschreibe den Vertrag',
+                CLEAR_SIGNATURE: 'Klare Signatur',
+                SIGN_IN_THE_BOX: 'Melden Sie sich im Feld an',
+                VALID_SIGNATURE: 'Gültige Unterschrift',
+                INVALID_SIGNATURE: 'Ungültige Signatur',
+                INVALID_SIGNATURE_IMAGE:'Ungültiges Signaturbild. Fehler beim Konvertieren der Signatur',
+                SIGNATURE_LENGTH_SHORT: 'Die Signaturlänge ist zu kurz',
+                SIGNATURE_LENGTH_LONG: 'Die Signaturlänge ist zu lang',
             },
         },
         MC: {

@@ -86,7 +86,7 @@ export const locale = {
             PRODUCT_DETAILS: {
                 PRODUCT_DETAILS: 'Product Details',
                 ROUTE_DATA_MISSING_TITLE: 'Contract not found',
-                ROUTE_DATA_MISSING_DESCRIPTIO: 'We were not able to find the {{missingData}} data for your contract. Please go back and try again. Or create a new contract',
+                ROUTE_DATA_MISSING_DESCRIPTION: 'We were not able to find the {{missingData}} data for your contract. Please go back and try again. Or create a new contract',
                 CONFIRM_PRODUCT: 'Confirm Product',
                 CONSUMPTION_PER_YEAR_ETHT: 'Consumption Per Year EtHt',
                 CONSUMPTION_PER_YEAR_NT: 'Consumption Per Year Nt',
@@ -100,6 +100,7 @@ export const locale = {
                 SIGN_CONTRACT: 'Sign Contract',
                 ADD_CONTRACT: 'Add Contract',
                 CART_IS_EMPTY: 'Your cart is empty',
+                SUBMIT_CONTRACT: 'Submit Contract',
             },
             ADD_CONTRACT: {
                 ADD_CONTRACT: 'Add Contract',
@@ -111,13 +112,24 @@ export const locale = {
             },
             CART_ITEM: {
                 CONSUMPTION_PER_YEAR_ETHT: 'Consumption Per Year ET HT',
-                CONSUMPTION_PER_YEAR_NT: 'Consumption Per Year NT'
+                CONSUMPTION_PER_YEAR_NT: 'Consumption Per Year NT',
+                CONTRACT_SIGNATURE: 'Contract Signature',
             },
             CONTRACT: {
                 CANT_REMOVE_CONTRACT: 'Could not remove Contract',
                 CONTRACT_REMOVED: 'Contract has been removed from Cart',
                 CONTRACT_NOT_FOUND: 'Could not find the Contract to be removed',
                 ERROR_MESSAGE: 'Could not find index for Contract Id: {{contractId}} and Data {{error}}',
+            },
+            SIGN_CONTRACT: {
+                SIGN_CONTRACT: 'Sign Contract',
+                CLEAR_SIGNATURE: 'Clear Signature',
+                SIGN_IN_THE_BOX: 'Sign in the box',
+                VALID_SIGNATURE: 'Valid Signature',
+                INVALID_SIGNATURE: 'Invalid Signature',
+                INVALID_SIGNATURE_IMAGE:'Invalid Signature Image. Error while converting signature',
+                SIGNATURE_LENGTH_SHORT: 'Signature length is too short',
+                SIGNATURE_LENGTH_LONG: 'Signature length is too long',
             },
         },
         MC: {

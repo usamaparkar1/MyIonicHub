@@ -63,6 +63,13 @@ const contractBookerRoutes: Route = {
             resolve: {
                 contracts: CbCartResolverService
             }
+        },
+        {
+            path: 'cb-sign-contract/:id',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-sign-contract/cb-sign-contract.module').then( m => m.CbSignContractPageModule),
+            resolve: {
+                contract: ContractResolverService
+            }
         }
     ]
 }

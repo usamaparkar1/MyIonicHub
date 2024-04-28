@@ -7,11 +7,12 @@ export class Contract implements IContract {
     postCode: string
     isSigned: boolean;
     currentRoute: ConsultationSteps;
-    selectedSectorId?: string;
-    selectedProductId?: string;
+    selectedSectorId: string | null;
+    selectedProductId: string | null;
     consumptionPerYearEtHt: number;
     consumptionPerYearNt: number;
     pricePerConsumption: number;
+    contractSignature: string | null;
 
     constructor(contract: Contract) {
         this.id = contract.id;
@@ -20,9 +21,12 @@ export class Contract implements IContract {
         this.postCode = contract.postCode;
         this.isSigned = contract.isSigned;
         this.currentRoute = contract.currentRoute;
+        this.selectedSectorId = contract.selectedSectorId;
+        this.selectedProductId = contract.selectedProductId;
         this.consumptionPerYearEtHt = contract.consumptionPerYearEtHt;
         this.consumptionPerYearNt = contract.consumptionPerYearNt;
         this.pricePerConsumption = contract.pricePerConsumption;
+        this.contractSignature = contract.contractSignature;
     }
 }
 
@@ -33,9 +37,10 @@ export interface IContract {
     postCode: string;
     isSigned: boolean;
     currentRoute: ConsultationSteps;
-    selectedSectorId?: string;
-    selectedProductId?: string;
+    selectedSectorId: string | null;
+    selectedProductId: string | null;
     consumptionPerYearEtHt: number;
     consumptionPerYearNt: number;
     pricePerConsumption: number;
+    contractSignature: string | null;
 }

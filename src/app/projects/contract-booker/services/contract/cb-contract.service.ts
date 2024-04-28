@@ -44,15 +44,14 @@ export class CbContractService {
         return this.allContracts;
     }
 
+    /** @description Create a copy of the contracts using spread syntax for immutability */
     get allContracts(): Contract[] {
-        return this.contracts.getValue();
+        return [...this.contracts.getValue()];
     }
 
     storeCurrentRoute(contract: Contract, route: ConsultationSteps) {
         contract.currentRoute = route;
-        const newContractsArray = this.updateContractsWithContract(contract);
-        this.contracts.next(newContractsArray);
-        this.storeContractsInStorage(this.allContracts);
+        this.updateContractInConsultation(contract);
     }
 
     async createNewContract(newCustomerAddressData: CustomerAddressData) {
@@ -65,15 +64,15 @@ export class CbContractService {
             postCode: newCustomerAddressData.postCode,
             isSigned: false,
             currentRoute: ConsultationSteps.productSelection,
+            selectedSectorId: null,
+            selectedProductId: null,
             consumptionPerYearEtHt: 0,
             consumptionPerYearNt: 0,
             pricePerConsumption: 0,
+            contractSignature: null
         });
 
-        const currentContracts = this.allContracts;
-        currentContracts.push(newContract);
-        this.contracts.next(currentContracts);
-        await this.storeContractsInStorage(this.allContracts);
+        await this._addNewContractToStorage(newContract);
 
         return newContract;
     }
@@ -86,10 +85,7 @@ export class CbContractService {
         newContract.city = newCustomerAddressData.city;
         newContract.postCode = newCustomerAddressData.postCode;
 
-        const currentContracts = this.allContracts;
-        currentContracts.push(newContract);
-        this.contracts.next(currentContracts);
-        await this.storeContractsInStorage(this.allContracts);
+        await this._addNewContractToStorage(newContract);
 
         return newContract;
     }
@@ -110,6 +106,10 @@ export class CbContractService {
         }
         
         return newContractId;
+    }
+
+    private async _addNewContractToStorage(newContract: Contract) {
+        await this.contracts.next([...this.contracts.getValue(), newContract]);
     }
 
     public async removeContractOnCartDelete(contract: Contract): Promise<CbReturnStatus> {
@@ -141,7 +141,7 @@ export class CbContractService {
         return cbReturnStatus;
     }
 
-    async storeContractsInStorage(contracts: Contract[]) {
+    private async storeContractsInStorage(contracts: Contract[]) {
         await this._storageService.set(cbStorageHelpers.allContracts, contracts);
     }
 
@@ -167,11 +167,8 @@ export class CbContractService {
             contract.currentRoute = ConsultationSteps.productDetails;
         }
 
-        const newContractsArray = this.updateContractsWithContract(contract);
-        this.contracts.next(newContractsArray);
-        this.storeContractsInStorage(this.allContracts);
+        this.updateContractInConsultation(contract);
     }
-
 
     storeComparisonProductConsumption(contract: Contract, productId: string, sectorId: string, consumptionPerYearEtHt: number, consumptionPerYearNt: number) {
         if (contract?.id) {
@@ -182,15 +179,11 @@ export class CbContractService {
             contract.currentRoute = ConsultationSteps.productDetails;
         }
 
-        const newContractsArray = this.updateContractsWithContract(contract);
-        this.contracts.next(newContractsArray);
-        this.storeContractsInStorage(this.allContracts);
+        this.updateContractInConsultation(contract);
     }
 
     storeProductDetailsConsumption(contract: Contract) {
-        const newContractsArray = this.updateContractsWithContract(contract);
-        this.contracts.next(newContractsArray);
-        this.storeContractsInStorage(this.allContracts);
+        this.updateContractInConsultation(contract);
     }
 
     updateContractsWithContract(newContract: Contract): Contract[] {
@@ -207,7 +200,20 @@ export class CbContractService {
     }
 
     getFirstUnSignedContract(): Contract | undefined {
-        const contract = this.allContracts.find((ac) => ac.isSigned);
+        const contract = this.allContracts.find((ac) => ac.isSigned === false);
         return contract ?? undefined;
+    }
+
+    storeContractSignature(contract: Contract, signature: string) {
+        contract.isSigned = true;
+        contract.contractSignature = signature;
+        contract.currentRoute = ConsultationSteps.shoppingCart;
+        this.updateContractInConsultation(contract);
+    }
+
+    updateContractInConsultation(contract: Contract) {
+        const newContractsArray = this.updateContractsWithContract(contract);
+        this.contracts.next(newContractsArray);
+        this.storeContractsInStorage(this.allContracts);
     }
 }
