@@ -11,13 +11,13 @@
 
     <ion-grid>
         <ion-row><ion-col>
-            <ion-title class="add-contract-title">{{'CB.ADD_CONTRACT.TITLE'}}</ion-title>
+            <ion-title class="add-contract-title">{{'CB.ADD_CONTRACT.TITLE' | translate}}</ion-title>
         </ion-col></ion-row>
         <ion-row><ion-col class="radios-container">
             <ion-radio-group [(ngModel)]="addContractType">
                 <!-- Radio 2: Create contract from existing ones -->
                 <ion-radio [value]="addContractTypeEnum.createFromExisting" labelPlacement="end">
-                    <ion-label>{{'CB.ADD_CONTRACT.CREATE_FROM_CONTRACT'}}</ion-label>
+                    <ion-label>{{'CB.ADD_CONTRACT.CREATE_FROM_CONTRACT' | translate}}</ion-label>
                 </ion-radio><br />
 
                 <!-- List of existing contracts -->
@@ -33,7 +33,7 @@
 
                 <!-- Radio 2: Create fresh contract -->
                 <ion-radio [value]="addContractTypeEnum.createNewContract" labelPlacement="end">
-                    <ion-label>{{'CB.ADD_CONTRACT.CREATE_NEW_CONTRACT'}}</ion-label>
+                    <ion-label>{{'CB.ADD_CONTRACT.CREATE_NEW_CONTRACT' | translate}}</ion-label>
                 </ion-radio>
             </ion-radio-group>
         </ion-col></ion-row>
@@ -43,7 +43,7 @@
 <ion-footer>
     <cb-form-footer>
         <ion-button
-            form-submission-bottom-button
+            cb-bottom-button
             expand="full"
             (click)="addAnotherContract()"
             [disabled]="!canAddAnotherContract()"

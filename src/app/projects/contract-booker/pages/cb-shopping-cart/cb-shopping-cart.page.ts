@@ -1,5 +1,7 @@
 import { CbContractService } from '../../services/contract/cb-contract.service';
 import { CbRoutingService } from '../../services/routing/cb-routing.service';
+import { CbAlertService } from '../../services/alert/cb-alert.service';
+import { ConsultationSteps } from '../../models/cb-consultation-steps';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Contract } from '../../models/cb-contract';
 import { Subscription } from 'rxjs';
@@ -16,6 +18,7 @@ export class CbShoppingCartPage implements OnInit, OnDestroy {
     contractsSubscription!: Subscription;
 
     constructor(
+        private _cbAlertService: CbAlertService,
         private _cbRoutingService: CbRoutingService,
         private _cbContractService: CbContractService
     ) { }
@@ -38,8 +41,8 @@ export class CbShoppingCartPage implements OnInit, OnDestroy {
         return this.contracts.length === 0 || this.allContractsAreSigned();
     }
 
-    allContractsAreSigned() {
-        return this.contracts.every((c) => c.isSigned === true);
+    allContractsAreSigned(): boolean {
+        return this.contracts?.length > 0 && this.contracts.every((c) => c.isSigned === true);
     }
 
     canAddMoreContracts() {
@@ -52,5 +55,21 @@ export class CbShoppingCartPage implements OnInit, OnDestroy {
 
     /** @description Navigate to PDF Signature Page to sign the contract */
     signContract() {
+        const contract = this._cbContractService.getFirstUnSignedContract();
+
+        if (contract) {
+            if (contract?.id) {
+                this._cbContractService.storeCurrentRoute(contract, ConsultationSteps.signContract);
+                this._cbRoutingService.goToCbSignContract(contract?.id, {});
+            } else {
+                this._cbAlertService.showAlertForContractDataNotFound('ContractId');
+            }
+        } else {
+            this._cbAlertService.showAlertForContractDataNotFound('Contract');
+        }
+    }
+
+    submitContracts() {
+
     }
 }

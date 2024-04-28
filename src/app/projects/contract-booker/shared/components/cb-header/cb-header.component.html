@@ -8,7 +8,7 @@
                 [src]="contractBookerData.shoppingCartSvgUrl"
                 (click)="openShoppingCart()"
             ></ion-icon>
-            <ion-badge class="cart-item-count">{{contracts.length}}</ion-badge>
+            <ion-badge (click)="openShoppingCart()" class="cart-item-count">{{contracts.length}}</ion-badge>
         </div>
         <app-profile-header cb-header-4 slot="end"></app-profile-header>
     </ion-toolbar>

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { CbCartFooterComponent } from './cb-cart-footer.component';
+import { CbFormFooter2Component } from './cb-form-footer-2.component';
 
-describe('CbCartFooterComponent', () => {
-  let component: CbCartFooterComponent;
-  let fixture: ComponentFixture<CbCartFooterComponent>;
+describe('CbFormFooter2Component', () => {
+  let component: CbFormFooter2Component;
+  let fixture: ComponentFixture<CbFormFooter2Component>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CbCartFooterComponent ],
+      declarations: [ CbFormFooter2Component ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CbCartFooterComponent);
+    fixture = TestBed.createComponent(CbFormFooter2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

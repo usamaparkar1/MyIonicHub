@@ -47,10 +47,10 @@
 <ion-footer>
     <cb-form-footer>
         <ion-button
+            cb-bottom-button
             expand="full"
-            [disabled]="isConsumptionInvalid()"
-            form-submission-bottom-button
             (click)="confirmConsumption()"
+            [disabled]="isConsumptionInvalid()"
         >
             <ion-label color="light">{{'CB.PRODUCT_DETAILS.CONFIRM_PRODUCT' | translate}}</ion-label>
         </ion-button>

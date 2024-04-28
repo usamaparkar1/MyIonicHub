@@ -4,4 +4,5 @@ export enum ConsultationSteps {
     productDetails = 'cb-product-details',
     shoppingCart = 'cb-shopping-cart',
     addContract = 'cb-add-contract',
+    signContract = 'cb-sign-contract',
 }

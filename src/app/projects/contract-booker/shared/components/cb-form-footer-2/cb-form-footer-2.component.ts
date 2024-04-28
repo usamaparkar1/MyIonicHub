@@ -4,13 +4,13 @@ import { IonicModule } from '@ionic/angular';
 
 @Component({
     standalone: true,
-    selector: 'cb-cart-footer',
+    selector: 'cb-form-footer-2',
     imports: [CommonModule, IonicModule],
-    templateUrl: './cb-cart-footer.component.html',
-    styleUrls: ['./cb-cart-footer.component.scss'],
+    templateUrl: './cb-form-footer-2.component.html',
+    styleUrls: ['./cb-form-footer-2.component.scss'],
 })
 
-export class CbCartFooterComponent  implements OnInit {
+export class CbFormFooter2Component  implements OnInit {
 
     constructor() { }
 

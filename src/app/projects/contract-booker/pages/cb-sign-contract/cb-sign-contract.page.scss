@@ -1,0 +1,21 @@
+canvas {
+    box-shadow: 0 0 8px var(--ion-color-warning);
+}
+
+.signature-block-container {
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+
+    > div {
+        height: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.signature-canvas {
+    touch-action: none;
+}

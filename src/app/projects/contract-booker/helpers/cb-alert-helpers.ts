@@ -6,4 +6,5 @@ export const CbAlertHelpers = {
     invalidNtConsumption: "invalidNtConsumption",
     newContractIdNotFound: "newContractIdNotFound",
     invalidSelectionForNewContract: "invalidSelectionForNewContract",
+    invalidSignature: "invalidSignature",
 }
