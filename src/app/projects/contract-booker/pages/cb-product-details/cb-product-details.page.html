@@ -3,11 +3,9 @@
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title>{{'CB.PRODUCT_DETAILS.PRODUCT_DETAILS' | translate}}</ion-title>
-        </ion-toolbar>
-    </ion-header>
+    <cb-header [collapseValue]="'condense'">
+        <ion-title cb-header-1>{{'CB.PRODUCT_DETAILS.PRODUCT_DETAILS' | translate}}</ion-title>
+    </cb-header>
 
     <ion-img *ngIf="productBgImage" [src]="productBgImage" class="product-image"></ion-img>
 
@@ -38,7 +36,7 @@
                     [sector]="sector"
                 ></cb-consumption-input>
 
-                <ion-label>{{contract.pricePerConsumption || ''}}</ion-label>
+                <p class="ion-text-center consumption-text">{{contract.pricePerConsumption || ''}}</p>
             </ion-col>
         </ion-row>
     </ion-grid>

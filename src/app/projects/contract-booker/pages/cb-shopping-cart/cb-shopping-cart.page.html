@@ -3,11 +3,9 @@
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title>{{'CB.SHOPPING_CART.SHOPPING_CART' | translate}}</ion-title>
-        </ion-toolbar>
-    </ion-header>
+    <cb-header [collapseValue]="'condense'">
+        <ion-title cb-header-1>{{'CB.SHOPPING_CART.SHOPPING_CART' | translate}}</ion-title>
+    </cb-header>
 
     <ion-list *ngIf="contracts && contracts.length > 0; else cartIsEmpty" lines="none">
         <ng-container *ngFor="let contract of contracts; let cIndex = index">

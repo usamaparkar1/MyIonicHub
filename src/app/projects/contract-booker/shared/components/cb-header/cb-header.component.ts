@@ -18,7 +18,8 @@ import { Subscription } from 'rxjs';
 
 export class CbHeaderComponent  implements OnInit, OnDestroy {
 
-    @Input() isTranslucent: boolean = true;
+    @Input() isTranslucent: boolean = false;
+    @Input() collapseValue: string | undefined = undefined;
 
     contracts: Contract[] = [];
     contractsSubscription!: Subscription;

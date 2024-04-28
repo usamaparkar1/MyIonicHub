@@ -3,11 +3,9 @@
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title>{{'CB.SIGN_CONTRACT.SIGN_CONTRACT' | translate}}</ion-title>
-        </ion-toolbar>
-    </ion-header>
+    <cb-header [collapseValue]="'condense'">
+        <ion-title cb-header-1>{{'CB.SIGN_CONTRACT.SIGN_CONTRACT' | translate}}</ion-title>
+    </cb-header>
 
     <div class="signature-block-container">
         <div id="signature-pad">

@@ -1,14 +1,10 @@
 .cb-home-module-row-container {
-    height: 100%;
-}
-
-.cb-home-module-col-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    > ion-col {
+        display: flex;
+        flex-direction: column;    
+    }
 }
 
 .home-module-images {
-    height: 100%;
+    height: 50%;
 }

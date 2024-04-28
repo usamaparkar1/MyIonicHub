@@ -65,6 +65,7 @@ export const locale = {
             HOME: {
                 HOME: 'Home',
                 START_CONSULTATION: 'Start a consultation',
+                MY_CONTRACTS: 'My Contracts',
             },
             CUSTOMER_ADDRESS: {
                 CUSTOMER_ADDRESS: 'Customer Address',
@@ -131,6 +132,9 @@ export const locale = {
                 SIGNATURE_LENGTH_SHORT: 'Signature length is too short',
                 SIGNATURE_LENGTH_LONG: 'Signature length is too long',
             },
+            MY_CONTRACTS: {
+                MY_CONTRACTS: 'My Contracts',
+            }
         },
         MC: {
             HOME: {

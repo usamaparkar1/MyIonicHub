@@ -84,6 +84,10 @@ export class CbRoutingService {
         await this.goToCbPage(CbRoutingHelpers.CbSignContract, contractId, navigationExtras);
     }
 
+    async goToMyContracts(navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.CbMyContracts, null, navigationExtras);
+    }
+
     async handleRouteNotFound() { 
         'Route not found. Go To Shopping Cart'
     }

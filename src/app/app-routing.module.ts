@@ -70,6 +70,10 @@ const contractBookerRoutes: Route = {
             resolve: {
                 contract: ContractResolverService
             }
+        },
+        {
+            path: 'cb-my-contracts',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-my-contracts/cb-my-contracts.module').then( m => m.CbMyContractsPageModule)
         }
     ]
 }
@@ -124,7 +128,7 @@ const routes: Routes = [
     {
         path: '**',
         redirectTo: '/route-not-found'
-    }
+    },
 ]
 
 @NgModule({
