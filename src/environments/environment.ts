@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  server: 'https://random-data-api.com/api/v2/'
+  server: 'https://random-data-api.com/api/v2/',
 };
 
 /*
