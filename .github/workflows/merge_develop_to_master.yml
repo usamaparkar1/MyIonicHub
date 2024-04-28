@@ -14,8 +14,8 @@ jobs:
         with:
           ref: ${{ github.sha }}  # Use the pushed commit SHA
       - run: |
-          git config --global user.email "your_github_email@example.com"
-          git config --global user.name "GitHub Actions"
+          git config --global user.email "ozyparkar@gmail.com"
+          git config --global user.name "UsamaParkar"
           git push origin ${{ github.sha }} main  # Push to main with PAT
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Personal Access Token with push access
