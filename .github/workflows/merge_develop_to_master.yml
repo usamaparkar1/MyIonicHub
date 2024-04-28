@@ -18,4 +18,4 @@ jobs:
           git config --global user.name "UsamaParkar"
           git push origin ${{ github.sha }} main  # Push to main with PAT
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Personal Access Token with push access
+  GITHUB_TOKEN: ${{ secrets.MERGE_WORKFLOW_ACCESS_TOKEN }}  # Personal Access Token with push access
