@@ -136,7 +136,7 @@ export const locale = {
             },
             MY_CONTRACTS: {
                 MY_CONTRACTS: 'My Contracts',
-                CONTRACT_ID: 'Contract ID',
+                CONTRACT_NUMBER: 'Contract No',
                 CONSUMPTION_PER_YEAR: 'Consumption Per Year',
                 PRICE_PER_CONSUMPTION: 'Price Per Consumption',
                 ADDRESS: 'Address',

@@ -17,7 +17,7 @@ export class CbMyContractsPage implements OnInit {
     private _myContractsSubscription!: Subscription;
 
     myContracts: Contract[] = [];
-    labelContractId: string = this._translateService.instant('CB.MY_CONTRACTS.CONTRACT_ID');
+    labelContractNo: string = this._translateService.instant('CB.MY_CONTRACTS.CONTRACT_NUMBER');
     labelConsumptionPerYear: string = this._translateService.instant('CB.MY_CONTRACTS.CONSUMPTION_PER_YEAR');
     labelPricePerConsumption: string = this._translateService.instant('CB.MY_CONTRACTS.PRICE_PER_CONSUMPTION');
     labelAddress: string = this._translateService.instant('CB.MY_CONTRACTS.ADDRESS');
