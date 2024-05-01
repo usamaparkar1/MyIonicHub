@@ -102,6 +102,8 @@ export const locale = {
                 ADD_CONTRACT: 'Add Contract',
                 CART_IS_EMPTY: 'Your cart is empty',
                 SUBMIT_CONTRACT: 'Submit Contract',
+                CONTRACT_SUBMISSION_FAILURE: 'Contract Submission Failure',
+                CONTRACT_SUBMISSION_FAILURE_NUMBER: 'Could not submit contract number {{contractIndex}}'
             },
             ADD_CONTRACT: {
                 ADD_CONTRACT: 'Add Contract',
@@ -134,7 +136,15 @@ export const locale = {
             },
             MY_CONTRACTS: {
                 MY_CONTRACTS: 'My Contracts',
-            }
+                CONTRACT_ID: 'Contract ID',
+                CONSUMPTION_PER_YEAR: 'Consumption Per Year',
+                PRICE_PER_CONSUMPTION: 'Price Per Consumption',
+                ADDRESS: 'Address',
+                CANT_REMOVE_SAVED_CONTRACT: 'Could not remove saved Contract',
+                CONTRACT_SAVED_REMOVED: 'Saved Contract has been removed from Cart',
+                CONTRACT_SAVED_NOT_FOUND: 'Could not find the saved Contract to be removed',
+                ERROR_LOADING_SAVED_CONTRACTS: 'Error while loading saved contracts from storage',
+            },
         },
         MC: {
             HOME: {

@@ -101,6 +101,8 @@ export const locale = {
                 ADD_CONTRACT: 'Vertrag hinzufügen',
                 CART_IS_EMPTY: 'Ihr Warenkorb ist leer',
                 SUBMIT_CONTRACT: 'Vertrag einreichen',
+                CONTRACT_SUBMISSION_FAILURE: 'Fehler bei der Vertragseinreichung',
+                CONTRACT_SUBMISSION_FAILURE_NUMBER: 'Vertragsnummer {{contractIndex}} konnte nicht übermittelt werden'
             },
             ADD_CONTRACT: {
                 ADD_CONTRACT: 'Vertrag hinzufügen',
@@ -133,7 +135,15 @@ export const locale = {
             },
             MY_CONTRACTS: {
                 MY_CONTRACTS: 'Meine Verträge',
-            }
+                CONTRACT_ID: 'Vertrags-ID',
+                CONSUMPTION_PER_YEAR: 'Verbrauch pro Jahr',
+                PRICE_PER_CONSUMPTION: 'Preis pro Verbrauch',
+                ADDRESS: 'Adresse',
+                CANT_REMOVE_SAVED_CONTRACT: 'Der gespeicherte Vertrag konnte nicht entfernt werden',
+                CONTRACT_SAVED_REMOVED: 'Der gespeicherte Vertrag wurde aus dem Warenkorb entfernt',
+                CONTRACT_SAVED_NOT_FOUND: 'Der gespeicherte zu entfernende Vertrag konnte nicht gefunden werden',
+                ERROR_LOADING_SAVED_CONTRACTS: 'Fehler beim Laden gespeicherter Verträge aus dem Speicher',
+            },
         },
         MC: {
             HOME: {

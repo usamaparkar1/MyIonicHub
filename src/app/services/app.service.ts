@@ -1,3 +1,4 @@
+import { CbDbMyContractsService } from '../projects/contract-booker/services/my-db-contracts/cb-db-my-contracts.service';
 import { StorageService } from './storage/storage.service';
 import { SqliteService } from './sqlite/sqlite.service';
 import { alertHelpers } from '../helpers/alert-helpers';
@@ -14,8 +15,9 @@ import { Injectable } from '@angular/core';
 
 export class AppService {
 
-    isAppInit: boolean = false;
     private _currentPlatform: string = Capacitor.getPlatform();
+
+    isAppInit: boolean = false;
 
     constructor(
         private _userService: UserService,
@@ -24,6 +26,7 @@ export class AppService {
         private _sqliteService: SqliteService,
         private _storageService: StorageService,
         private _networkService: NetworkService,
+        private _cbDbMyContractsService: CbDbMyContractsService,
     ) {}
 
     async initializeApp() {
@@ -34,6 +37,7 @@ export class AppService {
             await this._setupWebStore();
             await this._createStorageSchema();
             await this._createUserSchema();
+            await this._createMyContractsSchema();
             
             this.isAppInit = true;
         });
@@ -81,6 +85,19 @@ export class AppService {
             await this._alertService.showAlert(
                 alertHelpers.sqliteDatabaseNotSetup,
                 'AppService cannot initializeUserDatabase',
+                `${error}`
+            );
+        }
+    }
+
+    private async _createMyContractsSchema() {
+        try {
+            await this._cbDbMyContractsService.initializeMyContractsDatabase();
+            await this._signupService.setUserDbConnection(this._userService.getUserDbConnection);
+        } catch (error) {
+            await this._alertService.showAlert(
+                alertHelpers.myContractsDatabaseNotSetup,
+                'AppService cannot initializeMyContractsDatabase',
                 `${error}`
             );
         }

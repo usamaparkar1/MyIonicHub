@@ -7,4 +7,6 @@ export const CbAlertHelpers = {
     newContractIdNotFound: "newContractIdNotFound",
     invalidSelectionForNewContract: "invalidSelectionForNewContract",
     invalidSignature: "invalidSignature",
+    contractNotSubmitted: "contractNotSubmitted",
+    myContractInfoAlert: "myContractInfoAlert"
 }

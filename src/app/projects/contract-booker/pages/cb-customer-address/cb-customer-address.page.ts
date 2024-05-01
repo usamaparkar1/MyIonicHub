@@ -132,7 +132,7 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
                 ? await this._cbContractService.createNewContract(newCustomerAddressData)
                 : await this._cbContractService.createContractFromExistingContract(this.contract, newCustomerAddressData);
             this._showValidatingFormLoader(false);
-            this._goToProductSelection(newContract);
+            this._openProductSelection(newContract);
         } catch (error) {
             this._showValidatingFormLoader(false);
         }
@@ -146,7 +146,7 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
         this.isValidatingCustomerAddressForm = value;
     }
 
-    private _goToProductSelection(newContract: Contract) {
+    private _openProductSelection(newContract: Contract) {
         this._cbRoutingService.goToCbProductSelection(newContract.id, {});
     }
 }

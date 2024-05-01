@@ -7,4 +7,44 @@
         <ion-title cb-header-1>{{'CB.MY_CONTRACTS.MY_CONTRACTS' | translate}}</ion-title>
     </cb-header>
 
+    <ion-list *ngIf="myContracts.length > 0">
+        <ion-item>
+            <ion-label>{{labelContractId}}</ion-label>
+            <ion-label>{{labelConsumptionPerYear}}</ion-label>
+            <ion-label>{{labelConsumptionPerYear}}</ion-label>
+            <ion-label>{{labelAddress}}</ion-label>
+        </ion-item>
+
+        <ion-item *ngFor="let myContract of myContracts">
+            <ion-label
+                (click)="openInformationPopup(myContract.id, labelContractId)"
+            >
+                {{myContract.id}}
+            </ion-label>
+            <ion-label
+                (click)="openInformationPopup(
+                    (myContract.consumptionPerYearEtHt + myContract.consumptionPerYearNt).toString(), 
+                    labelConsumptionPerYear
+                )"
+            >
+                {{myContract.consumptionPerYearEtHt + myContract.consumptionPerYearNt}}
+            </ion-label>
+            <ion-label
+                (click)="openInformationPopup(
+                    (myContract.pricePerConsumption).toString(),
+                    labelPricePerConsumption
+                )"
+            >
+                {{myContract.pricePerConsumption}}
+            </ion-label>
+            <ion-label
+                (click)="openInformationPopup(
+                    myContract.state + ' - ' + myContract.city + ' - ' + myContract.postCode,
+                    labelAddress
+                )"
+            >
+                {{myContract.state}} - {{myContract.city}} - {{myContract.postCode}}
+            </ion-label>
+        </ion-item>
+    </ion-list>
 </ion-content>

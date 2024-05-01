@@ -76,7 +76,7 @@ export class AuthenticationService {
 
     private async _clearAppRelatedData() {
         if (this._appHelperService.getCurrentAppInUseToken === CbRoutingHelpers.cbHome) {
-            await this._cbContractService.clearAllContractStorageKeys();
+            await this._cbContractService.clearCartContractStorageKeys();
         }
     }
 }

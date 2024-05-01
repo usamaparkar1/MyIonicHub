@@ -1,8 +1,11 @@
+import { CbMyContractsService } from '../../services/my-contracts/cb-my-contracts.service';
 import { CbContractService } from '../../services/contract/cb-contract.service';
 import { CbRoutingService } from '../../services/routing/cb-routing.service';
 import { CbAlertService } from '../../services/alert/cb-alert.service';
 import { ConsultationSteps } from '../../models/cb-consultation-steps';
+import { CbAlertHelpers } from '../../helpers/cb-alert-helpers';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Contract } from '../../models/cb-contract';
 import { Subscription } from 'rxjs';
 
@@ -19,8 +22,10 @@ export class CbShoppingCartPage implements OnInit, OnDestroy {
 
     constructor(
         private _cbAlertService: CbAlertService,
+        private _translateService: TranslateService,
         private _cbRoutingService: CbRoutingService,
-        private _cbContractService: CbContractService
+        private _cbContractService: CbContractService,
+        private _cbMyContractsService: CbMyContractsService,
     ) { }
 
     ngOnInit() {
@@ -69,7 +74,26 @@ export class CbShoppingCartPage implements OnInit, OnDestroy {
         }
     }
 
-    submitContracts() {
+    async submitContracts() {
+        let contractSubmissionComplete: boolean | null = true;
 
+        await this.contracts.forEach(async (contract, index) => {
+            contractSubmissionComplete = await this._cbMyContractsService.saveContract(contract);
+
+            if (!contractSubmissionComplete) {
+                this._cbAlertService.showAlert(
+                    CbAlertHelpers.contractNotSubmitted,
+                    this._translateService.instant('CB.SHOPPING_CART.CONTRACT_SUBMISSION_FAILURE'),
+                    this._translateService.instant('CB.SHOPPING_CART.CONTRACT_SUBMISSION_FAILURE_NUMBER', {
+                        contractIndex: index+1
+                    })
+                );
+            }
+        });
+
+        if (contractSubmissionComplete) {
+            this._cbContractService.clearCartContractStorageKeys();
+            this._cbRoutingService.goToMyContracts();
+        }
     }
 }

@@ -1,4 +1,5 @@
 import { McRemindersResolverService } from './projects/miscellaneous/services/resolvers/mc-reminders-resolver/mc-reminders-resolver.service';
+import { CbMyContractsResolverService } from './projects/contract-booker/services/resolvers/my-contracts/cb-my-contracts-resolver.service';
 import { ContractResolverService } from './projects/contract-booker/resolvers/contract-resolver/contract-resolver.service';
 import { CbCartResolverService } from './projects/contract-booker/resolvers/cb-cart-resolver/cb-cart-resolver.service';
 import { CbHomeResolverService } from './projects/contract-booker/resolvers/cb-home-resolver/cb-home-resolver.service';
@@ -15,7 +16,8 @@ const contractBookerRoutes: Route = {
             path: 'cb-home',
             loadChildren: () => import('src/app/projects/contract-booker/pages/cb-home/cb-home.module').then( m => m.CbHomePageModule),
             resolve: {
-                contracts: CbHomeResolverService
+                contracts: CbHomeResolverService,
+                myContracts: CbMyContractsResolverService
             }
         },
         {

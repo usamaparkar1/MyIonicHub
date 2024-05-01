@@ -22,7 +22,7 @@ export class CbContractService {
         private _translateService: TranslateService
     ) {}
 
-    async clearAllContractStorageKeys() {
+    async clearCartContractStorageKeys() {
         this._clearAllContracts();
     }
 
@@ -115,7 +115,10 @@ export class CbContractService {
     public async removeContractOnCartDelete(contract: Contract): Promise<CbReturnStatus> {
         const cbReturnStatus = new CbReturnStatus({
             success: false,
-            message: this._translateService.instant('CB.CONTRACT.CANT_REMOVE_CONTRACT')
+            message: this._translateService.instant('CB.CONTRACT.CANT_REMOVE_CONTRACT', {
+                contractId: contract.id,
+                error: JSON.stringify(contract)  
+            })
         });
 
         try {
@@ -134,7 +137,7 @@ export class CbContractService {
         } catch (error) {
             cbReturnStatus.message = this._translateService.instant('CB.CONTRACT.CANT_REMOVE_CONTRACT', {
                 contractId: contract.id,
-                error: JSON.stringify(contract)
+                error: `Error: ${JSON.stringify(contract)} ${error}`
             });
         }
 

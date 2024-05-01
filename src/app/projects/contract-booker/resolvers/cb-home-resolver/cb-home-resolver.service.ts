@@ -10,7 +10,9 @@ import { Observable, of } from 'rxjs';
 
 export class CbHomeResolverService {
 
-    constructor(private _cbContractService: CbContractService) {}
+    constructor(
+        private _cbContractService: CbContractService,
+    ) {}
 
     resolve: ResolveFn<Observable<Contract[] | undefined>> = async (
         route: ActivatedRouteSnapshot,
