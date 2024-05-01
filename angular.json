@@ -32,7 +32,8 @@
                         }
                         ],
                         "styles": ["src/theme/variables.scss", "src/global.scss"],
-                        "scripts": []
+                        "scripts": [],
+                        "progress": true
                     },
                     "configurations": {
                         "production": {
@@ -65,7 +66,6 @@
                             "namedChunks": true
                         },
                         "ci": {
-                            "progress": false
                         }
                     },
                     "defaultConfiguration": "production"
@@ -80,7 +80,6 @@
                             "browserTarget": "app:build:development"
                         },
                         "ci": {
-                            "progress": false
                         }
                     },
                     "defaultConfiguration": "development"
