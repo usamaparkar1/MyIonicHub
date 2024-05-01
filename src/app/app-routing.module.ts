@@ -1,8 +1,9 @@
 import { McRemindersResolverService } from './projects/miscellaneous/services/resolvers/mc-reminders-resolver/mc-reminders-resolver.service';
-import { CbMyContractsResolverService } from './projects/contract-booker/services/resolvers/my-contracts/cb-my-contracts-resolver.service';
+import { CbMyContractsResolverService } from './projects/contract-booker/resolvers/cb-my-contracts/cb-my-contracts-resolver.service';
 import { ContractResolverService } from './projects/contract-booker/resolvers/contract-resolver/contract-resolver.service';
 import { CbCartResolverService } from './projects/contract-booker/resolvers/cb-cart-resolver/cb-cart-resolver.service';
 import { CbHomeResolverService } from './projects/contract-booker/resolvers/cb-home-resolver/cb-home-resolver.service';
+import { CbNewsResolverService } from './projects/contract-booker/resolvers/cb-news-resolver/cb-news-resolver.service';
 import { PreloadAllModules, Route, RouterModule, Routes } from '@angular/router';
 import { DashboardGuard } from 'src/app/guards/dashboard/dashboard.guard';
 import { IntroGuard } from 'src/app/guards/intro/intro.guard';
@@ -76,7 +77,14 @@ const contractBookerRoutes: Route = {
         {
             path: 'cb-my-contracts',
             loadChildren: () => import('./projects/contract-booker/pages/cb-my-contracts/cb-my-contracts.module').then( m => m.CbMyContractsPageModule)
-        }
+        },
+        {
+            path: 'cb-news',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-news/cb-news.module').then( m => m.CbNewsPageModule),
+            resolve: {
+                news: CbNewsResolverService
+            }
+        },
     ]
 }
 

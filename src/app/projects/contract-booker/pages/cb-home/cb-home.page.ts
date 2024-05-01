@@ -5,8 +5,8 @@ import { CbContractService } from '../../services/contract/cb-contract.service';
 import { CbHomePageLink } from '../../models/cb-home-page-link';
 import coreDataJson from 'src/assets/json-data/core-data.json';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Contract } from '../../models/cb-contract';
+import { Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -21,21 +21,11 @@ export class CbHomePage implements OnInit, OnDestroy {
     coreData = coreDataJson;
     contracts: Contract[] = [];
     contractsSubscription!: Subscription;
-    cbHomeModules: CbHomePageLink[] = [
-        {
-            id: 1,
-            name: this._translateService.instant('CB.HOME.START_CONSULTATION'),
-            image: this.contractBookerData.consultationStartSvg
-        },
-        {
-            id: 2,
-            name: this._translateService.instant('CB.HOME.MY_CONTRACTS'),
-            image: this.contractBookerData.myContractsSvg
-        }
-    ];
+    cbHomeModules: CbHomePageLink[] = this.contractBookerData.cbHomeModules;
+    isScreenSmall: boolean = false;
 
     constructor(
-        private _translateService: TranslateService,
+        private _platform: Platform,
         private _cbRoutingService: CbRoutingService,
         private _cbContractService: CbContractService,
         private _actionSheetService: ActionSheetService,
@@ -46,13 +36,26 @@ export class CbHomePage implements OnInit, OnDestroy {
     }
 
     private async _initCbHomePage() {
+        this._getPlatformByWidth();
+        this._subscribeToContracts();
+    }
+
+    ngOnDestroy() {
+        this.contractsSubscription.unsubscribe();
+    }
+
+    private _getPlatformByWidth() {
+        this.isScreenSmall = this._platform.width() < 768;
+    }
+
+    private _subscribeToContracts() {
         this.contractsSubscription = this._cbContractService.contracts.subscribe((contracts) => {
             this.contracts = contracts;
         });
     }
 
-    ngOnDestroy() {
-        this.contractsSubscription.unsubscribe();
+    getColumnClass() {
+        return this.isScreenSmall ? '6' : '4';
     }
 
     isCartCountGreaterThanZero() {
@@ -72,7 +75,9 @@ export class CbHomePage implements OnInit, OnDestroy {
         if (cbHomePageLink.id === 1) {
             this.startConsultation();
         } else if(cbHomePageLink.id === 2) {
-            this._cbRoutingService.goToMyContracts();
+            this._cbRoutingService.goToCbMyContracts();
+        } else if(cbHomePageLink.id === 3) {
+            this._cbRoutingService.goToCbNews();
         }
     }
 

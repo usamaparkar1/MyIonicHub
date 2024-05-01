@@ -66,6 +66,10 @@ export const locale = {
                 HOME: 'Home',
                 START_CONSULTATION: 'Start a consultation',
                 MY_CONTRACTS: 'My Contracts',
+                NEWS: 'News',
+            },
+            NEWS: {
+                NEWS: 'News',
             },
             CUSTOMER_ADDRESS: {
                 CUSTOMER_ADDRESS: 'Customer Address',

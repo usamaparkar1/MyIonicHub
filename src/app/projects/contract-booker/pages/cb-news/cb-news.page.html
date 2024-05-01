@@ -1,0 +1,24 @@
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{ 'CB.NEWS.NEWS' | translate }}</ion-title>
+</cb-header>
+
+<ion-content [fullscreen]="true">
+    <cb-header [collapseValue]="'condense'">
+        <ion-title cb-header-1>{{'CB.NEWS.NEWS' | translate}}</ion-title>
+    </cb-header>
+
+    <ion-list *ngIf="news.length > 0">
+        <ng-container *ngFor="let newsItem of news">
+            <ion-item class="news-item" (click)="expandNewsItem(newsItem)" [lines]="newsItem.expanded ? 'none' : 'full'">
+                <ion-label [color]="newsItem.isRead ? 'dark' : 'warning'">{{ newsItem.title }}</ion-label>
+                <ion-icon slot="end" [color]="newsItem.isRead ? 'dark' : 'warning'" name="chevron-down-outline" *ngIf="!newsItem.expanded"></ion-icon>
+                <ion-icon slot="end" [color]="newsItem.isRead ? 'dark' : 'warning'" name="chevron-up-outline" *ngIf="newsItem.expanded"></ion-icon>
+            </ion-item>
+
+            <!-- News Expanded -->
+            <ion-item *ngIf="newsItem.expanded" [lines]="newsItem.expanded ? 'full' : 'none'">
+                <ion-label class="news-description">{{ newsItem.description }}</ion-label>
+            </ion-item>
+        </ng-container>
+    </ion-list>
+</ion-content>

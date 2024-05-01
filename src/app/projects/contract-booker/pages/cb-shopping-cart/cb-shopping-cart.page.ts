@@ -93,7 +93,7 @@ export class CbShoppingCartPage implements OnInit, OnDestroy {
 
         if (contractSubmissionComplete) {
             this._cbContractService.clearCartContractStorageKeys();
-            this._cbRoutingService.goToMyContracts();
+            this._cbRoutingService.goToCbMyContracts();
         }
     }
 }

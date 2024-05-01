@@ -1,6 +1,6 @@
-import { CbMyContractsService } from '../../my-contracts/cb-my-contracts.service';
+import { CbMyContractsService } from '../../services/my-contracts/cb-my-contracts.service';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { Contract } from '../../../models/cb-contract';
+import { Contract } from '../../models/cb-contract';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 

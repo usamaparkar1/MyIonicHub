@@ -9,6 +9,7 @@ export const coreRoutingHelpers = {
 export const CbRoutingHelpers = {
     cb: 'cb',
     cbHome: 'cb-home',
+    cbNews: 'cb-news',
     cbCustomerAddress: 'cb-customer-address',
     cbProductSelection: 'cb-product-selection',
     cbStandardConsultation: 'cb-standard-consultation',
@@ -16,8 +17,8 @@ export const CbRoutingHelpers = {
     cbProductDetails: 'cb-product-details',
     cbShoppingCart: 'cb-shopping-cart',
     cbAddContract: 'cb-add-contract',
-    CbSignContract: 'cb-sign-contract',
-    CbMyContracts: 'cb-my-contracts',
+    cbSignContract: 'cb-sign-contract',
+    cbMyContracts: 'cb-my-contracts',
 }
 
 export const McRoutingHelpers = {

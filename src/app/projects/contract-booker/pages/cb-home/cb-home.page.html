@@ -9,9 +9,14 @@
 
     <ion-grid *ngIf="cbHomeModules.length > 0">
         <ion-row class="cb-home-module-row-container">
-            <ion-col *ngFor="let module of cbHomeModules" class="ion-text-center" (click)="moduleClicked(module)">
+            <ion-col
+                *ngFor="let module of cbHomeModules"
+                (click)="moduleClicked(module)"
+                [size]="getColumnClass()"
+                class="ion-text-center"
+            >
                 <ion-img class="home-module-images" [src]="module.image"></ion-img>
-                <ion-label class="ion-text-center ion-padding">{{module.name}}</ion-label>
+                <ion-label class="ion-text-center ion-padding">{{module.name | translate}}</ion-label>
             </ion-col>
         </ion-row>
     </ion-grid>

@@ -1,7 +1,7 @@
 .cb-home-module-row-container {
     > ion-col {
         display: flex;
-        flex-direction: column;    
+        flex-direction: column;
     }
 }
 
@@ -10,8 +10,9 @@
 }
 
 .consultation-start-fab {
-    right: 4vh;
-    bottom: 4vh;
+    position: fixed;
+    bottom: 5vh;
+    right: 5%;
 }
 
 .consultation-start-fab ion-fab-button ion-icon {
