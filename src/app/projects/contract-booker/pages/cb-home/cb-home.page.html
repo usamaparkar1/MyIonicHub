@@ -15,4 +15,10 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+
+    <ion-fab class="consultation-start-fab">
+        <ion-fab-button (click)="startConsultation()">
+            <ion-icon [src]="contractBookerData.consultationStartSvg"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>
