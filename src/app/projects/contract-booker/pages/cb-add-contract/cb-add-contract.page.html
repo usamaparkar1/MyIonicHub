@@ -16,9 +16,13 @@
         <ion-row><ion-col class="radios-container">
             <ion-radio-group [(ngModel)]="addContractType">
                 <!-- Radio 2: Create contract from existing ones -->
-                <ion-radio [value]="addContractTypeEnum.createFromExisting" labelPlacement="end">
-                    <ion-label>{{'CB.ADD_CONTRACT.CREATE_FROM_CONTRACT' | translate}}</ion-label>
-                </ion-radio><br />
+                <cb-radio
+                    [value]="addContractTypeEnum.createFromExisting"
+                    labelPlacement="end"
+                    [labelText]="'CB.ADD_CONTRACT.CREATE_FROM_CONTRACT' | translate"
+                ></cb-radio>
+
+                <br />
 
                 <!-- List of existing contracts -->
                 <ion-list [hidden]="!canSeeContractList()">
@@ -32,9 +36,11 @@
                   </ion-list>
 
                 <!-- Radio 2: Create fresh contract -->
-                <ion-radio [value]="addContractTypeEnum.createNewContract" labelPlacement="end">
-                    <ion-label>{{'CB.ADD_CONTRACT.CREATE_NEW_CONTRACT' | translate}}</ion-label>
-                </ion-radio>
+                <cb-radio
+                    [value]="addContractTypeEnum.createNewContract"
+                    labelPlacement="end"
+                    [labelText]="'CB.ADD_CONTRACT.CREATE_NEW_CONTRACT' | translate"
+                ></cb-radio>
             </ion-radio-group>
         </ion-col></ion-row>
     </ion-grid>

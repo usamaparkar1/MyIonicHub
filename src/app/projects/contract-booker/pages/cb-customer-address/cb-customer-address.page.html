@@ -8,7 +8,36 @@
     </cb-header>
 
     <ion-grid>
-        <form class="login-form-container" [formGroup]="customerAddressForm" (ngSubmit)="validateCustomerAddress()">
+        <form class="customer-address-form-container" [formGroup]="customerAddressForm" (ngSubmit)="validateCustomerAddress()">
+            <!-- Radios for Private or Business Customer -->
+            <ion-radio-group formControlName="isPrivateCustomer" class="customer-type-radio-container">
+                <!-- Private Customer -->
+                <cb-radio
+                    [value]="true"
+                    [labelPlacement]="'end'"
+                    [labelText]="'CB.CUSTOMER_ADDRESS.PRIVATE_CUSTOMER' | translate"
+                ></cb-radio>
+                
+                <!-- Business Customer -->
+                <cb-radio
+                    [value]="false"
+                    [labelPlacement]="'end'"
+                    [labelText]="'CB.CUSTOMER_ADDRESS.BUSINESS_CUSTOMER' | translate"
+                ></cb-radio>
+            </ion-radio-group>
+
+            <!-- Company Form Field -->
+            <cb-form-input [hidden]="customerAddressForm.get('isPrivateCustomer')?.value">
+                <ion-input
+                    form-input-field
+                    type="text"
+                    [maxlength]="customerAddressFormHelpers.companyNameMaxLength"
+                    formControlName="company"
+                    labelPlacement="floating"
+                    label="{{ 'CB.CUSTOMER_ADDRESS.COMPANY' | translate }}"
+                ></ion-input>
+            </cb-form-input>
+
             <!-- State Form Field -->
             <cb-form-input>
                 <ion-input

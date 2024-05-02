@@ -1,5 +1,5 @@
-import { CustomerAddressData } from 'src/app/projects/contract-booker/pages/cb-customer-address/cb-customer-address.page';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { CustomerAddressData } from '../../models/cb-customer-address';
 import { ConsultationSteps } from '../../models/cb-consultation-steps';
 import { cbStorageHelpers } from 'src/app/helpers/storage-helpers';
 import { CbReturnStatus } from '../../models/cb-return-status';
@@ -62,6 +62,8 @@ export class CbContractService {
             state: newCustomerAddressData.state,
             city: newCustomerAddressData.city,
             postCode: newCustomerAddressData.postCode,
+            isPrivateCustomer: newCustomerAddressData.isPrivateCustomer,
+            company: newCustomerAddressData.isPrivateCustomer ? null : newCustomerAddressData.company,
             isSigned: false,
             currentRoute: ConsultationSteps.productSelection,
             selectedSectorId: null,
@@ -84,6 +86,8 @@ export class CbContractService {
         newContract.state = newCustomerAddressData.state;
         newContract.city = newCustomerAddressData.city;
         newContract.postCode = newCustomerAddressData.postCode;
+        newContract.isPrivateCustomer = newCustomerAddressData.isPrivateCustomer;
+        newContract.company = newCustomerAddressData.company;
 
         await this._addNewContractToStorage(newContract);
 
@@ -110,6 +114,7 @@ export class CbContractService {
 
     private async _addNewContractToStorage(newContract: Contract) {
         await this.contracts.next([...this.contracts.getValue(), newContract]);
+        await this.storeContractsInStorage(this.allContracts);
     }
 
     public async removeContractOnCartDelete(contract: Contract): Promise<CbReturnStatus> {

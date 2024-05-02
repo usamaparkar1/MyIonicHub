@@ -12,7 +12,7 @@
         <ng-container *ngFor="let sectorCheckbox of sectorsCheckboxes">
             <ion-row>
                 <ion-col class="ion-no-padding">
-                    <ion-item>
+                    <ion-item lines="full">
                         <ion-checkbox labelPlacement="end" alignment="center" justify="start" color="warning" mode="ios" [value]="sectorCheckbox.sectorId" [(ngModel)]="sectorCheckbox.checked" (click)="sectorClicked(sectorCheckbox)">
                             {{ sectorCheckbox.sectorName | titlecase }}
                         </ion-checkbox>
@@ -37,9 +37,16 @@
                         <!-- Products for each Sector (Indented) -->
                         <ion-list>
                             <ng-container *ngFor="let product of sectorCheckbox.productCheckboxes">
-                                <ion-item (click)="isConsumptionInvalid(product.productId, sectorCheckbox.sectorId, sectorCheckbox.priceComparisonConsumptionPerYearEtHt, sectorCheckbox.priceComparisonConsumptionPerYearNt, sectorCheckbox.isDoubleTariffEnabled)">
-                                    <ion-label slot="start">{{product.name}}</ion-label>
-                                    <ion-label slot="end">{{product.productPricePerConsumption || ''}}</ion-label>
+                                <ion-item lines="full"
+                                    (click)="isConsumptionInvalid(
+                                        product.productId,
+                                        sectorCheckbox.sectorId,
+                                        sectorCheckbox.priceComparisonConsumptionPerYearEtHt,
+                                        sectorCheckbox.priceComparisonConsumptionPerYearNt,
+                                        sectorCheckbox.isDoubleTariffEnabled)"
+                                    >
+                                        <ion-label slot="start">{{product.name}}</ion-label>
+                                        <ion-label slot="end">{{product.productPricePerConsumption || ''}}</ion-label>
                                 </ion-item>
                             </ng-container>
                         </ion-list>

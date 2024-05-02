@@ -13,6 +13,12 @@ export const myContractsDbHelpers = {
         PostCode: {
             Name: 'postCode',
         },
+        IsPrivateCustomer: {
+            Name: 'isPrivateCustomer',
+        },
+        Company: {
+            Name: 'company',
+        },
         IsSigned: {
             Name: 'isSigned',
         },

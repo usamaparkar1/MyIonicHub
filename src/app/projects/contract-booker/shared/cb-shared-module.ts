@@ -5,6 +5,7 @@ import { CbFormFooterComponent } from './components/cb-form-footer/cb-form-foote
 import { CbFormInputComponent } from './components/cb-form-input/cb-form-input.component';
 import { CbCartItemComponent } from './components/cb-cart-item/cb-cart-item.component';
 import { CbHeaderComponent } from './components/cb-header/cb-header.component';
+import { CbRadioComponent } from './components/cb-radio/cb-radio.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
@@ -12,6 +13,7 @@ import { NgModule } from '@angular/core';
     declarations: [],
     imports: [
         CommonModule,
+        CbRadioComponent,
         CbHeaderComponent,
         CbCartItemComponent,
         CbFormInputComponent,
@@ -22,6 +24,7 @@ import { NgModule } from '@angular/core';
     ],
     exports: [
         CommonModule,
+        CbRadioComponent,
         CbHeaderComponent,
         CbCartItemComponent,
         CbFormInputComponent,

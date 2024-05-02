@@ -1,0 +1,14 @@
+.customer-address-form-container {
+    margin-bottom: 1rem;
+}
+
+.customer-type-radio-container {
+    display: flex;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+
+    cb-radio:first-child {
+        margin-right: 1rem;
+    }
+}

@@ -79,6 +79,9 @@ export const locale = {
                 POSTCODE: 'Post Code',
                 ENTER_POSTCODE: 'Enter Post Code',
                 SELECT_ADDRESS: 'Select Address',
+                PRIVATE_CUSTOMER: 'Private Customer',
+                BUSINESS_CUSTOMER: 'Business Customer',
+                COMPANY: 'Company',
             },
             PRODUCT_SELECTION: {
                 PRODUCT_SELECTION: 'Product Selection',

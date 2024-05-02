@@ -144,70 +144,70 @@
         {
             "id": 1,
             "title": "Test News 1",
-            "description": "Test News description 1 In a groundbreaking discovery, scientists have uncovered evidence of ancient civilizations on Mars, sparking excitement and debate among the scientific community.",
+            "description": "In a groundbreaking discovery, scientists have uncovered evidence of ancient civilizations on Mars, sparking excitement and debate among the scientific community.",
             "isRead": false,
             "expanded": false
         },
         {
             "id": 2,
             "title": "Test News 2",
-            "description": "Test News description 1 After months of speculation, tech giant XYZ unveils its latest flagship smartphone, boasting cutting-edge features and a sleek design that's sure to impress consumers worldwide.",
+            "description": "After months of speculation, tech giant XYZ unveils its latest flagship smartphone, boasting cutting-edge features and a sleek design that's sure to impress consumers worldwide.",
             "isRead": false,
             "expanded": false
         },
         {
             "id": 3,
             "title": "Test News 3",
-            "description": "Test News description 1 Amid rising tensions in the Middle East, diplomats from across the globe gather for urgent peace talks aimed at de-escalating the conflict and restoring stability to the region.",
+            "description": "Amid rising tensions in the Middle East, diplomats from across the globe gather for urgent peace talks aimed at de-escalating the conflict and restoring stability to the region.",
             "isRead": false,
             "expanded": false
         },
         {
             "id": 4,
             "title": "Test News 4",
-            "description": "Test News description 1 In a surprising turn of events, a small town in rural America becomes the focus of international attention after a series of mysterious disappearances baffle local authorities.",
+            "description": "In a surprising turn of events, a small town in rural America becomes the focus of international attention after a series of mysterious disappearances baffle local authorities.",
             "isRead": false,
             "expanded": false
         },
         {
             "id": 5,
             "title": "Test News 5",
-            "description": "Test News description 1 As climate change continues to ravage the planet, environmental activists stage a massive protest calling for urgent action to address the growing crisis and protect the Earth's fragile ecosystems.",
+            "description": "As climate change continues to ravage the planet, environmental activists stage a massive protest calling for urgent action to address the growing crisis and protect the Earth's fragile ecosystems.",
             "isRead": false,
             "expanded": false
         },
         {
             "id": 6,
             "title": "Test News 6",
-            "description": "Test News description 1 Following years of anticipation, a team of archaeologists unearths a long-lost ancient city buried deep in the Amazon rainforest, shedding new light on the region's rich history.",
+            "description": "Following years of anticipation, a team of archaeologists unearths a long-lost ancient city buried deep in the Amazon rainforest, shedding new light on the region's rich history.",
             "isRead": false,
             "expanded": false
         },
         {
             "id": 7,
             "title": "Test News 7",
-            "description": "Test News description 1 In a landmark decision, lawmakers approve sweeping reforms to the healthcare system, promising better access to quality care for millions of citizens across the country.",
+            "description": "In a landmark decision, lawmakers approve sweeping reforms to the healthcare system, promising better access to quality care for millions of citizens across the country.",
             "isRead": false,
             "expanded": false
         },
         {
             "id": 8,
             "title": "Test News 8",
-            "description": "Test News description 1 Renowned chef opens a groundbreaking restaurant serving innovative dishes crafted entirely from locally sourced, sustainable ingredients, revolutionizing the culinary scene.",
+            "description": "Renowned chef opens a groundbreaking restaurant serving innovative dishes crafted entirely from locally sourced, sustainable ingredients, revolutionizing the culinary scene.",
             "isRead": false,
             "expanded": false
         },
         {
             "id": 9,
             "title": "Test News 9",
-            "description": "Test News description 1 As tensions simmer on the Korean Peninsula, diplomatic efforts intensify as world leaders strive to find a peaceful resolution to the ongoing crisis and prevent further escalation.",
+            "description": "As tensions simmer on the Korean Peninsula, diplomatic efforts intensify as world leaders strive to find a peaceful resolution to the ongoing crisis and prevent further escalation.",
             "isRead": false,
             "expanded": false
         },
         {
             "id": 10,
             "title": "Test News 10",
-            "description": "Test News description 11 In a stunning revelation, whistleblowers expose widespread corruption within the government, prompting calls for accountability and sweeping reforms to restore public trust.",
+            "description": "In a stunning revelation, whistleblowers expose widespread corruption within the government, prompting calls for accountability and sweeping reforms to restore public trust.",
             "isRead": false,
             "expanded": false
         }

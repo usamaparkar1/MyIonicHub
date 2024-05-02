@@ -1,9 +1,10 @@
 import { cbCustomerAddressHelpers } from 'src/app/projects/contract-booker/helpers/cb-customer-address-helpers';
 import { CbContractService } from 'src/app/projects/contract-booker/services/contract/cb-contract.service';
 import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { CbModalService } from 'src/app/projects/contract-booker/services/modal/cb-modal.service';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { CbAlertService } from '../../services/alert/cb-alert.service';
+import { CustomerAddressData } from '../../models/cb-customer-address';
 import citiesListJson from 'src/assets/json-data/cities.json';
 import stateListJson from 'src/assets/json-data/states.json';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -25,6 +26,8 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
     isValidatingCustomerAddressForm: boolean = false;
     customerAddressFormHelpers = cbCustomerAddressHelpers;
     customerAddressForm: UntypedFormGroup = new UntypedFormBuilder().group({
+        isPrivateCustomer: [true, Validators.required],
+        company: ['Parkar&Parkar', this.isCompanyRequiredValidator()],
         state: ['Maharashtra', Validators.compose([Validators.required])],
         city: ['Mumbai', Validators.compose([Validators.required])],
         postCode: ['400009', Validators.compose([
@@ -40,7 +43,9 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
         private _cbModalService: CbModalService,
         private _cbRoutingService: CbRoutingService,
         private _cbContractService: CbContractService,
-    ) {}
+    ) {
+        this._detectFormChanges();
+    }
 
     ngOnInit() {
         this.routeSubscription = this._route.queryParams.subscribe((params) => {
@@ -57,6 +62,28 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
         }
     }
 
+    private _detectFormChanges() {
+        const detectIsPrivateCustomerChanges = () => {
+            this.customerAddressForm.get('isPrivateCustomer')?.valueChanges.subscribe(() => {
+                this.customerAddressForm.get('company')?.setValidators(this.isCompanyRequiredValidator());
+                this.customerAddressForm.get('company')?.updateValueAndValidity();
+            });
+        }
+
+        detectIsPrivateCustomerChanges();
+    }
+
+    isCompanyRequiredValidator() {
+        return (control: AbstractControl<any, any>) => {
+            const isPrivateCustomerControl = control.parent?.get('isPrivateCustomer');
+            if (isPrivateCustomerControl && isPrivateCustomerControl.value === false) {
+                return Validators.required(control);
+            } else {
+                return null;
+            }
+        };
+    }
+
     private _setExistingContractAddress(existingContractId: string) {
         const contract = this._cbContractService.getContractById(existingContractId);
         if (contract) {
@@ -70,6 +97,8 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
         this.customerAddressForm.get('state')?.setValue(existingContract.state);
         this.customerAddressForm.get('city')?.setValue(existingContract.city);
         this.customerAddressForm.get('postCode')?.setValue(existingContract.postCode);
+        this.customerAddressForm.get('isPrivateCustomer')?.setValue(existingContract.isPrivateCustomer);
+        this.customerAddressForm.get('company')?.setValue(existingContract.company);
     }
 
     private _handleExistingContractDataNotFound(contract: Contract | undefined) {
@@ -78,7 +107,7 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
             return;
         }
 
-        const missingProperty = !contract.state ? 'State' : !contract.city ? 'City' : !contract.postCode ? 'PostCode' : null;        
+        const missingProperty = !contract.state ? 'State' : !contract.city ? 'City' : !contract.postCode ? 'PostCode' : (!contract.isPrivateCustomer && !contract?.company) ? 'Company' : null;
         if (missingProperty) {
             this._cbAlertService.showAlertForContractDataNotFound(missingProperty);
             return;
@@ -124,7 +153,9 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
             const newCustomerAddressData = this._getNewCustomerAddressData(
                 this.customerAddressForm.get('state')?.value,
                 this.customerAddressForm.get('city')?.value,
-                this.customerAddressForm.get('postCode')?.value
+                this.customerAddressForm.get('postCode')?.value,
+                this.customerAddressForm.get('isPrivateCustomer')?.value,
+                this.customerAddressForm.get('company')?.value
             );
 
             const isNewContract = !this.contract;
@@ -138,8 +169,8 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
         }
     }
 
-    private _getNewCustomerAddressData(state: string, city: string, postCode: string) {
-        return new CustomerAddressData({ state, city, postCode });
+    private _getNewCustomerAddressData(state: string, city: string, postCode: string, isPrivateCustomer: boolean, company: string) {
+        return new CustomerAddressData({ state, city, postCode, isPrivateCustomer, company });
     }
 
     private _showValidatingFormLoader(value: boolean) {
@@ -149,22 +180,4 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
     private _openProductSelection(newContract: Contract) {
         this._cbRoutingService.goToCbProductSelection(newContract.id, {});
     }
-}
-
-export class CustomerAddressData implements ICustomerAddressData {
-    state: string;
-    city: string;
-    postCode: string
-
-    constructor(customerAddressData: CustomerAddressData) {
-        this.state = customerAddressData.state;
-        this.city = customerAddressData.city;
-        this.postCode = customerAddressData.postCode;
-    }
-}
-
-export interface ICustomerAddressData {
-    state: string;
-    city: string;
-    postCode: string
 }

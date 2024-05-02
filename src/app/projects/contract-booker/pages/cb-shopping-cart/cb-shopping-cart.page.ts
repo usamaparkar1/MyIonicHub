@@ -75,21 +75,39 @@ export class CbShoppingCartPage implements OnInit, OnDestroy {
     }
 
     async submitContracts() {
-        let contractSubmissionComplete: boolean | null = true;
+        let contractSubmissionComplete: boolean = true;
 
-        await this.contracts.forEach(async (contract, index) => {
-            contractSubmissionComplete = await this._cbMyContractsService.saveContract(contract);
+        for (let index = 0; index < this.contracts.length; index++) {
+            const contract = this.contracts[index];
 
-            if (!contractSubmissionComplete) {
+            try {
+                const submissionResult = await this._cbMyContractsService.saveContract(contract);
+                
+                if (!submissionResult) {
+                    contractSubmissionComplete = false;
+                    this._cbAlertService.showAlert(
+                        CbAlertHelpers.contractNotSubmitted,
+                        this._translateService.instant('CB.SHOPPING_CART.CONTRACT_SUBMISSION_FAILURE'),
+                        this._translateService.instant('CB.SHOPPING_CART.CONTRACT_SUBMISSION_FAILURE_NUMBER', {
+                            contractIndex: index+1
+                        })
+                    );
+
+                    // Exit the loop if any contract submission fails
+                    break;
+                }
+            } catch (error) {
                 this._cbAlertService.showAlert(
                     CbAlertHelpers.contractNotSubmitted,
                     this._translateService.instant('CB.SHOPPING_CART.CONTRACT_SUBMISSION_FAILURE'),
                     this._translateService.instant('CB.SHOPPING_CART.CONTRACT_SUBMISSION_FAILURE_NUMBER', {
-                        contractIndex: index+1
+                        contractIndex: `${index+1} ${error ?? ''}`
                     })
                 );
+                contractSubmissionComplete = false;
+                break;
             }
-        });
+        }
 
         if (contractSubmissionComplete) {
             this._cbContractService.clearCartContractStorageKeys();

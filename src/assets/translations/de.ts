@@ -78,6 +78,9 @@ export const locale = {
                 POSTCODE: 'Postleitzahl',
                 ENTER_POSTCODE: 'Geben Sie die Postleitzahl ein',
                 SELECT_ADDRESS: 'Wählen Sie Adresse aus',
+                PRIVATE_CUSTOMER: 'Privatkunde',
+                BUSINESS_CUSTOMER: 'Geschäftskunde',
+                COMPANY: 'Unternehmen',
             },
             PRODUCT_SELECTION: {
                 PRODUCT_SELECTION: 'Produktauswahl',

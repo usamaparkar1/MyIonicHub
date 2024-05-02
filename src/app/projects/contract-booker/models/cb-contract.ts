@@ -5,6 +5,8 @@ export class Contract implements IContract {
     state: string;
     city: string;
     postCode: string
+    isPrivateCustomer: boolean;
+    company: string | null;
     isSigned: boolean;
     currentRoute: ConsultationSteps;
     selectedSectorId: string | null;
@@ -19,6 +21,8 @@ export class Contract implements IContract {
         this.state = contract.state;
         this.city = contract.city;
         this.postCode = contract.postCode;
+        this.isPrivateCustomer = contract.isPrivateCustomer;
+        this.company = contract.company;
         this.isSigned = contract.isSigned;
         this.currentRoute = contract.currentRoute;
         this.selectedSectorId = contract.selectedSectorId;
@@ -35,6 +39,8 @@ export interface IContract {
     state: string;
     city: string;
     postCode: string;
+    isPrivateCustomer: boolean;
+    company: string | null;
     isSigned: boolean;
     currentRoute: ConsultationSteps;
     selectedSectorId: string | null;
