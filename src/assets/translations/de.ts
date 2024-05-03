@@ -95,8 +95,10 @@ export const locale = {
                 ROUTE_DATA_MISSING_TITLE: 'Vertrag nicht gefunden',
                 ROUTE_DATA_MISSING_DESCRIPTION: 'Wir konnten die {{missingData}}daten für Ihren Vertrag nicht finden. Bitte gehen Sie zurück und versuchen Sie es erneut. Oder erstellen Sie einen neuen Vertrag',
                 CONFIRM_PRODUCT: 'Ausgewähltes Produkt',
-                CONSUMPTION_PER_YEAR_ETHT: 'Verbrauch pro Jahr EtHt',
-                CONSUMPTION_PER_YEAR_NT: 'Verbrauch pro Jahr Nt',
+                CONSUMPTION_PER_YEAR_ETHT: 'Verbrauch pro Jahr EtHt (Kwt)',
+                CONSUMPTION_PER_YEAR_NT: 'Verbrauch pro Jahr Nt (Kwt)',
+                CONSUMPTION_PRICE_PER_YEAR: 'Verbrauch Preis pro Jahr',
+                CONSUMPTION_PRICE_PER_MONTH: 'Verbrauch Preis pro Monat',
             },
             CONSUMPTION: {
                 INVALID_CONSUMPTION: 'Ungültiger Verbrauch',
@@ -122,6 +124,8 @@ export const locale = {
             CART_ITEM: {
                 CONSUMPTION_PER_YEAR_ETHT: 'Verbrauch pro Jahr ET HT',
                 CONSUMPTION_PER_YEAR_NT: 'Verbrauch pro Jahr NT',
+                CONSUMPTION_PRICE_PER_YEAR: 'Verbrauch Preis pro Jahr',
+                CONSUMPTION_PRICE_PER_MONTH: 'Verbrauch Preis pro Monat',
                 CONTRACT_SIGNATURE: 'Vertragsunterzeichnung',
             },
             CONTRACT: {

@@ -1,5 +1,6 @@
 import { Capacitor } from '@capacitor/core';
 import { Injectable } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -12,6 +13,10 @@ export class AppHelperService {
 	isAppSetup$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	isloggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     isCurrentAppInUse$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+    constructor(
+        private _platform: Platform,
+    ) { }
 
     isNative(): boolean {
         return Capacitor.isNativePlatform();
@@ -80,5 +85,9 @@ export class AppHelperService {
 
     get getCurrentAppInUseToken() {
         return this.getStringOrNull(this.isCurrentAppInUse$.getValue());
+    }
+
+    isScreenSmall(): boolean {
+        return this._platform.width() < 768;
     }
 }

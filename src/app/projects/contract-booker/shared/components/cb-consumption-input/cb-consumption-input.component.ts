@@ -53,7 +53,8 @@ export class CbConsumptionInputComponent  implements OnInit {
         return /\D/.test(str);
     }
 
-    consumptionChanged() {
+    consumptionChanged(event: any) {
+        this.consumptionPerYear = event.detail?.value;
         this.consumptionChangedEvent.emit(this.consumptionPerYear);
     }
 }

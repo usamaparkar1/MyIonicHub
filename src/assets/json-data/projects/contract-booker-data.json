@@ -60,7 +60,7 @@
             "name": "Product A",
             "productImage": null,
             "productBannerImage": null,
-            "productPrice": 10,
+            "productPrice": 1,
             "productPricePerConsumption": 0,
             "productGroupId": "1",
             "keySellingPoints": [
@@ -74,7 +74,7 @@
             "name": "Product B",
             "productImage": null,
             "productBannerImage": null,
-            "productPrice": 20,
+            "productPrice": 2,
             "productPricePerConsumption": 0,
             "productGroupId": "1",
             "keySellingPoints": [
@@ -88,7 +88,7 @@
             "name": "Product C",
             "productImage": null,
             "productBannerImage": null,
-            "productPrice": 30,
+            "productPrice": 3,
             "productPricePerConsumption": 0,
             "productGroupId": "1",
             "keySellingPoints": [
@@ -102,7 +102,7 @@
             "name": "Product D",
             "productImage": null,
             "productBannerImage": null,
-            "productPrice": 10,
+            "productPrice": 1,
             "productPricePerConsumption": 0,
             "productGroupId": "2",
             "keySellingPoints": [
@@ -116,7 +116,7 @@
             "name": "Product E",
             "productImage": null,
             "productBannerImage": null,
-            "productPrice": 20,
+            "productPrice": 2,
             "productPricePerConsumption": 0,
             "productGroupId": "2",
             "keySellingPoints": [
@@ -130,7 +130,7 @@
             "name": "Product F",
             "productImage": null,
             "productBannerImage": null,
-            "productPrice": 30,
+            "productPrice": 3,
             "productPricePerConsumption": 0,
             "productGroupId": "2",
             "keySellingPoints": [

@@ -10,7 +10,9 @@ export class Contract implements IContract {
     isSigned: boolean;
     currentRoute: ConsultationSteps;
     selectedSectorId: string | null;
+    selectedSectorName: string | null;
     selectedProductId: string | null;
+    selectedProductName: string | null;
     consumptionPerYearEtHt: number;
     consumptionPerYearNt: number;
     pricePerConsumption: number;
@@ -26,7 +28,9 @@ export class Contract implements IContract {
         this.isSigned = contract.isSigned;
         this.currentRoute = contract.currentRoute;
         this.selectedSectorId = contract.selectedSectorId;
+        this.selectedSectorName = contract.selectedSectorName;
         this.selectedProductId = contract.selectedProductId;
+        this.selectedProductName = contract.selectedProductName;
         this.consumptionPerYearEtHt = contract.consumptionPerYearEtHt;
         this.consumptionPerYearNt = contract.consumptionPerYearNt;
         this.pricePerConsumption = contract.pricePerConsumption;
@@ -44,7 +48,9 @@ export interface IContract {
     isSigned: boolean;
     currentRoute: ConsultationSteps;
     selectedSectorId: string | null;
+    selectedSectorName: string | null;
     selectedProductId: string | null;
+    selectedProductName: string | null;
     consumptionPerYearEtHt: number;
     consumptionPerYearNt: number;
     pricePerConsumption: number;

@@ -7,20 +7,20 @@
         <ion-title cb-header-1>{{'CB.PRODUCT_SELECTION.STANDARD_CONSULTATION' | translate}}</ion-title>
     </cb-header>
 
-    <ion-grid>
+    <ion-grid *ngIf="products.length > 0">
         <!-- List of available Products for each Sector -->
-        <ion-row *ngIf="selectedSectorId">
-            <ion-col size="12" class="product-container">
-                <cb-product-card *ngFor="let product of products" (click)="productClicked(product.productId)" [product]="product"></cb-product-card>
+        <ion-row>
+            <ion-col *ngFor="let product of products" [size]="getColumnClass()" class="product-container">
+                <cb-product-card (click)="productClicked(product.productId, product.name)" [product]="product"></cb-product-card>
             </ion-col>
         </ion-row>
     </ion-grid>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="selectedSector">
     <ion-toolbar>
-        <ion-segment color="warning" [value]="selectedSectorId">
-            <ion-segment-button *ngFor="let sector of sectors" [value]="sector.sectorId" (click)="sectorClicked(sector.sectorId)">
+        <ion-segment color="warning" [value]="selectedSector.sectorId">
+            <ion-segment-button *ngFor="let sector of sectors" [value]="sector.sectorId" (click)="sectorClicked(sector)">
                 <ion-label>{{sector.sectorName}}</ion-label>
                 <ion-icon [src]="sector.sectorIcon"></ion-icon>
             </ion-segment-button>

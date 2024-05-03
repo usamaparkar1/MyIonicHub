@@ -40,11 +40,13 @@
                                 <ion-item lines="full"
                                     (click)="isConsumptionInvalid(
                                         product.productId,
+                                        product.name,
                                         sectorCheckbox.sectorId,
+                                        sectorCheckbox.sectorName,
                                         sectorCheckbox.priceComparisonConsumptionPerYearEtHt,
                                         sectorCheckbox.priceComparisonConsumptionPerYearNt,
-                                        sectorCheckbox.isDoubleTariffEnabled)"
-                                    >
+                                        sectorCheckbox.isDoubleTariffEnabled
+                                    )">
                                         <ion-label slot="start">{{product.name}}</ion-label>
                                         <ion-label slot="end">{{product.productPricePerConsumption || ''}}</ion-label>
                                 </ion-item>

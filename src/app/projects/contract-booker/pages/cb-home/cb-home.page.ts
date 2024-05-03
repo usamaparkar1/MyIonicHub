@@ -1,12 +1,12 @@
 import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
 import contractBookerJson from 'src/assets/json-data/projects/contract-booker-data.json';
 import { ActionSheetService } from 'src/app/services/action-sheet/action-sheet.service';
+import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { CbContractService } from '../../services/contract/cb-contract.service';
 import { CbHomePageLink } from '../../models/cb-home-page-link';
 import coreDataJson from 'src/assets/json-data/core-data.json';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Contract } from '../../models/cb-contract';
-import { Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -25,7 +25,7 @@ export class CbHomePage implements OnInit, OnDestroy {
     isScreenSmall: boolean = false;
 
     constructor(
-        private _platform: Platform,
+        private _appHelperService: AppHelperService,
         private _cbRoutingService: CbRoutingService,
         private _cbContractService: CbContractService,
         private _actionSheetService: ActionSheetService,
@@ -36,16 +36,11 @@ export class CbHomePage implements OnInit, OnDestroy {
     }
 
     private async _initCbHomePage() {
-        this._getPlatformByWidth();
         this._subscribeToContracts();
     }
 
     ngOnDestroy() {
         this.contractsSubscription.unsubscribe();
-    }
-
-    private _getPlatformByWidth() {
-        this.isScreenSmall = this._platform.width() < 768;
     }
 
     private _subscribeToContracts() {
@@ -54,8 +49,8 @@ export class CbHomePage implements OnInit, OnDestroy {
         });
     }
 
-    getColumnClass() {
-        return this.isScreenSmall ? '6' : '4';
+    getColumnClass(): string {
+        return this._appHelperService.isScreenSmall() ? '6' : '4';
     }
 
     isCartCountGreaterThanZero() {

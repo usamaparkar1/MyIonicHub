@@ -16,13 +16,13 @@
 <!-- Slider for Consumption -->
 <ion-row><ion-col>
     <ion-range
-        class="consumption-slider"
         [pin]="true"
         type="number"
+        class="consumption-slider"
         [min]="sector.minConsumption"
         [max]="sector.maxConsumption"
         [(ngModel)]="consumptionPerYear"
-        (ionChange)="consumptionChanged()"
+        (ionInput)="consumptionChanged($event)"
     >
         <ion-icon color="warning" slot="start" name="flash-outline"></ion-icon>
         <ion-icon color="warning" slot="end" name="flash-sharp"></ion-icon>

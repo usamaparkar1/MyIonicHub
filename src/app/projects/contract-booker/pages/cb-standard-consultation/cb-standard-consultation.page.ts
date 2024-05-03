@@ -1,4 +1,5 @@
 import { CbCustomerAddressService } from '../../services/customer-address/cb-customer-address.service';
+import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { CbContractService } from '../../services/contract/cb-contract.service';
 import { CbRoutingService } from '../../services/routing/cb-routing.service';
 import { CbAlertService } from '../../services/alert/cb-alert.service';
@@ -21,19 +22,24 @@ export class CbStandardConsultationPage implements OnInit {
     contract!: Contract;
     sectors: Sector[] = [];
     products: Product[] = [];
-    selectedSectorId!: string;
+    selectedSector!: Sector;
 
     constructor(
         private _route: ActivatedRoute,
         private _cbAlertService: CbAlertService,
         private _translateService: TranslateService,
         private _cbRoutingService: CbRoutingService,
+        private _appHelperService: AppHelperService,
         private _cbContractService: CbContractService,
         private _cbCustomerAddressService: CbCustomerAddressService
     ) { }
 
     ngOnInit() {
         this._setupProductSelectionPage();
+    }
+
+    getColumnClass(): string {
+        return this._appHelperService.isScreenSmall() ? '6' : '4';
     }
 
     private async _setupProductSelectionPage() {
@@ -48,8 +54,7 @@ export class CbStandardConsultationPage implements OnInit {
         });
 
         if (this.sectors?.length > 0) {
-            this.selectedSectorId = this.sectors[0].sectorId;
-            this.sectorClicked(this.selectedSectorId);
+            this.sectorClicked(this.sectors[0]);
         } else {
             this._cbAlertService.showAlert(
                 CbAlertHelpers.sectorstNotFound,
@@ -59,35 +64,45 @@ export class CbStandardConsultationPage implements OnInit {
         }
     }
 
-    sectorClicked(sectorId: string) {
-        this.selectedSectorId = sectorId;
-        this._getProductsForSector(sectorId);
+    sectorClicked(selectedSector: Sector) {
+        this.selectedSector = selectedSector;
+        this._getProductsForSector(selectedSector.sectorId);
     }
 
     private async _getProductsForSector(sectorId: string) {
         this.products = await this._cbCustomerAddressService.getAvailableProductsForSector(sectorId);
     }
 
-    async productClicked(productId: string) {
+    async productClicked(productId: string, productName: string) {
         this._setConsumptionValues();
-        this._cbContractService.storeStandardProductConsumption(this.contract, productId, this.selectedSectorId, this.contract.consumptionPerYearEtHt, this.contract.consumptionPerYearNt);
+        this._cbContractService.storeStandardProductConsumption(
+            this.contract,
+            productId,
+            productName,
+            this.selectedSector.sectorId,
+            this.selectedSector.sectorName,
+            this.contract.consumptionPerYearEtHt,
+            this.contract.consumptionPerYearNt
+        );
         this._cbRoutingService.goToCbProductDetails(this.contract.id);
     }
 
     private _setConsumptionValues() {
         if (this.contract.consumptionPerYearEtHt === 0 || this.contract.consumptionPerYearNt === 0) {
-            const sectorDefaultConsumptionValue = this.sectors.find((x) => x.sectorId === this.selectedSectorId)?.defaultConsumptionValue;
+            const defaulConsumptionValue = this.selectedSector.defaultConsumptionValue;
 
-            if (sectorDefaultConsumptionValue) {
+            if (defaulConsumptionValue) {
                 if (!this.contract.consumptionPerYearEtHt) {
-                    this.contract.consumptionPerYearEtHt = sectorDefaultConsumptionValue;
+                    this.contract.consumptionPerYearEtHt = defaulConsumptionValue;
                 }
             }
 
-            if (sectorDefaultConsumptionValue) {
+            if (this.selectedSector?.isDoubleTariffEnabled && defaulConsumptionValue) {
                 if (!this.contract.consumptionPerYearNt) {
-                    this.contract.consumptionPerYearNt = sectorDefaultConsumptionValue;
+                    this.contract.consumptionPerYearNt = defaulConsumptionValue;
                 }
+            } else {
+                this.contract.consumptionPerYearNt = 0;
             }
         }
     }

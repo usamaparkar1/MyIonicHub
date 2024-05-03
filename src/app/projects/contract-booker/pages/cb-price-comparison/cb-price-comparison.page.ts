@@ -115,7 +115,9 @@ export class CbPriceComparisonPage implements OnInit {
 
     isConsumptionInvalid(
         selectedProductId: string,
+        selectedProductName: string,
         selectedSectorId: string,
+        selectedSectorName: string,
         priceComparisonConsumptionPerYearEtHt:number,
         priceComparisonConsumptionPerYearNt: number,
         isDoubleTariffEnabled: boolean
@@ -142,14 +144,30 @@ export class CbPriceComparisonPage implements OnInit {
             return;
         }
 
-        this.confirmProductSelection(selectedProductId, selectedSectorId, priceComparisonConsumptionPerYearEtHt, priceComparisonConsumptionPerYearNt);
+        this.confirmProductSelection(
+            selectedProductId,
+            selectedProductName,
+            selectedSectorId,
+            selectedSectorName,
+            priceComparisonConsumptionPerYearEtHt,
+            priceComparisonConsumptionPerYearNt
+        );
     }
 
-    confirmProductSelection(selectedProductId: string, selectedSectorId: string, priceComparisonConsumptionPerYearEtHt: number, priceComparisonConsumptionPerYearNt: number) {
+    confirmProductSelection(
+        selectedProductId: string,
+        selectedProductName: string,
+        selectedSectorId: string,
+        selectedSectorName: string,
+        priceComparisonConsumptionPerYearEtHt: number,
+        priceComparisonConsumptionPerYearNt: number
+    ) {
         this._cbContractService.storeComparisonProductConsumption(
             this.contract,
             selectedProductId,
+            selectedProductName,
             selectedSectorId,
+            selectedSectorName,
             priceComparisonConsumptionPerYearEtHt,
             priceComparisonConsumptionPerYearNt
         );

@@ -67,7 +67,9 @@ export class CbContractService {
             isSigned: false,
             currentRoute: ConsultationSteps.productSelection,
             selectedSectorId: null,
+            selectedSectorName: null,
             selectedProductId: null,
+            selectedProductName: null,
             consumptionPerYearEtHt: 0,
             consumptionPerYearNt: 0,
             pricePerConsumption: 0,
@@ -166,10 +168,12 @@ export class CbContractService {
         return this.allContracts?.slice(-1)[0];
     }
 
-    storeStandardProductConsumption(contract: Contract, productId: string, sectorId: string, consumptionPerYearEtHt: number, consumptionPerYearNt: number) {
+    storeStandardProductConsumption(contract: Contract, productId: string, productName: string, sectorId: string, sectorName: string, consumptionPerYearEtHt: number, consumptionPerYearNt: number) {
         if (contract?.id) {
             contract.selectedSectorId = sectorId;
+            contract.selectedSectorName = sectorName;
             contract.selectedProductId = productId;
+            contract.selectedProductName = productName;
             contract.consumptionPerYearEtHt = consumptionPerYearEtHt;
             contract.consumptionPerYearNt = consumptionPerYearNt;
             contract.currentRoute = ConsultationSteps.productDetails;
@@ -178,10 +182,12 @@ export class CbContractService {
         this.updateContractInConsultation(contract);
     }
 
-    storeComparisonProductConsumption(contract: Contract, productId: string, sectorId: string, consumptionPerYearEtHt: number, consumptionPerYearNt: number) {
+    storeComparisonProductConsumption(contract: Contract, productId: string, productName: string, sectorId: string, sectorName: string, consumptionPerYearEtHt: number, consumptionPerYearNt: number) {
         if (contract?.id) {
             contract.selectedSectorId = sectorId;
+            contract.selectedSectorName = sectorName;
             contract.selectedProductId = productId;
+            contract.selectedProductName = productName;
             contract.consumptionPerYearEtHt = consumptionPerYearEtHt;
             contract.consumptionPerYearNt = consumptionPerYearNt;
             contract.currentRoute = ConsultationSteps.productDetails;

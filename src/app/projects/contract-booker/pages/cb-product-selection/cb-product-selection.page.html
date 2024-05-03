@@ -10,16 +10,19 @@
     <ion-grid>
         <ion-row>
             <ion-col class="consultation-type-container">
-                <ion-thumbnail (click)="consultationMethodClicked(this.standardConsultation)">
-                    <img [alt]="contractBookerData.standardConsultationImgAlt" [src]="contractBookerData.standardConsultationSvgUrl" />
-                </ion-thumbnail>
+                <ion-img
+                    (click)="consultationMethodClicked(this.standardConsultation)"
+                    [alt]="contractBookerData.standardConsultationImgAlt"
+                    [src]="contractBookerData.standardConsultationSvgUrl"
+                ></ion-img>
                 <ion-label color="warning" [autocapitalize]="true">{{ 'CB.PRODUCT_SELECTION.STANDARD_CONSULTATION' | translate }}</ion-label>
             </ion-col>
 
             <ion-col class="consultation-type-container">
-                <ion-thumbnail (click)="consultationMethodClicked(this.priceComparison)">
-                    <img [alt]="contractBookerData.priceComparisonImgAlt" [src]="contractBookerData.priceComparisonSvgUrl" />
-                </ion-thumbnail>
+                <ion-img (click)="consultationMethodClicked(this.priceComparison)"
+                    [alt]="contractBookerData.priceComparisonImgAlt"
+                    [src]="contractBookerData.priceComparisonSvgUrl"
+                ></ion-img>
                 <ion-label color="warning" [autocapitalize]="true">{{ 'CB.PRODUCT_SELECTION.PRICE_COMPARISON' | translate }}</ion-label>
             </ion-col>
         </ion-row>

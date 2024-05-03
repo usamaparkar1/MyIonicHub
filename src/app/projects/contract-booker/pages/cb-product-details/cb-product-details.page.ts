@@ -90,7 +90,7 @@ export class CbProductDetailsPage implements OnInit {
         this.updateProductPricePerConsumption(sector);
     }
 
-    handleConsumptionChangeEventNt(data: number, sector: Sector){
+    handleConsumptionChangeEventNt(data: number, sector: Sector) {
         this.contract.consumptionPerYearNt = data ?? 0;
         this.updateProductPricePerConsumption(sector);
     }
