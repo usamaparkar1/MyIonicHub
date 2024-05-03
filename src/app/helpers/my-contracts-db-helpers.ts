@@ -28,8 +28,14 @@ export const myContractsDbHelpers = {
         SelectedSectorId: {
             Name: 'selectedSectorId',
         },
+        SelectedSectorName: {
+            Name: 'selectedSectorName',
+        },
         SelectedProductId: {
             Name: 'selectedProductId',
+        },
+        SelectedProductName: {
+            Name: 'selectedProductName',
         },
         ConsumptionPerYearEtHt: {
             Name: 'consumptionPerYearEtHt',
