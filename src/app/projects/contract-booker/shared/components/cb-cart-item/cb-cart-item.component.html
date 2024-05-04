@@ -1,10 +1,11 @@
 <ion-card *ngIf="contract">
     <ion-grid class="ion-no-padding"><ion-row>
         <ion-col size="1" class="ion-no-padding cart-item-icons">
-            <div style="background-color: var(--ion-color-warning);">
+            <!-- Divs are included to add color to the entire background instead of just the icon -->
+            <div>
                 <ion-icon (click)="editCartItem()" color="light" name="pencil-outline"></ion-icon>
             </div>
-            <div style="background-color: var(--ion-color-danger);">
+            <div>
                 <ion-icon (click)="deleteCartItemClicked()" color="light" name="trash-outline"></ion-icon>
             </div>            
         </ion-col>
@@ -12,28 +13,28 @@
             <ion-card-header>
                 <ion-card-title>{{contract.selectedSectorName | titlecase}} - {{contract.selectedProductName | titlecase}}</ion-card-title>
                 <ion-card-subtitle>
-                    <p>{{contract.state}} - {{contract.city}} - {{contract.postCode}}</p>
+                    {{contract.state}} - {{contract.city}} - {{contract.postCode}}
                 </ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
                 <p>
-                    {{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_ETHT' | translate}}: 
+                    <strong>{{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_ETHT' | translate}}: </strong>
                     {{contract.consumptionPerYearEtHt}} (kwt)
                 </p>
                 <p *ngIf="contract?.consumptionPerYearNt && contract.consumptionPerYearNt > 0">
-                    {{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_NT' | translate}}: 
+                    <strong>{{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_NT' | translate}}: </strong>
                     {{contract.consumptionPerYearNt}} (kwt)
                 </p>
                 <p>
-                    {{'CB.CART_ITEM.CONSUMPTION_PRICE_PER_YEAR' | translate}}: 
+                    <strong>{{'CB.CART_ITEM.CONSUMPTION_PRICE_PER_YEAR' | translate}}: </strong>
                     {{contract.pricePerConsumption | currency:'EUR':'symbol':'1.2-2'}}
                 </p>
                 <p>
-                    {{'CB.CART_ITEM.CONSUMPTION_PRICE_PER_MONTH' | translate}}: 
+                    <strong>{{'CB.CART_ITEM.CONSUMPTION_PRICE_PER_MONTH' | translate}}: </strong>
                     {{(contract.pricePerConsumption/12) | currency:'EUR':'symbol':'1.2-2'}}
                 </p>
                 <div class="cart-item-signature-container">
-                    <ion-label>{{'CB.CART_ITEM.CONTRACT_SIGNATURE' | translate}}: </ion-label>
+                    <ion-label><strong>{{'CB.CART_ITEM.CONTRACT_SIGNATURE' | translate}}: </strong></ion-label>
                     <img *ngIf="contract.isSigned && contract?.contractSignature" src="{{contract.contractSignature}}" />
                 </div>
             </ion-card-content>

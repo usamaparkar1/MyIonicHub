@@ -36,19 +36,21 @@
                     [sector]="sector"
                 ></cb-consumption-input>
 
-                <p [hidden]="!contract.pricePerConsumption"
-                    class="consumption-text"
-                >
-                    {{ 'CB.PRODUCT_DETAILS.CONSUMPTION_PRICE_PER_YEAR' | translate }}: 
-                    {{ contract.pricePerConsumption | currency:'EUR':'symbol':'1.2-2' || '' }}
-                </p>
-                <br />
-                <p [hidden]="!contract.pricePerConsumption"
-                    class="consumption-text"
-                >
-                    {{ 'CB.PRODUCT_DETAILS.CONSUMPTION_PRICE_PER_MONTH' | translate }}: 
-                    {{ (contract.pricePerConsumption/12) | currency:'EUR':'symbol':'1.2-2' || '' }}
-                </p>
+                <div class="price-details-per-month-year-container">
+                    <p [hidden]="!contract.pricePerConsumption"
+                        class="consumption-text"
+                    >
+                        {{ 'CB.PRODUCT_DETAILS.CONSUMPTION_PRICE_PER_YEAR' | translate }}: 
+                        {{ contract.pricePerConsumption | currency:'EUR':'symbol':'1.2-2' || '' }}
+                    </p>
+                    <br />
+                    <p [hidden]="!contract.pricePerConsumption"
+                        class="consumption-text"
+                    >
+                        {{ 'CB.PRODUCT_DETAILS.CONSUMPTION_PRICE_PER_MONTH' | translate }}: 
+                        {{ (contract.pricePerConsumption/12) | currency:'EUR':'symbol':'1.2-2' || '' }}
+                    </p>
+                </div>
             </ion-col>
         </ion-row>
     </ion-grid>

@@ -87,18 +87,19 @@ export class CbCustomerAddressPage implements OnInit, OnDestroy {
     private _setExistingContractAddress(existingContractId: string) {
         const contract = this._cbContractService.getContractById(existingContractId);
         if (contract) {
-            this._setCustomerAddressFromExistingContract(contract);
+            this.contract = contract;
+            this._setCustomerAddressFromExistingContract();
         } else {
             this._handleExistingContractDataNotFound(contract);
         }
     }
 
-    private _setCustomerAddressFromExistingContract(existingContract: Contract) {
-        this.customerAddressForm.get('state')?.setValue(existingContract.state);
-        this.customerAddressForm.get('city')?.setValue(existingContract.city);
-        this.customerAddressForm.get('postCode')?.setValue(existingContract.postCode);
-        this.customerAddressForm.get('isPrivateCustomer')?.setValue(existingContract.isPrivateCustomer);
-        this.customerAddressForm.get('company')?.setValue(existingContract.company);
+    private _setCustomerAddressFromExistingContract() {
+        this.customerAddressForm.get('state')?.setValue(this.contract.state);
+        this.customerAddressForm.get('city')?.setValue(this.contract.city);
+        this.customerAddressForm.get('postCode')?.setValue(this.contract.postCode);
+        this.customerAddressForm.get('isPrivateCustomer')?.setValue(this.contract.isPrivateCustomer);
+        this.customerAddressForm.get('company')?.setValue(this.contract.company);
     }
 
     private _handleExistingContractDataNotFound(contract: Contract | undefined) {

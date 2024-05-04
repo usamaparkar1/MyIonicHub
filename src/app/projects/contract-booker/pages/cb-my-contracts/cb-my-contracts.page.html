@@ -7,7 +7,7 @@
         <ion-title cb-header-1>{{'CB.MY_CONTRACTS.MY_CONTRACTS' | translate}}</ion-title>
     </cb-header>
 
-    <ion-list *ngIf="myContracts.length > 0">
+    <ion-list *ngIf="myContracts.length > 0" class="my-contracts-list-container">
         <ion-item>
             <ion-label>{{labelContractNo}}</ion-label>
             <ion-label>{{labelConsumptionPerYear}}</ion-label>

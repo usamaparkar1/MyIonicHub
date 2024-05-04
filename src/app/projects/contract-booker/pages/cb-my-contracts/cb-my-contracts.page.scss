@@ -1,0 +1,5 @@
+.my-contracts-list-container {
+    > ion-item:first-child > ion-label {
+        white-space: pre-wrap;
+    }
+}
