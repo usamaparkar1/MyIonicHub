@@ -3,11 +3,9 @@
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title>{{'CB.ADD_CONTRACT.ADD_CONTRACT' | translate}}</ion-title>
-        </ion-toolbar>
-    </ion-header>
+    <cb-header collapseValue="condense" [isSecondHeader]="true">
+        <ion-title cb-header-1>{{'CB.ADD_CONTRACT.ADD_CONTRACT' | translate}}</ion-title>
+    </cb-header>
 
     <ion-grid>
         <ion-row><ion-col>
@@ -29,7 +27,7 @@
                     <ion-item>
                         <ion-select interface="action-sheet" placeholder="Select Contract" [(ngModel)]="selectedContractId">
                             <ion-select-option *ngFor="let contract of contracts" [value]="contract.id">
-                                {{contract.state}} - {{contract.city}} - {{contract.postCode}}
+                                {{contract.state}}, {{contract.city}}, {{contract.postCode}}
                             </ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -46,15 +44,13 @@
     </ion-grid>
 </ion-content>
 
-<ion-footer>
-    <cb-form-footer>
-        <ion-button
-            cb-bottom-button
-            expand="full"
-            (click)="addAnotherContract()"
-            [disabled]="!canAddAnotherContract()"
-        >
-            <ion-label color="light">{{'CB.ADD_CONTRACT.ADD_CONTRACT' | translate}}</ion-label>
-        </ion-button>
-    </cb-form-footer>
-</ion-footer>
+<cb-form-footer>
+    <ion-button
+        cb-bottom-button
+        expand="full"
+        (click)="addAnotherContract()"
+        [disabled]="!canAddAnotherContract()"
+    >
+        <ion-label color="light">{{'CB.ADD_CONTRACT.ADD_CONTRACT' | translate}}</ion-label>
+    </ion-button>
+</cb-form-footer>

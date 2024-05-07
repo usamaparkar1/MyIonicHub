@@ -3,7 +3,7 @@
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <cb-header [collapseValue]="'condense'">
+    <cb-header collapseValue="condense" [isSecondHeader]="true">
         <ion-title cb-header-1>{{'CB.MY_CONTRACTS.MY_CONTRACTS' | translate}}</ion-title>
     </cb-header>
 
@@ -39,7 +39,7 @@
                     labelAddress
                 )"
             >
-                {{myContract.state}} - {{myContract.city}} - {{myContract.postCode}}
+                {{myContract.state}}, {{myContract.city}}, {{myContract.postCode}}
             </ion-label>
         </ion-item>
     </ion-list>

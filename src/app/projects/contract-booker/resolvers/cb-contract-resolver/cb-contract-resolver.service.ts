@@ -8,7 +8,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 
-export class ContractResolverService {
+export class CbContractResolverService {
 
     constructor(private _cbContractService: CbContractService) {}
 

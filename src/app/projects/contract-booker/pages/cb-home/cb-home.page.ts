@@ -1,5 +1,5 @@
+import contractBookerJson from 'src/assets/json-data/projects/contract-booker/contract-booker-data.json';
 import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
-import contractBookerJson from 'src/assets/json-data/projects/contract-booker-data.json';
 import { ActionSheetService } from 'src/app/services/action-sheet/action-sheet.service';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { CbContractService } from '../../services/contract/cb-contract.service';
@@ -73,6 +73,8 @@ export class CbHomePage implements OnInit, OnDestroy {
             this._cbRoutingService.goToCbMyContracts();
         } else if(cbHomePageLink.id === 3) {
             this._cbRoutingService.goToCbNews();
+        } else if(cbHomePageLink.id === 4) {
+            this._cbRoutingService.goToCbAppointments();
         }
     }
 

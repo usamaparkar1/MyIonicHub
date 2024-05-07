@@ -1,4 +1,4 @@
-import contractBookerJson from 'src/assets/json-data/projects/contract-booker-data.json';
+import contractBookerJson from 'src/assets/json-data/projects/contract-booker/contract-booker-data.json';
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../../models/cb-product';
 import { CommonModule } from '@angular/common';

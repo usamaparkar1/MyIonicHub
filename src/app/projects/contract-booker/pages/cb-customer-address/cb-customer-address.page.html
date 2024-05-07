@@ -3,7 +3,7 @@
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <cb-header [collapseValue]="'condense'">
+    <cb-header collapseValue="condense" [isSecondHeader]="true">
         <ion-title cb-header-1>{{'CB.CUSTOMER_ADDRESS.CUSTOMER_ADDRESS' | translate}}</ion-title>
     </cb-header>
 
@@ -87,7 +87,7 @@
         (click)="validateCustomerAddress()"
         expand="full"
     >
-        <ion-spinner *ngIf="isValidatingCustomerAddressForm" name="lines-sharp-small"></ion-spinner>
-        <ion-label *ngIf="!isValidatingCustomerAddressForm">{{ 'CB.CUSTOMER_ADDRESS.SELECT_ADDRESS' | translate }}</ion-label>
+        <ion-spinner [hidden]="!isValidatingCustomerAddressForm" name="lines-sharp-small"></ion-spinner>
+        <ion-label [hidden]="isValidatingCustomerAddressForm">{{ 'CB.CUSTOMER_ADDRESS.SELECT_ADDRESS' | translate }}</ion-label>
     </ion-button>
 </cb-form-footer>

@@ -1,4 +1,4 @@
-export const myContractsDbHelpers = {
+export const cbMyContractsDbHelpers = {
     tableName: "MyContracts",
     Columns: {
         Id: {
@@ -50,4 +50,4 @@ export const myContractsDbHelpers = {
             Name: 'contractSignature',
         },
     }
-}
+};

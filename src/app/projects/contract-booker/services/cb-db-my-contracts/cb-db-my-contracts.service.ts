@@ -1,6 +1,6 @@
+import { myContractsSchema } from 'src/assets/schemas/projects/contract-booker/cb-my-contracts-schema';
+import { cbMyContractsDbHelpers } from '../../helpers/cb-my-contracts-db-helpers';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
-import { myContractsDbHelpers } from 'src/app/helpers/my-contracts-db-helpers';
-import { myContractsSchema } from 'src/assets/schemas/my-contracts-schema';
 import { SqliteService } from 'src/app/services/sqlite/sqlite.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { SQLiteDBConnection } from '@capacitor-community/sqlite';
@@ -66,7 +66,7 @@ export class CbDbMyContractsService {
             try {
                 let response = undefined;
 
-                const data = await this._myContractsDbConnection.query(`SELECT * FROM ${myContractsDbHelpers.tableName} WHERE id="${contractId}"`);
+                const data = await this._myContractsDbConnection.query(`SELECT * FROM ${cbMyContractsDbHelpers.tableName} WHERE id="${contractId}"`);
     
                 if (data.values!.length > 0) {
                     const keyValuePair = data.values!.find((x) => x?.id === contractId);
@@ -103,7 +103,7 @@ export class CbDbMyContractsService {
             try {
                 let response = undefined;
 
-                const data = await this._myContractsDbConnection.query(`SELECT * FROM ${myContractsDbHelpers.tableName}`);
+                const data = await this._myContractsDbConnection.query(`SELECT * FROM ${cbMyContractsDbHelpers.tableName}`);
 
                 if (data.values!.length > 0) {
                     response = data.values;
@@ -128,9 +128,9 @@ export class CbDbMyContractsService {
 
             try {
                 if (this._appHelperService.isNotNullAndNotUndefined(valueExists)) {
-                    await this._sqliteService.save(this._myContractsDbConnection, myContractsDbHelpers.tableName, contract, { id: contract.id });
+                    await this._sqliteService.save(this._myContractsDbConnection, cbMyContractsDbHelpers.tableName, contract, { id: contract.id });
                 } else {
-                    await this._sqliteService.save(this._myContractsDbConnection, myContractsDbHelpers.tableName, contract);
+                    await this._sqliteService.save(this._myContractsDbConnection, cbMyContractsDbHelpers.tableName, contract);
                 }
 
                 await this._saveDataToWebStore();
@@ -153,7 +153,7 @@ export class CbDbMyContractsService {
             try {
                 const valueExists: boolean = await this.get(contract.id);
                 if (valueExists) {
-                    await this._myContractsDbConnection.query(`DELETE FROM ${myContractsDbHelpers.tableName} WHERE id="${contract.id}"`);
+                    await this._myContractsDbConnection.query(`DELETE FROM ${cbMyContractsDbHelpers.tableName} WHERE id="${contract.id}"`);
                     await this._saveDataToWebStore();
                 }
 
@@ -173,14 +173,14 @@ export class CbDbMyContractsService {
     async clear(): Promise<void> {
         return await new Promise(async (resolve, reject) => {
             try {
-                await this._myContractsDbConnection.query(`DELETE FROM ${myContractsDbHelpers.tableName}`);
+                await this._myContractsDbConnection.query(`DELETE FROM ${cbMyContractsDbHelpers.tableName}`);
                 await this._saveDataToWebStore();
             } catch (error) {
                 console.error(error);
                 this._toastService.showToast({
                     id: toastHelpers.clearStorageError,
                     header: 'Error in Clear in My Contracts Serivce',
-                    message: `Error clearing all contracts in table: ${myContractsDbHelpers.tableName}`,
+                    message: `Error clearing all contracts in table: ${cbMyContractsDbHelpers.tableName}`,
                 });
             }
         });

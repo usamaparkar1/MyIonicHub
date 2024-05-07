@@ -24,6 +24,11 @@
             "id": 3,
             "name": "CB.HOME.NEWS",
             "image": "assets/icon/contract-booker/news.svg"
+        },
+        {
+            "id": 4,
+            "name": "CB.APPOINTMENTS.APPOINTMENTS",
+            "image": "assets/icon/contract-booker/appointments.svg"
         }
     ],
     "sectors": [

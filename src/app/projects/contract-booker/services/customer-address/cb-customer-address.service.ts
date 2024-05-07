@@ -1,4 +1,4 @@
-import contractBookerJson from 'src/assets/json-data/projects/contract-booker-data.json';
+import contractBookerJson from 'src/assets/json-data/projects/contract-booker/contract-booker-data.json';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../models/cb-product';
 import { Sector } from '../../models/cb-sector';

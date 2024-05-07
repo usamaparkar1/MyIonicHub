@@ -1,0 +1,155 @@
+<cb-header [isTranslucent]="true">
+    <ion-title cb-header-1>{{ 'CB.ADD_CONTRACT.ADD_CONTRACT' | translate }}</ion-title>
+</cb-header>
+
+<ion-content [fullscreen]="true">
+    <cb-header collapseValue="condense" [isSecondHeader]="true">
+        <ion-title cb-header-1>{{'CB.ADD_CONTRACT.ADD_CONTRACT' | translate}}</ion-title>
+    </cb-header>
+
+    <ion-grid><ion-row><ion-col class="ion-no-padding">
+        <form [formGroup]="newAppointmentForm" (ngSubmit)="validateNewAppointmentForm()" class="new-appointment-form-container">
+            <cb-form-input>
+                <ion-input
+                    form-input-field
+                    type="text"
+                    formControlName="appointmentTitle"
+                    labelPlacement="floating"
+                    label="{{ 'CB.NEW_APPOINTMENT.APPOINTMENT_TITLE' | translate }}"
+                    placeholder="{{ 'CB.NEW_APPOINTMENT.APPOINTMENT_TITLE_PLACEHOLDER' | translate }}"
+                ></ion-input>
+            </cb-form-input>
+
+            <div style="display: flex;width: 100%;">
+                <cb-form-input style="width: 50%;">
+                    <ion-input
+                        form-input-field
+                        readonly="true"
+                        formControlName="appointmentDate"
+                        labelPlacement="floating"
+                        (click)="toggleDatePicker()"
+                        label="{{ 'CB.NEW_APPOINTMENT.APPOINTMENT_DATE' | translate }}"
+                        placeholder="{{ 'CB.NEW_APPOINTMENT.APPOINTMENT_DATE_PLACEHOLDER' | translate }}"
+                    ></ion-input>
+                </cb-form-input>
+
+                <cb-form-input style="width: 50%;">
+                    <ion-input
+                        form-input-field
+                        readonly="true"
+                        formControlName="appointmentTime"
+                        labelPlacement="floating"
+                        (click)="toggleTimePicker()"
+                        label="{{ 'CB.NEW_APPOINTMENT.APPOINTMENT_TIME' | translate }}"
+                        placeholder="{{ 'CB.NEW_APPOINTMENT.APPOINTMENT_TIME_PLACEHOLDER' | translate }}"
+                    ></ion-input>
+                </cb-form-input>
+            </div>
+
+            <!-- Date Picker -->
+            <ion-datetime
+                #datePicker
+                presentation="date"
+                [min]="todaysDate"
+                [hidden]="hideDatePicker"
+                displayFormat="DD-MM-YYYY"
+                [showDefaultButtons]="true"
+                (ionChange)="dateChanged($event)"
+                class="new-appointment-date-time-container"
+            >
+                <ion-buttons slot="buttons">
+                    <ion-button color="danger" (click)="datePicker.cancel();toggleDatePicker();">Cancel</ion-button>
+                    <ion-button color="warning" (click)="datePicker.confirm();toggleDatePicker();">Confirm</ion-button>
+                </ion-buttons>
+            </ion-datetime>
+
+            <!-- Time Picker -->
+            <ion-datetime
+                #timePicker
+                presentation="time"
+                [min]="currentTime"
+                [minuteValues]="minuteValues"
+                [hidden]="hideTimePicker"
+                [showDefaultButtons]="true"
+                (ionChange)="timeChanged($event)"
+                class="new-appointment-date-time-container"
+            >
+                <ion-buttons slot="buttons">
+                    <ion-button color="danger" (click)="timePicker.cancel();toggleTimePicker();">Cancel</ion-button>
+                    <ion-button color="warning" (click)="timePicker.confirm();toggleTimePicker();">Confirm</ion-button>
+                </ion-buttons>
+            </ion-datetime>
+
+            <!-- State Form Field -->
+            <cb-form-input>
+                <ion-input
+                    form-input-field
+                    type="text"
+                    formControlName="state"
+                    [readonly]="true"
+                    labelPlacement="floating"
+                    (click)="openStateSearchBar()"
+                    label="{{ 'CB.NEW_APPOINTMENT.STATE' | translate }}"
+                ></ion-input>
+            </cb-form-input>
+
+            <!-- City Form Field -->
+            <cb-form-input>
+                <ion-input
+                    form-input-field
+                    type="text"
+                    formControlName="city"
+                    [readonly]="true"
+                    labelPlacement="floating"
+                    (click)="openCitiesSearchBar()"
+                    label="{{ 'CB.NEW_APPOINTMENT.CITY' | translate }}"
+                ></ion-input>
+            </cb-form-input>
+
+            <!-- Postcode Form Field -->
+            <cb-form-input>
+                <ion-input
+                    form-input-field
+                    type="tel"
+                    formControlName="postCode"
+                    [maxlength]="customerAddressFormHelpers.postCodeMaxLength"
+                    labelPlacement="floating"
+                    label="{{ 'CB.NEW_APPOINTMENT.POSTCODE' | translate }}"
+                    placeholder="{{ 'CB.NEW_APPOINTMENT.ENTER_POSTCODE' | translate }}"
+                ></ion-input>                
+            </cb-form-input>
+
+            <!-- Appointment Description Form Field -->
+            <cb-form-input>
+                <ion-textarea
+                    form-input-field
+                    type="text"
+                    [autoGrow]="true"
+                    formControlName="appointmentDescription"
+                    [maxlength]="newAppointmentFormHelpers.descriptionMaxLength"
+                    labelPlacement="floating"
+                    label="{{ 'CB.NEW_APPOINTMENT.APPOINTMENT_DESCRIPTION' | translate }}"
+                    placeholder="{{ 'CB.NEW_APPOINTMENT.APPOINTMENT_DESCRIPTION_PLACEHOLDER' | translate }}"
+                ></ion-textarea>
+            </cb-form-input>
+        </form>
+    </ion-col></ion-row></ion-grid>
+</ion-content>
+
+<cb-form-footer>
+    <ion-button
+        cb-bottom-button
+        expand="full"
+        (click)="validateNewAppointmentForm()"
+        [disabled]="isValidatingNewAppointmentForm ||newAppointmentForm.invalid"
+    >
+        <ion-spinner [hidden]="!isValidatingNewAppointmentForm" name="lines-sharp-small"></ion-spinner>
+        <ion-label [hidden]="isValidatingNewAppointmentForm">
+            {{ (
+                getIsNewAppointment()
+                ? 'CB.NEW_APPOINTMENT.CREATE_APPOINTMENT'
+                : 'CB.NEW_APPOINTMENT.EDIT_APPOINTMENT'
+            ) | translate }}
+        </ion-label>
+    </ion-button>
+</cb-form-footer>

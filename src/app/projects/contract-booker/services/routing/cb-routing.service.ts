@@ -92,6 +92,18 @@ export class CbRoutingService {
         await this.goToCbPage(CbRoutingHelpers.cbNews, null, navigationExtras);
     }
 
+    async goToCbAppointments(navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.cbAppointments, null, navigationExtras);
+    }
+
+    async goToCbNewAppointment(navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.cbNewAppointment, null, navigationExtras);
+    }
+
+    async goToCbEditAppointment(appointmentId: string, navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.cbEditAppointment, appointmentId, navigationExtras);
+    }
+
     async handleRouteNotFound() { 
         'Route not found. Go To Shopping Cart'
     }

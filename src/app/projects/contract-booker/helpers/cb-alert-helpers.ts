@@ -1,12 +1,13 @@
 export const CbAlertHelpers = {
     sectorstNotFound: "sectorstNotFound",
     productDetailsRouteDataNotFound: "productDetailsRouteDataNotFound",
+    invalidSelectionForNewContract: "invalidSelectionForNewContract",
+    couldNotFindAppointmentById: "couldNotFindAppointmentById",
     couldNotRemoveContract: "couldNotRemoveContract",
     invalidEtHtConsumption: "invalidEtHtConsumption",
-    invalidNtConsumption: "invalidNtConsumption",
     newContractIdNotFound: "newContractIdNotFound",
-    invalidSelectionForNewContract: "invalidSelectionForNewContract",
-    invalidSignature: "invalidSignature",
+    invalidNtConsumption: "invalidNtConsumption",
     contractNotSubmitted: "contractNotSubmitted",
-    myContractInfoAlert: "myContractInfoAlert"
+    myContractInfoAlert: "myContractInfoAlert",
+    invalidSignature: "invalidSignature",
 }

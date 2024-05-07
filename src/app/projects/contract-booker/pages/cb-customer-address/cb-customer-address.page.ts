@@ -3,10 +3,10 @@ import { CbContractService } from 'src/app/projects/contract-booker/services/con
 import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { CbModalService } from 'src/app/projects/contract-booker/services/modal/cb-modal.service';
+import citiesListJson from 'src/assets/json-data/projects/contract-booker/cities.json';
+import stateListJson from 'src/assets/json-data/projects/contract-booker/states.json';
 import { CbAlertService } from '../../services/alert/cb-alert.service';
 import { CustomerAddressData } from '../../models/cb-customer-address';
-import citiesListJson from 'src/assets/json-data/cities.json';
-import stateListJson from 'src/assets/json-data/states.json';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Contract } from '../../models/cb-contract';
 import { ActivatedRoute } from '@angular/router';

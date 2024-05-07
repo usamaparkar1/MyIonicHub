@@ -1,4 +1,5 @@
-import { CbDbMyContractsService } from '../projects/contract-booker/services/my-db-contracts/cb-db-my-contracts.service';
+import { CbDbAppointmentsService } from '../projects/contract-booker/services/cb-db-appointments/cb-db-appointments.service';
+import { CbDbMyContractsService } from '../projects/contract-booker/services/cb-db-my-contracts/cb-db-my-contracts.service';
 import { StorageService } from './storage/storage.service';
 import { SqliteService } from './sqlite/sqlite.service';
 import { alertHelpers } from '../helpers/alert-helpers';
@@ -27,6 +28,7 @@ export class AppService {
         private _storageService: StorageService,
         private _networkService: NetworkService,
         private _cbDbMyContractsService: CbDbMyContractsService,
+        private _cbDbAppointmentsService: CbDbAppointmentsService,
     ) {}
 
     async initializeApp() {
@@ -38,6 +40,7 @@ export class AppService {
             await this._createStorageSchema();
             await this._createUserSchema();
             await this._createMyContractsSchema();
+            await this._createAppointmentsSchema();
             
             this.isAppInit = true;
         });
@@ -93,11 +96,22 @@ export class AppService {
     private async _createMyContractsSchema() {
         try {
             await this._cbDbMyContractsService.initializeMyContractsDatabase();
-            await this._signupService.setUserDbConnection(this._userService.getUserDbConnection);
         } catch (error) {
             await this._alertService.showAlert(
                 alertHelpers.myContractsDatabaseNotSetup,
                 'AppService cannot initializeMyContractsDatabase',
+                `${error}`
+            );
+        }
+    }
+
+    private async _createAppointmentsSchema() {
+        try {
+            await this._cbDbAppointmentsService.initializeAppointmentsDatabase();
+        } catch (error) {
+            await this._alertService.showAlert(
+                alertHelpers.myContractsDatabaseNotSetup,
+                'AppService cannot initializeAppointmentsDatabase',
                 `${error}`
             );
         }

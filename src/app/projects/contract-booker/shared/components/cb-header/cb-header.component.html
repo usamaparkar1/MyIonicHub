@@ -2,14 +2,15 @@
     <ion-toolbar color="warning">
         <ng-content select="[cb-header-1]"></ng-content>
         <ng-content select="[cb-header-2]"></ng-content>
-        <div cb-header-3 slot="end" [hidden]="!isCartCountGreaterThanZero()">
+        <div cb-header-3 slot="end" [hidden]="!isCartCountGreaterThanZero() || isSecondHeader">
             <ion-icon
                 size="large"
                 [src]="contractBookerData.shoppingCartSvgUrl"
                 (click)="openShoppingCart()"
             ></ion-icon>
-            <ion-badge (click)="openShoppingCart()" class="cart-item-count">{{contracts.length}}</ion-badge>
+            <!-- Specify hidden here because badge position is absolute -->
+            <ion-badge [hidden]="isSecondHeader" (click)="openShoppingCart()" class="cart-item-count">{{contracts.length}}</ion-badge>
         </div>
-        <app-profile-header cb-header-4 slot="end"></app-profile-header>
+        <app-profile-header [hidden]="isSecondHeader" cb-header-4 slot="end"></app-profile-header>
     </ion-toolbar>
 </ion-header>

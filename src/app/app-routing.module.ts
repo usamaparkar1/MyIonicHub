@@ -1,6 +1,8 @@
+import { CbNewAppointmentResolverService } from './projects/contract-booker/resolvers/cb-new-appointment-resolver/cb-new-appointment-resolver.service';
+import { CbAppointmentsResolverService } from './projects/contract-booker/resolvers/cb-appointments-resolver/cb-appointments-resolver.service';
 import { McRemindersResolverService } from './projects/miscellaneous/services/resolvers/mc-reminders-resolver/mc-reminders-resolver.service';
 import { CbMyContractsResolverService } from './projects/contract-booker/resolvers/cb-my-contracts/cb-my-contracts-resolver.service';
-import { ContractResolverService } from './projects/contract-booker/resolvers/contract-resolver/contract-resolver.service';
+import { CbContractResolverService } from './projects/contract-booker/resolvers/cb-contract-resolver/cb-contract-resolver.service';
 import { CbCartResolverService } from './projects/contract-booker/resolvers/cb-cart-resolver/cb-cart-resolver.service';
 import { CbHomeResolverService } from './projects/contract-booker/resolvers/cb-home-resolver/cb-home-resolver.service';
 import { CbNewsResolverService } from './projects/contract-booker/resolvers/cb-news-resolver/cb-news-resolver.service';
@@ -29,28 +31,28 @@ const contractBookerRoutes: Route = {
             path: 'cb-product-selection/:id',
             loadChildren: () => import('src/app/projects/contract-booker/pages/cb-product-selection/cb-product-selection.module').then( m => m.CbProductSelectionPageModule),
             resolve: {
-                contract: ContractResolverService
+                contract: CbContractResolverService
             }
         },
         {
             path: 'cb-standard-consultation/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-standard-consultation/cb-standard-consultation.module').then( m => m.CbStandardConsultationPageModule),
             resolve: {
-                contract: ContractResolverService
+                contract: CbContractResolverService
             }
         },
         {
             path: 'cb-price-comparison/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-price-comparison/cb-price-comparison.module').then( m => m.CbPriceComparisonPageModule),
             resolve: {
-                contract: ContractResolverService
+                contract: CbContractResolverService
             }
         },
         {
             path: 'cb-product-details/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-product-details/cb-product-details.module').then( m => m.CbProductDetailsPageModule),
             resolve: {
-                contract: ContractResolverService
+                contract: CbContractResolverService
             }
         },
         {
@@ -71,7 +73,7 @@ const contractBookerRoutes: Route = {
             path: 'cb-sign-contract/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-sign-contract/cb-sign-contract.module').then( m => m.CbSignContractPageModule),
             resolve: {
-                contract: ContractResolverService
+                contract: CbContractResolverService
             }
         },
         {
@@ -83,6 +85,24 @@ const contractBookerRoutes: Route = {
             loadChildren: () => import('./projects/contract-booker/pages/cb-news/cb-news.module').then( m => m.CbNewsPageModule),
             resolve: {
                 news: CbNewsResolverService
+            }
+        },
+        {
+            path: 'cb-appointments',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-appointments/cb-appointments.module').then( m => m.CbAppointmentsPageModule),
+            resolve: {
+                appointments: CbAppointmentsResolverService
+            }
+        },
+        {
+            path: 'cb-new-appointment',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-new-appointment/cb-new-appointment.module').then( m => m.CbNewAppointmentPageModule)
+        },
+        {
+            path: 'cb-edit-appointment/:appointmentId',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-new-appointment/cb-new-appointment.module').then( m => m.CbNewAppointmentPageModule),
+            resolve: {
+                oldAppointment: CbNewAppointmentResolverService
             }
         },
     ]

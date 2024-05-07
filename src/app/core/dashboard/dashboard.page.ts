@@ -1,7 +1,7 @@
+import contractBookerJson from 'src/assets/json-data/projects/contract-booker/contract-booker-data.json';
 import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
 import { McRoutingService } from 'src/app/projects/miscellaneous/services/router/mc-routing.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import contractBookerJson from 'src/assets/json-data/projects/contract-booker-data.json';
 import miscellaneousJson from 'src/assets/json-data/projects/miscellaneous-data.json';
 import { CbRoutingHelpers, McRoutingHelpers } from 'src/app/helpers/routing-helpers';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';

@@ -3,7 +3,7 @@
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <cb-header [collapseValue]="'condense'">
+    <cb-header collapseValue="condense" [isSecondHeader]="true">
         <ion-title cb-header-1>{{'CB.PRODUCT_DETAILS.PRODUCT_DETAILS' | translate}}</ion-title>
     </cb-header>
 
@@ -56,15 +56,13 @@
     </ion-grid>
 </ion-content>
 
-<ion-footer>
-    <cb-form-footer>
-        <ion-button
-            cb-bottom-button
-            expand="full"
-            (click)="confirmConsumption()"
-            [disabled]="isConsumptionInvalid()"
-        >
-            <ion-label color="light">{{'CB.PRODUCT_DETAILS.CONFIRM_PRODUCT' | translate}}</ion-label>
-        </ion-button>
-    </cb-form-footer>
-</ion-footer>
+<cb-form-footer>
+    <ion-button
+        cb-bottom-button
+        expand="full"
+        (click)="confirmConsumption()"
+        [disabled]="isConsumptionInvalid()"
+    >
+        <ion-label color="light">{{'CB.PRODUCT_DETAILS.CONFIRM_PRODUCT' | translate}}</ion-label>
+    </ion-button>
+</cb-form-footer>

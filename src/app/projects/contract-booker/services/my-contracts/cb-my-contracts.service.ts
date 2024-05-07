@@ -1,4 +1,4 @@
-import { CbDbMyContractsService } from '../my-db-contracts/cb-db-my-contracts.service';
+import { CbDbMyContractsService } from '../cb-db-my-contracts/cb-db-my-contracts.service';
 import { cbToastHelpers } from '../../helpers/cb-toast-helpers';
 import { CbReturnStatus } from '../../models/cb-return-status';
 import { CbToastService } from '../toast/cb-toast.service';

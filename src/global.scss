@@ -97,6 +97,21 @@ cb-form-input {
             }
         }
     }
+
+    ion-textarea {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        --padding-start: 8px !important;
+        border: 2px solid var(--ion-color-warning);
+
+        &.has-value.ion-invalid {
+            border-color: var(--ion-color-danger) !important;
+        }
+
+        &.ion-invalid {
+            border-color: var(--ion-color-danger) !important;
+        }
+    }
 }
 
 ion-list {

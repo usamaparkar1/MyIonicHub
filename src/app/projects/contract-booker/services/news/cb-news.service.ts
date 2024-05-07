@@ -1,4 +1,4 @@
-import contractBookerJson from 'src/assets/json-data/projects/contract-booker-data.json';
+import contractBookerJson from 'src/assets/json-data/projects/contract-booker/contract-booker-data.json';
 import { CbNews } from '../../models/cb-news';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';

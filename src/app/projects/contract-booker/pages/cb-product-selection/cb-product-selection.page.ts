@@ -1,5 +1,5 @@
+import contractBookerJson from 'src/assets/json-data/projects/contract-booker/contract-booker-data.json';
 import { CbCustomerAddressService } from '../../services/customer-address/cb-customer-address.service';
-import contractBookerJson from 'src/assets/json-data/projects/contract-booker-data.json';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { CbRoutingService } from '../../services/routing/cb-routing.service';
 import { CbToastService } from '../../services/toast/cb-toast.service';
