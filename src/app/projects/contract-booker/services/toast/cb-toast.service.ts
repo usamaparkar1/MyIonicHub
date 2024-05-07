@@ -12,10 +12,10 @@ export class CbToastService {
         private _toastController: ToastController
     ) { }
 
-    async showToast(toastOptions: ToastOptions, cbnotificationType: CbNotificationType = CbNotificationType.Default) {
+    async showToast(toastOptions: ToastOptions, cbnotificationType: CbNotificationType = CbNotificationType.Warning) {
         toastOptions.color = cbnotificationType;
         if (!toastOptions.position) {
-            toastOptions.position = 'top';
+            toastOptions.position = 'middle';
         }
         if (!toastOptions?.buttons || toastOptions?.buttons?.length === 0) {
             toastOptions.duration = cbToastHelpers.toastTimeoutDuration;
