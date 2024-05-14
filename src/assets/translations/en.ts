@@ -31,14 +31,18 @@ export const locale = {
                 ACCOUNT_LOGOUT: 'Account Logout'
             }
         },
+        APPS: {
+            CONTRACT_BOOKER: {
+                DESCRIPTION: 'Book electricity and gas contracts for the comfort of your home',
+            },
+            MISCELLANEOUS: {
+                DESCRIPTION: 'This application has a lot of mini features that help you in your day to day activities',
+            },
+        },
         INTRODUCTION: {
             SLIDE_1: {
-                HEADER: 'Introduction'
+                HEADER: 'Welcome to my comprehensive and versatile mobile application designed to showcase different functionalities',
             },
-            SLIDE_2: {
-                HEADER: 'Want to know more?'
-            },
-            EXPLORE: 'Explore the Hub!',
             SKIP: 'Skip',
             START: 'Start',
         },

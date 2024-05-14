@@ -2,5 +2,6 @@
     "logoutIconUrl": "assets/icon/core/logout.svg",
     "profileIconUrl": "assets/icon/core/profile.svg",
     "appLogoutIconUrl": "assets/icon/core/app-logout.svg",
-    "routeNotFoundSvgUrl": "assets/icon/core/error-404.svg"
+    "routeNotFoundIconUrl": "assets/icon/core/error-404.svg",
+    "introductionIconUrl": "assets/icon/core/introduction.svg"
 }

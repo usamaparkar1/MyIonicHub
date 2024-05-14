@@ -2,8 +2,7 @@ export class Sector implements ISector {
     sectorId: string;
     sectorName: string;
     sectorIcon: string;
-    sectorImage: string;
-    sectorImageAlt: string;
+    sectorIconAlt: string;
     minConsumption: number;
     maxConsumption: number;
     defaultConsumptionValue: number;
@@ -13,8 +12,7 @@ export class Sector implements ISector {
         this.sectorId = sector.sectorId;
         this.sectorName = sector.sectorName;
         this.sectorIcon = sector.sectorIcon;
-        this.sectorImage = sector.sectorImage;
-        this.sectorImageAlt = sector.sectorImageAlt;
+        this.sectorIconAlt = sector.sectorIconAlt;
         this.minConsumption = sector.minConsumption;
         this.maxConsumption = sector.maxConsumption;
         this.defaultConsumptionValue = sector.defaultConsumptionValue;
@@ -26,8 +24,7 @@ export interface ISector {
     sectorId: string;
     sectorName: string;
     sectorIcon: string;
-    sectorImage: string;
-    sectorImageAlt: string;
+    sectorIconAlt: string;
     minConsumption: number;
     maxConsumption: number;
     defaultConsumptionValue: number;

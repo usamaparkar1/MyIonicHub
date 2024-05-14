@@ -47,8 +47,10 @@
                                         sectorCheckbox.priceComparisonConsumptionPerYearNt,
                                         sectorCheckbox.isDoubleTariffEnabled
                                     )">
-                                        <ion-label slot="start">{{product.name}}</ion-label>
-                                        <ion-label slot="end">{{product.productPricePerConsumption || ''}}</ion-label>
+                                        <ion-label slot="start">{{product.name}} 
+                                            <span class="price-comparison-price-per-product">({{product.productPrice | currency:'EUR':'symbol':'1.2-2'}})</span>
+                                        </ion-label>
+                                        <ion-label slot="end">{{product.productPricePerConsumption | currency:'EUR':'symbol':'1.2-2' || ''}}</ion-label>
                                 </ion-item>
                             </ng-container>
                         </ion-list>

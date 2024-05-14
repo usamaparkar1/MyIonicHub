@@ -15,3 +15,8 @@ ion-checkbox::part(container) {
 .sector-checked-dropdown-container > *:not(ion-list) ion-col {
     padding: 0 !important;
 }
+
+.price-comparison-price-per-product {
+    font-size: 12px;
+    color: var(--ion-color-medium);
+}

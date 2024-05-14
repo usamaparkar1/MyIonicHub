@@ -32,3 +32,15 @@ swiper-slide img {
     height: auto;
     max-height: 100%;
 }
+
+.swiper-zoom-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    img {
+        max-width: 25%;
+        max-height: 25%;
+        margin-bottom: 1rem;
+    }
+}

@@ -68,13 +68,13 @@ export class CbHomePage implements OnInit, OnDestroy {
 
     moduleClicked(cbHomePageLink: CbHomePageLink) {
         if (cbHomePageLink.id === 1) {
-            this.startConsultation();
-        } else if(cbHomePageLink.id === 2) {
-            this._cbRoutingService.goToCbMyContracts();
-        } else if(cbHomePageLink.id === 3) {
             this._cbRoutingService.goToCbNews();
-        } else if(cbHomePageLink.id === 4) {
+        } else if(cbHomePageLink.id === 2) {
             this._cbRoutingService.goToCbAppointments();
+        } else if(cbHomePageLink.id === 3) {
+            this._cbRoutingService.goToCbMyContracts();
+        } else if(cbHomePageLink.id === 4) {
+            this.startConsultation();
         }
     }
 

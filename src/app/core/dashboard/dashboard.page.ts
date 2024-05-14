@@ -1,13 +1,14 @@
 import contractBookerJson from 'src/assets/json-data/projects/contract-booker/contract-booker-data.json';
 import { CbRoutingService } from 'src/app/projects/contract-booker/services/routing/cb-routing.service';
 import { McRoutingService } from 'src/app/projects/miscellaneous/services/router/mc-routing.service';
+import miscellaneousJson from 'src/assets/json-data/projects/miscellaneous/miscellaneous-data.json';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import miscellaneousJson from 'src/assets/json-data/projects/miscellaneous-data.json';
 import { CbRoutingHelpers, McRoutingHelpers } from 'src/app/helpers/routing-helpers';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import coreDataJson from 'src/assets/json-data/core-data.json';
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -25,25 +26,21 @@ export class DashboardPage implements OnInit {
     projects: ProjectCards[] = [
         {
             appName: this.contractBookerData.appName,
-            appDescription: this.contractBookerData.appDescription,
+            appDescription: this._translateService.instant('APPS.CONTRACT_BOOKER.DESCRIPTION'),
             projectIcon: [
                 {
-                    altText: this.contractBookerData.sectors[0].sectorImageAlt,
-                    svgSrc: this.contractBookerData.sectors[0].sectorImage
-                },
-                {
-                    altText: this.contractBookerData.sectors[1].sectorImageAlt,
-                    svgSrc: this.contractBookerData.sectors[1].sectorImage
+                    altText: this.contractBookerData.appName,
+                    svgSrc: this.contractBookerData.appIcon
                 }
             ]
         },
         {
             appName: this.miscellaneousData.appName,
-            appDescription: this.miscellaneousData.appDescription,
+            appDescription: this._translateService.instant('APPS.MISCELLANEOUS.DESCRIPTION'),
             projectIcon: [
                 {
                     altText: this.miscellaneousData.appIconAlt,
-                    svgSrc: this.miscellaneousData.appIconSvgUrl
+                    svgSrc: this.miscellaneousData.appIcon
                 }
             ]
         }
@@ -52,6 +49,7 @@ export class DashboardPage implements OnInit {
     constructor(
         private _storageService: StorageService,
         private _routingService: RoutingService,
+        private _translateService: TranslateService,
         private _cbRoutingService: CbRoutingService,
         private _mcRoutingService: McRoutingService,
         private _appHelperService: AppHelperService,

@@ -1,6 +1,6 @@
 {
     "appName": "Contract Booker",
-    "appDescription": "This application lets you book electricity and gas contracts",
+    "appIcon": "assets/icon/contract-booker/contract-booker-app-icon.svg",
     "standardConsultationSvgUrl": "assets/icon/contract-booker/standard-consultation.svg",
     "standardConsultationImgAlt": "standard-consultation",
     "priceComparisonSvgUrl": "assets/icon/contract-booker/price-comparison.svg",
@@ -12,32 +12,31 @@
     "cbHomeModules": [
         {
             "id": 1,
-            "name": "CB.HOME.START_CONSULTATION",
-            "image": "assets/icon/contract-booker/consultation-start.svg"
-        },
-        {
-            "id": 2,
-            "name": "CB.HOME.MY_CONTRACTS",
-            "image": "assets/icon/contract-booker/my-contracts.svg"
-        },
-        {
-            "id": 3,
             "name": "CB.HOME.NEWS",
             "image": "assets/icon/contract-booker/news.svg"
         },
         {
-            "id": 4,
+            "id": 2,
             "name": "CB.APPOINTMENTS.APPOINTMENTS",
             "image": "assets/icon/contract-booker/appointments.svg"
+        },
+        {
+            "id": 3,
+            "name": "CB.HOME.MY_CONTRACTS",
+            "image": "assets/icon/contract-booker/my-contracts.svg"
+        },
+        {
+            "id": 4,
+            "name": "CB.HOME.START_CONSULTATION",
+            "image": "assets/icon/contract-booker/consultation-start.svg"
         }
     ],
     "sectors": [
         {
             "sectorId": "1",
             "sectorName": "electricity",
-            "sectorIcon": "assets/icon/contract-booker/electricity-icon.svg",
-            "sectorImage": "assets/icon/contract-booker/electricity.svg",
-            "sectorImageAlt": "electricity",
+            "sectorIcon": "assets/icon/contract-booker/electricity.svg",
+            "sectorIconAlt": "electricity",
             "minConsumption": 1,
             "maxConsumption": 100000,
             "defaultConsumptionValue": 3000,
@@ -48,9 +47,8 @@
         {
             "sectorId": "2",
             "sectorName": "gas",
-            "sectorIcon": "assets/icon/contract-booker/gas-icon.svg",
-            "sectorImage": "assets/icon/contract-booker/gas.svg",
-            "sectorImageAlt": "gas",
+            "sectorIcon": "assets/icon/contract-booker/gas.svg",
+            "sectorIconAlt": "gas",
             "minConsumption": 1,
             "maxConsumption": 900000,
             "defaultConsumptionValue": 9000,

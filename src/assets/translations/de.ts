@@ -31,14 +31,18 @@ export const locale = {
                 ACCOUNT_LOGOUT: 'Kontoabmeldung'
             }
         },
+        APPS: {
+            CONTRACT_BOOKER: {
+                DESCRIPTION: 'Buchen Sie Strom- und Gasverträge bequem von zu Hause aus',
+            },
+            MISCELLANEOUS: {
+                DESCRIPTION: 'Diese Anwendung verfügt über viele Minifunktionen, die Sie bei Ihren täglichen Aktivitäten unterstützen',
+            },
+        },
         INTRODUCTION: {
             SLIDE_1: {
-                HEADER: 'Einführung'
+                HEADER: 'Willkommen zu meiner umfassenden und vielseitigen mobilen Anwendung, die darauf ausgelegt ist, verschiedene Funktionalitäten zu präsentieren'
             },
-            SLIDE_2: {
-                HEADER: 'Möchten Sie mehr wissen?'
-            },
-            EXPLORE: 'Entdecken Sie den Hub!',
             SKIP: 'Überspringen',
             START: 'Start',
         },

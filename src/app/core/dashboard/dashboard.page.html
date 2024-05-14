@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-title slot="start" color="primary">{{ 'DASHBOARD.DASHBOARD' | translate }}</ion-title>
-        <ion-icon slot="end" size="large" [src]="coreData.logoutIconUrl" class="toolbar-slot-end-icon" (click)="logoutUser()"></ion-icon>
+        <ion-icon slot="end" size="large" [src]="coreData.logoutIconUrl" class="dashboard-logout-icon" (click)="logoutUser()"></ion-icon>
     </ion-toolbar>
 </ion-header>
 
@@ -19,7 +19,7 @@
     </ion-grid>
 
     <ion-grid *ngIf="!isLoadingContent">
-        <ion-row *ngFor="let project of projects"><ion-col>
+        <ion-row *ngFor="let project of projects" class="dashboard-app-card-container"><ion-col>
             <ion-card class="modern-card" (click)="selectApplication(project.appName)">
                 <!-- Images -->
                 <ion-row class="app-icon-row-container">
@@ -32,7 +32,7 @@
                     <ion-card-title>{{ project.appName }}</ion-card-title>
                 </ion-card-header>
                 <!-- App Description -->
-                <ion-card-content>{{ project.appDescription }}</ion-card-content>
+                <ion-card-content>{{ project.appDescription | translate }}</ion-card-content>
             </ion-card>
         </ion-col></ion-row>
     </ion-grid>
