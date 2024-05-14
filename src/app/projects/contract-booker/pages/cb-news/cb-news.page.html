@@ -8,9 +8,9 @@
     </cb-header>
 
     <ion-list *ngIf="news.length > 0">
-        <ng-container *ngFor="let newsItem of news">
+        <ng-container *ngFor="let newsItem of news;let newsIndex = index">
             <ion-item class="news-item" (click)="expandNewsItem(newsItem)" [lines]="newsItem.expanded ? 'none' : 'full'">
-                <ion-label [color]="newsItem.isRead ? 'dark' : 'warning'">{{ newsItem.title }}</ion-label>
+                <ion-label [color]="newsItem.isRead ? 'dark' : 'warning'">{{ newsIndex + 1 }}. {{ newsItem.title }}</ion-label>
                 <ion-icon slot="end" [color]="newsItem.isRead ? 'dark' : 'warning'" name="chevron-down-outline" *ngIf="!newsItem.expanded"></ion-icon>
                 <ion-icon slot="end" [color]="newsItem.isRead ? 'dark' : 'warning'" name="chevron-up-outline" *ngIf="newsItem.expanded"></ion-icon>
             </ion-item>
@@ -20,5 +20,14 @@
                 <ion-label class="news-description">{{ newsItem.description }}</ion-label>
             </ion-item>
         </ng-container>
+
+        <ion-infinite-scroll
+            threshold="1%"
+            [disabled]="allNewsLoaded()"
+            class="news-infinite-scroll-container"
+            (ionInfinite)="loadMoreNews($event)"
+        >
+            <ion-infinite-scroll-content loadingSpinner="lines-sharp"></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
     </ion-list>
 </ion-content>

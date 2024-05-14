@@ -5,3 +5,9 @@
 .news-description {
     white-space: normal;
 }
+
+.news-infinite-scroll-container {
+    ::ng-deep .infinite-loading {
+        margin-top: 2rem;
+    }
+}

@@ -4,7 +4,6 @@ import { CbRoutingHelpers, McRoutingHelpers } from 'src/app/helpers/routing-help
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { StorageService } from 'src/app/services//storage/storage.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
-import { NavigationBehaviorOptions } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -66,34 +65,33 @@ export class ScreenLoaderPage implements OnInit {
         }
     }
 
-    private async _navigateToNextPage() {
-        const navigationBehaviorOptions: NavigationBehaviorOptions = { skipLocationChange: true, replaceUrl: true };
+    private _navigateToNextPage() {
         if (!this._appHelperService.userHasSeenIntro) {
-            await this._routingService.goToIntroduction(navigationBehaviorOptions);
+            this._routingService.goToIntroduction({ replaceUrl: true });
             return;
         }
 
         if (!this._appHelperService.isUserLoggedIn) {
-            await this._routingService.goToLogin(navigationBehaviorOptions);
+            this._routingService.goToLogin({ replaceUrl: true });
             return;
         }
 
         if (this._appHelperService.getCurrentAppInUseToken) {
             switch (this._appHelperService.getCurrentAppInUseToken) {
                 case CbRoutingHelpers.cbHome:
-                    await this._cbRoutingService.goToCbHome();
+                    this._cbRoutingService.goToCbHome({ replaceUrl: true });
                     break;
                 case McRoutingHelpers.mcHome:
-                    await this._mcRoutingService.goToMcHome();
+                    this._mcRoutingService.goToMcHome({ replaceUrl: true });
                     break;
 
                 default:
-                    await this._routingService.goToDashboard(navigationBehaviorOptions);
+                    this._routingService.goToDashboard({ replaceUrl: true });
                     break;
             }
             return;
         }
 
-        await this._routingService.goToDashboard(navigationBehaviorOptions);
+        this._routingService.goToDashboard({ replaceUrl: true });
     }
 }

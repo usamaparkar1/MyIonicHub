@@ -1,0 +1,249 @@
+{
+    "news": [
+        {
+            "id": 1,
+            "title": "Evidence of Ancient Civilizations on Mars",
+            "description": "In a groundbreaking discovery, scientists have uncovered evidence of ancient civilizations on Mars, sparking excitement and debate among the scientific community.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 2,
+            "title": "Tech Giant XYZ Unveils Latest Flagship Smartphone",
+            "description": "After months of speculation, tech giant XYZ unveils its latest flagship smartphone, boasting cutting-edge features and a sleek design that's sure to impress consumers worldwide.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 3,
+            "title": "Global Diplomatic Efforts for Peace in the Middle East",
+            "description": "Amid rising tensions in the Middle East, diplomats from across the globe gather for urgent peace talks aimed at de-escalating the conflict and restoring stability to the region.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 4,
+            "title": "Mysterious Disappearances in Rural America",
+            "description": "In a surprising turn of events, a small town in rural America becomes the focus of international attention after a series of mysterious disappearances baffle local authorities.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 5,
+            "title": "Massive Protest for Climate Action",
+            "description": "As climate change continues to ravage the planet, environmental activists stage a massive protest calling for urgent action to address the growing crisis and protect the Earth's fragile ecosystems.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 6,
+            "title": "Discovery of Long-Lost Ancient City in the Amazon Rainforest",
+            "description": "Following years of anticipation, a team of archaeologists unearths a long-lost ancient city buried deep in the Amazon rainforest, shedding new light on the region's rich history.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 7,
+            "title": "Sweeping Reforms to Healthcare System Approved",
+            "description": "In a landmark decision, lawmakers approve sweeping reforms to the healthcare system, promising better access to quality care for millions of citizens across the country.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 8,
+            "title": "Groundbreaking Restaurant Revolutionizes Culinary Scene",
+            "description": "Renowned chef opens a groundbreaking restaurant serving innovative dishes crafted entirely from locally sourced, sustainable ingredients, revolutionizing the culinary scene.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 9,
+            "title": "Diplomatic Efforts to Resolve Korean Peninsula Crisis",
+            "description": "As tensions simmer on the Korean Peninsula, diplomatic efforts intensify as world leaders strive to find a peaceful resolution to the ongoing crisis and prevent further escalation.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 10,
+            "title": "Whistleblowers Expose Government Corruption",
+            "description": "In a stunning revelation, whistleblowers expose widespread corruption within the government, prompting calls for accountability and sweeping reforms to restore public trust.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 11,
+            "title": "Discovery of New Species in Pacific Ocean Depths",
+            "description": "Scientists discover a new species of marine life thriving in the depths of the Pacific Ocean, shedding light on the biodiversity of underwater ecosystems.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 12,
+            "title": "Mysterious Signal from Distant Galaxy Detected",
+            "description": "Astronomers detect a mysterious signal originating from a distant galaxy, igniting speculation about the possibility of extraterrestrial intelligence.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 13,
+            "title": "Major Breakthrough in Quest for Disease Cure",
+            "description": "In a historic milestone, a team of researchers achieves a major breakthrough in the quest for a viable cure for a devastating global disease.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 14,
+            "title": "AI Surpasses Humans in Problem-Solving Competition",
+            "description": "Artificial intelligence surpasses human capabilities in a complex problem-solving competition, showcasing the rapid advancement of AI technology.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 15,
+            "title": "Commercial Flights to the Moon Announced",
+            "description": "Space tourism takes a leap forward as the first commercial flights to the moon are announced, offering wealthy adventurers a chance to experience lunar travel.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 16,
+            "title": "Global Efforts Combat Poverty",
+            "description": "Global efforts to combat poverty reach a new milestone as millions of people are lifted out of extreme poverty, marking progress towards achieving sustainable development goals.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 17,
+            "title": "Gene Editing Technology Shows Promise in Disease Eradication",
+            "description": "Groundbreaking research reveals the potential of gene editing technology to eradicate hereditary diseases, offering hope for future generations.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 18,
+            "title": "Support for Refugees Amidst Crisis",
+            "description": "In a show of solidarity, nations pledge support for refugees fleeing conflict and persecution, emphasizing the importance of humanitarian aid and compassion.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 19,
+            "title": "Conservation Efforts to Protect Cultural Heritage Sites",
+            "description": "Cultural heritage sites around the world face threats from climate change and human activity, prompting calls for increased conservation efforts to protect these treasures.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 20,
+            "title": "Global Shift Towards Sustainable Energy",
+            "description": "Renewable energy initiatives gain momentum as governments and businesses invest in clean energy technologies, signaling a shift towards a more sustainable future.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 21,
+            "title": "Breakthrough Treatment for Incurable Disease",
+            "description": "Researchers develop a groundbreaking treatment for a previously incurable disease, offering hope to millions of patients worldwide.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 22,
+            "title": "Advancements in Robotics Revolutionize Industries",
+            "description": "Advancements in robotics revolutionize industries as automated systems streamline production processes and enhance efficiency.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 23,
+            "title": "Legal Victory for Indigenous Land Rights",
+            "description": "In a landmark decision, a court rules in favor of indigenous communities fighting to protect their ancestral lands from exploitation by multinational corporations.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 24,
+            "title": "AI Assistants Transform Daily Life",
+            "description": "Artificial intelligence assistants become ubiquitous in households, offering personalized recommendations and simplifying daily tasks for consumers.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 25,
+            "title": "Policies to Address Income Inequality Implemented",
+            "description": "In a bid to address income inequality, governments implement policies aimed at raising minimum wages and improving social safety nets for vulnerable populations.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 26,
+            "title": "Innovative Solutions to Combat Plastic Pollution",
+            "description": "Scientists develop innovative solutions to combat plastic pollution, offering hope for the preservation of marine ecosystems and wildlife.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 27,
+            "title": "Advancements in Virtual Reality Technology",
+            "description": "Advancements in virtual reality technology revolutionize entertainment and education, offering immersive experiences that blur the lines between reality and simulation.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 28,
+            "title": "Legal Rights Granted to Animals",
+            "description": "In a landmark ruling, a court grants legal rights to animals, recognizing their sentience and granting protections against cruelty and exploitation.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 29,
+            "title": "Breakthrough in Fight Against Cancer",
+            "description": "Researchers achieve a major breakthrough in the fight against cancer, developing targeted therapies that offer new hope for patients with advanced forms of the disease.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 30,
+            "title": "Ambitious Climate Policies Enacted",
+            "description": "Governments around the world enact ambitious climate policies to mitigate the effects of global warming and transition to renewable energy sources.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 31,
+            "title": "Renewable Energy Adoption Surges",
+            "description": "Renewable energy adoption surges globally as governments and businesses prioritize sustainability and climate action.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 32,
+            "title": "New Climate Agreement Reached",
+            "description": "World leaders announce a new climate agreement aimed at reducing greenhouse gas emissions and limiting global temperature rise.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 33,
+            "title": "Clean Energy Investments Soar",
+            "description": "Investments in clean energy technologies soar to record highs as demand for sustainable solutions grows.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 34,
+            "title": "Electric Vehicles Market Booms",
+            "description": "The electric vehicles market experiences a significant boom as consumers and governments embrace the transition to zero-emission transportation.",
+            "isRead": false,
+            "expanded": false
+        },
+        {
+            "id": 35,
+            "title": "Renewable Energy Targets Set",
+            "description": "Countries worldwide set ambitious renewable energy targets to reduce reliance on fossil fuels and combat climate change.",
+            "isRead": false,
+            "expanded": false
+        }
+    ]
+}

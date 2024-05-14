@@ -1,5 +1,6 @@
 import { CbNewsService } from '../../services/news/cb-news.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { CbNews } from '../../models/cb-news';
 import { Subscription } from 'rxjs';
 
@@ -39,8 +40,24 @@ export class CbNewsPage implements OnInit, OnDestroy {
 
     expandNewsItem(news: CbNews) {
         news.expanded = !news.expanded;
+        this._markNewsAsRead(news);
+    }
+
+    /** @description Set news as isRead to true if it's not already true. */
+    private _markNewsAsRead(news: CbNews) {
         if (!news.isRead) {
             news.isRead = true;
         }
+    }
+
+    loadMoreNews(event: any) {
+        setTimeout(() => {
+            this._cbNewsService.loadMoreNews();
+            (event as InfiniteScrollCustomEvent).target.complete();
+        }, 500);
+    }
+
+    allNewsLoaded(): boolean {
+        return this._cbNewsService.allNewsLoaded;
     }
 }

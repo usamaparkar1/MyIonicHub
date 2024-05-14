@@ -6,7 +6,9 @@ import { CbContractResolverService } from './projects/contract-booker/resolvers/
 import { CbCartResolverService } from './projects/contract-booker/resolvers/cb-cart-resolver/cb-cart-resolver.service';
 import { CbHomeResolverService } from './projects/contract-booker/resolvers/cb-home-resolver/cb-home-resolver.service';
 import { CbNewsResolverService } from './projects/contract-booker/resolvers/cb-news-resolver/cb-news-resolver.service';
-import { PreloadAllModules, Route, RouterModule, Routes } from '@angular/router';
+import { CbAuthenticationGuard } from './projects/contract-booker/guards/cb-authentication/cb-authentication.guard';
+import { McAuthenticationGuard } from './projects/miscellaneous/guards/mc-authentication/mc-authentication.guard';
+import { PreloadAllModules, Route, RouterModule, Routes, mapToCanActivateChild } from '@angular/router';
 import { DashboardGuard } from 'src/app/guards/dashboard/dashboard.guard';
 import { IntroGuard } from 'src/app/guards/intro/intro.guard';
 import { LoginGuard } from 'src/app/guards/login/login.guard';
@@ -14,6 +16,7 @@ import { NgModule } from '@angular/core';
 
 const contractBookerRoutes: Route = {
     path: 'cb',
+    canActivateChild: mapToCanActivateChild([CbAuthenticationGuard]),
     children: [
         {
             path: 'cb-home',
@@ -110,6 +113,7 @@ const contractBookerRoutes: Route = {
 
 const miscellaneousRoutes: Route = {
     path: 'mc',
+    canActivateChild: mapToCanActivateChild([McAuthenticationGuard]),
     children: [
         {
             path: 'mc-home',

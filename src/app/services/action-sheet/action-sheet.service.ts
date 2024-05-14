@@ -39,7 +39,7 @@ export class ActionSheetService {
 
     async onAppLogoutFromProfileSheet() {
         await this._authenticationService.removeCurrentAppInUseFromStorage();
-        this._routingService.goToDashboard();
+        this._routingService.goToDashboard({ replaceUrl: true });
     }
 
     async onAccountLogoutFromProfileSheet() {

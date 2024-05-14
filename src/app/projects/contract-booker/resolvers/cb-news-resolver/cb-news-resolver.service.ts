@@ -16,6 +16,6 @@ export class CbNewsResolverService {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<CbNews[]> => {
-        return of(this._cbNewsService.loadNews());
+        return of(this._cbNewsService.loadInitialNews());
     }
 }

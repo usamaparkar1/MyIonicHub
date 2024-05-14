@@ -14,7 +14,7 @@ export class LoginGuard {
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
         if (this._appHelperService.isUserLoggedIn) {
-            this._routingService.goToDashboard();
+            this._routingService.goToDashboard({ replaceUrl: true });
             return false;
         } else {
             return true;
