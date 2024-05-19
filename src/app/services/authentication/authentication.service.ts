@@ -1,6 +1,8 @@
 import { CbContractService } from 'src/app/projects/contract-booker/services/contract/cb-contract.service';
+import { SqliteStorageService } from 'src/app/services/storage/sqlite-storage.service';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
-import { StorageService } from 'src/app/services/storage/storage.service';
+import { SecureStorageService } from '../secure-storage/secure-storage.service';
+import { secureStorageHelpers } from 'src/app/helpers/secure-storage-helpers';
 import { CbRoutingHelpers } from 'src/app/helpers/routing-helpers';
 import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { HttpHeaders } from '@angular/common/http';
@@ -16,21 +18,22 @@ export class AuthenticationService {
     currentAccessToken = null;
 
     constructor(
-        private _storageService: StorageService,
         private _appHelperService: AppHelperService,
         private _cbContractService: CbContractService,
+        private _secureStorageService: SecureStorageService,
+        private _sqliteStorageService: SqliteStorageService,
     ) { }
 
     // Store a new access token
     storeAccessToken(accessToken: any) {
         this.currentAccessToken = accessToken;
-        return from(this._storageService.set(storageHelpers.accessTokenKey, accessToken));
+        return from(this._sqliteStorageService.set(storageHelpers.accessTokenKey, accessToken));
     }
 
     // Load the refresh token from storage
     // then attach it as the header for one specific API call
     getNewAccessToken() {
-        const refreshToken = from(this._storageService.get(storageHelpers.refreshTokenKey));
+        const refreshToken = from(this._sqliteStorageService.get(storageHelpers.refreshTokenKey));
         return refreshToken.pipe(
         switchMap(token => {
             if (token && token.value) {
@@ -59,18 +62,19 @@ export class AuthenticationService {
     }
 
     async setLoginTokenToStorage() {
-        await this._storageService.set(storageHelpers.isUserLoggedIn, true);
+        await this._sqliteStorageService.set(storageHelpers.isUserLoggedIn, true);
         await this._appHelperService.setUserIsLoggedInToken();
     }
 
     async removeLoginTokenFromStorage() {
-        await this._storageService.remove(storageHelpers.isUserLoggedIn);
+        await this._secureStorageService.remove(secureStorageHelpers.userLoginData);
+        await this._sqliteStorageService.remove(storageHelpers.isUserLoggedIn);
         await this._appHelperService.removeUserIsLoggedInToken();
     }
 
     async removeCurrentAppInUseFromStorage() {
         await this._clearAppRelatedData();
-        await this._storageService.remove(storageHelpers.currentAppInUse);
+        await this._sqliteStorageService.remove(storageHelpers.currentAppInUse);
         await this._appHelperService.removeCurrentAppInUseToken();
     }
 
@@ -79,38 +83,4 @@ export class AuthenticationService {
             await this._cbContractService.clearCartContractStorageKeys();
         }
     }
-}
-
-
-export class UserLoginData implements IUserLoginData {
-    username: string;
-    password: string;
-
-    constructor(userLoginData: UserLoginData) {
-    	this.username = userLoginData.username;
-        this.password = userLoginData.password;
-  	}
-}
-
-export interface IUserLoginData {
-    username: string;
-    password: string;
-}
-
-export class UserSignupData implements IUserSignupData {
-    username: string;
-    password: string;
-    confirmPassword: string;
-
-    constructor(userSignupData: UserSignupData) {
-    	this.username = userSignupData.username;
-        this.password = userSignupData.password;
-        this.confirmPassword = userSignupData?.confirmPassword;
-  	}
-}
-
-export interface IUserSignupData {
-    username: string;
-    password: string;
-    confirmPassword: string;
 }

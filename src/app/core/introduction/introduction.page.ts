@@ -1,12 +1,13 @@
-import { SlideService, SlidesModel } from 'src/app/services/slide/slide.service';
-import { StorageService } from 'src/app/services/storage/storage.service';
+import { SqliteStorageService } from 'src/app/services/storage/sqlite-storage.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
+import { SlideService } from 'src/app/services/slide/slide.service';
+import { SlidesModel } from 'src/app/models/slides';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-introduction',
-  templateUrl: './introduction.page.html',
-  styleUrls: ['./introduction.page.scss'],
+    selector: 'app-introduction',
+    templateUrl: './introduction.page.html',
+    styleUrls: ['./introduction.page.scss'],
 })
 
 export class IntroductionPage implements OnInit {
@@ -18,7 +19,7 @@ export class IntroductionPage implements OnInit {
     constructor(
         private _slideService: SlideService,
         private _routingService: RoutingService,
-        private _storageService: StorageService,
+        private _sqliteStorageService: SqliteStorageService,
     ) {}
 
     ngOnInit() {
@@ -35,7 +36,7 @@ export class IntroductionPage implements OnInit {
 
     async completeIntroduction() {
         // Skip can be clicked from the end of the slides or from the floating skip button
-        await this._storageService.setUserHasSeenIntroInStorage();
+        await this._sqliteStorageService.setUserHasSeenIntroInStorage();
         await this._routingService.goToLogin();
     }
 }

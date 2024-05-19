@@ -1,17 +1,17 @@
-import { CbDbAppointmentsService } from '../projects/contract-booker/services/cb-db-appointments/cb-db-appointments.service';
-import { CbDbMyContractsService } from '../projects/contract-booker/services/cb-db-my-contracts/cb-db-my-contracts.service';
-import { StorageService } from './storage/storage.service';
-import { SqliteService } from './sqlite/sqlite.service';
-import { alertHelpers } from '../helpers/alert-helpers';
-import { SignupService } from './signup/signup.service';
-import { AlertService } from './alert/alert.service';
-import { NetworkService } from './network.service';
-import { UserService } from './user/user.service';
+import { CbDbAppointmentsService } from 'src/app/projects/contract-booker/services/cb-db-appointments/cb-db-appointments.service';
+import { CbDbMyContractsService } from 'src/app/projects/contract-booker/services/cb-db-my-contracts/cb-db-my-contracts.service';
+import { SqliteStorageService } from '../storage/sqlite-storage.service';
+import { alertHelpers } from 'src/app/helpers/alert-helpers';
+import { NetworkService } from '../network/network.service';
+import { SqliteService } from '../sqlite/sqlite.service';
+import { SignupService } from '../signup/signup.service';
+import { AlertService } from '../alert/alert.service';
+import { UserService } from '../user/user.service';
 import { Capacitor } from '@capacitor/core';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class AppService {
@@ -25,8 +25,8 @@ export class AppService {
         private _alertService: AlertService,
         private _signupService: SignupService,
         private _sqliteService: SqliteService,
-        private _storageService: StorageService,
         private _networkService: NetworkService,
+        private _sqliteStorageService: SqliteStorageService,
         private _cbDbMyContractsService: CbDbMyContractsService,
         private _cbDbAppointmentsService: CbDbAppointmentsService,
     ) {}
@@ -68,7 +68,7 @@ export class AppService {
 
     private async _createStorageSchema() {
         try {
-            await this._storageService.initializeDatabase();
+            await this._sqliteStorageService.initializeDatabase();
         } catch (error) {
             console.error(error);
             await this._alertService.showAlert(

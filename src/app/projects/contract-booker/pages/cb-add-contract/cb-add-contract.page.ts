@@ -1,7 +1,7 @@
 import { CbContractService } from '../../services/contract/cb-contract.service';
 import { CbRoutingService } from '../../services/routing/cb-routing.service';
 import { CbAlertService } from '../../services/alert/cb-alert.service';
-import { CbAddContractType } from '../../models/cb-add-contract-type';
+import { CbAddContractType } from '../../enums/cb-add-contract-type';
 import { CbAlertHelpers } from '../../helpers/cb-alert-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { Contract } from '../../models/cb-contract';

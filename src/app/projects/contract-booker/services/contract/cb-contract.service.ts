@@ -1,4 +1,4 @@
-import { StorageService } from 'src/app/services/storage/storage.service';
+import { SqliteStorageService } from 'src/app/services/storage/sqlite-storage.service';
 import { CustomerAddressData } from '../../models/cb-customer-address';
 import { ConsultationSteps } from '../../models/cb-consultation-steps';
 import { cbStorageHelpers } from 'src/app/helpers/storage-helpers';
@@ -18,8 +18,8 @@ export class CbContractService {
     contracts: BehaviorSubject<Contract[]> = new BehaviorSubject<Contract[]>([]);
 
     constructor(
-        private _storageService: StorageService,
-        private _translateService: TranslateService
+        private _translateService: TranslateService,
+        private _sqliteStorageService: SqliteStorageService
     ) {}
 
     async clearCartContractStorageKeys() {
@@ -28,11 +28,11 @@ export class CbContractService {
 
     private async _clearAllContracts() {
         this.contracts.next([]);
-        this._storageService.remove(cbStorageHelpers.allContracts);
+        this._sqliteStorageService.remove(cbStorageHelpers.allContracts);
     }
 
     async getAllContractsFromStorage() {
-        return await this._storageService.get(cbStorageHelpers.allContracts);
+        return await this._sqliteStorageService.get(cbStorageHelpers.allContracts);
     }
 
     async loadAllContractsFromStorage(): Promise<Contract[]> {
@@ -152,7 +152,7 @@ export class CbContractService {
     }
 
     private async storeContractsInStorage(contracts: Contract[]) {
-        await this._storageService.set(cbStorageHelpers.allContracts, contracts);
+        await this._sqliteStorageService.set(cbStorageHelpers.allContracts, contracts);
     }
 
     getContractById(contractId: string): Contract | undefined {

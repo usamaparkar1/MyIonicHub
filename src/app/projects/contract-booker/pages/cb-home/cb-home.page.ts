@@ -10,9 +10,9 @@ import { Contract } from '../../models/cb-contract';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-cb-home',
-  templateUrl: './cb-home.page.html',
-  styleUrls: ['./cb-home.page.scss'],
+    selector: 'app-cb-home',
+    templateUrl: './cb-home.page.html',
+    styleUrls: ['./cb-home.page.scss'],
 })
 
 export class CbHomePage implements OnInit, OnDestroy {

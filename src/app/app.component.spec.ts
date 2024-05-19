@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { Storage } from '@ionic/storage-angular';
 import { MockProvider } from 'ng-mocks';
 import { TranslationService } from './services/translation/translation.service';
-import { StorageService } from './services/storage/storage.service';
+import { SqliteStorageService } from './services/storage/sqlite-storage.service';
 
 describe('AppComponent', () => {
 
@@ -14,7 +14,7 @@ describe('AppComponent', () => {
       declarations: [AppComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
-        MockProvider(StorageService),
+        MockProvider(SqliteStorageService),
         MockProvider(TranslationService)
       ]
     }).compileComponents();

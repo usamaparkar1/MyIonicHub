@@ -3,12 +3,15 @@ import { CbAppointmentsResolverService } from './projects/contract-booker/resolv
 import { McRemindersResolverService } from './projects/miscellaneous/services/resolvers/mc-reminders-resolver/mc-reminders-resolver.service';
 import { CbMyContractsResolverService } from './projects/contract-booker/resolvers/cb-my-contracts/cb-my-contracts-resolver.service';
 import { CbContractResolverService } from './projects/contract-booker/resolvers/cb-contract-resolver/cb-contract-resolver.service';
+import { CbCustomerAddressGuard } from './projects/contract-booker/guards/cb-customer-address/cb-customer-address.guard';
 import { CbCartResolverService } from './projects/contract-booker/resolvers/cb-cart-resolver/cb-cart-resolver.service';
 import { CbHomeResolverService } from './projects/contract-booker/resolvers/cb-home-resolver/cb-home-resolver.service';
 import { CbNewsResolverService } from './projects/contract-booker/resolvers/cb-news-resolver/cb-news-resolver.service';
 import { CbAuthenticationGuard } from './projects/contract-booker/guards/cb-authentication/cb-authentication.guard';
 import { McAuthenticationGuard } from './projects/miscellaneous/guards/mc-authentication/mc-authentication.guard';
+import { CbShoppingCartGuard } from './projects/contract-booker/guards/cb-shopping-cart/cb-shopping-cart.guard';
 import { PreloadAllModules, Route, RouterModule, Routes, mapToCanActivateChild } from '@angular/router';
+import { CbContractGuard } from './projects/contract-booker/guards/cb-contract/cb-contract.guard';
 import { DashboardGuard } from 'src/app/guards/dashboard/dashboard.guard';
 import { IntroGuard } from 'src/app/guards/intro/intro.guard';
 import { LoginGuard } from 'src/app/guards/login/login.guard';
@@ -29,55 +32,63 @@ const contractBookerRoutes: Route = {
         {
             path: 'cb-customer-address',
             loadChildren: () => import('src/app/projects/contract-booker/pages/cb-customer-address/cb-customer-address.module').then( m => m.CbCustomerAddressPageModule),
+            canActivate: [CbCustomerAddressGuard]
         },
         {
             path: 'cb-product-selection/:id',
             loadChildren: () => import('src/app/projects/contract-booker/pages/cb-product-selection/cb-product-selection.module').then( m => m.CbProductSelectionPageModule),
             resolve: {
                 contract: CbContractResolverService
-            }
+            },
+            canActivate: [CbContractGuard]
         },
         {
             path: 'cb-standard-consultation/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-standard-consultation/cb-standard-consultation.module').then( m => m.CbStandardConsultationPageModule),
             resolve: {
                 contract: CbContractResolverService
-            }
+            },
+            canActivate: [CbContractGuard]
         },
         {
             path: 'cb-price-comparison/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-price-comparison/cb-price-comparison.module').then( m => m.CbPriceComparisonPageModule),
             resolve: {
                 contract: CbContractResolverService
-            }
+            },
+            canActivate: [CbContractGuard]
         },
         {
             path: 'cb-product-details/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-product-details/cb-product-details.module').then( m => m.CbProductDetailsPageModule),
             resolve: {
                 contract: CbContractResolverService
-            }
+            },
+            canActivate: [CbContractGuard]
         },
         {
             path: 'cb-shopping-cart',
             loadChildren: () => import('./projects/contract-booker/pages/cb-shopping-cart/cb-shopping-cart.module').then( m => m.CbShoppingCartPageModule),
             resolve: {
                 contracts: CbCartResolverService
-            }
+            },
+            canActivate: [CbShoppingCartGuard]
         },
         {
             path: 'cb-add-contract',
             loadChildren: () => import('./projects/contract-booker/pages/cb-add-contract/cb-add-contract.module').then( m => m.CbAddContractPageModule),
             resolve: {
                 contracts: CbCartResolverService
-            }
+            },
+            canActivate: [CbShoppingCartGuard]
         },
         {
             path: 'cb-sign-contract/:id',
             loadChildren: () => import('./projects/contract-booker/pages/cb-sign-contract/cb-sign-contract.module').then( m => m.CbSignContractPageModule),
             resolve: {
                 contract: CbContractResolverService
-            }
+            },
+            canActivate: [CbContractGuard]
         },
         {
             path: 'cb-my-contracts',

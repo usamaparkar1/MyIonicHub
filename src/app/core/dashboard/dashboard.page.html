@@ -19,21 +19,23 @@
     </ion-grid>
 
     <ion-grid *ngIf="!isLoadingContent">
-        <ion-row *ngFor="let project of projects" class="dashboard-app-card-container"><ion-col>
-            <ion-card class="modern-card" (click)="selectApplication(project.appName)">
-                <!-- Images -->
-                <ion-row class="app-icon-row-container">
-                    <ion-col class="app-icon-col-container" *ngFor="let appicon of project.projectIcon">
-                        <img [alt]="appicon.altText" [src]="appicon.svgSrc" width="120" />
-                    </ion-col>
-                </ion-row>
-                <!-- App Title -->
-                <ion-card-header>
-                    <ion-card-title>{{ project.appName }}</ion-card-title>
-                </ion-card-header>
-                <!-- App Description -->
-                <ion-card-content>{{ project.appDescription | translate }}</ion-card-content>
-            </ion-card>
-        </ion-col></ion-row>
+        <ng-container *ngIf="projects$ | async as projects">
+            <ion-row *ngFor="let project of projects"><ion-col>
+                <ion-card class="modern-card" (click)="selectApplication(project.appName)">
+                    <!-- Images -->
+                    <ion-row class="app-icon-row-container">
+                        <ion-col class="app-icon-col-container">
+                            <img [alt]="project.projectIcon.altText" [src]="project.projectIcon.svgSrc" width="120" />
+                        </ion-col>
+                    </ion-row>
+                    <!-- App Title -->
+                    <ion-card-header>
+                        <ion-card-title>{{ project.appName }}</ion-card-title>
+                    </ion-card-header>
+                    <!-- App Description -->
+                    <ion-card-content>{{ project.appDescription | translate }}</ion-card-content>
+                </ion-card>
+            </ion-col></ion-row>
+        </ng-container>
     </ion-grid>
 </ion-content>

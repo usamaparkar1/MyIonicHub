@@ -7,7 +7,7 @@ import { McAlertService } from '../../services/alert/mc-alert.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { mcAlertHelpers } from '../../helpers/mc-alert-helper';
 import { toastHelpers } from 'src/app/helpers/toast-helpers';
-import { McReminder } from '../../models/mc-reminder.model';
+import { McReminder } from '../../models/mc-reminder';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 

@@ -1,9 +1,13 @@
-import { PasswordHash, PasswordHelperService } from '../password-helper/password-helper.service';
-import { UserSignupData } from '../authentication/authentication.service';
+import { PasswordHelperService } from '../password-helper/password-helper.service';
+import { UserCreationResponse } from 'src/app/models/user-creation-response';
 import { SQLiteDBConnection } from '@capacitor-community/sqlite';
+import { UserSignupData } from 'src/app/models/user-signup-data';
+import { PasswordHash } from 'src/app/models/password-hash';
 import { userSchema } from 'src/assets/schemas/user-schema';
 import { UserHelpers } from 'src/app/helpers/user-helpers';
 import { SqliteService } from '../sqlite/sqlite.service';
+import { RightsService } from '../rights/rights.service';
+import { UserService } from '../user/user.service';
 import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,6 +20,8 @@ export class SignupService {
     private _userDbConnection!: SQLiteDBConnection;
 
     constructor(
+        private _userService: UserService,
+        private _rightsSerice: RightsService,
         private _sqliteService: SqliteService,
         private _passwordHelperService: PasswordHelperService
     ) { }
@@ -52,11 +58,19 @@ export class SignupService {
 
 	async insertNewUserInDb(newUserAccountId: string, username: string, hashResponse: PasswordHash) {
 		try {
+            let userRights: number[] = [];
+            if (this._userService.isMasterUser(username)) {
+                userRights = this._rightsSerice.getMasterUserRights();
+            } else {
+                userRights = this._rightsSerice.getAuthenticatedUserRights();
+            }
+
 			const insertQuery: string = `INSERT INTO ${UserHelpers.UserTable} VALUES (
 				"${newUserAccountId}",
 				"${username}",
 				"${hashResponse.passwordHashString}",
-                "${hashResponse.passwordSaltString}"
+                "${hashResponse.passwordSaltString}",
+                "${userRights}"
 			);`;
 
 			let queryValues = (await this._userDbConnection.query(insertQuery)).values;
@@ -69,12 +83,4 @@ export class SignupService {
 			return false;
 		}
 	}
-}
-
-
-export interface UserCreationResponse {
-    userSignupData: UserSignupData;
-    passwordHash: PasswordHash;
-    accountId: string;
-    success: boolean;
 }

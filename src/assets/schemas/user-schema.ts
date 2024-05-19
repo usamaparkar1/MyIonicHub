@@ -8,7 +8,8 @@ export const userSchema = {
             ${UserHelpers.Columns.AccountId.Name} varchar(20) NOT NULL PRIMARY KEY,
             ${UserHelpers.Columns.Username.Name} varchar(20) UNIQUE NOT NULL,
             ${UserHelpers.Columns.Password.Name} varchar(512) NOT NULL,
-            ${UserHelpers.Columns.Salt.Name} varchar(32) NOT NULL
+            ${UserHelpers.Columns.Salt.Name} varchar(32) NOT NULL,
+            ${UserHelpers.Columns.Rights.Name} varchar(512) NOT NULL
         );`,
     ]
 };

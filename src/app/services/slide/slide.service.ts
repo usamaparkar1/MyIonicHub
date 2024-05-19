@@ -2,6 +2,7 @@ import contractBookerJson from 'src/assets/json-data/projects/contract-booker/co
 import miscellaneousJson from 'src/assets/json-data/projects/miscellaneous/miscellaneous-data.json';
 import coreDataJson from 'src/assets/json-data/core-data.json';
 import { TranslateService } from '@ngx-translate/core';
+import { SlidesModel } from 'src/app/models/slides';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -32,20 +33,5 @@ export class SlideService {
     async getSlides(): Promise<SlidesModel[]> {
         return this._introductionSlides;
     }
-}
-
-export class SlidesModel implements ISlidesModel {
-    title: string;
-    imageUrl: string;
-  
-    constructor(slidesModel: SlidesModel) {
-        this.title = slidesModel.title;
-        this.imageUrl = slidesModel.imageUrl;
-    }
-}
-  
-export interface ISlidesModel {
-    title: string;
-    imageUrl: string;
 }
   

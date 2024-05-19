@@ -1,26 +1,38 @@
-import { AuthenticationService, UserLoginData } from 'src/app/services/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { SecureStorageService } from 'src/app/services/secure-storage/secure-storage.service';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { secureStorageHelpers } from 'src/app/helpers/secure-storage-helpers';
 import { RoutingService } from 'src/app/services/routing/routing.service';
+import { NetworkService } from 'src/app/services/network/network.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
-import { NetworkService } from 'src/app/services/network.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { UserLoginData } from 'src/app/models/user-login-data';
 import { localHelpers } from 'src/app/helpers/local-helpers';
 import { toastHelpers } from 'src/app/helpers/toast-helpers';
 import { UserHelpers } from 'src/app/helpers/user-helpers';
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+    selector: 'app-login',
+    templateUrl: './login.page.html',
+    styleUrls: ['./login.page.scss'],
 })
 
 export class LoginPage implements OnInit {
   
     loginPageFormValidators = UserHelpers;
     loginForm = new UntypedFormGroup({
-        username: new UntypedFormControl('UsamaParkar', Validators.compose([Validators.required, Validators.minLength(UserHelpers.MinLengthForUserName), Validators.maxLength(UserHelpers.MaxLengthForUserName)])),
-        password: new UntypedFormControl('UsamaParkar', Validators.compose([Validators.required, Validators.minLength(UserHelpers.MinLengthForPassword), Validators.maxLength(UserHelpers.MaxLengthForPassword)])),
+        username: new UntypedFormControl('UsamaParkar', Validators.compose([
+            Validators.required,
+            Validators.minLength(UserHelpers.MinLengthForUserName),
+            Validators.maxLength(UserHelpers.MaxLengthForUserName)
+        ])),
+        password: new UntypedFormControl('UsamaParkar', Validators.compose([
+            Validators.required,
+            Validators.minLength(UserHelpers.MinLengthForPassword),
+            Validators.maxLength(UserHelpers.MaxLengthForPassword)
+        ])),
     });
     isLogginIn: boolean = false;
 
@@ -29,6 +41,8 @@ export class LoginPage implements OnInit {
         private _toastService: ToastService,
         private _routingService: RoutingService,
         private _networkService: NetworkService,
+        private _translateService: TranslateService,
+        private _secureStorageService: SecureStorageService,
         private _authenticationService: AuthenticationService,
     ) {}
 
@@ -89,13 +103,17 @@ export class LoginPage implements OnInit {
         }
 
         if (userNameErrors?.['required']) {
-            showMessageForInvalidUserName('You have not provided a username');
+            showMessageForInvalidUserName(this._translateService.instant('LOGIN.NO_USERNAME'));
             return false;
         } else if (userNameErrors?.['minlength']) {
-            showMessageForInvalidUserName(`Username must be atleast ${userNameErrors?.['minlength']?.requiredLength} long`);
+            showMessageForInvalidUserName(this._translateService.instant('LOGIN.USERNAME_TOO_SHORT', {
+                userNameLength: userNameErrors?.['minlength']?.requiredLength
+            }));
             return false;
         } else if (userNameErrors?.['maxlength']) {
-            showMessageForInvalidUserName(`Username must be less than ${userNameErrors?.['maxlength']?.requiredLength} characters`);
+            showMessageForInvalidUserName(this._translateService.instant('LOGIN.USERNAME_TOO_LONG', {
+                userNameLength: userNameErrors?.['maxlength']?.requiredLength
+            }));
             return false;
         }
     
@@ -112,7 +130,7 @@ export class LoginPage implements OnInit {
         }
 
         if (passwordErrors?.['required']) {
-            showMessageForInvalidPassword('You have not provided a password');
+            showMessageForInvalidPassword(this._translateService.instant('LOGIN.NO_PASSWORD'));
             return false;
         }
 
@@ -121,7 +139,7 @@ export class LoginPage implements OnInit {
 
     /** @description Login is called only after the form is validated */
     private async _onLogin(): Promise<void> {
-        return await new Promise(async (resolve) => {
+        return await new Promise(async (resolve, reject) => {
             try {
                 this._showLoginLoader(true);
                 await this._setTimeOutForDismissingLoader();
@@ -131,8 +149,11 @@ export class LoginPage implements OnInit {
                     this._handleOfflineLogin();
                 }
                 this._showLoginLoader(true);
+
+                resolve();
             } catch (error) {
                 this._dimissLoadingStateIfLoading();
+                reject(error);
             }
         });
     }
@@ -177,6 +198,8 @@ export class LoginPage implements OnInit {
         const isUserAuthenticated = await this._userService.authenticateUser(userDataOfflineLogin, userLoginData.password);
         await this._showLoginLoader(false);
         if (isUserAuthenticated) {
+            const secureUserData = await this._secureStorageService.createSecureUserData(userDataOfflineLogin);
+            await this._secureStorageService.set(secureStorageHelpers.userLoginData, secureUserData);
             await this._authenticationService.loginUser();
             await this._routingService.goToDashboard();
         } else {
@@ -187,14 +210,16 @@ export class LoginPage implements OnInit {
     private async _showUserDoesNotExistToast(username: string) {
         await this._toastService.showToast({
             id: toastHelpers.userDoesNotExist,
-            message: `You do not have an account with us for the User: ${username}`
+            message: this._translateService.instant('LOGIN.USERNAME_DOES_NOT_EXIST', {
+                username: username
+            })
         });
     }
 
     private async _showToastForIncorrectPasswordEntered() {
         await this._toastService.showToast({
             id: toastHelpers.incorrectPasswordOnLogin,
-            message: `You have entered an incorrect password. Please check your password again.`
+            message: this._translateService.instant('LOGIN.INCORRECT_PASSWORD')
         });
     }
 }

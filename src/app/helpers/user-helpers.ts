@@ -18,6 +18,9 @@ export const UserHelpers = {
         },
         Salt: {
             Name: 'salt',
+        },
+        Rights: {
+            Name: 'rights'
         }
     }
 }

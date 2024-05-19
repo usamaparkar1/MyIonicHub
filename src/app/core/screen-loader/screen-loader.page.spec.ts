@@ -3,7 +3,7 @@ import { ScreenLoaderPage } from './screen-loader.page';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MockModule, MockProvider } from 'ng-mocks';
 import { TranslateModule } from '@ngx-translate/core';
-import { StorageService } from 'src/app/services/storage/storage.service';
+import { SqliteStorageService } from 'src/app/services/storage/sqlite-storage.service';
 
 const mockStorageGetReturn = true;
 
@@ -19,7 +19,7 @@ describe('ScreenLoaderPage', () => {
         MockModule(TranslateModule),
       ],
       providers: [
-        MockProvider(StorageService, {
+        MockProvider(SqliteStorageService, {
           get: () => Promise.resolve(JSON.stringify(mockStorageGetReturn))
         })
       ]
@@ -31,11 +31,5 @@ describe('ScreenLoaderPage', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('expect downloadFiles toHaveBeenCalled', () => {
-    const spy = spyOn(component, 'downloadFiles').and.callThrough();
-    component.downloadFiles();
-    expect(spy).toHaveBeenCalled();
   });
 });

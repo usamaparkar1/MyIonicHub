@@ -5,11 +5,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppService } from './services/app/app.service';
 import { AppRoutingModule } from './app-routing.module';
 import { localHelpers } from './helpers/local-helpers';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouteReuseStrategy } from '@angular/router';
-import { AppService } from './services/app.service';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 

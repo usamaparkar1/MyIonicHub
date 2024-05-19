@@ -1,6 +1,6 @@
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { McReminderService } from '../../reminder/mc-reminder.service';
-import { McReminder } from '../../../models/mc-reminder.model';
+import { McReminder } from '../../../models/mc-reminder';
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 

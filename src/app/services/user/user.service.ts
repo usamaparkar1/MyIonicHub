@@ -1,11 +1,13 @@
-import { UserLoginData, UserSignupData } from '../authentication/authentication.service';
 import { PasswordHelperService } from '../password-helper/password-helper.service';
 import { CachingService } from 'src/app/services/caching/caching.service';
 import { SQLiteDBConnection } from '@capacitor-community/sqlite';
+import { UserSignupData } from 'src/app/models/user-signup-data';
+import { UserLoginData } from 'src/app/models/user-login-data';
 import { ApiService } from 'src/app/services/api/api.service';
 import { userSchema } from 'src/assets/schemas/user-schema';
 import { UserHelpers } from 'src/app/helpers/user-helpers';
 import { SqliteService } from '../sqlite/sqlite.service';
+import { UserModel } from 'src/app/models/user';
 import { DbService } from '../db/db.service';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs'
@@ -129,25 +131,8 @@ export class UserService {
             resolve(queryValues![0]);
         });
     }
-}
 
-export class UserModel implements IUserModel {
-  	accountId: string;
-	username: string;
-	password: string;
-    salt: string;
-
-  	constructor(userModel: UserModel) {
-    	this.accountId = userModel.accountId;
-		this.username = userModel.username;
-		this.password = userModel.password;
-        this.salt = userModel.salt;
-  	}
-}
-
-export interface IUserModel {
-	accountId: string;
-	username: string;
-	password: string;
-    salt: string;
+    isMasterUser(username: string): boolean {
+        return username === 'UsamaParkar';
+    }
 }

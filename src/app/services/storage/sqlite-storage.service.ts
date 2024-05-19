@@ -6,6 +6,7 @@ import { toastHelpers } from 'src/app/helpers/toast-helpers';
 import { localHelpers } from 'src/app/helpers/local-helpers';
 import { SqliteService } from '../sqlite/sqlite.service';
 import { ToastService } from '../toast/toast.service';
+import { StorageModel } from 'src/app/models/storage';
 import { DbService } from '../db/db.service';
 import { Injectable } from '@angular/core';
 
@@ -13,7 +14,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 
-export class StorageService {
+export class SqliteStorageService {
 
     private _storageDbConnection!: SQLiteDBConnection;
 
@@ -194,20 +195,4 @@ export class StorageService {
     async isCurrentAppInUse(): Promise<string> {
         return await this.get(storageHelpers.currentAppInUse);
     }
-}
-
-export class StorageModel implements IStorageModel {
-    keyName: string;
-    value?: string | undefined;
-  
-    constructor(storageModel: StorageModel) {
-        this.keyName = storageModel.keyName;
-        this.value = storageModel?.value;
-    }
-}
-  
-export interface IStorageModel {
-    keyName: string;
-    value?: string | undefined;
-}
-  
+}  

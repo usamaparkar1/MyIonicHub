@@ -3,18 +3,20 @@ import { CbRoutingService } from 'src/app/projects/contract-booker/services/rout
 import { McRoutingService } from 'src/app/projects/miscellaneous/services/router/mc-routing.service';
 import miscellaneousJson from 'src/assets/json-data/projects/miscellaneous/miscellaneous-data.json';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { SqliteStorageService } from 'src/app/services/storage/sqlite-storage.service';
 import { CbRoutingHelpers, McRoutingHelpers } from 'src/app/helpers/routing-helpers';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
+import { ProjectsService } from 'src/app/services/projects/projects.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
-import { StorageService } from 'src/app/services/storage/storage.service';
 import coreDataJson from 'src/assets/json-data/core-data.json';
-import { TranslateService } from '@ngx-translate/core';
+import { Projects } from 'src/app/models/projects';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss'],
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.page.html',
+    styleUrls: ['./dashboard.page.scss'],
 })
 
 export class DashboardPage implements OnInit {
@@ -23,36 +25,15 @@ export class DashboardPage implements OnInit {
     contractBookerData = contractBookerJson;
     miscellaneousData = miscellaneousJson;
     coreData = coreDataJson;
-    projects: ProjectCards[] = [
-        {
-            appName: this.contractBookerData.appName,
-            appDescription: this._translateService.instant('APPS.CONTRACT_BOOKER.DESCRIPTION'),
-            projectIcon: [
-                {
-                    altText: this.contractBookerData.appName,
-                    svgSrc: this.contractBookerData.appIcon
-                }
-            ]
-        },
-        {
-            appName: this.miscellaneousData.appName,
-            appDescription: this._translateService.instant('APPS.MISCELLANEOUS.DESCRIPTION'),
-            projectIcon: [
-                {
-                    altText: this.miscellaneousData.appIconAlt,
-                    svgSrc: this.miscellaneousData.appIcon
-                }
-            ]
-        }
-    ];
+    projects$: Observable<Projects[]> = this._projectsService.getAllProjects();
 
     constructor(
-        private _storageService: StorageService,
         private _routingService: RoutingService,
-        private _translateService: TranslateService,
+        private _projectsService: ProjectsService,
         private _cbRoutingService: CbRoutingService,
         private _mcRoutingService: McRoutingService,
         private _appHelperService: AppHelperService,
+        private _sqliteStorageService: SqliteStorageService,
         private _authenticationService: AuthenticationService
     ) {}
 
@@ -60,7 +41,7 @@ export class DashboardPage implements OnInit {
         this._dashboardInit();
     }
 
-    private _dashboardInit() {
+    private async _dashboardInit() {
         this._showLoadingContent(false);
     }
 
@@ -78,7 +59,7 @@ export class DashboardPage implements OnInit {
 
     async selectContractBookerApp() {
         this._appHelperService.setCurrentAppInUseToken(CbRoutingHelpers.cbHome);
-        await this._storageService.setCurrentAppInUse(CbRoutingHelpers.cbHome);
+        await this._sqliteStorageService.setCurrentAppInUse(CbRoutingHelpers.cbHome);
         await this.goToContractBooker();
     }
 
@@ -88,7 +69,7 @@ export class DashboardPage implements OnInit {
 
     async selectMiscellaneousApp() {
         this._appHelperService.setCurrentAppInUseToken(McRoutingHelpers.mcHome);
-        await this._storageService.setCurrentAppInUse(McRoutingHelpers.mcHome);
+        await this._sqliteStorageService.setCurrentAppInUse(McRoutingHelpers.mcHome);
         await this.goToMiscellaneous();
     }
 
@@ -100,15 +81,4 @@ export class DashboardPage implements OnInit {
         await this._authenticationService.logoutUser();
         await this._routingService.goToLogin();
     }
-}
-
-export interface ProjectCards {
-    appName: string;
-    appDescription: string;
-    projectIcon: ProjectIcon[];
-}
-
-export interface ProjectIcon {
-    altText: string;
-    svgSrc: string;
 }

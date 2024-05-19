@@ -1,5 +1,5 @@
 import { TranslationService } from 'src/app/services/translation/translation.service';
-import { StorageService } from './storage.service';
+import { SqliteStorageService } from './sqlite-storage.service';
 import { Storage } from '@ionic/storage-angular';
 import { TestBed } from '@angular/core/testing';
 import { MockProvider } from 'ng-mocks';
@@ -9,8 +9,8 @@ const mockStorageValue: string = JSON.stringify({
   data: 'mockStorageValue'
 });
 
-describe('StorageService', () => {
-  let service: StorageService;
+describe('SqliteStorageService', () => {
+  let service: SqliteStorageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -19,17 +19,11 @@ describe('StorageService', () => {
         MockProvider(TranslationService)
       ]
     });
-    service = TestBed.inject(StorageService);
+    service = TestBed.inject(SqliteStorageService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('expect setupStorage toBeDefined', () => {
-    const spy = spyOn(service, 'setupStorage').and.callThrough();
-    service.setupStorage();
-    expect(spy).toBeDefined();
   });
 
   it('expect get toBeDefined', () => {

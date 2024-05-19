@@ -1,19 +1,21 @@
 import { AbstractControl, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { AuthenticationService, UserSignupData } from 'src/app/services/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { RoutingService } from 'src/app/services/routing/routing.service';
+import { NetworkService } from 'src/app/services/network/network.service';
 import { SignupService } from 'src/app/services/signup/signup.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
-import { NetworkService } from 'src/app/services/network.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { UserSignupData } from 'src/app/models/user-signup-data';
 import { localHelpers } from 'src/app/helpers/local-helpers';
 import { toastHelpers } from 'src/app/helpers/toast-helpers';
 import { UserHelpers } from 'src/app/helpers/user-helpers';
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.page.html',
-  styleUrls: ['./signup.page.scss'],
+    selector: 'app-signup',
+    templateUrl: './signup.page.html',
+    styleUrls: ['./signup.page.scss'],
 })
 
 export class SignupPage implements OnInit {
@@ -31,9 +33,21 @@ export class SignupPage implements OnInit {
     };
 
     signupForm = new UntypedFormGroup({
-        username: new UntypedFormControl('UsamaParkar', Validators.compose([Validators.required, Validators.minLength(UserHelpers.MinLengthForUserName), Validators.maxLength(UserHelpers.MaxLengthForUserName)])),
-        password: new UntypedFormControl('UsamaParkar', Validators.compose([Validators.required, Validators.minLength(UserHelpers.MinLengthForPassword), Validators.maxLength(UserHelpers.MaxLengthForPassword)])),
-        confirmPassword: new UntypedFormControl('UsamaParkar', Validators.compose([Validators.required, Validators.minLength(UserHelpers.MinLengthForPassword), Validators.maxLength(UserHelpers.MaxLengthForPassword)])),
+        username: new UntypedFormControl('UsamaParkar', Validators.compose([
+            Validators.required,
+            Validators.minLength(UserHelpers.MinLengthForUserName),
+            Validators.maxLength(UserHelpers.MaxLengthForUserName)
+        ])),
+        password: new UntypedFormControl('UsamaParkar',Validators.compose([
+            Validators.required,
+            Validators.minLength(UserHelpers.MinLengthForPassword),
+            Validators.maxLength(UserHelpers.MaxLengthForPassword)
+        ])),
+        confirmPassword: new UntypedFormControl('UsamaParkar', Validators.compose([
+            Validators.required,
+            Validators.minLength(UserHelpers.MinLengthForPassword),
+            Validators.maxLength(UserHelpers.MaxLengthForPassword)
+        ])),
     }, { validators: [this.confirmPasswordValidator] });
 
     constructor(
@@ -42,6 +56,7 @@ export class SignupPage implements OnInit {
         private _signupService: SignupService,
         private _networkService: NetworkService,
         private _routingService: RoutingService,
+        private _translateService: TranslateService,
         private _authenticationService: AuthenticationService
     ) { }
 
@@ -104,13 +119,17 @@ export class SignupPage implements OnInit {
         }
 
         if (userNameErrors?.['required']) {
-            showMessageForInvalidUserName('You have not provided a username');
+            showMessageForInvalidUserName(this._translateService.instant('SIGNUP.NO_USERNAME'));
             return false;
         } else if (userNameErrors?.['minlength']) {
-            showMessageForInvalidUserName(`Username must be atleast ${userNameErrors?.['minlength']?.requiredLength} long`);
+            showMessageForInvalidUserName(this._translateService.instant('SIGNUP.USERNAME_TOO_SHORT', {
+                userNameLength: userNameErrors?.['minlength']?.requiredLength
+            }));
             return false;
         } else if (userNameErrors?.['maxlength']) {
-            showMessageForInvalidUserName(`Username must be less than ${userNameErrors?.['maxlength']?.requiredLength} characters`);
+            showMessageForInvalidUserName(this._translateService.instant('SIGNUP.USERNAME_TOO_LONG', {
+                userNameLength: userNameErrors?.['maxlength']?.requiredLength
+            }));
             return false;
         }
     
@@ -127,7 +146,7 @@ export class SignupPage implements OnInit {
         }
 
         if (passwordErrors?.['required']) {
-            showMessageForInvalidPassword('You have not provided a password');
+            showMessageForInvalidPassword(this._translateService.instant('SIGNUP.NO_PASSWORD'));
             return false;
         }
 
@@ -144,12 +163,12 @@ export class SignupPage implements OnInit {
         }
 
         if (passwordErrors?.['required']) {
-            showMessageForInvalidPassword('You have not provided a confirmation password');
+            showMessageForInvalidPassword(this._translateService.instant('SIGNUP.NO_CONFIRMATION_PASSWORD'));
             return false;
         }
 
         if (passwordErrors?.['passwordsDoNotMatch']) {
-            showMessageForInvalidPassword('Your passwords do not match');
+            showMessageForInvalidPassword(this._translateService.instant('SIGNUP.PASSWORDS_DONT_MATCH'));
             return false;
         }
 
@@ -177,7 +196,7 @@ export class SignupPage implements OnInit {
     private async _showToastUserCannotSignupOffline() {
         await this._toastService.showToast({
             id: toastHelpers.cannotSignUpOffline,
-            message: `You need to be online to create a new account`
+            message: this._translateService.instant('SIGNUP.NEED_TO_BE_ONLINE')
         });
     }
 
@@ -206,7 +225,9 @@ export class SignupPage implements OnInit {
     private async _showToastForUserExists(username: string) {
         await this._toastService.showToast({
             id: toastHelpers.userDoesNotExist,
-            message: `An account already exists for the Username: ${username}`
+            message: this._translateService.instant('SIGNUP.USERNAME_EXISTS', {
+                username: username
+            })
         });
     }
     

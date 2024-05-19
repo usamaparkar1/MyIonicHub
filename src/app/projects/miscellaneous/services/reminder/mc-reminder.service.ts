@@ -1,7 +1,7 @@
 import { LocalNotificationSchema, LocalNotifications } from '@capacitor/local-notifications';
 import { PushNotificationHelpers } from '../../helpers/mc-reminder-helpers';
 import { McHelperService } from '../helper/mc-helper.service';
-import { McReminder } from '../../models/mc-reminder.model';
+import { McReminder } from '../../models/mc-reminder';
 import { McToastService } from '../toast/mc-toast.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';

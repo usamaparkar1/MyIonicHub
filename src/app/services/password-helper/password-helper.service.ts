@@ -1,3 +1,4 @@
+import { PasswordHash } from 'src/app/models/password-hash';
 import { Injectable } from '@angular/core';
 import CryptoES from 'crypto-es';
 
@@ -20,19 +21,4 @@ export class PasswordHelperService {
 
 		return newPasswordHashData;
 	}
-}
-
-export class PasswordHash implements IPasswordHash {
-    passwordHashString: string;
-    passwordSaltString: string;
-
-    constructor(passwordHash: PasswordHash) {
-        this.passwordHashString = passwordHash.passwordHashString;
-        this.passwordSaltString = passwordHash.passwordSaltString;
-    }
-}
-
-export interface IPasswordHash {
-    passwordHashString: string;
-    passwordSaltString: string;
 }
