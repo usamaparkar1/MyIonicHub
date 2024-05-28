@@ -16,9 +16,11 @@
                 <p>Location: {{ appointment.city }}, {{ appointment.state }}, {{ appointment.postCode }}</p>
                 <p class="appointment-description">{{ appointment.appointmentDescription }}</p>
             </ion-label>
-            <ion-icon name="create" slot="end" color="warning" (click)="editAppointment(appointment.id)"></ion-icon>
-            <ion-icon name="trash" slot="end" color="danger" (click)="deleteAppointment(appointment)"></ion-icon>
-        </ion-item>
+            <div class="icons-container">
+                <ion-icon size="large" name="create" slot="end" color="warning" (click)="editAppointment(appointment.id)"></ion-icon>
+                <ion-icon size="large" name="trash" slot="end" color="danger" (click)="deleteAppointment(appointment)"></ion-icon>
+            </div>
+        </ion-item>        
     </ion-list>
 </ion-content>
 

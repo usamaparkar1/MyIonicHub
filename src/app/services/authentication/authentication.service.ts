@@ -6,6 +6,7 @@ import { secureStorageHelpers } from 'src/app/helpers/secure-storage-helpers';
 import { CbRoutingHelpers } from 'src/app/helpers/routing-helpers';
 import { storageHelpers } from 'src/app/helpers/storage-helpers';
 import { HttpHeaders } from '@angular/common/http';
+import { UserModel } from 'src/app/models/user';
 import { Injectable } from '@angular/core';
 import { from, of, switchMap } from 'rxjs';
 
@@ -51,6 +52,11 @@ export class AuthenticationService {
             }
         })
         );
+    }
+
+    async saveSecureData(userDataOfflineLogin: UserModel) {
+        const secureUserData = await this._secureStorageService.createSecureUserData(userDataOfflineLogin);
+        await this._secureStorageService.set(secureStorageHelpers.userLoginData, secureUserData);
     }
 
     async loginUser() {

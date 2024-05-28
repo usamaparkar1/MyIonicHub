@@ -1,3 +1,14 @@
 .appointment-description {
     white-space: normal;
 }
+
+.icons-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    ion-icon {
+        height: 100%;
+    }    
+}

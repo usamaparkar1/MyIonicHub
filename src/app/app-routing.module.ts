@@ -16,6 +16,7 @@ import { DashboardGuard } from 'src/app/guards/dashboard/dashboard.guard';
 import { IntroGuard } from 'src/app/guards/intro/intro.guard';
 import { LoginGuard } from 'src/app/guards/login/login.guard';
 import { NgModule } from '@angular/core';
+import { DashboardResolverService } from './resolvers/dashboard/dashboard-resolver.service';
 
 const contractBookerRoutes: Route = {
     path: 'cb',
@@ -162,6 +163,9 @@ const routes: Routes = [
     {
         path: 'dashboard',
         loadChildren: () => import('./core/dashboard/dashboard.module').then( m => m.DashboardPageModule),
+        resolve: {
+            projects: DashboardResolverService
+        },
         canActivate: [DashboardGuard]
     },
     contractBookerRoutes,

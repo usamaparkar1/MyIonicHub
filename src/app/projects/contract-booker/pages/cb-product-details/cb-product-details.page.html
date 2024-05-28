@@ -9,19 +9,15 @@
 
     <!-- <ion-img *ngIf="productBgImage" [src]="productBgImage" class="product-image"></ion-img> -->
 
-    <ion-grid>
+    <ion-grid *ngIf="product">
         <ion-row>
-            <ion-col *ngIf="product" size="6">
-                <ion-list>
-                    <ion-list-header *ngIf="product.name">{{product.name}}</ion-list-header>
-                    <ul>
-                        <li *ngFor="let ksp of product.keySellingPoints" class="key-selling-point-text">{{ksp}}</li>
-                    </ul>
-                </ion-list>
+            <ion-col>
+                <h2 class="product-title">{{product.name}}</h2>
             </ion-col>
+        </ion-row>
 
-            <!-- Right Column: Consumption Input -->
-            <ion-col size="6">
+        <ion-row>
+            <ion-col>
                 <cb-consumption-input 
                     (consumptionChangedEvent)="handleConsumptionChangeEventEtHt($event, sector)"
                     [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_ETHT'"
@@ -51,6 +47,16 @@
                         {{ (contract.pricePerConsumption/12) | currency:'EUR':'symbol':'1.2-2' || '' }}
                     </p>
                 </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-list>
+                    <ion-list-header>{{ 'CB.PRODUCT_DETAILS.KEY_SELLING_POINTS' | translate }}:</ion-list-header>
+                    <ul>
+                        <li *ngFor="let ksp of product.keySellingPoints" class="key-selling-point-text">{{ksp}}</li>
+                    </ul>
+                </ion-list>
             </ion-col>
         </ion-row>
     </ion-grid>

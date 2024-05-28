@@ -9,6 +9,36 @@
 
     <ion-grid>
         <form class="customer-address-form-container" [formGroup]="customerAddressForm" (ngSubmit)="validateCustomerAddress()">
+            <!-- Radios for New or Existing Customer -->
+            <ion-radio-group formControlName="isNewCustomer" class="customer-type-radio-container">
+                <!-- New Customer -->
+                <cb-radio
+                    [value]="true"
+                    [labelPlacement]="'end'"
+                    [labelText]="'CB.CUSTOMER_ADDRESS.NEW_CUSTOMER' | translate"
+                ></cb-radio>
+
+                <!-- Existing Customer -->
+                <cb-radio
+                    [value]="false"
+                    [labelPlacement]="'end'"
+                    [labelText]="'CB.CUSTOMER_ADDRESS.EXISTING_CUSTOMER' | translate"
+                ></cb-radio>
+            </ion-radio-group>
+
+            <!-- Customer Number Form Field -->
+            <cb-form-input [hidden]="customerAddressForm.get('isNewCustomer')?.value">
+                <ion-input
+                    form-input-field
+                    type="text"
+                    [maxlength]="customerAddressFormHelpers.customerNumberMaxLength"
+                    formControlName="customerNumber"
+                    labelPlacement="floating"
+                    label="{{ 'CB.CUSTOMER_ADDRESS.CUSTOMER_NUMBER' | translate }}"
+                    placeholder="{{ 'CB.CUSTOMER_ADDRESS.ENTER_CUSTOMER_NUMBER' | translate }}"
+                ></ion-input>
+            </cb-form-input>
+
             <!-- Radios for Private or Business Customer -->
             <ion-radio-group formControlName="isPrivateCustomer" class="customer-type-radio-container">
                 <!-- Private Customer -->

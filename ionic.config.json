@@ -1,5 +1,5 @@
 {
-  "name": "iohub",
+  "name": "hub",
   "integrations": {
     "capacitor": {}
   },

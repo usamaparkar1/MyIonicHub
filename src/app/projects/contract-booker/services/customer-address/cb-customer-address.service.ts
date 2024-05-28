@@ -42,4 +42,8 @@ export class CbCustomerAddressService {
     getProductByProductId(selectedProductId: string): Product | undefined {
         return this.contractBookerData.products.find((product) => product.productId === selectedProductId);
     }
+
+    getExistingCustomerByCustomerNumber(customerNumber: string): boolean {
+        return customerNumber === "0224518800";
+    }
 }

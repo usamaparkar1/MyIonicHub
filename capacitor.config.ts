@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.iohub.app',
-  appName: 'IoHub',
+  appId: 'com.hub.app',
+  appName: 'Hub',
   webDir: 'www',
   server: {
     androidScheme: 'https'
@@ -11,15 +11,15 @@ const config: CapacitorConfig = {
     CapacitorSQLite: {
       iosDatabaseLocation: 'Library/CapacitorDatabase',
       iosIsEncryption: true,
-      iosKeychainPrefix: 'iohub',
+      iosKeychainPrefix: 'hub',
       iosBiometric: {
         biometricAuth: false,
-        biometricTitle : "Biometric login for IoHub"
+        biometricTitle : "Biometric login for Hub"
       },
       androidIsEncryption: true,
       androidBiometric: {
         biometricAuth : false,
-        biometricTitle : "Biometric login for IoHub",
+        biometricTitle : "Biometric login for Hub",
         biometricSubTitle : "Log in using your biometric"
       },
       electronIsEncryption: true,

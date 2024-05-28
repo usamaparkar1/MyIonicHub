@@ -198,8 +198,7 @@ export class LoginPage implements OnInit {
         const isUserAuthenticated = await this._userService.authenticateUser(userDataOfflineLogin, userLoginData.password);
         await this._showLoginLoader(false);
         if (isUserAuthenticated) {
-            const secureUserData = await this._secureStorageService.createSecureUserData(userDataOfflineLogin);
-            await this._secureStorageService.set(secureStorageHelpers.userLoginData, secureUserData);
+            await this._authenticationService.saveSecureData(userDataOfflineLogin);
             await this._authenticationService.loginUser();
             await this._routingService.goToDashboard();
         } else {

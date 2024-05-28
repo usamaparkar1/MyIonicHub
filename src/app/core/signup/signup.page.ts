@@ -215,7 +215,6 @@ export class SignupPage implements OnInit {
         } else {
             const userCreated = await this._signupService.createUserAccount(userSignupData);
             if (userCreated?.success) {
-                await this._authenticationService.loginUser();
                 await this._routingService.goToLogin();
                 await this._showSignupLoader(false);
             }

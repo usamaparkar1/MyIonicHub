@@ -62,6 +62,8 @@ export class CbContractService {
             state: newCustomerAddressData.state,
             city: newCustomerAddressData.city,
             postCode: newCustomerAddressData.postCode,
+            isNewCustomer: newCustomerAddressData.isNewCustomer,
+            customerNumber: newCustomerAddressData.isNewCustomer ? null : newCustomerAddressData.customerNumber,
             isPrivateCustomer: newCustomerAddressData.isPrivateCustomer,
             company: newCustomerAddressData.isPrivateCustomer ? null : newCustomerAddressData.company,
             isSigned: false,
@@ -85,11 +87,13 @@ export class CbContractService {
         const newContract = Object.assign({}, contract);
 
         newContract.id = this._getNewContractId();
+        newContract.isNewCustomer = newCustomerAddressData.isNewCustomer;
+        newContract.customerNumber = newCustomerAddressData.customerNumber;
+        newContract.isPrivateCustomer = newCustomerAddressData.isPrivateCustomer;
+        newContract.company = newCustomerAddressData.company;
         newContract.state = newCustomerAddressData.state;
         newContract.city = newCustomerAddressData.city;
         newContract.postCode = newCustomerAddressData.postCode;
-        newContract.isPrivateCustomer = newCustomerAddressData.isPrivateCustomer;
-        newContract.company = newCustomerAddressData.company;
 
         await this._addNewContractToStorage(newContract);
 

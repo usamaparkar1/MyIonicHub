@@ -1,6 +1,7 @@
 export const alertHelpers = {
     cannotClearAllSecureStorageKeys: 'cannotClearAllSecureStorageKeys',
     cannotRemoveSecureStorageByKey: 'cannotRemoveSecureStorageByKey',
+    couldNotLoadLoggedInUserData: 'couldNotLoadLoggedInUserData',
     cannotGetSecureStorageByKey: 'cannotGetSecureStorageByKey',
     myContractsDatabaseNotSetup: 'myContractsDatabaseNotSetup',
     sqliteDatabaseNotSetup: 'sqliteDatabaseNotSetup',

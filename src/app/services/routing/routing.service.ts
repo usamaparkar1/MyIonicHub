@@ -1,5 +1,5 @@
 import { coreRoutingHelpers } from 'src/app/helpers/routing-helpers';
-import { NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router, UrlTree } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -34,5 +34,9 @@ export class RoutingService {
 
     async goToDashboard(navigationExtras: NavigationExtras = {}) {
         await this.goToPage(coreRoutingHelpers.dashboard, navigationExtras);
+    }
+
+    async createUrlTree(urlSegments: string[]): Promise<UrlTree> {
+        return this._router.createUrlTree(urlSegments);
     }
 }

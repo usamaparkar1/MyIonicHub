@@ -83,7 +83,8 @@ export const locale = {
             CLEAR_KEYS_ERROR: 'Beim Versuch, alle Schlüssel zu löschen, ist ein Fehler aufgetreten. Fehler: {{error}}',
         },
         DASHBOARD: {
-            DASHBOARD: 'Armaturenbrett'
+            DASHBOARD: 'Armaturenbrett',
+            COULD_NOT_LOAD_USER: 'Wir können die Daten der angemeldeten Benutzer nicht laden',
         },
         CB: {
             HOME: {
@@ -103,9 +104,17 @@ export const locale = {
                 POSTCODE: 'Postleitzahl',
                 ENTER_POSTCODE: 'Geben Sie die Postleitzahl ein',
                 SELECT_ADDRESS: 'Wählen Sie Adresse aus',
+                NEW_CUSTOMER: "Neukunde",
+                EXISTING_CUSTOMER: "BestandsKunde",
                 PRIVATE_CUSTOMER: 'Privatkunde',
                 BUSINESS_CUSTOMER: 'Geschäftskunde',
                 COMPANY: 'Unternehmen',
+                CUSTOMER_NUMBER: 'Kundennummer',
+                ENTER_CUSTOMER_NUMBER: 'Kundennummer eingeben',
+                NO_CUSTOMER_NUMBER: 'Keine Kundennummer',
+                CUSTOMER_NUMBER_NOT_ENTERED: 'Sie haben keine Kundennummer eingegeben',
+                CUSTOMER_NOT_FOUND: 'Kunde nicht gefunden',
+                CUSTOMER_NUMBER_DOES_NOT_EXIST: 'Ein Kunde konnte mit der Kundennummer {{customerNumber}} nicht gefunden werden.',
             },
             PRODUCT_SELECTION: {
                 PRODUCT_SELECTION: 'Produktauswahl',
@@ -119,6 +128,7 @@ export const locale = {
                 PRODUCT_DETAILS: 'Produktdetails',
                 ROUTE_DATA_MISSING_TITLE: 'Vertrag nicht gefunden',
                 ROUTE_DATA_MISSING_DESCRIPTION: 'Wir konnten die {{missingData}}daten für Ihren Vertrag nicht finden. Bitte gehen Sie zurück und versuchen Sie es erneut. Oder erstellen Sie einen neuen Vertrag',
+                KEY_SELLING_POINTS: 'Wichtige Verkaufspunkte',
                 CONFIRM_PRODUCT: 'Ausgewähltes Produkt',
                 CONSUMPTION_PER_YEAR_ETHT: 'Verbrauch pro Jahr EtHt (Kwt)',
                 CONSUMPTION_PER_YEAR_NT: 'Verbrauch pro Jahr Nt (Kwt)',

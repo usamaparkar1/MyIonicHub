@@ -84,7 +84,8 @@ export const locale = {
             CLEAR_KEYS_ERROR: 'We ran into an error trying to clear all keys. Error: {{error}}',
         },
         DASHBOARD: {
-            DASHBOARD: 'Dashboard'
+            DASHBOARD: 'Dashboard',
+            COULD_NOT_LOAD_USER: 'We are unable to load the logged in Users data',
         },
         CB: {
             HOME: {
@@ -104,9 +105,17 @@ export const locale = {
                 POSTCODE: 'Post Code',
                 ENTER_POSTCODE: 'Enter Post Code',
                 SELECT_ADDRESS: 'Select Address',
+                NEW_CUSTOMER: 'New Customer',
+                EXISTING_CUSTOMER: 'Existing Customer',
                 PRIVATE_CUSTOMER: 'Private Customer',
                 BUSINESS_CUSTOMER: 'Business Customer',
                 COMPANY: 'Company',
+                CUSTOMER_NUMBER: 'Customer Number',
+                ENTER_CUSTOMER_NUMBER: 'Enter Customer Number',
+                NO_CUSTOMER_NUMBER: 'No Customer Number',
+                CUSTOMER_NUMBER_NOT_ENTERED: 'You have not entered a  Customer Number',
+                CUSTOMER_NOT_FOUND: 'Customer not found',
+                CUSTOMER_NUMBER_DOES_NOT_EXIST: 'Could not find a customer using the Customer Number: {{customerNumber}}',
             },
             PRODUCT_SELECTION: {
                 PRODUCT_SELECTION: 'Product Selection',
@@ -120,6 +129,7 @@ export const locale = {
                 PRODUCT_DETAILS: 'Product Details',
                 ROUTE_DATA_MISSING_TITLE: 'Contract not found',
                 ROUTE_DATA_MISSING_DESCRIPTION: 'We were not able to find the {{missingData}} data for your contract. Please go back and try again. Or create a new contract',
+                KEY_SELLING_POINTS: 'Key selling points',
                 CONFIRM_PRODUCT: 'Confirm Product',
                 CONSUMPTION_PER_YEAR_ETHT: 'Consumption Per Year EtHt (Kwt)',
                 CONSUMPTION_PER_YEAR_NT: 'Consumption Per Year Nt (Kwt)',
