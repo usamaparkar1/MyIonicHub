@@ -1,8 +1,14 @@
 .cb-home-module-row-container {
     > ion-col {
         display: flex;
+        align-items: center;
         flex-direction: column;
         justify-content: center;
+
+        ion-badge {
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
     }
 }
 

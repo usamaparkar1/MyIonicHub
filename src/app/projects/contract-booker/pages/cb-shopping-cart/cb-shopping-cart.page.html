@@ -32,7 +32,7 @@
         <ion-button
             cb-bottom-button
             expand="full"
-            color="warning"
+            color="cbprimary"
             (click)="submitContracts()"
         >
             <ion-label color="light">{{'CB.SHOPPING_CART.SUBMIT_CONTRACT' | translate}}</ion-label>
@@ -52,7 +52,7 @@
         <!-- Sign Contracts -->
         <ion-button
             cb-bottom-button-2
-            color="warning"
+            color="cbprimary"
             [style]="canAddMoreContracts() ? 'width: 50%;' : 'width: 100%'"
             (click)="signContract()"
             [hidden]="isSignatureButtonHidden()"

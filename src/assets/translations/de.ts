@@ -92,6 +92,7 @@ export const locale = {
                 START_CONSULTATION: 'Beratung Starten',
                 MY_CONTRACTS: 'Meine Verträge',
                 NEWS: 'Nachricht',
+                MENU: 'Speisekarte',
             },
             NEWS: {
                 NEWS: 'Nachricht',

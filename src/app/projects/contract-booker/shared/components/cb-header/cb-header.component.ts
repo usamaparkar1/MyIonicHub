@@ -3,9 +3,10 @@ import contractBookerJson from 'src/assets/json-data/projects/contract-booker/co
 import { CbContractService } from '../../../services/contract/cb-contract.service';
 import { CbRoutingService } from '../../../services/routing/cb-routing.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { IonicModule, MenuController } from '@ionic/angular';
 import { Contract } from '../../../models/cb-contract';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { Menus } from 'src/app/enum/menus';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -27,6 +28,7 @@ export class CbHeaderComponent  implements OnInit, OnDestroy {
     contractBookerData = contractBookerJson;
     
     constructor(
+        private _cbMenuController: MenuController,
         private _cbRoutingService: CbRoutingService,
         private _cbContractService: CbContractService
     ) { }
@@ -51,5 +53,9 @@ export class CbHeaderComponent  implements OnInit, OnDestroy {
 
     openShoppingCart() {
         this._cbRoutingService.goToCbShoppingCart();
+    }
+
+    cbMenuClicked() {
+        this._cbMenuController.open(Menus.CbMenu);
     }
 }

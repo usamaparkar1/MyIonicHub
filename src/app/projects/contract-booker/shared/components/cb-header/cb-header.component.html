@@ -1,5 +1,10 @@
 <ion-header [translucent]="isTranslucent" [collapse]="collapseValue">
-    <ion-toolbar color="warning">
+    <ion-toolbar color="cbprimary">
+        <ion-buttons slot="start">
+            <ion-button (click)="cbMenuClicked()">
+                <ion-icon slot="icon-only" name="menu" color="light"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ng-content select="[cb-header-1]"></ng-content>
         <ng-content select="[cb-header-2]"></ng-content>
         <div cb-header-3 slot="end" [hidden]="!isCartCountGreaterThanZero() || isSecondHeader">

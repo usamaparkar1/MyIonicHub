@@ -9,6 +9,8 @@ export const myContractsSchema = {
             ${cbMyContractsDbHelpers.Columns.State.Name} varchar(256),
             ${cbMyContractsDbHelpers.Columns.City.Name} varchar(256),
             ${cbMyContractsDbHelpers.Columns.PostCode.Name} varchar(256),
+            ${cbMyContractsDbHelpers.Columns.IsNewCustomer.Name} varchar(256),
+            ${cbMyContractsDbHelpers.Columns.CustomerNumber.Name} varchar(256),
             ${cbMyContractsDbHelpers.Columns.IsPrivateCustomer.Name} varchar(256),
             ${cbMyContractsDbHelpers.Columns.Company.Name} varchar(256),
             ${cbMyContractsDbHelpers.Columns.IsSigned.Name} boolean,

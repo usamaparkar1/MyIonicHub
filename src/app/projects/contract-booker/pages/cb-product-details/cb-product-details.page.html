@@ -9,7 +9,7 @@
 
     <!-- <ion-img *ngIf="productBgImage" [src]="productBgImage" class="product-image"></ion-img> -->
 
-    <ion-grid *ngIf="product">
+    <ion-grid>
         <ion-row>
             <ion-col>
                 <h2 class="product-title">{{product.name}}</h2>
@@ -49,6 +49,8 @@
                 </div>
             </ion-col>
         </ion-row>
+
+        <!-- Key Selling Points List -->
         <ion-row>
             <ion-col>
                 <ion-list>
@@ -57,6 +59,37 @@
                         <li *ngFor="let ksp of product.keySellingPoints" class="key-selling-point-text">{{ksp}}</li>
                     </ul>
                 </ion-list>
+            </ion-col>
+        </ion-row>
+
+        <!-- Consumption Table -->
+        <ion-row>
+            <ion-col>
+                <div class="consumption-table">
+                    <ion-row>
+                        <ion-col>
+                            <ion-text>Consumption kWh</ion-text>
+                        </ion-col>
+                        <ion-col>
+                            <ion-text>Gross Price</ion-text>
+                        </ion-col>
+                        <ion-col>
+                            <ion-text>Net Price</ion-text>
+                        </ion-col>
+                    </ion-row>
+        
+                    <ion-row *ngFor="let priceline of product.pricelines">
+                        <ion-col size="4">
+                            <ion-text>{{priceline.consumptionRange}} kWh</ion-text>
+                        </ion-col>
+                        <ion-col size="4">
+                            <ion-text>{{priceline.grossPrice | currency:'EUR':'symbol':'1.2-2' || '' }}</ion-text>
+                        </ion-col>
+                        <ion-col size="4">
+                            <ion-text>{{priceline.netPrice | currency:'EUR':'symbol':'1.2-2' || '' }}</ion-text>
+                        </ion-col>
+                    </ion-row>
+                </div>
             </ion-col>
         </ion-row>
     </ion-grid>

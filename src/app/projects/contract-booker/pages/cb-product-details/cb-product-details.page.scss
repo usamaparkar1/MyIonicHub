@@ -1,3 +1,7 @@
+ion-content {
+    --offset-bottom: 0px !important;
+}
+  
 .product-image {
     max-width: 100%;
 }
@@ -5,7 +9,7 @@
 .product-title {
     text-align: left;
     margin-bottom: 0;
-    margin-top: 0.5rem;
+    margin-top: 0rem;
 }
 
 .key-selling-point-text {
@@ -30,3 +34,36 @@ ul {
         margin-top: 1rem;
     }
 }
+
+.consumption-table {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--ion-color-warning);
+  
+    ion-row {
+        ion-col {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        ion-col:not(:last-child) {
+            border-right: 1px solid var(--ion-color-warning);
+        }
+    }
+    
+    ion-row:not(:last-child) {
+        border-bottom: 1px solid var(--ion-color-warning);
+    }
+
+    ion-row:nth-child(1) {
+        background-color: var(--ion-color-warning);
+        color: var(--ion-color-light);
+
+        ion-col:not(:last-child) {
+            border-right: 1px solid var(--ion-color-light);
+        }
+    }
+} 

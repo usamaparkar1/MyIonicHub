@@ -1,3 +1,5 @@
+import { IPriceline } from "./cb-pricelines";
+
 export class Product implements IProduct {
     name: string;
     productId: string
@@ -7,6 +9,7 @@ export class Product implements IProduct {
     productPrice: number;
     productPricePerConsumption: number;
     keySellingPoints?: string[];
+    pricelines: IPriceline[];
 
     constructor(product: Product) {
         this.name = product.name;
@@ -17,6 +20,7 @@ export class Product implements IProduct {
         this.productBannerImage = product.productBannerImage;
         this.productPricePerConsumption = product.productPricePerConsumption;
         this.keySellingPoints = product.keySellingPoints;
+        this.pricelines = product.pricelines;
     }
 }
 
@@ -29,4 +33,5 @@ export interface IProduct {
     productPrice: number;
     productPricePerConsumption: number;
     keySellingPoints?: string[];
+    pricelines: IPriceline[];
 }

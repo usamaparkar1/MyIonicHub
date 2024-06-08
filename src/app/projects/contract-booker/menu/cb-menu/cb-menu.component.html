@@ -1,0 +1,18 @@
+<ion-menu side="start" [menuId]="menus.CbMenu" contentId="main-content" swipeGesture="false">
+    <ion-header>
+        <ion-toolbar color="cbprimary">
+            <ion-title color="light">{{'CB.HOME.MENU' | translate}}</ion-title>
+            <ion-icon (click)="closeCbMenu()" slot="end" name="close" color="light" size="large" class="ion-padding"></ion-icon>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        <ion-item *ngFor="let module of cbHomeModules" (click)="moduleClicked(module)" class="module-items" lines="full">
+            <ion-icon [src]="module.image"></ion-icon>
+            <ion-label>{{module.name | translate}}</ion-label>
+            <ion-badge [hidden]="module.count < 1" color="cbprimary">
+                <ion-text>{{ module.count > 9 ? '9+' : module.count }}</ion-text>
+            </ion-badge>
+        </ion-item>
+    </ion-content>
+</ion-menu>

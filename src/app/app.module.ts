@@ -3,6 +3,7 @@ import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { MenusComponent } from './core/menus/menus.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppService } from './services/app/app.service';
@@ -21,6 +22,7 @@ export function initializeFactory(init: AppService) {
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        MenusComponent, // Check for any other options than to use in imports
         HttpClientModule,
         AppRoutingModule,
         IonicModule.forRoot(),

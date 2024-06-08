@@ -18,14 +18,14 @@
     <ion-range
         [pin]="true"
         type="number"
-        color="warning"
+        color="cbprimary"
         class="consumption-slider"
         [min]="sector.minConsumption"
         [max]="sector.maxConsumption"
         [(ngModel)]="consumptionPerYear"
         (ionInput)="consumptionChanged($event)"
     >
-        <ion-icon color="warning" slot="start" name="flash-outline"></ion-icon>
-        <ion-icon color="warning" slot="end" name="flash-sharp"></ion-icon>
+        <ion-icon color="cbprimary" slot="start" name="flash-outline"></ion-icon>
+        <ion-icon color="cbprimary" slot="end" name="flash-sharp"></ion-icon>
     </ion-range>
 </ion-col></ion-row>

@@ -88,6 +88,7 @@ export class CbPriceComparisonPage implements OnInit {
             checked: false,
             productPrice: prod.productPrice,
             productPricePerConsumption: prod.productPrice * (sector?.isDoubleTariffEnabled ? sector.defaultConsumptionValue + sector.defaultConsumptionValue : sector.defaultConsumptionValue),
+            pricelines: prod.pricelines
         }));
     }
 

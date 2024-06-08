@@ -3,10 +3,9 @@ import { CbRoutingService } from 'src/app/projects/contract-booker/services/rout
 import { ActionSheetService } from 'src/app/services/action-sheet/action-sheet.service';
 import { AppHelperService } from 'src/app/services/app-helper/app-helper.service';
 import { CbContractService } from '../../services/contract/cb-contract.service';
+import { CbHomeService } from '../../services/home/cb-home.service';
 import { CbHomePageLink } from '../../models/cb-home-page-link';
-import coreDataJson from 'src/assets/json-data/core-data.json';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Contract } from '../../models/cb-contract';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,14 +16,14 @@ import { Subscription } from 'rxjs';
 
 export class CbHomePage implements OnInit, OnDestroy {
 
+    private _homeModulesSubscription!: Subscription;
+
     contractBookerData = contractBookerJson;
-    coreData = coreDataJson;
-    contracts: Contract[] = [];
-    contractsSubscription!: Subscription;
-    cbHomeModules: CbHomePageLink[] = this.contractBookerData.cbHomeModules;
+    cbHomeModules: CbHomePageLink[] = [];
     isScreenSmall: boolean = false;
 
     constructor(
+        private _cbHomeService: CbHomeService,
         private _appHelperService: AppHelperService,
         private _cbRoutingService: CbRoutingService,
         private _cbContractService: CbContractService,
@@ -36,16 +35,20 @@ export class CbHomePage implements OnInit, OnDestroy {
     }
 
     private async _initCbHomePage() {
-        this._subscribeToContracts();
+        this._subscribeToEvents();
     }
 
     ngOnDestroy() {
-        this.contractsSubscription.unsubscribe();
+        this._homeModulesSubscription.unsubscribe();
     }
 
-    private _subscribeToContracts() {
-        this.contractsSubscription = this._cbContractService.contracts.subscribe((contracts) => {
-            this.contracts = contracts;
+    private _subscribeToEvents() {
+        this._subscribeToHomeModules();
+    }
+
+    private _subscribeToHomeModules() {
+        this._homeModulesSubscription = this._cbHomeService.homeModules.subscribe((homeModules) => {
+            this.cbHomeModules = homeModules;
         });
     }
 
@@ -54,7 +57,7 @@ export class CbHomePage implements OnInit, OnDestroy {
     }
 
     isCartCountGreaterThanZero() {
-        return this.contracts?.length > 0;
+        return this.cbHomeModules[2].count > 0;
     }
 
     async openProfileActionSheet() {
