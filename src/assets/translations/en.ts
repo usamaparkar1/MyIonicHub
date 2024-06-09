@@ -91,12 +91,13 @@ export const locale = {
             HOME: {
                 HOME: 'Home',
                 START_CONSULTATION: 'Start a consultation',
-                MY_CONTRACTS: 'My Contracts',
-                NEWS: 'News',
                 MENU: 'Menu',
             },
             NEWS: {
                 NEWS: 'News',
+            },
+            SUPPORT: {
+                SUPPORT: 'Support',
             },
             CUSTOMER_ADDRESS: {
                 CUSTOMER_ADDRESS: 'Customer Address',
@@ -173,6 +174,8 @@ export const locale = {
             },
             SIGN_CONTRACT: {
                 SIGN_CONTRACT: 'Sign Contract',
+                TERMS_AND_CONDITIONS: 'Terms and conditions',
+                I_HAVE_READ_TERMS_AND_CONDITIONS: 'I have read and agreed to the terms and conditions of this contract.',
                 CLEAR_SIGNATURE: 'Clear Signature',
                 SIGN_IN_THE_BOX: 'Sign in the box',
                 VALID_SIGNATURE: 'Valid Signature',
@@ -180,6 +183,16 @@ export const locale = {
                 INVALID_SIGNATURE_IMAGE:'Invalid Signature Image. Error while converting signature',
                 SIGNATURE_LENGTH_SHORT: 'Signature length is too short',
                 SIGNATURE_LENGTH_LONG: 'Signature length is too long',
+                TERMS_AND_CONDITIONS_LIST: {
+                    TNC_1: 'Service Description: Clearly outline the services provided, including the type of energy (gas, electricity, or both), the pricing structure, and any additional services or features included in the contract',
+                    TNC_2: 'Duration of Contract: Specify the duration of the contract, including the start date and end date, as well as any conditions for renewal or termination.',
+                    TNC_3: 'Pricing and Payment Terms: Detail the pricing for the energy services, including any fixed or variable rates, fees, and charges. Outline the payment terms, including the frequency of billing, accepted payment methods, and any penalties for late payments.',
+                    TNC_4: 'Usage and Consumption: Define the allowed usage and consumption limits, if applicable, and any penalties for exceeding these limits.',
+                    TNC_5: 'Billing and Metering: Describe how billing will be calculated, including the metering methods used to measure energy consumption. Explain how meter readings will be obtained and billed.',
+                    TNC_6: 'Terms of Termination: Specify the conditions under which the contract can be terminated by either party, including any notice periods and termination fees.',
+                    TNC_7: 'Rights and Responsibilities: Clearly outline the rights and responsibilities of both the energy provider and the customer, including obligations related to maintenance, repairs, and safety.',
+                    TNC_8: 'Dispute Resolution: Provide information on how disputes will be resolved, including any procedures for mediation, arbitration, or legal action',
+                }
             },
             MY_CONTRACTS: {
                 MY_CONTRACTS: 'My Contracts',

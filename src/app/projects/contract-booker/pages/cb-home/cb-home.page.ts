@@ -77,7 +77,7 @@ export class CbHomePage implements OnInit, OnDestroy {
         } else if(cbHomePageLink.id === 3) {
             this._cbRoutingService.goToCbMyContracts();
         } else if(cbHomePageLink.id === 4) {
-            this.startConsultation();
+            this._cbRoutingService.goToCbSupport();
         }
     }
 

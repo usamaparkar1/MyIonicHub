@@ -9,10 +9,11 @@
     "consultationStartSvg": "assets/icon/contract-booker/home/consultation-start.svg",
     "defaultProductImg": "assets/img/contract-booker/cb-default-product-image.png",
     "defaultProductBannerImg": "assets/img/contract-booker/cb-default-product-banner.jpg",
+    "menuSvgUrl": "assets/icon/contract-booker/menu.svg",
     "cbHomeModules": [
         {
             "id": 1,
-            "name": "CB.HOME.NEWS",
+            "name": "CB.NEWS.NEWS",
             "image": "assets/icon/contract-booker/home/news.svg",
             "count": 0
         },
@@ -24,8 +25,14 @@
         },
         {
             "id": 3,
-            "name": "CB.HOME.MY_CONTRACTS",
+            "name": "CB.MY_CONTRACTS.MY_CONTRACTS",
             "image": "assets/icon/contract-booker/home/my-contracts.svg",
+            "count": 0
+        },
+        {
+            "id": 4,
+            "name": "CB.SUPPORT.SUPPORT",
+            "image": "assets/icon/contract-booker/home/support.svg",
             "count": 0
         }
     ],

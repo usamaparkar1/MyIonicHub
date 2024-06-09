@@ -1,8 +1,8 @@
 <ion-menu side="start" [menuId]="menus.CbMenu" contentId="main-content" swipeGesture="false">
     <ion-header>
         <ion-toolbar color="cbprimary">
-            <ion-title color="light">{{'CB.HOME.MENU' | translate}}</ion-title>
-            <ion-icon (click)="closeCbMenu()" slot="end" name="close" color="light" size="large" class="ion-padding"></ion-icon>
+            <ion-title>{{'CB.HOME.MENU' | translate}}</ion-title>
+            <ion-icon (click)="closeCbMenu()" slot="end" name="close" size="large" class="ion-padding"></ion-icon>
         </ion-toolbar>
     </ion-header>
 
@@ -11,7 +11,7 @@
             <ion-icon [src]="module.image"></ion-icon>
             <ion-label>{{module.name | translate}}</ion-label>
             <ion-badge [hidden]="module.count < 1" color="cbprimary">
-                <ion-text>{{ module.count > 9 ? '9+' : module.count }}</ion-text>
+                <ion-label>{{ module.count > 9 ? '9+' : module.count }}</ion-label>
             </ion-badge>
         </ion-item>
     </ion-content>

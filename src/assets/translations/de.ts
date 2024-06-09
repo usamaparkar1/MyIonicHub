@@ -90,12 +90,13 @@ export const locale = {
             HOME: {
                 HOME: 'Heim',
                 START_CONSULTATION: 'Beratung Starten',
-                MY_CONTRACTS: 'Meine Verträge',
-                NEWS: 'Nachricht',
                 MENU: 'Speisekarte',
             },
             NEWS: {
                 NEWS: 'Nachricht',
+            },
+            SUPPORT: {
+                SUPPORT: 'Unterstützung',
             },
             CUSTOMER_ADDRESS: {
                 CUSTOMER_ADDRESS: 'Kundenadresse',
@@ -172,6 +173,8 @@ export const locale = {
             },
             SIGN_CONTRACT: {
                 SIGN_CONTRACT: 'Unterschreibe den Vertrag',
+                TERMS_AND_CONDITIONS: 'Geschäftsbedingungen',
+                I_HAVE_READ_TERMS_AND_CONDITIONS: 'Ich habe die Bedingungen dieses Vertrags gelesen und stimme ihnen zu.',
                 CLEAR_SIGNATURE: 'Klare Signatur',
                 SIGN_IN_THE_BOX: 'Melden Sie sich im Feld an',
                 VALID_SIGNATURE: 'Gültige Unterschrift',
@@ -179,6 +182,16 @@ export const locale = {
                 INVALID_SIGNATURE_IMAGE:'Ungültiges Signaturbild. Fehler beim Konvertieren der Signatur',
                 SIGNATURE_LENGTH_SHORT: 'Die Signaturlänge ist zu kurz',
                 SIGNATURE_LENGTH_LONG: 'Die Signaturlänge ist zu lang',
+                TERMS_AND_CONDITIONS_LIST: {
+                    TNC_1: 'Servicebeschreibung: Beschreiben Sie klar die bereitgestellten Services, einschließlich der Energieart (Gas, Strom oder beides), der Preisstruktur und aller im Vertrag enthaltenen zusätzlichen Services oder Funktionen“',
+                    TNC_2: 'Vertragsdauer: Geben Sie die Vertragsdauer an, einschließlich Start- und Enddatum sowie alle Bedingungen für Verlängerung oder Kündigung.',
+                    TNC_3: 'Preis- und Zahlungsbedingungen: Geben Sie die Preise für die Energieservices detailliert an, einschließlich aller festen oder variablen Tarife, Gebühren und Kosten. Geben Sie die Zahlungsbedingungen an, einschließlich der Häufigkeit der Rechnungsstellung, der akzeptierten Zahlungsmethoden und etwaiger Strafen für verspätete Zahlungen.',
+                    TNC_4: 'Nutzung und Verbrauch: Definieren Sie die zulässigen Nutzungs- und Verbrauchsgrenzen, falls zutreffend, und etwaige Strafen für das Überschreiten dieser Grenzen.',
+                    TNC_5: 'Abrechnung und Messung: Beschreiben Sie, wie die Abrechnung berechnet wird, einschließlich der Messmethoden, die zur Messung des Energieverbrauchs verwendet werden.“ Erklären Sie, wie Zählerstände ermittelt und abgerechnet werden.',
+                    TNC_6: 'Kündigungsbedingungen: Geben Sie die Bedingungen an, unter denen der Vertrag von beiden Parteien gekündigt werden kann, einschließlich etwaiger Kündigungsfristen und Kündigungsgebühren.',
+                    TNC_7: 'Rechte und Pflichten: Legen Sie die Rechte und Pflichten sowohl des Energieversorgers als auch des Kunden klar dar, einschließlich der Pflichten in Bezug auf Wartung, Reparaturen und Sicherheit.',
+                    TNC_8: 'Streitbeilegung: Geben Sie Informationen darüber an, wie Streitigkeiten beigelegt werden, einschließlich etwaiger Verfahren zur Schlichtung, Schlichtung oder rechtlichen Schritten',
+                }
             },
             MY_CONTRACTS: {
                 MY_CONTRACTS: 'Meine Verträge',

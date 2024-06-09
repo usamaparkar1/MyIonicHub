@@ -104,6 +104,10 @@ export class CbRoutingService {
         await this.goToCbPage(CbRoutingHelpers.cbEditAppointment, appointmentId, navigationExtras);
     }
 
+    async goToCbSupport(navigationExtras: NavigationExtras = {}) {
+        await this.goToCbPage(CbRoutingHelpers.cbSupport, null, navigationExtras);
+    }
+
     async handleRouteNotFound() { 
         'Route not found. Go To Shopping Cart'
     }

@@ -1,5 +1,10 @@
 .news-item {
     margin-top: 1rem;
+
+    ion-label {
+        white-space: normal;
+        word-break: break-word;
+    }
 }
 
 .news-description {

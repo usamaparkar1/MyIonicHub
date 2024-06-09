@@ -22,6 +22,7 @@ export const CbRoutingHelpers = {
     cbAddContract: 'cb-add-contract',
     cbSignContract: 'cb-sign-contract',
     cbMyContracts: 'cb-my-contracts',
+    cbSupport: 'cb-support',
 }
 
 export const McRoutingHelpers = {

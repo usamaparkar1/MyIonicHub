@@ -21,6 +21,7 @@ export class RightsService {
             CbUserRights.HasAppointmentsModuleRights,
             CbUserRights.HasMyContractModuleRights,
             CbUserRights.HasContractCreationRights,
+            CbUserRights.HasSupportFeatureRights,
         ];
     }
 
@@ -32,6 +33,7 @@ export class RightsService {
             CbUserRights.HasAppointmentsModuleRights,
             CbUserRights.HasMyContractModuleRights,
             CbUserRights.HasContractCreationRights,
+            CbUserRights.HasSupportFeatureRights,
         ];
     }
 

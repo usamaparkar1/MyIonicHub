@@ -31,7 +31,7 @@
                             </ion-select-option>
                         </ion-select>
                     </ion-item>
-                  </ion-list>
+                </ion-list>
 
                 <!-- Radio 2: Create fresh contract -->
                 <cb-radio
@@ -51,6 +51,6 @@
         (click)="addAnotherContract()"
         [disabled]="!canAddAnotherContract()"
     >
-        <ion-label color="light">{{'CB.ADD_CONTRACT.ADD_CONTRACT' | translate}}</ion-label>
+        <ion-label>{{'CB.ADD_CONTRACT.ADD_CONTRACT' | translate}}</ion-label>
     </ion-button>
 </cb-form-footer>

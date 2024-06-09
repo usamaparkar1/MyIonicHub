@@ -4,4 +4,5 @@ export enum CbUserRights {
     HasAppointmentsModuleRights = 103,
     HasMyContractModuleRights = 104,
     HasContractCreationRights = 105,
+    HasSupportFeatureRights = 106,
 }

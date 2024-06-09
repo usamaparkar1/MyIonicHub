@@ -2,7 +2,7 @@
     <ion-toolbar color="cbprimary">
         <ion-buttons slot="start">
             <ion-button (click)="cbMenuClicked()">
-                <ion-icon slot="icon-only" name="menu" color="light"></ion-icon>
+                <ion-icon slot="icon-only" [src]="contractBookerData.menuSvgUrl"></ion-icon>
             </ion-button>
         </ion-buttons>
         <ng-content select="[cb-header-1]"></ng-content>

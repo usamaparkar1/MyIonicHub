@@ -35,7 +35,7 @@
             color="cbprimary"
             (click)="submitContracts()"
         >
-            <ion-label color="light">{{'CB.SHOPPING_CART.SUBMIT_CONTRACT' | translate}}</ion-label>
+            <ion-label>{{'CB.SHOPPING_CART.SUBMIT_CONTRACT' | translate}}</ion-label>
         </ion-button>
     </cb-form-footer>
     <cb-form-footer-2 [hidden]="allContractsAreSigned()">
@@ -47,7 +47,7 @@
             (click)="addContract()"
             [hidden]="!canAddMoreContracts()"
         >
-            <ion-label color="light">{{'CB.SHOPPING_CART.ADD_CONTRACT' | translate}}</ion-label>
+            <ion-label>{{'CB.SHOPPING_CART.ADD_CONTRACT' | translate}}</ion-label>
         </ion-button>
         <!-- Sign Contracts -->
         <ion-button
@@ -57,7 +57,7 @@
             (click)="signContract()"
             [hidden]="isSignatureButtonHidden()"
         >
-            <ion-label color="light">{{'CB.SHOPPING_CART.SIGN_CONTRACT' | translate}}</ion-label>
+            <ion-label>{{'CB.SHOPPING_CART.SIGN_CONTRACT' | translate}}</ion-label>
         </ion-button>
     </cb-form-footer-2>
 </ion-footer>

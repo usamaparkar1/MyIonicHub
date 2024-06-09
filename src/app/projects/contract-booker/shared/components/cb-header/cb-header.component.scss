@@ -1,5 +1,7 @@
 ion-toolbar {
-    color: var(--ion-color-light);
+    ion-title {
+        color: var(--ion-color-light);
+    }
 }
 ion-toolbar [isTranslucent="true"] > div {
     position: relative;

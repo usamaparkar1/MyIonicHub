@@ -12,6 +12,7 @@ import { McAuthenticationGuard } from './projects/miscellaneous/guards/mc-authen
 import { CbShoppingCartGuard } from './projects/contract-booker/guards/cb-shopping-cart/cb-shopping-cart.guard';
 import { PreloadAllModules, Route, RouterModule, Routes, mapToCanActivateChild } from '@angular/router';
 import { CbContractGuard } from './projects/contract-booker/guards/cb-contract/cb-contract.guard';
+import { CbSupportGuard } from './projects/contract-booker/guards/cb-support/cb-support.guard';
 import { DashboardResolverService } from './resolvers/dashboard/dashboard-resolver.service';
 import { DashboardGuard } from 'src/app/guards/dashboard/dashboard.guard';
 import { IntroGuard } from 'src/app/guards/intro/intro.guard';
@@ -119,6 +120,11 @@ const contractBookerRoutes: Route = {
             resolve: {
                 oldAppointment: CbNewAppointmentResolverService
             }
+        },
+        {
+            path: 'cb-support',
+            loadChildren: () => import('./projects/contract-booker/pages/cb-support/cb-support.module').then( m => m.CbSupportPageModule),
+            canActivate: [CbSupportGuard]
         },
     ]
 }

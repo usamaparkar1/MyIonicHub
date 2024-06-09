@@ -7,12 +7,45 @@
         <ion-title cb-header-1>{{'CB.SIGN_CONTRACT.SIGN_CONTRACT' | translate}}</ion-title>
     </cb-header>
 
-    <div class="signature-block-container">
-        <div id="signature-pad">
-            <canvas #signaturePadCanvas class="signature-canvas"></canvas>
-        </div>
-        <p class="ion-text-center" color="cbprimary">{{'CB.SIGN_CONTRACT.SIGN_IN_THE_BOX' | translate}}</p>
-    </div>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-list class="tnc-list-container">
+                    <h4>{{'CB.SIGN_CONTRACT.TERMS_AND_CONDITIONS' | translate}}</h4>
+                    <ul>
+                        <li *ngFor="let tnc of termsAndConditions">{{tnc | translate}}</li>
+                    </ul>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+
+        <ion-row><ion-col class="tnc-read-container">
+            <ion-checkbox
+                (click)="tncCheckboxClicked()"
+                [(ngModel)]="tncRead"
+                [value]="tncRead"
+                color="cbprimary"
+                labelPlacement="end"
+                alignment="center"
+                justify="start"
+                mode="ios"
+            ></ion-checkbox>
+            <ion-label>{{'CB.SIGN_CONTRACT.I_HAVE_READ_TERMS_AND_CONDITIONS' | translate}}</ion-label>
+        </ion-col></ion-row>
+
+        <ion-row><ion-col>
+            <div class="signature-block-container">
+                <div id="signature-pad">
+                    <canvas
+                        [style.pointer-events]="tncRead ? 'auto' : 'none'"
+                        #signaturePadCanvas
+                        class="signature-canvas"
+                    ></canvas>
+                </div>
+                <p class="ion-text-center" color="cbprimary">{{'CB.SIGN_CONTRACT.SIGN_IN_THE_BOX' | translate}}</p>
+            </div>
+        </ion-col></ion-row>
+    </ion-grid>
 
 </ion-content>
 
@@ -23,14 +56,15 @@
             color="danger"
             (click)="clearSignature()"
         >
-            <ion-label color="light">{{'CB.SIGN_CONTRACT.CLEAR_SIGNATURE' | translate}}</ion-label>
+            <ion-label>{{'CB.SIGN_CONTRACT.CLEAR_SIGNATURE' | translate}}</ion-label>
         </ion-button>
         <ion-button
+            [disabled]="!tncRead"
             cb-bottom-button-2
             color="cbprimary"
             (click)="saveSignature()"
         >
-            <ion-label color="light">{{'CB.SIGN_CONTRACT.SIGN_CONTRACT' | translate}}</ion-label>
+            <ion-label>{{'CB.SIGN_CONTRACT.SIGN_CONTRACT' | translate}}</ion-label>
         </ion-button>
     </cb-form-footer-2>
 </ion-footer>

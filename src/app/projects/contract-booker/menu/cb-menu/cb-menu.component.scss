@@ -9,5 +9,19 @@
         border-radius: 16px;
         --padding-end: 8px;
         --padding-start: 8px;
+
+        /* Media query for small screens */
+        @media (min-width: 250px) {
+            ion-label {
+                font-size: 11px;
+            }
+        }
+
+        /* Media query for extra large screens */
+        @media (min-width: 1024px) {
+            ion-label {
+                font-size: 14px;
+            }
+        }
     }
 }

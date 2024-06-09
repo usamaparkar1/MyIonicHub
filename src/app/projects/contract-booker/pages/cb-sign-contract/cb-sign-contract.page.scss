@@ -6,7 +6,6 @@ canvas {
     display: flex;
     margin-top: 2rem;
     flex-direction: column;
-    justify-content: center;
 
     > div {
         height: 50%;
@@ -18,4 +17,24 @@ canvas {
 
 .signature-canvas {
     touch-action: none;
+}
+
+.tnc-list-container {
+    h4 {
+        margin-top: 0;
+    }
+
+    ul li {
+        margin-bottom: 1rem;
+    }
+}
+
+.tnc-read-container {
+    display: flex;
+    align-items: center;
+
+    ion-checkbox {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }

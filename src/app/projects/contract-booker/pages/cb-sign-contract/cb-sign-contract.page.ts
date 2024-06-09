@@ -1,3 +1,4 @@
+import termsAndConditionsJson from 'src/assets/json-data/projects/contract-booker/terms-and-conditions.json';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CbContractService } from '../../services/contract/cb-contract.service';
 import { CbRoutingService } from '../../services/routing/cb-routing.service';
@@ -10,9 +11,9 @@ import { ActivatedRoute } from '@angular/router';
 import SignaturePad from 'signature_pad';
 
 @Component({
-  selector: 'app-cb-sign-contract',
-  templateUrl: './cb-sign-contract.page.html',
-  styleUrls: ['./cb-sign-contract.page.scss'],
+    selector: 'app-cb-sign-contract',
+    templateUrl: './cb-sign-contract.page.html',
+    styleUrls: ['./cb-sign-contract.page.scss'],
 })
 
 export class CbSignContractPage implements OnInit, AfterViewInit, OnDestroy {
@@ -21,7 +22,9 @@ export class CbSignContractPage implements OnInit, AfterViewInit, OnDestroy {
 
     signaturePad!: SignaturePad;
     contract!: Contract;
-
+    tncRead: boolean = false;
+    termsAndConditions: string[] = termsAndConditionsJson.termsAndConditions;
+    
     constructor(
         private _route: ActivatedRoute,
         private _cbAlertService: CbAlertService,
@@ -51,8 +54,10 @@ export class CbSignContractPage implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private _setupSignatureCanvas() {
+        const cbPrimaryColor = getComputedStyle(document.body).getPropertyValue('--ion-color-cbprimary').trim();
+
         this.signaturePad = new SignaturePad(this.signaturePadElement.nativeElement, {
-            penColor: '#e0ac08'
+            penColor: cbPrimaryColor
         });
         window.addEventListener("resize", this.resizeCanvas);
         this.resizeCanvas();
@@ -114,5 +119,9 @@ export class CbSignContractPage implements OnInit, AfterViewInit, OnDestroy {
             ? this._translateService.instant('CB.SIGN_CONTRACT.SIGNATURE_LENGTH_SHORT')
             : this._translateService.instant('CB.SIGN_CONTRACT.SIGNATURE_LENGTH_LONG')
         });
+    }
+
+    tncCheckboxClicked() {
+        this.tncRead != this.tncRead;
     }
 }

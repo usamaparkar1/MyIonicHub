@@ -1,19 +1,40 @@
 .cb-home-module-row-container {
     > ion-col {
         display: flex;
+        position: relative;
         align-items: center;
         flex-direction: column;
         justify-content: center;
 
         ion-badge {
-            margin-top: 1rem;
+            position: absolute;
             border-radius: 4px;
+
+            /* Media query for small screens */
+            @media (min-width: 250px) {
+                right: 28%;
+                top: 25%;
+
+                ion-label {
+                    font-size: 11px;
+                }
+            }
+
+            /* Media query for extra large screens */
+            @media (min-width: 1024px) {
+                right: 33%;
+                top: 30%;
+
+                ion-label {
+                    font-size: 14px;
+                }
+            }
         }
     }
 }
 
 .home-module-images {
-    height: 40%;
+    height: 30%;
 }
 
 .consultation-start-fab {
