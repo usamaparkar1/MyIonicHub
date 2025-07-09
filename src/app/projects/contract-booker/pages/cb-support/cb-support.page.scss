@@ -1,0 +1,92 @@
+.support-container {
+    display: flex;
+    padding-top: 1rem;
+    margin-bottom: 2rem;
+    flex-direction: column;
+}
+
+.suggestion-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bot-message-bubble, .user-message-bubble {
+    max-width: 70%;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+}
+
+.bot-message-bubble {
+    align-self: flex-start;
+    background-color: #dcf8c6;
+    color: var(--ion-color-dark);
+}
+
+.user-message-bubble {
+    align-self: flex-end;
+    color: var(--ion-color-dark);
+    background-color: var(--ion-color-cbprimary);
+}
+
+.message-content {
+    word-wrap: break-word;
+
+    .message-text {
+        padding: 0.75rem 1rem;
+    }
+}
+
+.news-suggestion-container {
+    padding: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: white;
+    border-bottom: 1px solid black;
+
+    ion-label {
+        font-size: 14px;
+    }
+
+    .news-suggestion-dates {
+        display: flex;
+        font-size: 10px;
+        padding-top: 4px;
+        justify-content: flex-end;
+    }
+}
+
+.send-icon {
+    font-size: 2rem;
+    color: var(--ion-color-cbprimary);
+  
+    &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+ion-footer {
+    ion-toolbar {
+        .suggestion {
+            cursor: pointer;
+            margin: 8px 4px;
+            padding: 8px 16px;
+            user-select: none;
+            border-radius: 16px;
+            color: var(--ion-color-dark);
+            background-color: var(--ion-color-light);
+        }
+
+        ion-input {
+            flex: 1;
+            margin-right: 8px;
+        }
+  
+        ion-button {
+            --padding-start: 0;
+            --padding-end: 0;
+        }
+    }
+}

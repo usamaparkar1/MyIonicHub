@@ -62,7 +62,7 @@ export class CbMenuComponent  implements OnInit {
         } else if(cbHomePageLink.id === 3) {
             this._cbRoutingService.goToCbMyContracts();
         } else if(cbHomePageLink.id === 4) {
-            this.startConsultation();
+            this._cbRoutingService.goToCbSupport();
         }
 
         this.closeCbMenu();
@@ -79,6 +79,8 @@ export class CbMenuComponent  implements OnInit {
         } else {
             await this._cbRoutingService.goToCbCustomerAddress();
         }
+
+        this.closeCbMenu();
     }
 
     isCartCountGreaterThanZero() {

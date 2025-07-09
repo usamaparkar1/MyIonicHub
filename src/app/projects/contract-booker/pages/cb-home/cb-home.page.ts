@@ -53,7 +53,7 @@ export class CbHomePage implements OnInit, OnDestroy {
     }
 
     getColumnClass(): string {
-        return this._appHelperService.isScreenSmall() ? '6' : '4';
+        return this._appHelperService.isScreenSmall() ? '6' : '3';
     }
 
     isCartCountGreaterThanZero() {

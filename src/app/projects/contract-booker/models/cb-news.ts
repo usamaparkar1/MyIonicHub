@@ -4,6 +4,7 @@ export class CbNews implements INews {
     description: string;
     isRead: boolean;
     expanded: boolean;
+    createDate: string;
 
     constructor(cbNews: CbNews) {
         this.id = cbNews.id;
@@ -11,6 +12,7 @@ export class CbNews implements INews {
         this.description = cbNews.description;
         this.isRead = cbNews.isRead;
         this.expanded = cbNews.expanded;
+        this.createDate = cbNews.createDate
     }
 }
 
@@ -20,4 +22,5 @@ export interface INews {
     description: string;
     isRead: boolean;
     expanded: boolean;
+    createDate: string;
 }

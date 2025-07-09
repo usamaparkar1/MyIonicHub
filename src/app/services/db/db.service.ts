@@ -1,15 +1,12 @@
-import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection } from '@capacitor-community/sqlite';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class DbService {
 
-    private _userSqliteConnection: SQLiteConnection = new SQLiteConnection(CapacitorSQLite);
     private _dbNameVersionDict: Map<string, number> = new Map();
-    private _userDb!: SQLiteDBConnection;
 
     constructor() { }
 

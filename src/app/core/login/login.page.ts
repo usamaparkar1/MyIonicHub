@@ -1,7 +1,5 @@
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { SecureStorageService } from 'src/app/services/secure-storage/secure-storage.service';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { secureStorageHelpers } from 'src/app/helpers/secure-storage-helpers';
 import { RoutingService } from 'src/app/services/routing/routing.service';
 import { NetworkService } from 'src/app/services/network/network.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
@@ -42,7 +40,6 @@ export class LoginPage implements OnInit {
         private _routingService: RoutingService,
         private _networkService: NetworkService,
         private _translateService: TranslateService,
-        private _secureStorageService: SecureStorageService,
         private _authenticationService: AuthenticationService,
     ) {}
 

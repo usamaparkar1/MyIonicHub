@@ -14,5 +14,11 @@
                 <ion-label>{{ module.count > 9 ? '9+' : module.count }}</ion-label>
             </ion-badge>
         </ion-item>
+
+        <!-- Consultation Start Item -->
+        <ion-item (click)="startConsultation()" class="module-items" lines="full">
+            <ion-icon [src]="contractBookerData.consultationStartSvg"></ion-icon>
+            <ion-label>{{'CB.HOME.START_CONSULTATION' | translate}}</ion-label>
+        </ion-item>
     </ion-content>
 </ion-menu>
