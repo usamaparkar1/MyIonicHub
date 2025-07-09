@@ -1,3 +1,4 @@
+import { CbNewsIssue } from '../../models/cb-support-messages';
 import { CbNewsService } from '../news/cb-news.service';
 import { CbNews } from '../../models/cb-news';
 import { Injectable } from '@angular/core';
@@ -44,5 +45,30 @@ export class CbSupportNewsService {
 
     getNumberOfNews(news: CbNews[], numberOfNews: number) {
         return news.slice(0, numberOfNews);
+    }
+
+    getNewsIssueResponse(): CbNewsIssue[] {
+        return [
+            {
+                id: 0,
+                message: "The news is incorrect"
+            },
+            {
+                id: 1,
+                message: "The news is outdated"
+            },
+            {
+                id: 2,
+                message: "The news is reptitive"
+            },
+            {
+                id: 3,
+                message: "I want to add more information helpful to this news"
+            },
+            {
+                id: 10,
+                message: "Other"
+            },
+        ]
     }
 }

@@ -1,7 +1,5 @@
 .support-container {
     display: flex;
-    padding-top: 1rem;
-    margin-bottom: 2rem;
     flex-direction: column;
 }
 
@@ -18,13 +16,11 @@
 
 .bot-message-bubble {
     align-self: flex-start;
-    background-color: #dcf8c6;
-    color: var(--ion-color-dark);
+    background-color: #7db552; // Light Theme color: #dcf8c6
 }
 
 .user-message-bubble {
     align-self: flex-end;
-    color: var(--ion-color-dark);
     background-color: var(--ion-color-cbprimary);
 }
 
@@ -42,8 +38,8 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background-color: white;
-    border-bottom: 1px solid black;
+    background-color: var(--ion-color-light);
+    border-bottom: 1px solid var(--ion-color-dark);
 
     ion-label {
         font-size: 14px;
@@ -55,6 +51,12 @@
         padding-top: 4px;
         justify-content: flex-end;
     }
+}
+
+.news-suggestion-container:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .send-icon {
@@ -75,7 +77,6 @@ ion-footer {
             padding: 8px 16px;
             user-select: none;
             border-radius: 16px;
-            color: var(--ion-color-dark);
             background-color: var(--ion-color-light);
         }
 
