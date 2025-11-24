@@ -1,14 +1,13 @@
 import coreDataJson from 'src/assets/json-data/core-data.json';
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { IonicModule } from '@ionic/angular';
 import { ActionSheetService } from 'src/app/services/action-sheet/action-sheet.service';
 
 @Component({
     imports: [
-        CommonModule,
-        IonicModule,
-    ],
+    IonicModule
+],
     selector: 'app-profile-header',
     templateUrl: './profile-header.component.html',
     styleUrls: ['./profile-header.component.scss']

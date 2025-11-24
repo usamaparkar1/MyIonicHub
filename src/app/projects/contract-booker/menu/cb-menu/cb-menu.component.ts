@@ -6,13 +6,13 @@ import { IonicModule, MenuController } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { Contract } from '../../models/cb-contract';
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Menus } from 'src/app/enum/menus';
 import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'cb-menu',
-    imports: [CommonModule, IonicModule, TranslateModule],
+    imports: [IonicModule, TranslateModule],
     templateUrl: './cb-menu.component.html',
     styleUrls: ['./cb-menu.component.scss']
 })

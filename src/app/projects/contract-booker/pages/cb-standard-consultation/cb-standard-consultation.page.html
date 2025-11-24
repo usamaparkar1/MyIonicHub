@@ -1,29 +1,37 @@
 <cb-header [isTranslucent]="true">
-    <ion-title cb-header-1>{{ 'CB.PRODUCT_SELECTION.STANDARD_CONSULTATION' | translate }}</ion-title>
+  <ion-title cb-header-1>{{ 'CB.PRODUCT_SELECTION.STANDARD_CONSULTATION' | translate }}</ion-title>
 </cb-header>
 
 <ion-content [fullscreen]="true" scrollY="true">
-    <cb-header collapseValue="condense" [isSecondHeader]="true">
-        <ion-title cb-header-1>{{'CB.PRODUCT_SELECTION.STANDARD_CONSULTATION' | translate}}</ion-title>
-    </cb-header>
+  <cb-header collapseValue="condense" [isSecondHeader]="true">
+    <ion-title cb-header-1>{{'CB.PRODUCT_SELECTION.STANDARD_CONSULTATION' | translate}}</ion-title>
+  </cb-header>
 
-    <ion-grid *ngIf="products.length > 0">
-        <!-- List of available Products for each Sector -->
-        <ion-row>
-            <ion-col *ngFor="let product of products" [size]="getColumnClass()" class="product-container">
-                <cb-product-card (click)="productClicked(product.productId, product.name)" [product]="product"></cb-product-card>
-            </ion-col>
-        </ion-row>
+  @if (products.length > 0) {
+    <ion-grid>
+      <!-- List of available Products for each Sector -->
+      <ion-row>
+        @for (product of products; track product) {
+          <ion-col [size]="getColumnClass()" class="product-container">
+            <cb-product-card (click)="productClicked(product.productId, product.name)" [product]="product"></cb-product-card>
+          </ion-col>
+        }
+      </ion-row>
     </ion-grid>
+  }
 </ion-content>
 
-<ion-footer *ngIf="selectedSector">
+@if (selectedSector) {
+  <ion-footer>
     <ion-toolbar>
-        <ion-segment color="cbprimary" [value]="selectedSector.sectorId">
-            <ion-segment-button *ngFor="let sector of sectors" [value]="sector.sectorId" (click)="sectorClicked(sector)">
-                <ion-label>{{sector.sectorName}}</ion-label>
-                <ion-icon [src]="sector.sectorIcon"></ion-icon>
-            </ion-segment-button>
-        </ion-segment>
+      <ion-segment color="cbprimary" [value]="selectedSector.sectorId">
+        @for (sector of sectors; track sector) {
+          <ion-segment-button [value]="sector.sectorId" (click)="sectorClicked(sector)">
+            <ion-label>{{sector.sectorName}}</ion-label>
+            <ion-icon [src]="sector.sectorIcon"></ion-icon>
+          </ion-segment-button>
+        }
+      </ion-segment>
     </ion-toolbar>
-</ion-footer>
+  </ion-footer>
+}

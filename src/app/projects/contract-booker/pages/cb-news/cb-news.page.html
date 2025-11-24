@@ -1,33 +1,39 @@
 <cb-header [isTranslucent]="true">
-    <ion-title cb-header-1>{{ 'CB.NEWS.NEWS' | translate }}</ion-title>
+  <ion-title cb-header-1>{{ 'CB.NEWS.NEWS' | translate }}</ion-title>
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <cb-header collapseValue="condense" [isSecondHeader]="true">
-        <ion-title cb-header-1>{{'CB.NEWS.NEWS' | translate}}</ion-title>
-    </cb-header>
+  <cb-header collapseValue="condense" [isSecondHeader]="true">
+    <ion-title cb-header-1>{{'CB.NEWS.NEWS' | translate}}</ion-title>
+  </cb-header>
 
-    <ion-list *ngIf="news.length > 0">
-        <ng-container *ngFor="let newsItem of news;let newsIndex = index">
-            <ion-item class="news-item" (click)="expandNewsItem(newsItem)" [lines]="newsItem.expanded ? 'none' : 'full'">
-                <ion-label [color]="newsItem.isRead ? 'dark' : 'warning'">{{ newsIndex + 1 }}. {{ newsItem.title }}</ion-label>
-                <ion-icon slot="end" [color]="newsItem.isRead ? 'dark' : 'warning'" name="chevron-down-outline" *ngIf="!newsItem.expanded"></ion-icon>
-                <ion-icon slot="end" [color]="newsItem.isRead ? 'dark' : 'warning'" name="chevron-up-outline" *ngIf="newsItem.expanded"></ion-icon>
-            </ion-item>
-
-            <!-- News Expanded -->
-            <ion-item *ngIf="newsItem.expanded" [lines]="newsItem.expanded ? 'full' : 'none'">
-                <ion-label class="news-description">{{ newsItem.description }}</ion-label>
-            </ion-item>
-        </ng-container>
-
-        <ion-infinite-scroll
-            threshold="1%"
-            [disabled]="allNewsLoaded()"
-            class="news-infinite-scroll-container"
-            (ionInfinite)="loadMoreNews($event)"
+  @if (news.length > 0) {
+    <ion-list>
+      @for (newsItem of news; track newsItem; let newsIndex = $index) {
+        <ion-item class="news-item" (click)="expandNewsItem(newsItem)" [lines]="newsItem.expanded ? 'none' : 'full'">
+          <ion-label [color]="newsItem.isRead ? 'dark' : 'warning'">{{ newsIndex + 1 }}. {{ newsItem.title }}</ion-label>
+          @if (!newsItem.expanded) {
+            <ion-icon slot="end" [color]="newsItem.isRead ? 'dark' : 'warning'" name="chevron-down-outline"></ion-icon>
+          }
+          @if (newsItem.expanded) {
+            <ion-icon slot="end" [color]="newsItem.isRead ? 'dark' : 'warning'" name="chevron-up-outline"></ion-icon>
+          }
+        </ion-item>
+        <!-- News Expanded -->
+        @if (newsItem.expanded) {
+          <ion-item [lines]="newsItem.expanded ? 'full' : 'none'">
+            <ion-label class="news-description">{{ newsItem.description }}</ion-label>
+          </ion-item>
+        }
+      }
+      <ion-infinite-scroll
+        threshold="1%"
+        [disabled]="allNewsLoaded()"
+        class="news-infinite-scroll-container"
+        (ionInfinite)="loadMoreNews($event)"
         >
-            <ion-infinite-scroll-content loadingSpinner="lines-sharp"></ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+        <ion-infinite-scroll-content loadingSpinner="lines-sharp"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </ion-list>
+  }
 </ion-content>

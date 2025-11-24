@@ -1,63 +1,64 @@
 <cb-header [isTranslucent]="true">
-    <ion-title cb-header-1>{{ 'CB.SHOPPING_CART.SHOPPING_CART' | translate }}</ion-title>
+  <ion-title cb-header-1>{{ 'CB.SHOPPING_CART.SHOPPING_CART' | translate }}</ion-title>
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <cb-header collapseValue="condense" [isSecondHeader]="true">
-        <ion-title cb-header-1>{{'CB.SHOPPING_CART.SHOPPING_CART' | translate}}</ion-title>
-    </cb-header>
+  <cb-header collapseValue="condense" [isSecondHeader]="true">
+    <ion-title cb-header-1>{{'CB.SHOPPING_CART.SHOPPING_CART' | translate}}</ion-title>
+  </cb-header>
 
-    <ion-list *ngIf="contracts && contracts.length > 0; else cartIsEmpty" lines="none">
-        <ng-container *ngFor="let contract of contracts; let cIndex = index">
-            <cb-cart-item
-                [cIndex]="cIndex"
-                [contract]="contract"
-            ></cb-cart-item>
-        </ng-container>
+  @if (contracts && contracts.length > 0) {
+    <ion-list lines="none">
+      @for (contract of contracts; track contract; let cIndex = $index) {
+        <cb-cart-item
+          [cIndex]="cIndex"
+          [contract]="contract"
+        ></cb-cart-item>
+      }
     </ion-list>
+  } @else {
+    <ion-grid class="empty-cart-container ion-justify-content-center ion-align-items-center">
+      <ion-row><ion-col>
+        <ion-title>{{'CB.SHOPPING_CART.CART_IS_EMPTY' | translate}}</ion-title>
+      </ion-col></ion-row>
+    </ion-grid>
+  }
 
-    <ng-template #cartIsEmpty>
-        <ion-grid class="empty-cart-container ion-justify-content-center ion-align-items-center">
-            <ion-row><ion-col>
-                <ion-title>{{'CB.SHOPPING_CART.CART_IS_EMPTY' | translate}}</ion-title>
-            </ion-col></ion-row>
-        </ion-grid>
-    </ng-template>
 </ion-content>
 
 <ion-footer>
-    <!-- Look into imroving this code. -->
-    <cb-form-footer [hidden]="!allContractsAreSigned()">
-        <!-- Submit Contracts -->
-        <ion-button
-            cb-bottom-button
-            expand="full"
-            color="cbprimary"
-            (click)="submitContracts()"
-        >
-            <ion-label>{{'CB.SHOPPING_CART.SUBMIT_CONTRACT' | translate}}</ion-label>
-        </ion-button>
-    </cb-form-footer>
-    <cb-form-footer-2 [hidden]="allContractsAreSigned()">
-        <!-- Add Contracts -->
-        <ion-button
-            cb-bottom-button-1
-            color="secondary"
-            [style]="isSignatureButtonHidden() ? 'width: 100%;' : 'width: 50%'"
-            (click)="addContract()"
-            [hidden]="!canAddMoreContracts()"
-        >
-            <ion-label>{{'CB.SHOPPING_CART.ADD_CONTRACT' | translate}}</ion-label>
-        </ion-button>
-        <!-- Sign Contracts -->
-        <ion-button
-            cb-bottom-button-2
-            color="cbprimary"
-            [style]="canAddMoreContracts() ? 'width: 50%;' : 'width: 100%'"
-            (click)="signContract()"
-            [hidden]="isSignatureButtonHidden()"
-        >
-            <ion-label>{{'CB.SHOPPING_CART.SIGN_CONTRACT' | translate}}</ion-label>
-        </ion-button>
-    </cb-form-footer-2>
+  <!-- Look into imroving this code. -->
+  <cb-form-footer [hidden]="!allContractsAreSigned()">
+    <!-- Submit Contracts -->
+    <ion-button
+      cb-bottom-button
+      expand="full"
+      color="cbprimary"
+      (click)="submitContracts()"
+      >
+      <ion-label>{{'CB.SHOPPING_CART.SUBMIT_CONTRACT' | translate}}</ion-label>
+    </ion-button>
+  </cb-form-footer>
+  <cb-form-footer-2 [hidden]="allContractsAreSigned()">
+    <!-- Add Contracts -->
+    <ion-button
+      cb-bottom-button-1
+      color="secondary"
+      [style]="isSignatureButtonHidden() ? 'width: 100%;' : 'width: 50%'"
+      (click)="addContract()"
+      [hidden]="!canAddMoreContracts()"
+      >
+      <ion-label>{{'CB.SHOPPING_CART.ADD_CONTRACT' | translate}}</ion-label>
+    </ion-button>
+    <!-- Sign Contracts -->
+    <ion-button
+      cb-bottom-button-2
+      color="cbprimary"
+      [style]="canAddMoreContracts() ? 'width: 50%;' : 'width: 100%'"
+      (click)="signContract()"
+      [hidden]="isSignatureButtonHidden()"
+      >
+      <ion-label>{{'CB.SHOPPING_CART.SIGN_CONTRACT' | translate}}</ion-label>
+    </ion-button>
+  </cb-form-footer-2>
 </ion-footer>

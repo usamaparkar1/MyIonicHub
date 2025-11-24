@@ -1,43 +1,45 @@
 <cb-header [isTranslucent]="true">
-    <ion-title cb-header-1>{{ 'CB.PRODUCT_SELECTION.PRICE_COMPARISON' | translate }}</ion-title>
+  <ion-title cb-header-1>{{ 'CB.PRODUCT_SELECTION.PRICE_COMPARISON' | translate }}</ion-title>
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <cb-header collapseValue="condense" [isSecondHeader]="true">
-        <ion-title cb-header-1>{{'CB.PRODUCT_SELECTION.PRICE_COMPARISON' | translate}}</ion-title>
-    </cb-header>
+  <cb-header collapseValue="condense" [isSecondHeader]="true">
+    <ion-title cb-header-1>{{'CB.PRODUCT_SELECTION.PRICE_COMPARISON' | translate}}</ion-title>
+  </cb-header>
 
-    <ion-grid *ngIf="sectorsCheckboxes.length > 0">
-        <!-- Checkboxes for Sectors -->
-        <ng-container *ngFor="let sectorCheckbox of sectorsCheckboxes">
-            <ion-row>
-                <ion-col class="ion-no-padding">
-                    <ion-item lines="full">
-                        <ion-checkbox labelPlacement="end" alignment="center" justify="start" color="cbprimary" mode="ios" [value]="sectorCheckbox.sectorId" [(ngModel)]="sectorCheckbox.checked" (click)="sectorClicked(sectorCheckbox)">
-                            {{ sectorCheckbox.sectorName | titlecase }}
-                        </ion-checkbox>
-                    </ion-item>
-
-                    <div *ngIf="sectorCheckbox.checked" class="sector-checked-dropdown-container">
-                        <!-- Single Tariff Consumption -->
-                        <cb-consumption-input 
-                            (consumptionChangedEvent)="handleConsumptionChangeEventEtHt($event, sectorCheckbox)"
-                            [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_ETHT'"
-                            [consumptionPerYear]="sectorCheckbox.priceComparisonConsumptionPerYearEtHt"
-                            [sector]="sectorCheckbox"
-                        ></cb-consumption-input>
-                        <!-- Night Consumption Tariff Consumption -->
-                        <cb-consumption-input *ngIf="sectorCheckbox.isDoubleTariffEnabled"
-                            (consumptionChangedEvent)="handleConsumptionChangeEventNt($event, sectorCheckbox)"
-                            [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_NT'"
-                            [consumptionPerYear]="sectorCheckbox.priceComparisonConsumptionPerYearNt"
-                            [sector]="sectorCheckbox"
-                        ></cb-consumption-input>
-
-                        <!-- Products for each Sector (Indented) -->
-                        <ion-list>
-                            <ng-container *ngFor="let product of sectorCheckbox.productCheckboxes">
-                                <ion-item lines="full"
+  @if (sectorsCheckboxes.length > 0) {
+    <ion-grid>
+      <!-- Checkboxes for Sectors -->
+      @for (sectorCheckbox of sectorsCheckboxes; track sectorCheckbox) {
+        <ion-row>
+          <ion-col class="ion-no-padding">
+            <ion-item lines="full">
+              <ion-checkbox labelPlacement="end" alignment="center" justify="start" color="cbprimary" mode="ios" [value]="sectorCheckbox.sectorId" [(ngModel)]="sectorCheckbox.checked" (click)="sectorClicked(sectorCheckbox)">
+                {{ sectorCheckbox.sectorName | titlecase }}
+              </ion-checkbox>
+            </ion-item>
+            @if (sectorCheckbox.checked) {
+              <div class="sector-checked-dropdown-container">
+                <!-- Single Tariff Consumption -->
+                <cb-consumption-input
+                  (consumptionChangedEvent)="handleConsumptionChangeEventEtHt($event, sectorCheckbox)"
+                  [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_ETHT'"
+                  [consumptionPerYear]="sectorCheckbox.priceComparisonConsumptionPerYearEtHt"
+                  [sector]="sectorCheckbox"
+                ></cb-consumption-input>
+                <!-- Night Consumption Tariff Consumption -->
+                @if (sectorCheckbox.isDoubleTariffEnabled) {
+                  <cb-consumption-input
+                    (consumptionChangedEvent)="handleConsumptionChangeEventNt($event, sectorCheckbox)"
+                    [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_NT'"
+                    [consumptionPerYear]="sectorCheckbox.priceComparisonConsumptionPerYearNt"
+                    [sector]="sectorCheckbox"
+                  ></cb-consumption-input>
+                }
+                <!-- Products for each Sector (Indented) -->
+                <ion-list>
+                  @for (product of sectorCheckbox.productCheckboxes; track product) {
+                    <ion-item lines="full"
                                     (click)="isConsumptionInvalid(
                                         product.productId,
                                         product.name,
@@ -47,16 +49,18 @@
                                         sectorCheckbox.priceComparisonConsumptionPerYearNt,
                                         sectorCheckbox.isDoubleTariffEnabled
                                     )">
-                                        <ion-label slot="start">{{product.name}} 
-                                            <span class="price-comparison-price-per-product">({{product.productPrice | currency:'EUR':'symbol':'1.2-2'}})</span>
-                                        </ion-label>
-                                        <ion-label slot="end">{{product.productPricePerConsumption | currency:'EUR':'symbol':'1.2-2' || ''}}</ion-label>
-                                </ion-item>
-                            </ng-container>
-                        </ion-list>
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ng-container> 
+                      <ion-label slot="start">{{product.name}}
+                        <span class="price-comparison-price-per-product">({{product.productPrice | currency:'EUR':'symbol':'1.2-2'}})</span>
+                      </ion-label>
+                      <ion-label slot="end">{{product.productPricePerConsumption | currency:'EUR':'symbol':'1.2-2' || ''}}</ion-label>
+                    </ion-item>
+                  }
+                </ion-list>
+              </div>
+            }
+          </ion-col>
+        </ion-row>
+      }
     </ion-grid>
+  }
 </ion-content>

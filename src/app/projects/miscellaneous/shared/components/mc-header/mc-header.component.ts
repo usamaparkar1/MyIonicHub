@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { IonicModule } from '@ionic/angular';
 
 @Component({
     selector: 'app-mc-header',
-    imports: [CommonModule, IonicModule],
+    imports: [IonicModule],
     templateUrl: './mc-header.component.html',
     styleUrls: ['./mc-header.component.scss']
 })

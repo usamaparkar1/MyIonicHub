@@ -1,46 +1,49 @@
 <cb-header [isTranslucent]="true">
-    <ion-title cb-header-1>{{ 'CB.MY_CONTRACTS.MY_CONTRACTS' | translate }}</ion-title>
+  <ion-title cb-header-1>{{ 'CB.MY_CONTRACTS.MY_CONTRACTS' | translate }}</ion-title>
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <cb-header collapseValue="condense" [isSecondHeader]="true">
-        <ion-title cb-header-1>{{'CB.MY_CONTRACTS.MY_CONTRACTS' | translate}}</ion-title>
-    </cb-header>
+  <cb-header collapseValue="condense" [isSecondHeader]="true">
+    <ion-title cb-header-1>{{'CB.MY_CONTRACTS.MY_CONTRACTS' | translate}}</ion-title>
+  </cb-header>
 
-    <ion-list *ngIf="myContracts.length > 0" class="my-contracts-list-container">
+  @if (myContracts.length > 0) {
+    <ion-list class="my-contracts-list-container">
+      <ion-item>
+        <ion-label>{{labelContractNo}}</ion-label>
+        <ion-label>{{labelConsumptionPerYear}}</ion-label>
+        <ion-label>{{labelPricePerConsumption}}</ion-label>
+        <ion-label>{{labelAddress}}</ion-label>
+      </ion-item>
+      @for (myContract of myContracts; track myContract; let i = $index) {
         <ion-item>
-            <ion-label>{{labelContractNo}}</ion-label>
-            <ion-label>{{labelConsumptionPerYear}}</ion-label>
-            <ion-label>{{labelPricePerConsumption}}</ion-label>
-            <ion-label>{{labelAddress}}</ion-label>
-        </ion-item>
-
-        <ion-item *ngFor="let myContract of myContracts;let i = index">
-            <ion-label>{{i+1}}</ion-label>
-            <ion-label
+          <ion-label>{{i+1}}</ion-label>
+          <ion-label
                 (click)="openInformationPopup(
                     (myContract.consumptionPerYearEtHt + myContract.consumptionPerYearNt).toString(), 
                     labelConsumptionPerYear
                 )"
             >
-                {{myContract.consumptionPerYearEtHt + myContract.consumptionPerYearNt}}
-            </ion-label>
-            <ion-label
+            {{myContract.consumptionPerYearEtHt + myContract.consumptionPerYearNt}}
+          </ion-label>
+          <ion-label
                 (click)="openInformationPopup(
                     (myContract.pricePerConsumption).toString(),
                     labelPricePerConsumption
                 )"
             >
-                {{myContract.pricePerConsumption}}
-            </ion-label>
-            <ion-label
+            {{myContract.pricePerConsumption}}
+          </ion-label>
+          <ion-label
                 (click)="openInformationPopup(
                     myContract.state + ' - ' + myContract.city + ' - ' + myContract.postCode,
                     labelAddress
                 )"
             >
-                {{myContract.state}}, {{myContract.city}}, {{myContract.postCode}}
-            </ion-label>
+            {{myContract.state}}, {{myContract.city}}, {{myContract.postCode}}
+          </ion-label>
         </ion-item>
+      }
     </ion-list>
+  }
 </ion-content>

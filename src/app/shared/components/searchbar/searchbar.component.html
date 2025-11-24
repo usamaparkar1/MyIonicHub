@@ -1,13 +1,17 @@
 <ion-header [translucent]="true" class="ion-no-border">
-    <ion-toolbar>
-        <ion-searchbar [formControl]="searchValue" [debounce]="300"></ion-searchbar>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [formControl]="searchValue" [debounce]="300"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-list lines="none">
-        <ion-item *ngFor="let result of searchResult$ | async">
-            <ion-label *ngIf="result!.length > 0" (click)="selectSearchResult(result)">{{ result }}</ion-label>
-        </ion-item>
-    </ion-list>
+  <ion-list lines="none">
+    @for (result of searchResult$ | async; track result) {
+      <ion-item>
+        @if (result!.length > 0) {
+          <ion-label (click)="selectSearchResult(result)">{{ result }}</ion-label>
+        }
+      </ion-item>
+    }
+  </ion-list>
 </ion-content>

@@ -1,15 +1,19 @@
 <ion-content [fullscreen]="true">
-    <!-- Container for all the Slides in Introduction Page -->
-    <swiper-container #swiper pagination="true" [loop]="false" [zoom]="true" (slidechange)="onSlideChange($event)">
-        <swiper-slide *ngFor="let slide of slides; index as index">
-            <div class="swiper-zoom-container">
-                <img [src]="slide.imageUrl" width="120" />
-                <ion-label *ngIf="slide.title">{{ slide.title | translate }}</ion-label>
-            </div>
-        </swiper-slide>
-    </swiper-container>
-  
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button color="primary" (click)="completeIntroduction()">{{ (currentSlideIndex === slides.length - 1 ? 'Start' : 'Skip') | translate }}</ion-fab-button>
-    </ion-fab>
+  <!-- Container for all the Slides in Introduction Page -->
+  <swiper-container #swiper pagination="true" [loop]="false" [zoom]="true" (slidechange)="onSlideChange($event)">
+    @for (slide of slides; track slide; let index = $index) {
+      <swiper-slide>
+        <div class="swiper-zoom-container">
+          <img [src]="slide.imageUrl" width="120" />
+          @if (slide.title) {
+            <ion-label>{{ slide.title | translate }}</ion-label>
+          }
+        </div>
+      </swiper-slide>
+    }
+  </swiper-container>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="completeIntroduction()">{{ (currentSlideIndex === slides.length - 1 ? 'Start' : 'Skip') | translate }}</ion-fab-button>
+  </ion-fab>
 </ion-content>

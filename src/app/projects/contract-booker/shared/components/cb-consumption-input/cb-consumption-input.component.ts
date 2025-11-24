@@ -3,17 +3,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonInput, IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { Sector } from '../../../models/cb-sector';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'cb-consumption-input',
     imports: [
-        CommonModule,
-        IonicModule,
-        FormsModule,
-        TranslateModule,
-        ReactiveFormsModule,
-    ],
+    IonicModule,
+    FormsModule,
+    TranslateModule,
+    ReactiveFormsModule
+],
     templateUrl: './cb-consumption-input.component.html',
     styleUrls: ['./cb-consumption-input.component.scss']
 })

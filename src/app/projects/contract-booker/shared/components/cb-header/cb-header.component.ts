@@ -5,13 +5,13 @@ import { CbRoutingService } from '../../../services/routing/cb-routing.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IonicModule, MenuController } from '@ionic/angular';
 import { Contract } from '../../../models/cb-contract';
-import { CommonModule } from '@angular/common';
+
 import { Menus } from 'src/app/enum/menus';
 import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'cb-header',
-    imports: [CommonModule, IonicModule, ProfileHeaderComponent],
+    imports: [IonicModule, ProfileHeaderComponent],
     templateUrl: './cb-header.component.html',
     styleUrls: ['./cb-header.component.scss']
 })

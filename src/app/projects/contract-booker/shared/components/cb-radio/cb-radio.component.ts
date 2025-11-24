@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
     selector: 'cb-radio',
-    imports: [CommonModule, IonicModule, FormsModule],
+    imports: [IonicModule, FormsModule],
     templateUrl: './cb-radio.component.html',
     styleUrls: ['./cb-radio.component.scss']
 })

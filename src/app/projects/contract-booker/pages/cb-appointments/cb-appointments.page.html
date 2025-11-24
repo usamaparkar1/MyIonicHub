@@ -1,35 +1,39 @@
 <cb-header [isTranslucent]="true">
-    <ion-title cb-header-1>{{ 'CB.APPOINTMENTS.APPOINTMENTS' | translate }}</ion-title>
+  <ion-title cb-header-1>{{ 'CB.APPOINTMENTS.APPOINTMENTS' | translate }}</ion-title>
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <cb-header collapseValue="condense" [isSecondHeader]="true">
-        <ion-title cb-header-1>{{'CB.APPOINTMENTS.APPOINTMENTS' | translate}}</ion-title>
-    </cb-header>
+  <cb-header collapseValue="condense" [isSecondHeader]="true">
+    <ion-title cb-header-1>{{'CB.APPOINTMENTS.APPOINTMENTS' | translate}}</ion-title>
+  </cb-header>
 
-    <ion-list *ngIf="appointments.length > 0">
-        <ion-item *ngFor="let appointment of appointments" lines="full">
-            <ion-label>
-                <h2>{{ appointment.appointmentTitle }}</h2>
-                <p>Date: {{ appointment.appointmentDate }}</p>
-                <p>Time: {{ appointment.appointmentTime }}</p>
-                <p>Location: {{ appointment.city }}, {{ appointment.state }}, {{ appointment.postCode }}</p>
-                <p class="appointment-description">{{ appointment.appointmentDescription }}</p>
-            </ion-label>
-            <div class="icons-container">
-                <ion-icon size="large" name="create" slot="end" color="cbprimary" (click)="editAppointment(appointment.id)"></ion-icon>
-                <ion-icon size="large" name="trash" slot="end" color="danger" (click)="deleteAppointment(appointment)"></ion-icon>
-            </div>
-        </ion-item>        
+  @if (appointments.length > 0) {
+    <ion-list>
+      @for (appointment of appointments; track appointment) {
+        <ion-item lines="full">
+          <ion-label>
+            <h2>{{ appointment.appointmentTitle }}</h2>
+            <p>Date: {{ appointment.appointmentDate }}</p>
+            <p>Time: {{ appointment.appointmentTime }}</p>
+            <p>Location: {{ appointment.city }}, {{ appointment.state }}, {{ appointment.postCode }}</p>
+            <p class="appointment-description">{{ appointment.appointmentDescription }}</p>
+          </ion-label>
+          <div class="icons-container">
+            <ion-icon size="large" name="create" slot="end" color="cbprimary" (click)="editAppointment(appointment.id)"></ion-icon>
+            <ion-icon size="large" name="trash" slot="end" color="danger" (click)="deleteAppointment(appointment)"></ion-icon>
+          </div>
+        </ion-item>
+      }
     </ion-list>
+  }
 </ion-content>
 
 <cb-form-footer>
-    <ion-button
-        cb-bottom-button
-        expand="full"
-        (click)="addNewAppointment()"
+  <ion-button
+    cb-bottom-button
+    expand="full"
+    (click)="addNewAppointment()"
     >
-        <ion-label>{{'CB.APPOINTMENTS.CREATE_APPOINTMENT' | translate}}</ion-label>
-    </ion-button>
+    <ion-label>{{'CB.APPOINTMENTS.CREATE_APPOINTMENT' | translate}}</ion-label>
+  </ion-button>
 </cb-form-footer>

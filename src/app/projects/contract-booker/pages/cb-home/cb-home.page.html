@@ -1,32 +1,35 @@
 <cb-header [isTranslucent]="true">
-    <ion-title cb-header-1>{{ 'CB.HOME.HOME' | translate }}</ion-title>
+  <ion-title cb-header-1>{{ 'CB.HOME.HOME' | translate }}</ion-title>
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <cb-header collapseValue="condense" [isSecondHeader]="true">
-        <ion-title cb-header-1>{{'CB.HOME.HOME' | translate}}</ion-title>
-    </cb-header>
+  <cb-header collapseValue="condense" [isSecondHeader]="true">
+    <ion-title cb-header-1>{{'CB.HOME.HOME' | translate}}</ion-title>
+  </cb-header>
 
-    <ion-grid *ngIf="cbHomeModules.length > 0">
-        <ion-row class="cb-home-module-row-container">
-            <ion-col
-                *ngFor="let module of cbHomeModules"
-                (click)="moduleClicked(module)"
-                [size]="getColumnClass()"
-                class="ion-text-center"
+  @if (cbHomeModules.length > 0) {
+    <ion-grid>
+      <ion-row class="cb-home-module-row-container">
+        @for (module of cbHomeModules; track module) {
+          <ion-col
+            (click)="moduleClicked(module)"
+            [size]="getColumnClass()"
+            class="ion-text-center"
             >
-                <ion-img class="home-module-images" [src]="module.image"></ion-img>
-                <ion-badge [hidden]="module.count < 1" color="cbprimary">
-                    <ion-label>{{ module.count > 9 ? '9+' : module.count }}</ion-label>
-                </ion-badge>
-                <ion-label class="ion-text-center ion-padding">{{module.name | translate}}</ion-label>
-            </ion-col>
-        </ion-row>
+            <ion-img class="home-module-images" [src]="module.image"></ion-img>
+            <ion-badge [hidden]="module.count < 1" color="cbprimary">
+              <ion-label>{{ module.count > 9 ? '9+' : module.count }}</ion-label>
+            </ion-badge>
+            <ion-label class="ion-text-center ion-padding">{{module.name | translate}}</ion-label>
+          </ion-col>
+        }
+      </ion-row>
     </ion-grid>
+  }
 
-    <ion-fab class="consultation-start-fab">
-        <ion-fab-button (click)="startConsultation()">
-            <ion-icon [src]="contractBookerData.consultationStartSvg"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
+  <ion-fab class="consultation-start-fab">
+    <ion-fab-button (click)="startConsultation()">
+      <ion-icon [src]="contractBookerData.consultationStartSvg"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

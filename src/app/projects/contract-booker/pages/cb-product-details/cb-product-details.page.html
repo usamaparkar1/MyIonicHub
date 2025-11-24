@@ -1,107 +1,113 @@
 <cb-header [isTranslucent]="true">
-    <ion-title cb-header-1>{{ 'CB.PRODUCT_DETAILS.PRODUCT_DETAILS' | translate }}</ion-title>
+  <ion-title cb-header-1>{{ 'CB.PRODUCT_DETAILS.PRODUCT_DETAILS' | translate }}</ion-title>
 </cb-header>
 
 <ion-content [fullscreen]="true">
-    <cb-header collapseValue="condense" [isSecondHeader]="true">
-        <ion-title cb-header-1>{{'CB.PRODUCT_DETAILS.PRODUCT_DETAILS' | translate}}</ion-title>
-    </cb-header>
+  <cb-header collapseValue="condense" [isSecondHeader]="true">
+    <ion-title cb-header-1>{{'CB.PRODUCT_DETAILS.PRODUCT_DETAILS' | translate}}</ion-title>
+  </cb-header>
 
-    <!-- <ion-img *ngIf="productBgImage" [src]="productBgImage" class="product-image"></ion-img> -->
+  <!-- <ion-img *ngIf="productBgImage" [src]="productBgImage" class="product-image"></ion-img> -->
 
-    <ion-grid>
-        <ion-row>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h2 class="product-title">{{product.name}}</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <cb-consumption-input
+          (consumptionChangedEvent)="handleConsumptionChangeEventEtHt($event, sector)"
+          [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_ETHT'"
+          [consumptionPerYear]="contract.consumptionPerYearEtHt"
+          [sector]="sector"
+        ></cb-consumption-input>
+        <!-- Night Consumption Tariff Consumption -->
+        @if (sector.isDoubleTariffEnabled) {
+          <cb-consumption-input
+            (consumptionChangedEvent)="handleConsumptionChangeEventNt($event, sector)"
+            [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_NT'"
+            [consumptionPerYear]="contract.consumptionPerYearNt"
+            [sector]="sector"
+          ></cb-consumption-input>
+        }
+
+        <div class="price-details-per-month-year-container">
+          <p [hidden]="!contract.pricePerConsumption"
+            class="consumption-text"
+            >
+            {{ 'CB.PRODUCT_DETAILS.CONSUMPTION_PRICE_PER_YEAR' | translate }}:
+            {{ contract.pricePerConsumption | currency:'EUR':'symbol':'1.2-2' || '' }}
+          </p>
+          <br />
+          <p [hidden]="!contract.pricePerConsumption"
+            class="consumption-text"
+            >
+            {{ 'CB.PRODUCT_DETAILS.CONSUMPTION_PRICE_PER_MONTH' | translate }}:
+            {{ (contract.pricePerConsumption/12) | currency:'EUR':'symbol':'1.2-2' || '' }}
+          </p>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Key Selling Points List -->
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-list-header>{{ 'CB.PRODUCT_DETAILS.KEY_SELLING_POINTS' | translate }}:</ion-list-header>
+          <ul>
+            @for (ksp of product.keySellingPoints; track ksp) {
+              <li class="key-selling-point-text">{{ksp}}</li>
+            }
+          </ul>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <!-- Consumption Table -->
+    <ion-row>
+      <ion-col>
+        <div class="consumption-table">
+          <ion-row>
             <ion-col>
-                <h2 class="product-title">{{product.name}}</h2>
+              <ion-text>Consumption kWh</ion-text>
             </ion-col>
-        </ion-row>
-
-        <ion-row>
             <ion-col>
-                <cb-consumption-input 
-                    (consumptionChangedEvent)="handleConsumptionChangeEventEtHt($event, sector)"
-                    [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_ETHT'"
-                    [consumptionPerYear]="contract.consumptionPerYearEtHt"
-                    [sector]="sector"
-                ></cb-consumption-input>
-                <!-- Night Consumption Tariff Consumption -->
-                <cb-consumption-input *ngIf="sector.isDoubleTariffEnabled"
-                    (consumptionChangedEvent)="handleConsumptionChangeEventNt($event, sector)"
-                    [consumptionPerYearLabel]="'CB.PRODUCT_DETAILS.CONSUMPTION_PER_YEAR_NT'"
-                    [consumptionPerYear]="contract.consumptionPerYearNt"
-                    [sector]="sector"
-                ></cb-consumption-input>
-
-                <div class="price-details-per-month-year-container">
-                    <p [hidden]="!contract.pricePerConsumption"
-                        class="consumption-text"
-                    >
-                        {{ 'CB.PRODUCT_DETAILS.CONSUMPTION_PRICE_PER_YEAR' | translate }}: 
-                        {{ contract.pricePerConsumption | currency:'EUR':'symbol':'1.2-2' || '' }}
-                    </p>
-                    <br />
-                    <p [hidden]="!contract.pricePerConsumption"
-                        class="consumption-text"
-                    >
-                        {{ 'CB.PRODUCT_DETAILS.CONSUMPTION_PRICE_PER_MONTH' | translate }}: 
-                        {{ (contract.pricePerConsumption/12) | currency:'EUR':'symbol':'1.2-2' || '' }}
-                    </p>
-                </div>
+              <ion-text>Gross Price</ion-text>
             </ion-col>
-        </ion-row>
-
-        <!-- Key Selling Points List -->
-        <ion-row>
             <ion-col>
-                <ion-list>
-                    <ion-list-header>{{ 'CB.PRODUCT_DETAILS.KEY_SELLING_POINTS' | translate }}:</ion-list-header>
-                    <ul>
-                        <li *ngFor="let ksp of product.keySellingPoints" class="key-selling-point-text">{{ksp}}</li>
-                    </ul>
-                </ion-list>
+              <ion-text>Net Price</ion-text>
             </ion-col>
-        </ion-row>
+          </ion-row>
 
-        <!-- Consumption Table -->
-        <ion-row>
-            <ion-col>
-                <div class="consumption-table">
-                    <ion-row>
-                        <ion-col>
-                            <ion-text>Consumption kWh</ion-text>
-                        </ion-col>
-                        <ion-col>
-                            <ion-text>Gross Price</ion-text>
-                        </ion-col>
-                        <ion-col>
-                            <ion-text>Net Price</ion-text>
-                        </ion-col>
-                    </ion-row>
-        
-                    <ion-row *ngFor="let priceline of product.pricelines">
-                        <ion-col size="4">
-                            <ion-text>{{priceline.consumptionRange}} kWh</ion-text>
-                        </ion-col>
-                        <ion-col size="4">
-                            <ion-text>{{priceline.grossPrice | currency:'EUR':'symbol':'1.2-2' || '' }}</ion-text>
-                        </ion-col>
-                        <ion-col size="4">
-                            <ion-text>{{priceline.netPrice | currency:'EUR':'symbol':'1.2-2' || '' }}</ion-text>
-                        </ion-col>
-                    </ion-row>
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+          @for (priceline of product.pricelines; track priceline) {
+            <ion-row>
+              <ion-col size="4">
+                <ion-text>{{priceline.consumptionRange}} kWh</ion-text>
+              </ion-col>
+              <ion-col size="4">
+                <ion-text>{{priceline.grossPrice | currency:'EUR':'symbol':'1.2-2' || '' }}</ion-text>
+              </ion-col>
+              <ion-col size="4">
+                <ion-text>{{priceline.netPrice | currency:'EUR':'symbol':'1.2-2' || '' }}</ion-text>
+              </ion-col>
+            </ion-row>
+          }
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <cb-form-footer>
-    <ion-button
-        cb-bottom-button
-        expand="full"
-        (click)="confirmConsumption()"
-        [disabled]="isConsumptionInvalid()"
+  <ion-button
+    cb-bottom-button
+    expand="full"
+    (click)="confirmConsumption()"
+    [disabled]="isConsumptionInvalid()"
     >
-        <ion-label>{{'CB.PRODUCT_DETAILS.CONFIRM_PRODUCT' | translate}}</ion-label>
-    </ion-button>
+    <ion-label>{{'CB.PRODUCT_DETAILS.CONFIRM_PRODUCT' | translate}}</ion-label>
+  </ion-button>
 </cb-form-footer>

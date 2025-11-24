@@ -1,43 +1,49 @@
-<ion-card *ngIf="contract">
+@if (contract) {
+  <ion-card>
     <ion-grid class="ion-no-padding"><ion-row>
-        <ion-col size="1" class="ion-no-padding cart-item-icons">
-            <!-- Divs are included to add color to the entire background instead of just the icon -->
-            <div>
-                <ion-icon (click)="editCartItem()" color="light" name="pencil-outline"></ion-icon>
-            </div>
-            <div>
-                <ion-icon (click)="deleteCartItemClicked()" color="light" name="trash-outline"></ion-icon>
-            </div>            
-        </ion-col>
-        <ion-col size="11">
-            <ion-card-header>
-                <ion-card-title>{{contract.selectedSectorName | titlecase}} - {{contract.selectedProductName | titlecase}}</ion-card-title>
-                <ion-card-subtitle>
-                    {{contract.state}}, {{contract.city}}, {{contract.postCode}}
-                </ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-                <p>
-                    <strong>{{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_ETHT' | translate}}: </strong>
-                    {{contract.consumptionPerYearEtHt}} (kwt)
-                </p>
-                <p *ngIf="contract?.consumptionPerYearNt && contract.consumptionPerYearNt > 0">
-                    <strong>{{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_NT' | translate}}: </strong>
-                    {{contract.consumptionPerYearNt}} (kwt)
-                </p>
-                <p>
-                    <strong>{{'CB.CART_ITEM.CONSUMPTION_PRICE_PER_YEAR' | translate}}: </strong>
-                    {{contract.pricePerConsumption | currency:'EUR':'symbol':'1.2-2'}}
-                </p>
-                <p>
-                    <strong>{{'CB.CART_ITEM.CONSUMPTION_PRICE_PER_MONTH' | translate}}: </strong>
-                    {{(contract.pricePerConsumption/12) | currency:'EUR':'symbol':'1.2-2'}}
-                </p>
-                <div class="cart-item-signature-container">
-                    <ion-label><strong>{{'CB.CART_ITEM.CONTRACT_SIGNATURE' | translate}}: </strong></ion-label>
-                    <img *ngIf="contract.isSigned && contract?.contractSignature" src="{{contract.contractSignature}}" />
-                </div>
-            </ion-card-content>
-        </ion-col>
+      <ion-col size="1" class="ion-no-padding cart-item-icons">
+        <!-- Divs are included to add color to the entire background instead of just the icon -->
+        <div>
+          <ion-icon (click)="editCartItem()" color="light" name="pencil-outline"></ion-icon>
+        </div>
+        <div>
+          <ion-icon (click)="deleteCartItemClicked()" color="light" name="trash-outline"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col size="11">
+        <ion-card-header>
+          <ion-card-title>{{contract.selectedSectorName | titlecase}} - {{contract.selectedProductName | titlecase}}</ion-card-title>
+          <ion-card-subtitle>
+            {{contract.state}}, {{contract.city}}, {{contract.postCode}}
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>
+            <strong>{{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_ETHT' | translate}}: </strong>
+            {{contract.consumptionPerYearEtHt}} (kwt)
+          </p>
+          @if (contract?.consumptionPerYearNt && contract.consumptionPerYearNt > 0) {
+            <p>
+              <strong>{{'CB.CART_ITEM.CONSUMPTION_PER_YEAR_NT' | translate}}: </strong>
+              {{contract.consumptionPerYearNt}} (kwt)
+            </p>
+          }
+          <p>
+            <strong>{{'CB.CART_ITEM.CONSUMPTION_PRICE_PER_YEAR' | translate}}: </strong>
+            {{contract.pricePerConsumption | currency:'EUR':'symbol':'1.2-2'}}
+          </p>
+          <p>
+            <strong>{{'CB.CART_ITEM.CONSUMPTION_PRICE_PER_MONTH' | translate}}: </strong>
+            {{(contract.pricePerConsumption/12) | currency:'EUR':'symbol':'1.2-2'}}
+          </p>
+          <div class="cart-item-signature-container">
+            <ion-label><strong>{{'CB.CART_ITEM.CONTRACT_SIGNATURE' | translate}}: </strong></ion-label>
+            @if (contract.isSigned && contract?.contractSignature) {
+              <img src="{{contract.contractSignature}}" />
+            }
+          </div>
+        </ion-card-content>
+      </ion-col>
     </ion-row></ion-grid>
-</ion-card>
+  </ion-card>
+}

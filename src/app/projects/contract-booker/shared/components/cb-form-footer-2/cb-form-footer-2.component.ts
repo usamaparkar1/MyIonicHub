@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { IonicModule } from '@ionic/angular';
 
 @Component({
     selector: 'cb-form-footer-2',
-    imports: [CommonModule, IonicModule],
+    imports: [IonicModule],
     templateUrl: './cb-form-footer-2.component.html',
     styleUrls: ['./cb-form-footer-2.component.scss']
 })

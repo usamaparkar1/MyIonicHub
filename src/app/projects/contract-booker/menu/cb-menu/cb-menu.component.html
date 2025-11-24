@@ -1,24 +1,26 @@
 <ion-menu side="start" [menuId]="menus.CbMenu" contentId="main-content" swipeGesture="false">
-    <ion-header>
-        <ion-toolbar color="cbprimary">
-            <ion-title>{{'CB.HOME.MENU' | translate}}</ion-title>
-            <ion-icon (click)="closeCbMenu()" slot="end" name="close" size="large" class="ion-padding"></ion-icon>
-        </ion-toolbar>
-    </ion-header>
+  <ion-header>
+    <ion-toolbar color="cbprimary">
+      <ion-title>{{'CB.HOME.MENU' | translate}}</ion-title>
+      <ion-icon (click)="closeCbMenu()" slot="end" name="close" size="large" class="ion-padding"></ion-icon>
+    </ion-toolbar>
+  </ion-header>
 
-    <ion-content>
-        <ion-item *ngFor="let module of cbHomeModules" (click)="moduleClicked(module)" class="module-items" lines="full">
-            <ion-icon [src]="module.image"></ion-icon>
-            <ion-label>{{module.name | translate}}</ion-label>
-            <ion-badge [hidden]="module.count < 1" color="cbprimary">
-                <ion-label>{{ module.count > 9 ? '9+' : module.count }}</ion-label>
-            </ion-badge>
-        </ion-item>
+  <ion-content>
+    @for (module of cbHomeModules; track module) {
+      <ion-item (click)="moduleClicked(module)" class="module-items" lines="full">
+        <ion-icon [src]="module.image"></ion-icon>
+        <ion-label>{{module.name | translate}}</ion-label>
+        <ion-badge [hidden]="module.count < 1" color="cbprimary">
+          <ion-label>{{ module.count > 9 ? '9+' : module.count }}</ion-label>
+        </ion-badge>
+      </ion-item>
+    }
 
-        <!-- Consultation Start Item -->
-        <ion-item (click)="startConsultation()" class="module-items" lines="full">
-            <ion-icon [src]="contractBookerData.consultationStartSvg"></ion-icon>
-            <ion-label>{{'CB.HOME.START_CONSULTATION' | translate}}</ion-label>
-        </ion-item>
-    </ion-content>
+    <!-- Consultation Start Item -->
+    <ion-item (click)="startConsultation()" class="module-items" lines="full">
+      <ion-icon [src]="contractBookerData.consultationStartSvg"></ion-icon>
+      <ion-label>{{'CB.HOME.START_CONSULTATION' | translate}}</ion-label>
+    </ion-item>
+  </ion-content>
 </ion-menu>

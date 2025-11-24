@@ -1,5 +1,7 @@
 <ion-app>
-    <app-menus></app-menus>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
-    <jeep-sqlite *ngIf="isWeb"></jeep-sqlite>
+  <app-menus></app-menus>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+  @if (isWeb) {
+    <jeep-sqlite></jeep-sqlite>
+  }
 </ion-app>
