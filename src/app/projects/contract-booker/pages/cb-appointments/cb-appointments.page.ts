@@ -5,9 +5,10 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-cb-appointments',
-  templateUrl: './cb-appointments.page.html',
-  styleUrls: ['./cb-appointments.page.scss'],
+    selector: 'app-cb-appointments',
+    templateUrl: './cb-appointments.page.html',
+    styleUrls: ['./cb-appointments.page.scss'],
+    standalone: false
 })
 
 export class CbAppointmentsPage implements OnInit {

@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-cb-customer-address',
     templateUrl: './cb-customer-address.page.html',
     styleUrls: ['./cb-customer-address.page.scss'],
+    standalone: false
 })
 
 export class CbCustomerAddressPage implements OnInit, OnDestroy {

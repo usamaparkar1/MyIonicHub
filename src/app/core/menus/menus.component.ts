@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
-    standalone: true,
     selector: 'app-menus',
     imports: [CommonModule, IonicModule, CbMenuComponent],
     templateUrl: './menus.component.html',
-    styleUrls: ['./menus.component.scss'],
+    styleUrls: ['./menus.component.scss']
 })
 
 export class MenusComponent  implements OnInit {

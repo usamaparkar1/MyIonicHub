@@ -17,6 +17,7 @@ import { Observable } from 'rxjs';
     selector: 'app-dashboard',
     templateUrl: './dashboard.page.html',
     styleUrls: ['./dashboard.page.scss'],
+    standalone: false
 })
 
 export class DashboardPage implements OnInit {

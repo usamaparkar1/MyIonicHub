@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-cb-support',
     templateUrl: './cb-support.page.html',
     styleUrls: ['./cb-support.page.scss'],
+    standalone: false
 })
 
 export class CbSupportPage implements OnInit, OnDestroy {

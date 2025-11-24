@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
-    standalone: true,
     selector: 'cb-radio',
     imports: [CommonModule, IonicModule, FormsModule],
     templateUrl: './cb-radio.component.html',
-    styleUrls: ['./cb-radio.component.scss'],
+    styleUrls: ['./cb-radio.component.scss']
 })
 
 export class CbRadioComponent  implements OnInit {

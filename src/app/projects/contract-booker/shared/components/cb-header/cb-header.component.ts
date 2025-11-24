@@ -10,11 +10,10 @@ import { Menus } from 'src/app/enum/menus';
 import { Subscription } from 'rxjs';
 
 @Component({
-    standalone: true,
     selector: 'cb-header',
     imports: [CommonModule, IonicModule, ProfileHeaderComponent],
     templateUrl: './cb-header.component.html',
-    styleUrls: ['./cb-header.component.scss'],
+    styleUrls: ['./cb-header.component.scss']
 })
 
 export class CbHeaderComponent  implements OnInit, OnDestroy {

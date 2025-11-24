@@ -14,6 +14,7 @@ import SignaturePad from 'signature_pad';
     selector: 'app-cb-sign-contract',
     templateUrl: './cb-sign-contract.page.html',
     styleUrls: ['./cb-sign-contract.page.scss'],
+    standalone: false
 })
 
 export class CbSignContractPage implements OnInit, AfterViewInit, OnDestroy {

@@ -9,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-cb-product-selection',
-  templateUrl: './cb-product-selection.page.html',
-  styleUrls: ['./cb-product-selection.page.scss'],
+    selector: 'app-cb-product-selection',
+    templateUrl: './cb-product-selection.page.html',
+    styleUrls: ['./cb-product-selection.page.scss'],
+    standalone: false
 })
 
 export class CbProductSelectionPage implements OnInit {

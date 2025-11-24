@@ -5,14 +5,13 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
-    standalone: true,
     imports: [
         IonicModule,
         CommonModule,
     ],
     selector: 'cb-product-card',
     templateUrl: './cb-product-card.component.html',
-    styleUrls: ['./cb-product-card.component.scss'],
+    styleUrls: ['./cb-product-card.component.scss']
 })
 
 export class CbProductCardComponent  implements OnInit {

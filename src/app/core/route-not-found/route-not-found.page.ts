@@ -8,6 +8,7 @@ import { App } from '@capacitor/app';
     selector: 'app-route-not-found',
     templateUrl: './route-not-found.page.html',
     styleUrls: ['./route-not-found.page.scss'],
+    standalone: false
 })
 
 export class RouteNotFoundPage implements OnInit {

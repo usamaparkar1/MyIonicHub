@@ -5,9 +5,10 @@ import coreDataJson from 'src/assets/json-data/core-data.json';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-mc-home',
-  templateUrl: './mc-home.page.html',
-  styleUrls: ['./mc-home.page.scss'],
+    selector: 'app-mc-home',
+    templateUrl: './mc-home.page.html',
+    styleUrls: ['./mc-home.page.scss'],
+    standalone: false
 })
 
 export class McHomePage implements OnInit {

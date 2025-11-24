@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-cb-home',
     templateUrl: './cb-home.page.html',
     styleUrls: ['./cb-home.page.scss'],
+    standalone: false
 })
 
 export class CbHomePage implements OnInit, OnDestroy {

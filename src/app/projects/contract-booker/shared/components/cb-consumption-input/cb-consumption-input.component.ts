@@ -6,7 +6,6 @@ import { Sector } from '../../../models/cb-sector';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    standalone: true,
     selector: 'cb-consumption-input',
     imports: [
         CommonModule,
@@ -16,7 +15,7 @@ import { CommonModule } from '@angular/common';
         ReactiveFormsModule,
     ],
     templateUrl: './cb-consumption-input.component.html',
-    styleUrls: ['./cb-consumption-input.component.scss'],
+    styleUrls: ['./cb-consumption-input.component.scss']
 })
 
 export class CbConsumptionInputComponent  implements OnInit {

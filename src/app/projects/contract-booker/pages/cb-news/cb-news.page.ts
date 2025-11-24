@@ -5,9 +5,10 @@ import { CbNews } from '../../models/cb-news';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-cb-news',
-  templateUrl: './cb-news.page.html',
-  styleUrls: ['./cb-news.page.scss'],
+    selector: 'app-cb-news',
+    templateUrl: './cb-news.page.html',
+    styleUrls: ['./cb-news.page.scss'],
+    standalone: false
 })
 
 export class CbNewsPage implements OnInit, OnDestroy {

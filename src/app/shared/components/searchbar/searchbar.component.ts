@@ -5,11 +5,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    standalone: true,
     selector: 'hub-app-searchbar',
     imports: [CommonModule, IonicModule, ReactiveFormsModule],
     templateUrl: './searchbar.component.html',
-    styleUrls: ['./searchbar.component.scss'],
+    styleUrls: ['./searchbar.component.scss']
 })
 
 export class SearchbarComponent  implements OnInit {

@@ -10,9 +10,10 @@ import { Contract } from '../../models/cb-contract';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-cb-shopping-cart',
-  templateUrl: './cb-shopping-cart.page.html',
-  styleUrls: ['./cb-shopping-cart.page.scss'],
+    selector: 'app-cb-shopping-cart',
+    templateUrl: './cb-shopping-cart.page.html',
+    styleUrls: ['./cb-shopping-cart.page.scss'],
+    standalone: false
 })
 
 export class CbShoppingCartPage implements OnInit, OnDestroy {

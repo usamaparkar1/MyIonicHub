@@ -13,9 +13,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Sector } from '../../models/cb-sector';
 
 @Component({
-  selector: 'app-cb-price-comparison',
-  templateUrl: './cb-price-comparison.page.html',
-  styleUrls: ['./cb-price-comparison.page.scss'],
+    selector: 'app-cb-price-comparison',
+    templateUrl: './cb-price-comparison.page.html',
+    styleUrls: ['./cb-price-comparison.page.scss'],
+    standalone: false
 })
 
 export class CbPriceComparisonPage implements OnInit {

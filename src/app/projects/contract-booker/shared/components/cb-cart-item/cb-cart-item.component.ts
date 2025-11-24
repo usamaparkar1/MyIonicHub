@@ -10,11 +10,10 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
-    standalone: true,
     selector: 'cb-cart-item',
     imports: [CommonModule, IonicModule, TranslateModule],
     templateUrl: './cb-cart-item.component.html',
-    styleUrls: ['./cb-cart-item.component.scss'],
+    styleUrls: ['./cb-cart-item.component.scss']
 })
 
 export class CbCartItemComponent  implements OnInit {

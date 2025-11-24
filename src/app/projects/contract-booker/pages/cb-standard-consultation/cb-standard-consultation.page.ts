@@ -12,9 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Sector } from '../../models/cb-sector';
 
 @Component({
-  selector: 'app-cb-standard-consultation',
-  templateUrl: './cb-standard-consultation.page.html',
-  styleUrls: ['./cb-standard-consultation.page.scss'],
+    selector: 'app-cb-standard-consultation',
+    templateUrl: './cb-standard-consultation.page.html',
+    styleUrls: ['./cb-standard-consultation.page.scss'],
+    standalone: false
 })
 
 export class CbStandardConsultationPage implements OnInit {

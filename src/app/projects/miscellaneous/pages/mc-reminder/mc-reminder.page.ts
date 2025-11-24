@@ -12,9 +12,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-mc-reminder',
-  templateUrl: './mc-reminder.page.html',
-  styleUrls: ['./mc-reminder.page.scss'],
+    selector: 'app-mc-reminder',
+    templateUrl: './mc-reminder.page.html',
+    styleUrls: ['./mc-reminder.page.scss'],
+    standalone: false
 })
 
 export class McReminderPage implements OnInit {

@@ -11,11 +11,10 @@ import { Menus } from 'src/app/enum/menus';
 import { Subscription } from 'rxjs';
 
 @Component({
-    standalone: true,
     selector: 'cb-menu',
     imports: [CommonModule, IonicModule, TranslateModule],
     templateUrl: './cb-menu.component.html',
-    styleUrls: ['./cb-menu.component.scss'],
+    styleUrls: ['./cb-menu.component.scss']
 })
 
 export class CbMenuComponent  implements OnInit {

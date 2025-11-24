@@ -5,14 +5,13 @@ import { IonicModule } from '@ionic/angular';
 import { ActionSheetService } from 'src/app/services/action-sheet/action-sheet.service';
 
 @Component({
-    standalone: true,
     imports: [
         CommonModule,
         IonicModule,
     ],
     selector: 'app-profile-header',
     templateUrl: './profile-header.component.html',
-    styleUrls: ['./profile-header.component.scss'],
+    styleUrls: ['./profile-header.component.scss']
 })
 
 export class ProfileHeaderComponent  implements OnInit {

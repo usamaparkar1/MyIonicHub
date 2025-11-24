@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-cb-add-contract',
     templateUrl: './cb-add-contract.page.html',
     styleUrls: ['./cb-add-contract.page.scss'],
+    standalone: false
 })
 
 export class CbAddContractPage implements OnInit {

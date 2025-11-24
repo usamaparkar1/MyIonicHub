@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'app-screen-loader',
     templateUrl: './screen-loader.page.html',
     styleUrls: ['./screen-loader.page.scss'],
+    standalone: false
 })
 
 export class ScreenLoaderPage implements OnInit {

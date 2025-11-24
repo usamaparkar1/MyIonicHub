@@ -19,6 +19,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-cb-new-appointment',
     templateUrl: './cb-new-appointment.page.html',
     styleUrls: ['./cb-new-appointment.page.scss'],
+    standalone: false
 })
 
 export class CbNewAppointmentPage implements OnInit {
