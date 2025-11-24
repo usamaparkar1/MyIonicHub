@@ -1,6 +1,6 @@
 import { cartReducer } from './projects/contract-booker/store/reducers/cart.reducer';
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { MenusComponent } from './core/menus/menus.component';
@@ -18,26 +18,20 @@ export function initializeFactory(init: AppService) {
     return () => init.initializeApp();
 }
 
-@NgModule({
-    declarations: [AppComponent],
-    imports: [
-        BrowserModule,
-        MenusComponent, // Check for any other options than to use in imports
-        HttpClientModule,
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
+        MenusComponent,
         AppRoutingModule,
         IonicModule.forRoot(),
         IonicStorageModule.forRoot(),
         StoreModule.forRoot({ cartCount: cartReducer }),
-        TranslateModule.forRoot({ defaultLanguage: localHelpers.defaultLanguage })
-    ],
-    providers: [
+        TranslateModule.forRoot({ defaultLanguage: localHelpers.defaultLanguage })], providers: [
         AppService,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: APP_INITIALIZER, useFactory: initializeFactory, deps: [AppService], multi: true }
-    ],
-    bootstrap: [AppComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-})
+        { provide: APP_INITIALIZER, useFactory: initializeFactory, deps: [AppService], multi: true },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 
 export class AppModule {}
